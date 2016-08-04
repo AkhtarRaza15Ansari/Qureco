@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Qureco</string>
+    <string-array name="nav_drawer_labels">
+        <item>Home</item>
+        <item>About Us</item>
+        <item>Terms &amp; Conditions.</item>
+        <item>Logout</item>
+    </string-array>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <!-- Login Page -->
+    <string name="input_phone">Mobile Number</string>
+    <string name="input_password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="btn_login">Login</string>
+
+    <!-- Register Page -->
+    <string name="input_name">Name</string>
+    <string name="btn_register">Next</string>
+    <string name="btn_register_complete">Register</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
+    <!--  Page -->
+
+    <string name="review">Review</string>
+    <string name="loyalty">Loyalty</string>
+    <string name="feedback">Feedback</string>
+</resources>

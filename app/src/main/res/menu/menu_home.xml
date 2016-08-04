@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/messages"
+        android:icon="@drawable/ic_question_answer_white_18dp"
+        app:showAsAction="always"
+        android:title="Messages"/>
+    <item
+        android:id="@+id/chat"
+        android:orderInCategory="100"
+        android:title="Chat"
+        android:icon="@drawable/ic_chat_bubble_white_18dp"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/settings"
+        android:orderInCategory="100"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings_white_18dp"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/accounts"
+        android:orderInCategory="100"
+        android:title="My Account"
+        android:icon="@drawable/ic_account_box_white_18dp"
+        app:showAsAction="ifRoom" />
+</menu>

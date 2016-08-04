@@ -1,0 +1,108 @@
+package com.sriyaan.qureco;
+
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+public class Register extends AppCompatActivity {
+    Button btnRegister;
+    EditText dob;
+    Calendar myCalendar;
+    Context con;
+    Toolbar toolbar;
+    DatePickerDialog.OnDateSetListener date;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        con = Register.this;
+        init();
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //What to do on back clicked
+                onBackPressed();
+            }
+        });
+        setTitle("");
+
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setText("Register");
+        getSupportActionBar().setIcon(R.drawable.logo);
+
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPicker();
+            }
+        });
+        dob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b)
+                {
+                    showPicker();
+                }
+            }
+        });
+
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Register.this,CompleteRegister.class);
+                startActivity(i);
+            }
+        });
+    }
+    public void showPicker()
+    {
+        new DatePickerDialog(con, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+    private void updateLabel() {
+
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        dob.setText(sdf.format(myCalendar.getTime()));
+    }
+    public void init()
+    {
+        toolbar     = (Toolbar) findViewById(R.id.toolbar);
+        btnRegister     = (Button)  findViewById(R.id.btnRegister);
+        dob             = (EditText)findViewById(R.id.dob);
+        myCalendar = Calendar.getInstance();
+    }
+}
