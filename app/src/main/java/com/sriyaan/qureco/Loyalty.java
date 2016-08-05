@@ -14,9 +14,12 @@ import com.sriyaan.qr.IntentIntegrator;
 import com.sriyaan.qr.IntentResult;
 import com.sriyaan.qr.QrCode;
 
+import org.w3c.dom.Text;
+
 public class Loyalty extends AppCompatActivity {
     ImageView qrcodescanner;
-    TextView textQr;
+    TextView textQr,nameandaddress;
+    Button btnConfirm;
     String message = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +48,21 @@ public class Loyalty extends AppCompatActivity {
                 startActivityForResult(i, 2);
             }
         });
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
     public void init(){
         qrcodescanner   = (ImageView)   findViewById(R.id.qrcodescanner);
         textQr          = (TextView)    findViewById(R.id.textQr);
+        nameandaddress  = (TextView)    findViewById(R.id.nameandaddress);
+        btnConfirm      = (Button)      findViewById(R.id.confirm);
+
+
+        btnConfirm.setVisibility(View.GONE);
     }
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -60,7 +74,15 @@ public class Loyalty extends AppCompatActivity {
                 message = intent.getStringExtra("MESSAGE");
                 // Set the message string in textView
                 try {
-                    textQr.setText("Scan result: " + message);
+                    if(message.equals("") || message.equals("null") || message == null)
+                    {
+                        //do nothing
+                    }
+                    else {
+                        textQr.setText("Hi XXXX: We see you are in California");//+ message
+                        nameandaddress.setText("Name: Ansari Akhtar's GYM \nAddress: A - 103, Oasis Park, Beverly Hills California.");
+                        btnConfirm.setVisibility(View.VISIBLE);
+                    }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
