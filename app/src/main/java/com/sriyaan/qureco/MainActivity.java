@@ -39,6 +39,9 @@ import android.widget.Toast;
 
 import com.sriyaan.util.url_dump;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,6 +55,7 @@ import java.util.Locale;
 
 import static com.sriyaan.util.url_dump.DeviceRegistration;
 import static com.sriyaan.util.url_dump.SplashTimer;
+import static com.sriyaan.util.url_dump.Toastthis;
 
 public class MainActivity extends AppCompatActivity {
     Fragment fragment = null;
@@ -66,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView[] dots;
     private GestureDetector mGestureDetector;
     Button btnLogin;
+    EditText input_phone;
+    String str_mobile_login;
     TextView tvSignUp,tvForgotPassword;
 
     Button btnRegister;
@@ -107,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initLogin(){
+        input_phone = (EditText)findViewById(R.id.input_phone);
         tvSignUp    = (TextView)findViewById(R.id.tvSignUp);
         btnLogin    = (Button)  findViewById(R.id.btnLogin);
     }
@@ -676,10 +683,16 @@ public class MainActivity extends AppCompatActivity {
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(MainActivity.this,Home.class);
+                    str_mobile_login = input_phone.getText().toString();
+                    if(!str_mobile_login.equals(""))
+                    {
+
+                    }
+                    /*Intent i = new Intent(MainActivity.this,Home.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
-                    finish();
+                    finish();*/
+
                 }
             });
             tvSignUp.setOnClickListener(new View.OnClickListener() {
@@ -946,6 +959,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public class UserRegister extends AsyncTask<Void,Void,Void> {
+        String json;
+        String str_Code;
+        String str_Message;
+        String str_UserID;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -954,8 +971,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                String json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,strNationality,strCity,bitmap);
-                Log.d("json","This is it: "+json);
+                json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,strNationality,strCity,bitmap);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -965,7 +981,99 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            try{
+                if(!json.equals(""))
+                {
+                    JSONArray object = new JSONArray(json);
+                    str_Code = object.get(0).toString();
+                    str_Message = object.get(1).toString();
+                    str_UserID = object.get(2).toString();
+                    Log.d("Code",str_Code);
+                    Log.d("Mesg",str_Message);
+                    Log.d("UsID",str_UserID);
 
+                    if(str_Code.equals("HCPC200"))
+                    {
+                        //Successfull
+                        Intent i = new Intent(con,SmsReciever.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else if(str_Code.equals("HCPC201"))
+                    {
+                        //Some Parameters are Missing
+                        Toastthis(str_Message,con);
+                    }
+                    else if(str_Code.equals("HCP202"))
+                    {
+                        //User Already Registered
+                        Toastthis(str_Message,con);
+                        loadLayout("login");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    public class UserLogin extends AsyncTask<Void,Void,Void> {
+        String json;
+        String str_Code,str_Message,str_UserID;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                json = url_dump.LoginUser(strMobile);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            try{
+                if(!json.equals(""))
+                {
+                    JSONArray object = new JSONArray(json);
+                    str_Code = object.get(0).toString();
+                    str_Message = object.get(1).toString();
+                    str_UserID = object.get(2).toString();
+                    Log.d("Code",str_Code);
+                    Log.d("Mesg",str_Message);
+                    Log.d("UsID",str_UserID);
+
+                    if(str_Code.equals("HCPC200"))
+                    {
+                        //Successfull
+                        Intent i = new Intent(con,SmsReciever.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else if(str_Code.equals("HCPC201"))
+                    {
+                        //Some Parameters are Missing
+                        Toastthis(str_Message,con);
+                    }
+                    else if(str_Code.equals("HCP202"))
+                    {
+                        //User Already Registered
+                        Toastthis(str_Message,con);
+                        loadLayout("login");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 }

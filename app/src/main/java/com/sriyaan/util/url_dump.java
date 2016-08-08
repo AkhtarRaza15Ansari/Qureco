@@ -57,6 +57,8 @@ public class url_dump {
     public static String deviceregistration = "hcp_device_registration.php";
     // To fetch userregistration
     public static String userregistration = "hcp_customer_registration.php";
+    // To fetch userlogin
+    public static String userlogin = "hcp_customer_login.php";
 
     public static void SplashTimer(final Context con, final Class class1)
     {
@@ -135,6 +137,16 @@ public class url_dump {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("imei", getImei(context)));
         nameValuePairs.add(new BasicNameValuePair("email", email));
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+    public static String LoginUser(String mobile) throws Exception {
+        String url = main_header + userlogin;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("mobile", mobile));
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

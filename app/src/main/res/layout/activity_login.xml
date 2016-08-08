@@ -55,6 +55,7 @@
                         android:id="@+id/input_layout_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:textColorHint="@color/light_black">
 
                         <EditText
@@ -94,7 +95,7 @@
                             android:textColor="@color/colorPrimary"
                             android:textSize="13dp"
                             android:layout_gravity="end"
-                            android:visibility="visible" />
+                            android:visibility="gone" />
                     </RelativeLayout>
 
                 </LinearLayout>
