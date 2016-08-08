@@ -1,8 +1,18 @@
 package com.sriyaan.util;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.Log;
@@ -15,10 +25,20 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +91,8 @@ public class url_dump {
     public static HttpClient httpClient;
     public static HttpResponse response;
     public static HttpPost httpPost;
+
+    public static HttpEntity resEntity;
     public static void Logthis(String key,String value)
     {
         Log.d(key, value);
@@ -152,5 +174,83 @@ public class url_dump {
         // decode
         byte[] data = Base64.decode(base64, Base64.DEFAULT);
         return new String(data, "UTF-8");
+    }
+
+
+    public static String doFileUpload(String name,String mobile_no,String gender,String dob,String referral_code,String interests,String nationality,String city,String profile_pic) throws Exception {
+        String urlString = main_header + userregistration;
+        String sResponse;
+        StringBuilder s = new StringBuilder();
+        try
+        {
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(urlString);
+
+            MultipartEntity reqEntity = new MultipartEntity();
+            //ContentBody encFile = new FileBody(fmain,"image/jpg");
+            reqEntity.addPart("method", new StringBody("addoffer"));
+            //reqEntity.addPart("image", encFile);
+            if(profile_pic!=null)
+            {
+                File fmain = new File(profile_pic);
+                FileBody binmain = new FileBody(fmain);
+                reqEntity.addPart("profile_pic", binmain);
+                Log.d("image", profile_pic);
+            }
+            reqEntity.addPart("name", new StringBody(name));
+            reqEntity.addPart("mobile_no", new StringBody(mobile_no));
+            reqEntity.addPart("gender", new StringBody(gender));
+            reqEntity.addPart("dob", new StringBody(dob));
+            reqEntity.addPart("referral_code", new StringBody(referral_code));
+            reqEntity.addPart("interests", new StringBody(interests));
+            reqEntity.addPart("nationality", new StringBody(nationality));
+            reqEntity.addPart("city", new StringBody(city));
+
+            post.setEntity(reqEntity);
+            HttpResponse response = client.execute(post);
+            resEntity = response.getEntity();
+            jsonvalues = EntityUtils.toString(resEntity);
+            if (resEntity != null) {
+                Log.i(" RESPONSE", jsonvalues);
+            }
+        }
+        catch (Exception ex) {
+            Log.e("Debug", "error: " + ex.getMessage(), ex);
+        }
+        return getDecode(jsonvalues);
+    }
+    public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public static boolean checkPermission(final Context context)
+    {
+        int currentAPIVersion = Build.VERSION.SDK_INT;
+        if(currentAPIVersion>=android.os.Build.VERSION_CODES.M)
+        {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+                    alertBuilder.setCancelable(true);
+                    alertBuilder.setTitle("Permission necessary");
+                    alertBuilder.setMessage("External storage permission is necessary");
+                    alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                        }
+                    });
+                    AlertDialog alert = alertBuilder.create();
+                    alert.show();
+
+                } else {
+                    ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+                }
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
     }
 }

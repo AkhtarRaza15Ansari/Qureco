@@ -27,4 +27,8 @@
     <string name="review">Review</string>
     <string name="loyalty">Loyalty</string>
     <string name="feedback">Feedback</string>
+
+    <string name="msg_sit_back">Sit back &amp; Relax! while we verify your mobile number</string>
+    <string name="msg_manual_otp">(Enter the OTP below in case if we fail to detect the SMS automatically)</string>
+    <string name="lbl_enter_otp">Enter OTP</string>
 </resources>
