@@ -44,7 +44,12 @@
         <activity
             android:name="com.sriyaan.qr.QrCode"
             android:screenOrientation="portrait" />
-        <activity android:name=".SmsReciever"></activity>
+        <activity android:name=".SmsReciever"/>
+        <receiver android:name="com.sriyaan.reciever.SmsBroadReciever">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

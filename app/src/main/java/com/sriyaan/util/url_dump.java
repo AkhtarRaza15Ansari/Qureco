@@ -59,6 +59,10 @@ public class url_dump {
     public static String userregistration = "hcp_customer_registration.php";
     // To fetch userlogin
     public static String userlogin = "hcp_customer_login.php";
+    // For SMS Verification Registration
+    public static String sms_verification = "hcp_customer_registration_confirm.php";
+    // For SMS Verification Login
+    public static String sms_verification_login = "hcp_customer_otp_verify.php";
 
     public static void SplashTimer(final Context con, final Class class1)
     {
@@ -151,19 +155,26 @@ public class url_dump {
         function2();
         return getDecode(jsonvalues);
     }
-    public static String UserRegistration(String name,String mobile_no,String gender,String dob,String referral_code,String interests,String nationality,String profile_pic) throws Exception {
-        String url = main_header + userregistration;
+
+    public static String OTPSender(String mobile_no,String sms_code) throws Exception {
+        String url = main_header + sms_verification;
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-        nameValuePairs.add(new BasicNameValuePair("name", name));
         nameValuePairs.add(new BasicNameValuePair("mobile_no", mobile_no));
-        nameValuePairs.add(new BasicNameValuePair("gender", gender));
-        nameValuePairs.add(new BasicNameValuePair("dob", dob));
-        nameValuePairs.add(new BasicNameValuePair("referral_code", referral_code));
-        nameValuePairs.add(new BasicNameValuePair("interests", interests));
-        nameValuePairs.add(new BasicNameValuePair("nationality", nationality));
-        nameValuePairs.add(new BasicNameValuePair("profile_pic", profile_pic));
+        nameValuePairs.add(new BasicNameValuePair("sms_code", sms_code));
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+
+    public static String OTPSenderLogin(String mobile_no,String sms_code) throws Exception {
+        String url = main_header + sms_verification_login;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("mobile_no", mobile_no));
+        nameValuePairs.add(new BasicNameValuePair("sms_code", sms_code));
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

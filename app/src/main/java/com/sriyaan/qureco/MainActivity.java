@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -95,11 +96,14 @@ public class MainActivity extends AppCompatActivity {
     private String userChoosenTask;
     int page = 0;
 
+    SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         con = MainActivity.this;
+        prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
+
         toolbar     = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -686,7 +690,7 @@ public class MainActivity extends AppCompatActivity {
                     str_mobile_login = input_phone.getText().toString();
                     if(!str_mobile_login.equals(""))
                     {
-
+                        new UserLogin().execute();
                     }
                     /*Intent i = new Intent(MainActivity.this,Home.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -971,6 +975,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
+                prefs.edit().putString("mobile",strMobile).apply();
                 json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,strNationality,strCity,bitmap);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -995,6 +1000,7 @@ public class MainActivity extends AppCompatActivity {
                     if(str_Code.equals("HCPC200"))
                     {
                         //Successfull
+                        prefs.edit().putString("type","register").apply();
                         Intent i = new Intent(con,SmsReciever.class);
                         startActivity(i);
                         finish();
@@ -1029,6 +1035,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
+                prefs.edit().putString("mobile",strMobile).apply();
                 json = url_dump.LoginUser(strMobile);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1050,19 +1057,20 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("Mesg",str_Message);
                     Log.d("UsID",str_UserID);
 
-                    if(str_Code.equals("HCPC200"))
+                    if(str_Code.equals("HCPC400"))
                     {
                         //Successfull
+                        prefs.edit().putString("type","login").apply();
                         Intent i = new Intent(con,SmsReciever.class);
                         startActivity(i);
                         finish();
                     }
-                    else if(str_Code.equals("HCPC201"))
+                    else if(str_Code.equals("HCPC401"))
                     {
                         //Some Parameters are Missing
                         Toastthis(str_Message,con);
                     }
-                    else if(str_Code.equals("HCP202"))
+                    else if(str_Code.equals("HCP402"))
                     {
                         //User Already Registered
                         Toastthis(str_Message,con);
