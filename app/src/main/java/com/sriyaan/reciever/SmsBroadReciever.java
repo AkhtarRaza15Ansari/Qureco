@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.sriyaan.qureco.Home;
 import com.sriyaan.qureco.SmsReciever;
+import com.sriyaan.util.RoutingActivity;
+import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
 
@@ -42,6 +44,7 @@ public class SmsBroadReciever extends BroadcastReceiver {
         this.con = context;
         prefs = con.getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
         type = prefs.getString("type","");
+        Log.d("reciever","reciever");
         mobile = prefs.getString("mobile","");
         try {
 
@@ -118,7 +121,8 @@ public class SmsBroadReciever extends BroadcastReceiver {
                         {
                             //Successfull
                             prefs.edit().putString("type","login").apply();
-                            Intent i = new Intent(con,Home.class);
+                            Intent i = new Intent(con,RoutingActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             con.startActivity(i);
                         }
                         else if(str_Code.equals("HCPC501"))
@@ -142,7 +146,8 @@ public class SmsBroadReciever extends BroadcastReceiver {
                         {
                             //Successfull
                             prefs.edit().putString("type","login").apply();
-                            Intent i = new Intent(con,Home.class);
+                            Intent i = new Intent(con,RoutingActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             con.startActivity(i);
                         }
                         else if(str_Code.equals("HCPC301"))

@@ -3,16 +3,21 @@ package com.sriyaan.qureco;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -38,6 +43,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
@@ -51,6 +57,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -92,10 +99,11 @@ public class MainActivity extends AppCompatActivity {
     EditText etNationality,etCity;
     ImageView opengallery,person;
     String strName,strMobile,strDob,strReferral,strGender,strInterest,strImageName,strNationality,strCity;
-    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
+    int REQUEST_CAMERA = 0, FILE_SELECT_CODE = 1;
     private String userChoosenTask;
     int page = 0;
 
+    String path = "",selectedImagePath;
     SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -742,7 +750,7 @@ public class MainActivity extends AppCompatActivity {
 
         dob.setText(sdf.format(myCalendar.getTime()));
     }
-    @Override
+    /*@Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case url_dump.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
@@ -756,32 +764,35 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
-    }
+    }*/
 
     private void selectImage() {
-        Log.d("coming","1");
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Add Photo!");
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Add File");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result=url_dump.checkPermission(MainActivity.this);
-
                 if (items[item].equals("Take Photo")) {
-                    userChoosenTask ="Take Photo";
-                    Log.d("coming","2");
-                    if(result)
-                        cameraIntent();
-
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, setImageUri());
+                    startActivityForResult(intent, REQUEST_CAMERA);
                 } else if (items[item].equals("Choose from Library")) {
-                    Log.d("coming","3");
-                    userChoosenTask ="Choose from Library";
-                    if(result)
-                        galleryIntent();
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("*/*");
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
 
+                    try {
+                        startActivityForResult(
+                                Intent.createChooser(intent, "Select a File to Upload"),
+                                FILE_SELECT_CODE);
+                    } catch (android.content.ActivityNotFoundException ex) {
+                        // Potentially direct the user to the Market with a Dialog
+                        Toast.makeText(MainActivity.this, "Please install a File Manager.",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
@@ -790,71 +801,171 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private void galleryIntent()
-    {
-        Log.d("coming","5");
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
-    }
-
-    private void cameraIntent()
-    {
-        Log.d("coming","4");
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
+            if (requestCode == FILE_SELECT_CODE)
+            {
+                Uri uri = data.getData();
+                Log.d("TAG", "File Uri: " + uri.toString());
+                // Get the path
+
+                path = getPath(this, uri);
+                Log.d("TAG", "File Path: " + path);
+                String filename = path.substring(path.lastIndexOf("/") + 1);
+                PlaceImage();
+                //new PostNotification().execute();
+            }
             else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
         }
     }
-
-    private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
-
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        person.setImageBitmap(thumbnail);
+    public void PlaceImage(){
+        Uri uri = Uri.fromFile(new File(path));
+        Picasso.with(MainActivity.this).load(uri).resize(96, 96).centerCrop().into(person);
     }
+    public String getImagePath() {
+        return imgPath;
+    }
+    private void onCaptureImageResult(Intent data) {
+        selectedImagePath = getImagePath();
+        File destination = new File(selectedImagePath);
+        path = destination.getAbsolutePath();
+        Log.d("path",path);
+        PlaceImage();
+        //new PostNotification().execute();
+    }
+    public static String getPath(final Context context, final Uri uri) {
 
-    @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
+        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
-        Bitmap bm=null;
-        if (data != null) {
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-            } catch (IOException e) {
-                e.printStackTrace();
+        // DocumentProvider
+        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                if ("primary".equalsIgnoreCase(type)) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+
+                // TODO handle non-primary volumes
+            }
+            // DownloadsProvider
+            else if (isDownloadsDocument(uri)) {
+
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                return getDataColumn(context, contentUri, null, null);
+            }
+            // MediaProvider
+            else if (isMediaDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[]{
+                        split[1]
+                };
+
+                return getDataColumn(context, contentUri, selection, selectionArgs);
             }
         }
+        // MediaStore (and general)
+        else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            return getDataColumn(context, uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
 
-        person.setImageBitmap(bm);
+        return null;
     }
+
+    /**
+     * Get the value of the data column for this Uri. This is useful for
+     * MediaStore Uris, and other file-based ContentProviders.
+     *
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the query.
+     * @return The value of the _data column, which is typically a file path.
+     */
+    public static String getDataColumn(Context context, Uri uri, String selection,
+                                       String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    private String imgPath;
+    public Uri setImageUri() {
+        // Store image in dcim
+        File file = new File(Environment.getExternalStorageDirectory() + "/DCIM/", "image" + new Date().getTime() + ".png");
+        Uri imgUri = Uri.fromFile(file);
+        this.imgPath = file.getAbsolutePath();
+        return imgUri;
+    }
+
 
     public void validateNext()
     {
@@ -970,14 +1081,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            url_dump.startprogress("Fetching Data","Please wait",MainActivity.this,false);
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
             try {
                 prefs.edit().putString("mobile",strMobile).apply();
-                json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,strNationality,strCity,bitmap);
+                json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,strNationality,strCity,path);
             } catch (Exception e) {
+                url_dump.dismissprogress();
                 e.printStackTrace();
             }
             return null;
@@ -986,6 +1099,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            url_dump.dismissprogress();
             try{
                 if(!json.equals(""))
                 {
@@ -1030,15 +1144,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            url_dump.startprogress("Fetching Data","Please wait",MainActivity.this,false);
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                prefs.edit().putString("mobile",strMobile).apply();
-                json = url_dump.LoginUser(strMobile);
+                prefs.edit().putString("mobile",str_mobile_login).apply();
+                json = url_dump.LoginUser(str_mobile_login);
             } catch (Exception e) {
                 e.printStackTrace();
+                url_dump.dismissprogress();
             }
             return null;
         }
@@ -1046,6 +1162,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            url_dump.dismissprogress();
             try{
                 if(!json.equals(""))
                 {

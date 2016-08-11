@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.sriyaan.util.url_dump;
+
 import org.json.JSONArray;
 
 import static com.sriyaan.util.url_dump.OTPSender;
@@ -39,10 +41,12 @@ public class SmsReciever extends AppCompatActivity {
     String mobile;
     SharedPreferences prefs;
     String type;
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_reciever);
+        context = SmsReciever.this;
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
         type = prefs.getString("type","");
         mobile = prefs.getString("mobile","");
@@ -96,6 +100,7 @@ public class SmsReciever extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            url_dump.startprogress("Fetching Data","Please wait",SmsReciever.this,false);
         }
 
         @Override
@@ -112,6 +117,7 @@ public class SmsReciever extends AppCompatActivity {
                 Log.d("json","This is it: "+json);
             } catch (Exception e) {
                 e.printStackTrace();
+                url_dump.dismissprogress();
             }
             return null;
         }
@@ -119,6 +125,7 @@ public class SmsReciever extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            url_dump.dismissprogress();
             try{
                 if(!json.equals(""))
                 {
@@ -135,25 +142,25 @@ public class SmsReciever extends AppCompatActivity {
                         {
                             //Successfull
                             prefs.edit().putString("type","login").apply();
-                            Intent i = new Intent(SmsReciever.this,Home.class);
-                            startActivity(i);
+                            Intent i = new Intent(context,Home.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(i);
                             finish();
                         }
                         else if(str_Code.equals("HCPC501"))
                         {
                             //Some Parameters are Missing
-                            Toastthis(str_Message,SmsReciever.this);
+                            Toastthis(str_Message,context);
                         }
                         else if(str_Code.equals("HCPC502"))
                         {
                             //User Already Registered
-                            Toastthis(str_Message,SmsReciever.this);
-                            onBackPressed();
+                            Toastthis(str_Message,context);
                         }
                         else if(str_Code.equals("HCPC503"))
                         {
                             //User Already Registered
-                            Toastthis(str_Message,SmsReciever.this);
+                            Toastthis(str_Message,context);
                         }
                     }
                     else {
@@ -161,25 +168,25 @@ public class SmsReciever extends AppCompatActivity {
                         {
                             //Successfull
                             prefs.edit().putString("type","login").apply();
-                            Intent i = new Intent(SmsReciever.this,Home.class);
-                            startActivity(i);
+                            Intent i = new Intent(context,Home.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(i);
                             finish();
                         }
                         else if(str_Code.equals("HCPC301"))
                         {
                             //Some Parameters are Missing
-                            Toastthis(str_Message,SmsReciever.this);
+                            Toastthis(str_Message,context);
                         }
                         else if(str_Code.equals("HCPC302"))
                         {
                             //User Already Registered
-                            Toastthis(str_Message,SmsReciever.this);
-                            onBackPressed();
+                            Toastthis(str_Message,context);
                         }
                         else if(str_Code.equals("HCPC303"))
                         {
                             //User Already Registered
-                            Toastthis(str_Message,SmsReciever.this);
+                            Toastthis(str_Message,context);
                         }
                     }
                 }
@@ -188,72 +195,6 @@ public class SmsReciever extends AppCompatActivity {
             {
                 e.printStackTrace();
             }
-        }
-    }
-    public class UserLogin extends AsyncTask<Void,Void,Void> {
-        String json;
-        String str_Code,str_Message,str_UserID;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                json = OTPSenderLogin(mobile,code);
-                Log.d("json","This is it: "+json);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            try{
-                if(!json.equals(""))
-                {
-                    JSONArray object = new JSONArray(json);
-                    str_Code = object.get(0).toString();
-                    str_Message = object.get(1).toString();
-                    str_UserID = object.get(2).toString();
-                    Log.d("Code",str_Code);
-                    Log.d("Mesg",str_Message);
-                    Log.d("UsID",str_UserID);
-
-                    if(str_Code.equals("HCPC500"))
-                    {
-                        //Successfull
-                        prefs.edit().putString("type","login").apply();
-                        Intent i = new Intent(SmsReciever.this,Home.class);
-                        startActivity(i);
-                        finish();
-                    }
-                    else if(str_Code.equals("HCPC501"))
-                    {
-                        //Some Parameters are Missing
-                        Toastthis(str_Message,SmsReciever.this);
-                    }
-                    else if(str_Code.equals("HCPC502"))
-                    {
-                        //User Already Registered
-                        Toastthis(str_Message,SmsReciever.this);
-                        onBackPressed();
-                    }
-                    else if(str_Code.equals("HCPC503"))
-                    {
-                        //User Already Registered
-                        Toastthis(str_Message,SmsReciever.this);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-
         }
     }
 }

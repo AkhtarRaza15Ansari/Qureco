@@ -108,7 +108,22 @@ public class url_dump {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
     public static ProgressDialog mProgressDialog;
-
+    public static void startprogress(String message,String title,Context context,Boolean cancelable)
+    {
+        mProgressDialog = new ProgressDialog(context);
+        // Set progressdialog title
+        mProgressDialog.setTitle(title);
+        // Set progressdialog message
+        mProgressDialog.setMessage(message);
+        mProgressDialog.setCancelable(cancelable);
+        mProgressDialog.setIndeterminate(false);
+        // Show progressdialog
+        mProgressDialog.show();
+    }
+    public static void dismissprogress()
+    {
+        mProgressDialog.dismiss();
+    }
     public static void function1(String url) throws Exception
     {
         String postReceiverUrl = url.trim();
@@ -151,6 +166,7 @@ public class url_dump {
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("mobile", mobile));
+        Log.d("mobile",mobile);
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);
@@ -173,8 +189,10 @@ public class url_dump {
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-        nameValuePairs.add(new BasicNameValuePair("mobile_no", mobile_no));
-        nameValuePairs.add(new BasicNameValuePair("sms_code", sms_code));
+        nameValuePairs.add(new BasicNameValuePair("mobile", mobile_no));
+        nameValuePairs.add(new BasicNameValuePair("otp", sms_code));
+        Log.d("mobile_no", mobile_no);
+        Log.d("otp", sms_code);
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);
@@ -210,9 +228,6 @@ public class url_dump {
             HttpPost post = new HttpPost(urlString);
 
             MultipartEntity reqEntity = new MultipartEntity();
-            //ContentBody encFile = new FileBody(fmain,"image/jpg");
-            reqEntity.addPart("method", new StringBody("addoffer"));
-            //reqEntity.addPart("image", encFile);
             if(profile_pic!=null)
             {
                 File fmain = new File(profile_pic);
