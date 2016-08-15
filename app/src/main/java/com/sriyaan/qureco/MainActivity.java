@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.icon_hospital_clicked));
+                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
                             }
 
                             @Override
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.icon_hospital));
+                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
                             }
 
                             @Override
@@ -311,7 +311,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                hospital.setImageDrawable(getResources().getDrawable(R.drawable.icon_hospital_clicked));
+                                hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
                             }
 
                             @Override
@@ -331,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                hospital.setImageDrawable(getResources().getDrawable(R.drawable.icon_hospital));
+                                hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
                             }
 
                             @Override
@@ -359,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pathlab.setImageDrawable(getResources().getDrawable(R.drawable.icon_pathlab_clicked));
+                                pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab));
                             }
 
                             @Override
@@ -379,7 +379,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pathlab.setImageDrawable(getResources().getDrawable(R.drawable.icon_pathlab));
+                                pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab));
                             }
 
                             @Override
@@ -407,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                fitness.setImageDrawable(getResources().getDrawable(R.drawable.icon_fitness_clicked));
+                                fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness));
                             }
 
                             @Override
@@ -427,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                fitness.setImageDrawable(getResources().getDrawable(R.drawable.icon_fittness));
+                                fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness));
                             }
 
                             @Override
@@ -455,7 +455,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.icon_bloodbank_clicked));
+                                bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank));
                             }
 
                             @Override
@@ -475,7 +475,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.icon_bloodbank));
+                                bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank));
                             }
 
                             @Override
@@ -503,7 +503,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                salon.setImageDrawable(getResources().getDrawable(R.drawable.icon_salon_clicked));
+                                salon.setImageDrawable(getResources().getDrawable(R.drawable.salon));
                             }
 
                             @Override
@@ -523,7 +523,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                salon.setImageDrawable(getResources().getDrawable(R.drawable.icon_salon));
+                                salon.setImageDrawable(getResources().getDrawable(R.drawable.salon));
                             }
 
                             @Override
@@ -551,7 +551,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.icon_pharmacy_clicked));
+                                pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy));
                             }
 
                             @Override
@@ -571,7 +571,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.icon_pharmacy));
+                                pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy));
                             }
 
                             @Override
@@ -599,7 +599,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                doctor.setImageDrawable(getResources().getDrawable(R.drawable.icon_doctor_clicked));
+                                doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor));
                             }
 
                             @Override
@@ -619,7 +619,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                doctor.setImageDrawable(getResources().getDrawable(R.drawable.icon_doctor));
+                                doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor));
                             }
 
                             @Override
@@ -647,7 +647,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                spa.setImageDrawable(getResources().getDrawable(R.drawable.icon_spa_clicked));
+                                spa.setImageDrawable(getResources().getDrawable(R.drawable.spa));
                             }
 
                             @Override
@@ -667,7 +667,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                spa.setImageDrawable(getResources().getDrawable(R.drawable.icon_spa));
+                                spa.setImageDrawable(getResources().getDrawable(R.drawable.spa));
                             }
 
                             @Override

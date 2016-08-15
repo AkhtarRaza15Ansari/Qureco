@@ -121,7 +121,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
-                                    android:src="@drawable/icon_hospital" />
+                                    android:src="@drawable/clinic" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -144,7 +144,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
-                                    android:src="@drawable/icon_hospital" />
+                                    android:src="@drawable/hospital" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -167,7 +167,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
-                                    android:src="@drawable/icon_pathlab" />
+                                    android:src="@drawable/pathlab" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -189,7 +189,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
-                                    android:src="@drawable/icon_fittness" />
+                                    android:src="@drawable/fitness" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -218,7 +218,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
-                                    android:src="@drawable/icon_bloodbank" />
+                                    android:src="@drawable/bloodbank" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -241,7 +241,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
-                                    android:src="@drawable/icon_salon" />
+                                    android:src="@drawable/salon" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -263,7 +263,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
-                                    android:src="@drawable/icon_pharmacy" />
+                                    android:src="@drawable/pharmacy" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -285,7 +285,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
-                                    android:src="@drawable/icon_doctor" />
+                                    android:src="@drawable/doctor" />
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -313,7 +313,7 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
-                                    android:src="@drawable/icon_spa" />
+                                    android:src="@drawable/spa" />
 
                                 <TextView
                                     android:layout_width="match_parent"
