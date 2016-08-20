@@ -65,8 +65,8 @@ public class SmsReciever extends AppCompatActivity {
             }
         });
         timerfunction();
-        String substr = msg.substring(startIndex,endIndex);
-        Log.d("cscc",substr);
+        //String substr = msg.substring(startIndex,endIndex);
+        //Log.d("cscc",substr);
     }
 
     public void timerfunction()

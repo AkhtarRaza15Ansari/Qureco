@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
     android:orientation="vertical"
     tools:context="com.sriyaan.qureco.CompleteRegister">
 
@@ -16,8 +16,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/newbackground"/>
+        android:scaleType="centerCrop"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -35,6 +34,7 @@
                 android:text="Skip"
                 android:layout_gravity="end"
                 android:gravity="center"
+                android:visibility="gone"
                 android:background="@drawable/circular"
                 android:textColor="@color/white"
                 android:textSize="15dp"/>
@@ -53,27 +53,39 @@
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:elevation="10dp">
+                        card_view:cardUseCompatPadding="true"
+                        card_view:cardElevation="5dp"
+                        card_view:cardCornerRadius="3dp"
+                        >
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="10dp">
+                            android:layout_height="wrap_content">
                             <ImageView
                                 android:id="@+id/person"
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:layout_centerInParent="true"
-                                android:src="@drawable/person"
+                                android:padding="15dp"
+                                android:layout_alignParentLeft="true"
+                                android:src="@drawable/user"
                                 />
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18dp"
+                                android:textStyle="bold"
+                                android:typeface="serif"
+                                android:text="Name"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@id/person"
+                                android:layout_toLeftOf="@+id/opengallery"/>
                             <ImageView
                                 android:id="@+id/opengallery"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:padding="10dp"
                                 android:layout_alignParentRight="true"
-                                android:background="@drawable/circular"
-                                android:src="@drawable/camera_icon"
+                                android:src="@drawable/camera"
                                 />
                         </RelativeLayout>
                     </android.support.v7.widget.CardView>
@@ -83,20 +95,27 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="10dp">
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="5dp"
+                card_view:cardCornerRadius="3dp"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Interested in:"
-                        android:textSize="15dp"
+                        android:text="SELECT PREFERENCES"
+                        android:gravity="center"
+                        android:textSize="12dp"
+                        android:padding="10dp"
+                        android:typeface="serif"
+                        android:background="#5D5B5C"
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -108,175 +127,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/clinics"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="05dp"
-                                    android:src="@drawable/clinic" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="Clinics"
-                                    android:textSize="13dp"
-                                    android:textColor="@color/colorPrimary" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/hospital"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="05dp"
-                                    android:src="@drawable/hospital" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="Hospital"
-                                    android:textSize="13dp"
-                                    android:textColor="@color/colorPrimary" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/pathlab"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="05dp"
-                                    android:src="@drawable/pathlab" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="Pathlab"
-                                    android:textSize="13dp"
-                                    android:textColor="@color/colorPrimary" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/fitness"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="05dp"
-                                    android:src="@drawable/fitness" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="Fitness"
-                                    android:textSize="13dp"
-                                    android:textColor="@color/colorPrimary" />
-                            </LinearLayout>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/bloodbanks"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="05dp"
-                                    android:src="@drawable/bloodbank" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="Blood Bank"
-                                    android:textSize="13dp"
-                                    android:textColor="@color/colorPrimary" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/salon"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="05dp"
-                                    android:src="@drawable/salon" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="Salon"
-                                    android:textSize="13dp"
-                                    android:textColor="@color/colorPrimary" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/pharmacy"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="05dp"
-                                    android:src="@drawable/pharmacy" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="Pharmacy"
-                                    android:textSize="13dp"
-                                    android:textColor="@color/colorPrimary" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.25"
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -291,20 +146,122 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Doctor"
+                                    android:text="DOCTOR"
                                     android:textSize="13dp"
-                                    android:textColor="@color/colorPrimary" />
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
                             </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/clinics"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="05dp"
+                                    android:src="@drawable/clinic" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="CLINICS"
+                                    android:textSize="13dp"
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/pathlab"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="05dp"
+                                    android:src="@drawable/pathlab" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="PATHLAB"
+                                    android:textSize="13dp"
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/fitness"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="05dp"
+                                    android:src="@drawable/fitness" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="FITNESS"
+                                    android:textSize="13dp"
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/salon"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="05dp"
+                                    android:src="@drawable/salon" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="SALON"
+                                    android:textSize="13dp"
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
                                 android:orientation="vertical">
 
                                 <ImageView
@@ -319,39 +276,163 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Spa"
+                                    android:text="SPA"
                                     android:textSize="13dp"
-                                    android:textColor="@color/colorPrimary" />
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
                             </LinearLayout>
+
+
+
+
                         </LinearLayout>
 
-                        <android.support.design.widget.TextInputLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColorHint="@color/light_black">
-
-                            <EditText
-                                android:id="@+id/nationality"
+                            android:orientation="horizontal">
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Nationality"
-                                android:textSize="15dp"
-                                android:textColor="@color/colorPrimary" />
-                        </android.support.design.widget.TextInputLayout>
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
+                                android:orientation="vertical">
 
-                        <android.support.design.widget.TextInputLayout
+                                <ImageView
+                                    android:id="@+id/pharmacy"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="05dp"
+                                    android:src="@drawable/pharmacy" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="PHARMACY"
+                                    android:textSize="13dp"
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/hospital"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="05dp"
+                                    android:src="@drawable/hospital" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="HOSPITAL"
+                                    android:textSize="13dp"
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/bloodbanks"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="05dp"
+                                    android:src="@drawable/bloodbank" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="BLOOD BANK"
+                                    android:textSize="13dp"
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="5dp"
+                card_view:cardCornerRadius="3dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="SELECT YOUR LOCATION"
+                        android:gravity="center"
+                        android:textSize="12dp"
+                        android:padding="10dp"
+                        android:typeface="serif"
+                        android:background="#5D5B5C"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColorHint="@color/light_black">
-
-                            <EditText
-                                android:id="@+id/city"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:id="@+id/location"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="City"
-                                android:textSize="15dp"
-                                android:textColor="@color/colorPrimary" />
-                        </android.support.design.widget.TextInputLayout>
+                                android:layout_weight="0.33"
+                                android:background="@drawable/border_thin"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/icon_map"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="05dp"
+                                    android:src="@drawable/location" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="CLICK HERE TO SELECT"
+                                    android:textSize="13dp"
+                                    android:layout_margin="02dp"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+                        </LinearLayout>
 
                     </LinearLayout>
                 </LinearLayout>

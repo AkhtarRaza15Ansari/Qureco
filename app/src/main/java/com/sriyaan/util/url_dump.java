@@ -218,7 +218,7 @@ public class url_dump {
     }
 
 
-    public static String doFileUpload(String name,String mobile_no,String gender,String dob,String referral_code,String interests,String nationality,String city,String profile_pic) throws Exception {
+    public static String doFileUpload(String name,String mobile_no,String gender,String dob,String referral_code,String interests,String map_lat,String map_long,String profile_pic) throws Exception {
         String urlString = main_header + userregistration;
         String sResponse;
         StringBuilder s = new StringBuilder();
@@ -241,8 +241,8 @@ public class url_dump {
             reqEntity.addPart("dob", new StringBody(dob));
             reqEntity.addPart("referral_code", new StringBody(referral_code));
             reqEntity.addPart("interests", new StringBody(interests));
-            reqEntity.addPart("nationality", new StringBody(nationality));
-            reqEntity.addPart("city", new StringBody(city));
+            reqEntity.addPart("map_lat", new StringBody(map_lat));
+            reqEntity.addPart("map_long", new StringBody(map_long));
 
             post.setEntity(reqEntity);
             HttpResponse response = client.execute(post);

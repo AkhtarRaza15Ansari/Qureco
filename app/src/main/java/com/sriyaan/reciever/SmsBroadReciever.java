@@ -46,6 +46,7 @@ public class SmsBroadReciever extends BroadcastReceiver {
         type = prefs.getString("type","");
         Log.d("reciever","reciever");
         mobile = prefs.getString("mobile","");
+        Log.d("cscc","coming");
         try {
 
             if (bundle != null) {

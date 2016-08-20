@@ -4,11 +4,14 @@
     <color name="colorPrimaryDark">#B40A08</color>
     <color name="colorAccent">#B40A08</color>
     <color name="transparent">#88ED0D0A</color>
+    <color name="text_color">#536172</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="light_black">#757575</color>
     <color name="lines">#C8C8C8</color>
     <color name="transparenta">#73000000</color>
+    <color name="footer">#F3F3F3</color>
+    <color name="unselected">#949494</color>
     <color name="backgroundColor">#e4e4e4</color>
     <color name="colora">#FF9800</color>
     <color name="colorb">#C0CA33</color>
@@ -18,4 +21,9 @@
     <color name="tcolorb">#e4e4e4</color>
     <color name="tcolorc">#e4e4e4</color>
     <color name="tcolord">#e4e4e4</color>
+
+    <color name="loyalty">#e67040</color>
+    <color name="deals">#51b8d7</color>
+    <color name="review">#fec93b</color>
+    <color name="lifesavers">#37bcab</color>
 </resources>

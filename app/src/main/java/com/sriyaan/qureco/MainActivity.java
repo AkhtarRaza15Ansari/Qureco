@@ -96,9 +96,10 @@ public class MainActivity extends AppCompatActivity {
     Button btnCompleteRegister;
     int cclinics,chospital,cpathlab,cfitness,cbloodbanks,csalon,cpharmacy,cdoctor,cspa;
     Animation flipin,flipout;
-    EditText etNationality,etCity;
+    LinearLayout location;
     ImageView opengallery,person;
-    String strName,strMobile,strDob,strReferral,strGender,strInterest,strImageName,strNationality,strCity;
+    String strName="",strMobile="",strDob="",strReferral="",strGender="",strInterest="";
+    public static String str_lat,str_lon;
     int REQUEST_CAMERA = 0, FILE_SELECT_CODE = 1;
     private String userChoosenTask;
     int page = 0;
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("");
 
+
         my_root = (LinearLayout) findViewById(R.id.body);
         inflater = LayoutInflater.from(this);
         setUiPageViewController(3);
@@ -131,9 +133,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public void initRegister()
     {
-        btnRegister     = (Button)  findViewById(R.id.btnRegister);
-        dob             = (EditText)findViewById(R.id.dob);
-        skip            = (TextView)  findViewById(R.id.skip);
+        btnRegister     = (Button)      findViewById(R.id.btnRegister);
+        dob             = (EditText)    findViewById(R.id.dob);
+        skip            = (TextView)    findViewById(R.id.skip);
         gender          = (RadioGroup)  findViewById(R.id.group);
         male            = (RadioButton) findViewById(R.id.male);
         female          = (RadioButton) findViewById(R.id.female);
@@ -155,11 +157,10 @@ public class MainActivity extends AppCompatActivity {
         doctor              = (ImageView)   findViewById(R.id.doctor);
         spa                 = (ImageView)   findViewById(R.id.spa);
         btnCompleteRegister = (Button)      findViewById(R.id.btnRegister);
-        skip1               = (TextView)  findViewById(R.id.skip);
-        etNationality   = (EditText)        findViewById(R.id.nationality);
-        etCity          = (EditText)        findViewById(R.id.city);
-        opengallery     = (ImageView)       findViewById(R.id.opengallery);
-        person          = (ImageView)       findViewById(R.id.person);
+        skip1               = (TextView)    findViewById(R.id.skip);
+        location            = (LinearLayout)findViewById(R.id.location);
+        opengallery         = (ImageView)   findViewById(R.id.opengallery);
+        person              = (ImageView)   findViewById(R.id.person);
     }
     public void loadLayout(String body)
     {
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         {
             page = 1;
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-            mTitle.setText("Register");
+            mTitle.setText("REGISTRATION");
             my_root.removeAllViews();
             View inflatedLayout = inflater.inflate(R.layout.activity_register, null, false);
             my_root.addView(inflatedLayout);
@@ -219,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
             page = 2;
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-            mTitle.setText("Complete Register");
+            mTitle.setText("COMPLETE REGISTRATION");
             my_root.removeAllViews();
             View inflatedLayout = inflater.inflate(R.layout.activity_complete_register, null, false);
             my_root.addView(inflatedLayout);
@@ -247,7 +248,13 @@ public class MainActivity extends AppCompatActivity {
             });
             flipin = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flip_in);
             flipout = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flip_out);
-
+            location.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i =new Intent(MainActivity.this,MapsActivity.class);
+                    startActivity(i);
+                }
+            });
             clinics.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -263,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
+                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic_));
                             }
 
                             @Override
@@ -283,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
+                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic));
                             }
 
                             @Override
@@ -311,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
+                                hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital_));
                             }
 
                             @Override
@@ -359,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab));
+                                pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab_));
                             }
 
                             @Override
@@ -407,7 +414,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness));
+                                fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness_));
                             }
 
                             @Override
@@ -455,7 +462,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank));
+                                bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank_));
                             }
 
                             @Override
@@ -503,7 +510,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                salon.setImageDrawable(getResources().getDrawable(R.drawable.salon));
+                                salon.setImageDrawable(getResources().getDrawable(R.drawable.salon_));
                             }
 
                             @Override
@@ -551,7 +558,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy));
+                                pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy_));
                             }
 
                             @Override
@@ -599,7 +606,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor));
+                                doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor_));
                             }
 
                             @Override
@@ -647,7 +654,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                spa.setImageDrawable(getResources().getDrawable(R.drawable.spa));
+                                spa.setImageDrawable(getResources().getDrawable(R.drawable.spa_));
                             }
 
                             @Override
@@ -686,7 +693,7 @@ public class MainActivity extends AppCompatActivity {
         {
             page = 3;
             TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-            mTitle.setText("Login");
+            mTitle.setText("LOGIN");
 
             my_root.removeAllViews();
             View inflatedLayout = inflater.inflate(R.layout.activity_login, null, false);
@@ -972,7 +979,6 @@ public class MainActivity extends AppCompatActivity {
         strName = etName.getText().toString();
         strMobile = etMobile.getText().toString();
         strDob = dob.getText().toString();
-        strReferral = etReferral.getText().toString();
         int selectedId = gender.getCheckedRadioButtonId();
         if(selectedId == male.getId())
         {
@@ -985,19 +991,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(strName.equals(""))
         {
-            url_dump.Toastthis("",con);
+            url_dump.Toastthis("Please enter name to proceed",con);
         }
         else if(strMobile.equals(""))
         {
-            url_dump.Toastthis("",con);
-        }
-        else if(strReferral.equals(""))
-        {
-            url_dump.Toastthis("",con);
+            url_dump.Toastthis("Please enter mobile number to proceed",con);
         }
         else if(strDob.equals(""))
         {
-            url_dump.Toastthis("",con);
+            url_dump.Toastthis("Please select date of birth to proceed",con);
         }
         else{
             loadLayout("completeregister");
@@ -1007,19 +1009,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void validateRegister(){
         strInterest = "";
-        strCity =  etCity.getText().toString();
-        strNationality = etNationality.getText().toString();
         strInterest = getInterest();
         Toast.makeText(MainActivity.this, ""+getInterest(), Toast.LENGTH_SHORT).show();
         if(strInterest.equals("Please select one interest to proceed"))
         {
             url_dump.Toastthis(strInterest,con);
         }
-        else if(strNationality.equals("")){
-            url_dump.Toastthis("Please enter your nationality",con);
+        else if(str_lat.equals("")){
+            url_dump.Toastthis("Please select your location",con);
         }
-        else if(strCity.equals("")){
-            url_dump.Toastthis("Please enter your city",con);
+        else if(str_lon.equals("")){
+            url_dump.Toastthis("Please select your location",con);
         }
         else {
             new UserRegister().execute();
@@ -1088,7 +1088,7 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             try {
                 prefs.edit().putString("mobile",strMobile).apply();
-                json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,strNationality,strCity,path);
+                json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,str_lat,str_lon,path);
             } catch (Exception e) {
                 url_dump.dismissprogress();
                 e.printStackTrace();
@@ -1115,6 +1115,7 @@ public class MainActivity extends AppCompatActivity {
                     {
                         //Successfull
                         prefs.edit().putString("type","register").apply();
+                        prefs.edit().putString("login","yes").apply();
                         Intent i = new Intent(con,SmsReciever.class);
                         startActivity(i);
                         finish();
@@ -1178,6 +1179,7 @@ public class MainActivity extends AppCompatActivity {
                     {
                         //Successfull
                         prefs.edit().putString("type","login").apply();
+                        prefs.edit().putString("login","yes").apply();
                         Intent i = new Intent(con,SmsReciever.class);
                         startActivity(i);
                         finish();

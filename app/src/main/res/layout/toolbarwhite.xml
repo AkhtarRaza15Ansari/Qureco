@@ -4,7 +4,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/colorPrimary"
     android:minHeight="?attr/actionBarSize"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
@@ -14,19 +14,19 @@
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/left"
-            android:layout_width="75dp"
-            android:layout_height="50dp"
-            android:src="@drawable/logo"
-            android:layout_alignParentLeft="true"
-            android:tint="@color/colorPrimary"/>
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/qureco_logo"
+            android:layout_alignParentLeft="true"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_toLeftOf="@+id/right"
             android:layout_toRightOf="@+id/left"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/white"
             android:gravity="center"
-            android:textSize="18dp"
+            android:textSize="15dp"
             android:id="@+id/toolbar_title" />
         <ImageView
             android:id="@+id/right"

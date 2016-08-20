@@ -103,7 +103,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            clinics.setImageDrawable(getResources().getDrawable(R.drawable.icon_hospital_clicked));
+                            clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic_));
                         }
 
                         @Override
@@ -123,7 +123,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            clinics.setImageDrawable(getResources().getDrawable(R.drawable.icon_hospital));
+                            clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic));
                         }
 
                         @Override
@@ -151,7 +151,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            hospital.setImageDrawable(getResources().getDrawable(R.drawable.icon_hospital_clicked));
+                            hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital_));
                         }
 
                         @Override
@@ -171,7 +171,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            hospital.setImageDrawable(getResources().getDrawable(R.drawable.icon_hospital));
+                            hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
                         }
 
                         @Override
@@ -199,7 +199,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            pathlab.setImageDrawable(getResources().getDrawable(R.drawable.icon_pathlab_clicked));
+                            pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab_));
                         }
 
                         @Override
@@ -219,7 +219,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            pathlab.setImageDrawable(getResources().getDrawable(R.drawable.icon_pathlab));
+                            pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab));
                         }
 
                         @Override
@@ -247,7 +247,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            fitness.setImageDrawable(getResources().getDrawable(R.drawable.icon_fitness_clicked));
+                            fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness_));
                         }
 
                         @Override
@@ -267,7 +267,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            fitness.setImageDrawable(getResources().getDrawable(R.drawable.icon_fittness));
+                            fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness));
                         }
 
                         @Override
@@ -295,7 +295,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.icon_bloodbank_clicked));
+                            bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank_));
                         }
 
                         @Override
@@ -315,7 +315,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.icon_bloodbank));
+                            bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank));
                         }
 
                         @Override
@@ -343,7 +343,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            salon.setImageDrawable(getResources().getDrawable(R.drawable.icon_salon_clicked));
+                            salon.setImageDrawable(getResources().getDrawable(R.drawable.salon_));
                         }
 
                         @Override
@@ -363,7 +363,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            salon.setImageDrawable(getResources().getDrawable(R.drawable.icon_salon));
+                            salon.setImageDrawable(getResources().getDrawable(R.drawable.salon));
                         }
 
                         @Override
@@ -391,7 +391,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.icon_pharmacy_clicked));
+                            pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy_));
                         }
 
                         @Override
@@ -411,7 +411,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.icon_pharmacy));
+                            pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy));
                         }
 
                         @Override
@@ -439,7 +439,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            doctor.setImageDrawable(getResources().getDrawable(R.drawable.icon_doctor_clicked));
+                            doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor_));
                         }
 
                         @Override
@@ -459,7 +459,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            doctor.setImageDrawable(getResources().getDrawable(R.drawable.icon_doctor));
+                            doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor));
                         }
 
                         @Override
@@ -487,7 +487,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            spa.setImageDrawable(getResources().getDrawable(R.drawable.icon_spa_clicked));
+                            spa.setImageDrawable(getResources().getDrawable(R.drawable.spa_));
                         }
 
                         @Override
@@ -507,7 +507,7 @@ public class CompleteRegister extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            spa.setImageDrawable(getResources().getDrawable(R.drawable.icon_spa));
+                            spa.setImageDrawable(getResources().getDrawable(R.drawable.spa));
                         }
 
                         @Override
@@ -535,8 +535,6 @@ public class CompleteRegister extends AppCompatActivity {
         pharmacy        = (ImageView)       findViewById(R.id.pharmacy);
         doctor          = (ImageView)       findViewById(R.id.doctor);
         spa             = (ImageView)       findViewById(R.id.spa);
-        etNationality   = (EditText)        findViewById(R.id.nationality);
-        etCity          = (EditText)        findViewById(R.id.city);
         opengallery     = (ImageView)       findViewById(R.id.opengallery);
         person          = (ImageView)       findViewById(R.id.person);
         btnRegister     = (Button)          findViewById(R.id.btnRegister);
