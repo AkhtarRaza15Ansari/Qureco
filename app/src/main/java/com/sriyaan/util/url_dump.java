@@ -276,6 +276,45 @@ public class url_dump {
         }
         return getDecode(jsonvalues);
     }
+
+    public static String updateProfile(String user_id,String name,String dob,String old_profile_pic,String map_lat,String map_long,String profile_pic) throws Exception {
+        String urlString = main_header + update_profile;
+        String sResponse;
+        StringBuilder s = new StringBuilder();
+        try
+        {
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(urlString);
+
+            MultipartEntity reqEntity = new MultipartEntity();
+            if(profile_pic!=null)
+            {
+                File fmain = new File(profile_pic);
+                FileBody binmain = new FileBody(fmain);
+                reqEntity.addPart("profile_pic", binmain);
+                Log.d("image", profile_pic);
+            }
+            reqEntity.addPart("user_id", new StringBody(user_id));
+            reqEntity.addPart("old_profile_pic", new StringBody(old_profile_pic));
+            reqEntity.addPart("name", new StringBody(name));
+            reqEntity.addPart("dob", new StringBody(dob));
+            reqEntity.addPart("map_lat", new StringBody(map_lat));
+            reqEntity.addPart("map_long", new StringBody(map_long));
+
+            post.setEntity(reqEntity);
+            HttpResponse response = client.execute(post);
+            resEntity = response.getEntity();
+            jsonvalues = EntityUtils.toString(resEntity);
+            if (resEntity != null) {
+                Log.i(" RESPONSE", jsonvalues);
+            }
+        }
+        catch (Exception ex) {
+            Log.e("Debug", "error: " + ex.getMessage(), ex);
+        }
+        return getDecode(jsonvalues);
+    }
+
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

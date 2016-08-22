@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
@@ -31,11 +32,15 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.sriyaan.util.url_dump;
 
+import org.json.JSONArray;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import static com.sriyaan.util.url_dump.Toastthis;
 
 public class EditProfile extends AppCompatActivity {
     Toolbar toolbar;
@@ -59,7 +64,7 @@ public class EditProfile extends AppCompatActivity {
     int page = 0;
 
     String path = "",selectedImagePath;
-    String user_id,user_name,mobile_no,profile_pic,sgender,sdob,referral_code,lat,longt;
+    String user_id,user_name,mobile_no,profile_pic,sgender,sdob,referral_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +89,8 @@ public class EditProfile extends AppCompatActivity {
         sgender = prefs.getString("cust_gender","");
         sdob = prefs.getString("cust_dob","");
         referral_code = prefs.getString("cust_referral_code","");
-        lat = prefs.getString("cust_map_lat","");
-        longt = prefs.getString("cust_map_long","");
+        str_lat = prefs.getString("cust_map_lat","");
+        str_lon = prefs.getString("cust_map_long","");
 
 
         opengallery.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +102,9 @@ public class EditProfile extends AppCompatActivity {
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i =new Intent(con,MapsActivity.class);
+                Intent i =new Intent(con,MapsActivity1.class);
+                i.putExtra("lat",str_lat);
+                i.putExtra("lon",str_lon);
                 startActivity(i);
             }
         });
@@ -164,7 +171,7 @@ public class EditProfile extends AppCompatActivity {
             url_dump.Toastthis("Please select date of birth to proceed",con);
         }
         else{
-
+            new UserRegister().execute();
         }
 
     }
@@ -397,5 +404,66 @@ public class EditProfile extends AppCompatActivity {
         Uri imgUri = Uri.fromFile(file);
         this.imgPath = file.getAbsolutePath();
         return imgUri;
+    }
+    public class UserRegister extends AsyncTask<Void,Void,Void> {
+        String json;
+        String str_Code;
+        String str_Message;
+        String str_UserID;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            url_dump.startprogress("Fetching Data","Please wait",con,false);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                prefs.edit().putString("mobile",strMobile).apply();
+                json = url_dump.updateProfile(user_id,strName,strDob,profile_pic,str_lat,str_lon,path);
+            } catch (Exception e) {
+                url_dump.dismissprogress();
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            url_dump.dismissprogress();
+            try{
+                if(!json.equals(""))
+                {
+                    JSONArray object = new JSONArray(json);
+                    str_Code = object.get(0).toString();
+                    str_Message = object.get(1).toString();
+                    str_UserID = object.get(2).toString();
+                    Log.d("Code",str_Code);
+                    Log.d("Mesg",str_Message);
+                    Log.d("UsID",str_UserID);
+
+                    if(str_Code.equals("HCPC900"))
+                    {
+                        //Successfull
+                        onBackPressed();
+                    }
+                    else if(str_Code.equals("HCPC901"))
+                    {
+                        //Some Parameters are Missing
+                        Toastthis(str_Message,con);
+                    }
+                    else
+                    {
+                        //User Already Registered
+                        Toastthis(str_Message,con);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }
