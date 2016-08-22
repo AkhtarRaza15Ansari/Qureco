@@ -1,6 +1,7 @@
 package com.sriyaan.qureco;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,15 +18,24 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
+import com.sriyaan.util.url_dump;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class EditProfile extends AppCompatActivity {
     Toolbar toolbar;
@@ -34,6 +44,23 @@ public class EditProfile extends AppCompatActivity {
     ImageView opengallery,person;
     LinearLayout location;
     SharedPreferences prefs;
+    Button btnSave;
+    EditText dob;
+    Calendar myCalendar;
+    DatePickerDialog.OnDateSetListener date;
+    EditText etName,etMobile,etDob,etReferral;
+    RadioGroup gender;
+    RadioButton male,female;
+
+    String strName="",strMobile="",strDob="",strReferral="",strGender="",strInterest="";
+    public static String str_lat,str_lon;
+    int REQUEST_CAMERA = 0, FILE_SELECT_CODE = 1;
+    private String userChoosenTask;
+    int page = 0;
+
+    String path = "",selectedImagePath;
+    String user_id,user_name,mobile_no,profile_pic,sgender,sdob,referral_code,lat,longt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +77,17 @@ public class EditProfile extends AppCompatActivity {
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText("Edit Profile");
 
+        user_id = prefs.getString("cust_id","");
+        user_name = prefs.getString("cust_name","");
+        mobile_no = prefs.getString("cust_mobile_no","");
+        profile_pic = prefs.getString("cust_profile_pic","");
+        sgender = prefs.getString("cust_gender","");
+        sdob = prefs.getString("cust_dob","");
+        referral_code = prefs.getString("cust_referral_code","");
+        lat = prefs.getString("cust_map_lat","");
+        longt = prefs.getString("cust_map_long","");
+
+
         opengallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,18 +101,109 @@ public class EditProfile extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                validateNext();
+            }
+        });
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+        dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPicker();
+            }
+        });
+        dob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b)
+                {
+                    showPicker();
+                }
+            }
+        });
+    }
+    public void validateNext()
+    {
+        strName = etName.getText().toString();
+        strMobile = etMobile.getText().toString();
+        strDob = dob.getText().toString();
+        int selectedId = gender.getCheckedRadioButtonId();
+        if(selectedId == male.getId())
+        {
+            strGender = "Male";
+        }
+        else if(selectedId == female.getId())
+        {
+            strGender = "Female";
+        }
+
+        if(strName.equals(""))
+        {
+            url_dump.Toastthis("Please enter name to proceed",con);
+        }
+        else if(strMobile.equals(""))
+        {
+            url_dump.Toastthis("Please enter mobile number to proceed",con);
+        }
+        else if(strDob.equals(""))
+        {
+            url_dump.Toastthis("Please select date of birth to proceed",con);
+        }
+        else{
+
+        }
+
     }
     public void init(){
         con         = EditProfile.this;
         toolbar     = (Toolbar)         findViewById(R.id.toolbar);
         opengallery         = (ImageView)   findViewById(R.id.opengallery);
         person              = (ImageView)   findViewById(R.id.person);
+
+        btnSave         = (Button)      findViewById(R.id.btnSave);
+        dob             = (EditText)    findViewById(R.id.dob);
+        gender          = (RadioGroup)  findViewById(R.id.group);
+        male            = (RadioButton) findViewById(R.id.male);
+        female          = (RadioButton) findViewById(R.id.female);
+        etName          = (EditText)    findViewById(R.id.name);
+        etMobile        = (EditText)    findViewById(R.id.Mobile);
+        etReferral      = (EditText)    findViewById(R.id.promocode);
+
+        myCalendar      = Calendar.getInstance();
+    }
+
+    public void showPicker()
+    {
+        new DatePickerDialog(con, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+    private void updateLabel() {
+
+        String myFormat = "yyyy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        dob.setText(sdf.format(myCalendar.getTime()));
     }
     private void selectImage() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
 
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(MainActivity.this);
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(con);
         builder.setTitle("Add File");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -94,7 +223,7 @@ public class EditProfile extends AppCompatActivity {
                                 FILE_SELECT_CODE);
                     } catch (android.content.ActivityNotFoundException ex) {
                         // Potentially direct the user to the Market with a Dialog
-                        Toast.makeText(MainActivity.this, "Please install a File Manager.",
+                        Toast.makeText(con, "Please install a File Manager.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 } else if (items[item].equals("Cancel")) {
@@ -128,7 +257,7 @@ public class EditProfile extends AppCompatActivity {
     }
     public void PlaceImage(){
         Uri uri = Uri.fromFile(new File(path));
-        Picasso.with(MainActivity.this).load(uri).resize(96, 96).centerCrop().into(person);
+        Picasso.with(con).load(uri).resize(96, 96).centerCrop().into(person);
     }
     public String getImagePath() {
         return imgPath;

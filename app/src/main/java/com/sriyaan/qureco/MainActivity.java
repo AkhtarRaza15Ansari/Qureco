@@ -1040,7 +1040,7 @@ public class MainActivity extends AppCompatActivity {
     public void validateRegister(){
         strInterest = "";
         strInterest = getInterest();
-        Toast.makeText(MainActivity.this, ""+getInterest(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, ""+getInterest(), Toast.LENGTH_SHORT).show();
         if(strInterest.equals("Please select one interest to proceed"))
         {
             url_dump.Toastthis(strInterest,con);

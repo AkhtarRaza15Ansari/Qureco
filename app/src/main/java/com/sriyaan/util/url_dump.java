@@ -63,6 +63,10 @@ public class url_dump {
     public static String sms_verification = "hcp_customer_registration_confirm.php";
     // For SMS Verification Login
     public static String sms_verification_login = "hcp_customer_otp_verify.php";
+    // For Update in Preference
+    public static String update_preference= "hcp_customer_edit_preferences.php";
+    // For Update in Profile
+    public static String update_profile= "hcp_customer_edit_profile.php";
 
     public static void SplashTimer(final Context con, final Class class1)
     {
@@ -199,6 +203,19 @@ public class url_dump {
         function2();
         return getDecode(jsonvalues);
     }
+
+    public static String updatePreference(String user_id,String interests) throws Exception {
+        String url = main_header + update_preference;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("interests", interests));
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+
     public static String getImei(Context context) throws Exception
     {
         telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);

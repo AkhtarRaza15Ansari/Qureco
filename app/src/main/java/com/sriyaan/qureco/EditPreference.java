@@ -46,6 +46,8 @@ public class EditPreference extends AppCompatActivity {
     Animation flipin,flipout;
     SharedPreferences prefs;
     List<String> cat;
+    String strInterest="";
+    String categories,user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +61,21 @@ public class EditPreference extends AppCompatActivity {
         setTitle("");
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText("Edit Preference");
-        String categories = prefs.getString("cust_interests","");
+
+        categories = prefs.getString("cust_interests","");
+        user_id = prefs.getString("cust_id","");
+
         categories = removeLastChar(categories);
         cat = Arrays.asList(categories.split(","));
         new GetCategories().execute();
 
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //loadLayout("login");
+                validateRegister();
+            }
+        });
         flipin = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flip_in);
         flipout = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flip_out);
         clinics.setOnClickListener(new View.OnClickListener() {
@@ -642,7 +654,7 @@ public class EditPreference extends AppCompatActivity {
     public void validateRegister(){
         strInterest = "";
         strInterest = getInterest();
-        Toast.makeText(con, ""+getInterest(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(con, ""+getInterest(), Toast.LENGTH_SHORT).show();
         if(strInterest.equals("Please select one interest to proceed"))
         {
             url_dump.Toastthis(strInterest,con);
@@ -665,7 +677,7 @@ public class EditPreference extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                json = url_dump.doFileUpload(strInterest);
+                json = url_dump.updatePreference(user_id,strInterest);
             } catch (Exception e) {
                 url_dump.dismissprogress();
                 e.printStackTrace();
@@ -688,22 +700,19 @@ public class EditPreference extends AppCompatActivity {
                     Log.d("Mesg",str_Message);
                     Log.d("UsID",str_UserID);
 
-                    if(str_Code.equals("HCPC200"))
+                    if(str_Code.equals("HCPC1000"))
                     {
                         //Successfull
-                        prefs.edit().putString("type","register").apply();
-                        Intent i = new Intent(con,SmsReciever.class);
-                        startActivity(i);
-                        finish();
+                        onBackPressed();
                     }
-                    else if(str_Code.equals("HCPC201"))
+                    else if(str_Code.equals("HCPC1001"))
                     {
                         //Some Parameters are Missing
                         Toastthis(str_Message,con);
                     }
-                    else if(str_Code.equals("HCP202"))
+                    else
                     {
-
+                        Toastthis(str_Message,con);
                     }
                 }
             }
