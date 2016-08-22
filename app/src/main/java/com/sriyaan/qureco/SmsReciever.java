@@ -19,7 +19,9 @@ import android.widget.TextView;
 import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
+import static com.sriyaan.util.url_dump.Logthis;
 import static com.sriyaan.util.url_dump.OTPSender;
 import static com.sriyaan.util.url_dump.OTPSenderLogin;
 import static com.sriyaan.util.url_dump.SplashTimer;
@@ -42,50 +44,52 @@ public class SmsReciever extends AppCompatActivity {
     SharedPreferences prefs;
     String type;
     Context context;
+    String json;
+    String str_Code,str_Message,str_UserID;
+    String hcp_cust_id,hcp_cust_name,hcp_cust_mobile_no,hcp_cust_gender,hcp_cust_dob,hcp_cust_referral_code,hcp_cust_profile_pic,hcp_cust_interests,hcp_cust_map_lat,hcp_cust_map_long;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms_reciever);
-        context = SmsReciever.this;
-        prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
-        type = prefs.getString("type","");
-        mobile = prefs.getString("mobile","");
-        codeotp = (EditText) findViewById(R.id.inputOtp);
-        code = codeotp.getText().toString();
-        resend = (TextView) findViewById(R.id.resend);
+        context     = SmsReciever.this;
+        prefs       = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
+        type        = prefs.getString("type","");
+        mobile      = prefs.getString("mobile","");
+
+        codeotp     = (EditText)    findViewById(R.id.inputOtp);
+        resend      = (TextView)    findViewById(R.id.resend);
+        text        = (TextView)    this.findViewById(R.id.timer);
+        btnEnter    = (Button)      findViewById(R.id.btn_verify_otp);
+
+        code        = codeotp.getText().toString();
         setTitle("SMS Verification");
-        text = (TextView) this.findViewById(R.id.timer);
-        btnEnter = (Button) findViewById(R.id.btn_verify_otp);
-        btnEnter.setOnClickListener(new View.OnClickListener() {
+
+        btnEnter.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                String message = codeotp.getText().toString();
-                code = message;
+            public void onClick(View v){
+                String message  = codeotp.getText().toString();
+                code            = message;
                 new UserRegister().execute();
             }
         });
         timerfunction();
-        //String substr = msg.substring(startIndex,endIndex);
-        //Log.d("cscc",substr);
     }
 
     public void timerfunction()
     {
-        new CountDownTimer(60000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
+        new CountDownTimer(60000, 1000){
+            public void onTick(long millisUntilFinished){
                 text.setText("Please wait till " + millisUntilFinished / 1000 + " seconds");
             }
-
-            public void onFinish() {
+            public void onFinish(){
                 text.setText("Please enter the otp in the box below");
                 try {
                     resend.setVisibility(View.VISIBLE);
-                    resend.setOnClickListener(new View.OnClickListener() {
+                    resend.setOnClickListener(new View.OnClickListener(){
                         @Override
-                        public void onClick(View view) {
+                        public void onClick(View view){
                             resend.setVisibility(View.GONE);
-
                         }
                     });
                 } catch (Exception e) {
@@ -95,8 +99,6 @@ public class SmsReciever extends AppCompatActivity {
         }.start();
     }
     public class UserRegister extends AsyncTask<Void,Void,Void> {
-        String json;
-        String str_Code,str_Message,str_UserID;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -136,12 +138,38 @@ public class SmsReciever extends AppCompatActivity {
                     Log.d("Code",str_Code);
                     Log.d("Mesg",str_Message);
                     Log.d("UsID",str_UserID);
+
                     if(type.equals("login"))
                     {
                         if(str_Code.equals("HCPC500"))
                         {
                             //Successfull
-                            prefs.edit().putString("type","login").apply();
+                            JSONObject object1 = object.getJSONObject(3);
+                            hcp_cust_id = object1.getString("hcp_cust_id");
+                            hcp_cust_name = object1.getString("hcp_cust_name");
+                            hcp_cust_mobile_no = object1.getString("hcp_cust_mobile_no");
+                            hcp_cust_profile_pic = object1.getString("hcp_cust_profile_pic");
+                            hcp_cust_gender = object1.getString("hcp_cust_gender");
+                            hcp_cust_dob = object1.getString("hcp_cust_dob");
+                            hcp_cust_referral_code = object1.getString("hcp_cust_referral_code");
+                            hcp_cust_interests = object1.getString("hcp_cust_interests");
+                            hcp_cust_map_lat = object1.getString("hcp_cust_map_lat");
+                            hcp_cust_map_long = object1.getString("hcp_cust_map_long");
+
+                            Logthis("hcp_cust_profile_pic",hcp_cust_profile_pic);
+
+                            prefs.edit().putString("cust_id",hcp_cust_id).apply();
+                            prefs.edit().putString("cust_name",hcp_cust_name).apply();
+                            prefs.edit().putString("cust_mobile_no",hcp_cust_mobile_no).apply();
+                            prefs.edit().putString("cust_profile_pic",hcp_cust_profile_pic).apply();
+                            prefs.edit().putString("cust_gender",hcp_cust_gender).apply();
+                            prefs.edit().putString("cust_dob",hcp_cust_dob).apply();
+                            prefs.edit().putString("cust_referral_code",hcp_cust_referral_code).apply();
+                            prefs.edit().putString("cust_interests",hcp_cust_interests).apply();
+                            prefs.edit().putString("cust_map_lat",hcp_cust_map_lat).apply();
+                            prefs.edit().putString("cust_map_long",hcp_cust_map_long).apply();
+                            prefs.edit().putString("login","yes").apply();
+
                             Intent i = new Intent(context,Home.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(i);
@@ -167,7 +195,31 @@ public class SmsReciever extends AppCompatActivity {
                         if(str_Code.equals("HCPC300"))
                         {
                             //Successfull
-                            prefs.edit().putString("type","login").apply();
+                            JSONObject object1 = object.getJSONObject(3);
+                            hcp_cust_id = object1.getString("hcp_cust_id");
+                            hcp_cust_name = object1.getString("hcp_cust_name");
+                            hcp_cust_mobile_no = object1.getString("hcp_cust_mobile_no");
+                            hcp_cust_profile_pic = object1.getString("hcp_cust_profile_pic");
+                            hcp_cust_gender = object1.getString("hcp_cust_gender");
+                            hcp_cust_dob = object1.getString("hcp_cust_dob");
+                            hcp_cust_referral_code = object1.getString("hcp_cust_referral_code");
+                            hcp_cust_interests = object1.getString("hcp_cust_interests");
+                            hcp_cust_map_lat = object1.getString("hcp_cust_map_lat");
+                            hcp_cust_map_long = object1.getString("hcp_cust_map_long");
+
+                            Logthis("hcp_cust_profile_pic",hcp_cust_profile_pic);
+
+                            prefs.edit().putString("cust_id",hcp_cust_id).apply();
+                            prefs.edit().putString("cust_name",hcp_cust_name).apply();
+                            prefs.edit().putString("cust_mobile_no",hcp_cust_mobile_no).apply();
+                            prefs.edit().putString("cust_profile_pic",hcp_cust_profile_pic).apply();
+                            prefs.edit().putString("cust_gender",hcp_cust_gender).apply();
+                            prefs.edit().putString("cust_dob",hcp_cust_dob).apply();
+                            prefs.edit().putString("cust_referral_code",hcp_cust_referral_code).apply();
+                            prefs.edit().putString("cust_interests",hcp_cust_interests).apply();
+                            prefs.edit().putString("cust_map_lat",hcp_cust_map_lat).apply();
+                            prefs.edit().putString("cust_map_long",hcp_cust_map_long).apply();
+                            prefs.edit().putString("login","yes").apply();
                             Intent i = new Intent(context,Home.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(i);

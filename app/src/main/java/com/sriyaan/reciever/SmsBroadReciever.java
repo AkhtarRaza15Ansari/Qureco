@@ -17,8 +17,9 @@ import com.sriyaan.util.RoutingActivity;
 import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
-import static com.sriyaan.util.url_dump.DeviceRegistration;
+import static com.sriyaan.util.url_dump.Logthis;
 import static com.sriyaan.util.url_dump.OTPSender;
 import static com.sriyaan.util.url_dump.OTPSenderLogin;
 import static com.sriyaan.util.url_dump.SplashTimer;
@@ -37,6 +38,7 @@ public class SmsBroadReciever extends BroadcastReceiver {
     public String code;
     SharedPreferences prefs;
     String type;
+    String hcp_cust_id,hcp_cust_name,hcp_cust_mobile_no,hcp_cust_gender,hcp_cust_dob,hcp_cust_referral_code,hcp_cust_profile_pic,hcp_cust_interests,hcp_cust_map_lat,hcp_cust_map_long;
     @Override
     public void onReceive(Context context, Intent intent) {
 // Retrieves a map of extended data from the intent.
@@ -48,45 +50,39 @@ public class SmsBroadReciever extends BroadcastReceiver {
         mobile = prefs.getString("mobile","");
         Log.d("cscc","coming");
         try {
-
-            if (bundle != null) {
-
+            if (bundle != null){
                 final Object[] pdusObj = (Object[]) bundle.get("pdus");
-
-                for (int i = 0; i < pdusObj.length; i++) {
+                for (int i = 0; i < pdusObj.length; i++){
 
                     SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                     String phoneNumber = currentMessage.getDisplayOriginatingAddress();
-
                     String senderNum = phoneNumber;
                     String message = currentMessage.getDisplayMessageBody();
-
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
-                    if(senderNum.contains("TXTLCL"))
-                    {
+
+                    if(senderNum.contains("TXTLCL")){
                         String substr = message.substring(startIndex,endIndex);
                         Log.d("cscc",substr);
                         code = substr;
                         new UserRegister().execute();
                     }
-                } // end for loop
-            } // bundle is null
-
-        } catch (Exception e) {
+                }
+            }
+        }catch (Exception e){
             Log.e("SmsReceiver", "Exception smsReceiver" + e);
             e.printStackTrace();
         }
     }
-    public class UserRegister extends AsyncTask<Void,Void,Void> {
+    public class UserRegister extends AsyncTask<Void,Void,Void>{
         String json;
         String str_Code,str_Message,str_UserID;
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute(){
             super.onPreExecute();
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(Void... voids){
             try {
                 if(type.equals("login"))
                 {
@@ -95,7 +91,6 @@ public class SmsBroadReciever extends BroadcastReceiver {
                 else {
                     json = OTPSender(mobile,code);
                 }
-
                 Log.d("json","This is it: "+json);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -120,8 +115,33 @@ public class SmsBroadReciever extends BroadcastReceiver {
                     {
                         if(str_Code.equals("HCPC500"))
                         {
-                            //Successfull
-                            prefs.edit().putString("type","login").apply();
+                            //Successfull//Successfull
+                            JSONObject object1 = object.getJSONObject(3);
+                            hcp_cust_id = object1.getString("hcp_cust_id");
+                            hcp_cust_name = object1.getString("hcp_cust_name");
+                            hcp_cust_mobile_no = object1.getString("hcp_cust_mobile_no");
+                            hcp_cust_profile_pic = object1.getString("hcp_cust_profile_pic");
+                            hcp_cust_gender = object1.getString("hcp_cust_gender");
+                            hcp_cust_dob = object1.getString("hcp_cust_dob");
+                            hcp_cust_referral_code = object1.getString("hcp_cust_referral_code");
+                            hcp_cust_interests = object1.getString("hcp_cust_interests");
+                            hcp_cust_map_lat = object1.getString("hcp_cust_map_lat");
+                            hcp_cust_map_long = object1.getString("hcp_cust_map_long");
+
+                            Logthis("hcp_cust_profile_pic",hcp_cust_profile_pic);
+
+                            prefs.edit().putString("cust_id",hcp_cust_id).apply();
+                            prefs.edit().putString("cust_name",hcp_cust_name).apply();
+                            prefs.edit().putString("cust_mobile_no",hcp_cust_mobile_no).apply();
+                            prefs.edit().putString("cust_profile_pic",hcp_cust_profile_pic).apply();
+                            prefs.edit().putString("cust_gender",hcp_cust_gender).apply();
+                            prefs.edit().putString("cust_dob",hcp_cust_dob).apply();
+                            prefs.edit().putString("cust_referral_code",hcp_cust_referral_code).apply();
+                            prefs.edit().putString("cust_interests",hcp_cust_interests).apply();
+                            prefs.edit().putString("cust_map_lat",hcp_cust_map_lat).apply();
+                            prefs.edit().putString("cust_map_long",hcp_cust_map_long).apply();
+                            prefs.edit().putString("login","yes").apply();
+
                             Intent i = new Intent(con,RoutingActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             con.startActivity(i);
@@ -146,7 +166,32 @@ public class SmsBroadReciever extends BroadcastReceiver {
                         if(str_Code.equals("HCPC300"))
                         {
                             //Successfull
-                            prefs.edit().putString("type","login").apply();
+                            JSONObject object1 = object.getJSONObject(3);
+                            hcp_cust_id = object1.getString("hcp_cust_id");
+                            hcp_cust_name = object1.getString("hcp_cust_name");
+                            hcp_cust_mobile_no = object1.getString("hcp_cust_mobile_no");
+                            hcp_cust_profile_pic = object1.getString("hcp_cust_profile_pic");
+                            hcp_cust_gender = object1.getString("hcp_cust_gender");
+                            hcp_cust_dob = object1.getString("hcp_cust_dob");
+                            hcp_cust_referral_code = object1.getString("hcp_cust_referral_code");
+                            hcp_cust_interests = object1.getString("hcp_cust_interests");
+                            hcp_cust_map_lat = object1.getString("hcp_cust_map_lat");
+                            hcp_cust_map_long = object1.getString("hcp_cust_map_long");
+
+                            Logthis("hcp_cust_profile_pic",hcp_cust_profile_pic);
+
+                            prefs.edit().putString("cust_id",hcp_cust_id).apply();
+                            prefs.edit().putString("cust_name",hcp_cust_name).apply();
+                            prefs.edit().putString("cust_mobile_no",hcp_cust_mobile_no).apply();
+                            prefs.edit().putString("cust_profile_pic",hcp_cust_profile_pic).apply();
+                            prefs.edit().putString("cust_gender",hcp_cust_gender).apply();
+                            prefs.edit().putString("cust_dob",hcp_cust_dob).apply();
+                            prefs.edit().putString("cust_referral_code",hcp_cust_referral_code).apply();
+                            prefs.edit().putString("cust_interests",hcp_cust_interests).apply();
+                            prefs.edit().putString("cust_map_lat",hcp_cust_map_lat).apply();
+                            prefs.edit().putString("cust_map_long",hcp_cust_map_long).apply();
+                            prefs.edit().putString("login","yes").apply();
+
                             Intent i = new Intent(con,RoutingActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             con.startActivity(i);

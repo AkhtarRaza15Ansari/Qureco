@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sriyaan.qureco.EditPreference">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnRegister"
+        android:orientation="vertical">
+
+        <include android:id="@+id/toolbar"
+            layout="@layout/toolbarwhite"/>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="5dp"
+            card_view:cardCornerRadius="3dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="SELECT PREFERENCES"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:padding="10dp"
+                    android:typeface="serif"
+                    android:background="#5D5B5C"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="@drawable/border_thin"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/doctor"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="05dp"
+                                android:src="@drawable/doctor" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="DOCTOR"
+                                android:textSize="13dp"
+                                android:layout_margin="02dp"
+                                android:textColor="@color/text_color" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="@drawable/border_thin"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/clinics"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="05dp"
+                                android:src="@drawable/clinic" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="CLINICS"
+                                android:textSize="13dp"
+                                android:layout_margin="02dp"
+                                android:textColor="@color/text_color" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="@drawable/border_thin"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/pathlab"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="05dp"
+                                android:src="@drawable/pathlab" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="PATHLAB"
+                                android:textSize="13dp"
+                                android:layout_margin="02dp"
+                                android:textColor="@color/text_color" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="@drawable/border_thin"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/fitness"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="05dp"
+                                android:src="@drawable/fitness" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="FITNESS"
+                                android:textSize="13dp"
+                                android:layout_margin="02dp"
+                                android:textColor="@color/text_color" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="@drawable/border_thin"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/salon"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="05dp"
+                                android:src="@drawable/salon" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="SALON"
+                                android:textSize="13dp"
+                                android:layout_margin="02dp"
+                                android:textColor="@color/text_color" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="@drawable/border_thin"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/spa"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="05dp"
+                                android:src="@drawable/spa" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="SPA"
+                                android:textSize="13dp"
+                                android:layout_margin="02dp"
+                                android:textColor="@color/text_color" />
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="@drawable/border_thin"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/pharmacy"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="05dp"
+                                android:src="@drawable/pharmacy" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="PHARMACY"
+                                android:textSize="13dp"
+                                android:layout_margin="02dp"
+                                android:textColor="@color/text_color" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="@drawable/border_thin"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/hospital"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="05dp"
+                                android:src="@drawable/hospital" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="HOSPITAL"
+                                android:textSize="13dp"
+                                android:layout_margin="02dp"
+                                android:textColor="@color/text_color" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.33"
+                            android:background="@drawable/border_thin"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/bloodbanks"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_gravity="center"
+                                android:layout_margin="05dp"
+                                android:src="@drawable/bloodbank" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="BLOOD BANK"
+                                android:textSize="13dp"
+                                android:layout_margin="02dp"
+                                android:textColor="@color/text_color" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/btn_edit_preference" />
+</RelativeLayout>

@@ -26,6 +26,11 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
 
+    <!-- Edit Preference-->
+    <string name="btn_edit_preference">Save</string>
+
+    <!-- Edit Profile-->
+    <string name="btn_edit_profile">Save</string>
     <!--  Page -->
 
     <string name="review">Review</string>

@@ -43,9 +43,7 @@
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".Home"
-            android:screenOrientation="sensorPortrait" >
-
-        </activity>
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="sensorPortrait" />
@@ -81,7 +79,9 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".MapsActivity1"
-            android:label="@string/title_activity_maps1"></activity>
+            android:label="@string/title_activity_maps1" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".EditPreference"></activity>
     </application>
 
 </manifest>

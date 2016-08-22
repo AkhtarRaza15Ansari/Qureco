@@ -2,6 +2,7 @@ package com.sriyaan.qureco;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,11 +37,22 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
     LinearLayout doctor,clinics,pathlab,fitness,salon,spa,pharmacy,hospital,bloodbanks;
     int num=0;
     ImageView img_profile;
+    SharedPreferences prefs;
+    String cust_id,cust_name,cust_mobile_no,cust_profile_pic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         init();
+        prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
+
+        cust_id = prefs.getString("cust_id","");
+        cust_name = prefs.getString("cust_name","");
+        cust_mobile_no = prefs.getString("cust_mobile_no","");
+        cust_profile_pic = prefs.getString("cust_profile_pic","");
+        Logthis("cust_profile_pic",cust_profile_pic+"A");
+
+        Log.d("Ansari","Akhtar");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -52,21 +65,19 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText("Home");
         loadScreen(num);
-        right_ll.setOnClickListener(new View.OnClickListener() {
+        right_ll.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                if(num<2)
-                {
+            public void onClick(View view){
+                if(num<2){
                     num++;
                     loadScreen(num);
                 }
             }
         });
-        left_ll.setOnClickListener(new View.OnClickListener() {
+        left_ll.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                if(num>0)
-                {
+            public void onClick(View view){
+                if(num>0){
                     num--;
                     loadScreen(num);
                 }
@@ -74,23 +85,54 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         });
 
         img_profile = (ImageView)   findViewById(R.id.img_profile);
-        Picasso.with(con).load("https://lh3.googleusercontent.com/wDbi4pzmsH-nj4-JxNcKEBoG8fZpvHON3KHB9QfWaRGojRx0auIcPDL148uhWB9MuOb-N4p4t5T2ke7bqY8b8s2vD1-4yHsU2ryQMG4-2WcBezH9cosC0xImFrzRivIeW1HZM6_gWEoWjPjjngsUXaGJZ5wbqdXzz4-eKbEkzQuP4syasl4SSYkl2dOy71FtSnoY56sQTvJ7DngZte8I2lX-INUl_SH9OrN-GgxS-BWdZ5Vn8nUmEnPtMYATRAT6EcGAAq_Jn8KXjQuEalNur2qCLVGVI46Dy1p6EzWNbnaO49QfzhwlpvOAdEDVnEpqYHvQ6nteYcMSwrT1kssUxQGC3d8Xa7YFLqTJzZiqSl5XrNgBTrE5TnAoOQhkBhJH-FKEyh1Gos4VFY0t6ZnuAPUuM7IFq9H5RBBhTPpm0ruJTIhdSy4pbtt3dGUoPWhVDWdb6hcsRgbed5wbGHB7VUTLQBerC7sDo9XoF3xGaHgWvoSOxYccaztAp5B2vtbqtObwehnWYZl33GV2mihrbO1ONDSZiekbz0HJepGID6PpNsVh4e9uW97XemgWTMv4W-UYPEBzWYbl6einxH8LFgvFbYlzNpA=s580-no")
+        if(!cust_profile_pic.isEmpty())
+        Picasso.with(con).load(cust_profile_pic)
                 .transform(new CircleTransform()).into(img_profile);
     }
     public void init(){
         con         = Home.this;
-        toolbar     = (Toolbar)     findViewById(R.id.toolbar);
-        category    = (LinearLayout)findViewById(R.id.category);
-        right_ll    = (LinearLayout)findViewById(R.id.right_ll);
-        left_ll     = (LinearLayout)findViewById(R.id.left_ll);
+        toolbar     = (Toolbar)         findViewById(R.id.toolbar);
+        category    = (LinearLayout)    findViewById(R.id.category);
+        right_ll    = (LinearLayout)    findViewById(R.id.right_ll);
+        left_ll     = (LinearLayout)    findViewById(R.id.left_ll);
     }
 
     @Override
-    public void onDrawerItemSelected(View view, int position) {
+    public void onDrawerItemSelected(View view, int position){
+        if(position==0)
+        {
+            //My Accounts
+        }
+        else if(position==1)
+        {
+            //Settings
+        }else if(position==2)
+        {
+            //About Us
+        }else if(position==3)
+        {
+            //Rate Us
+        }else if(position==4)
+        {
+            //Feedback
+        }else if(position==5)
+        {
+            //Terms & Conditions
+        }else if(position==6)
+        {
+            //Contact Us
+        }else if(position==7)
+        {
+            //Logout
+            prefs.edit().clear().apply();
+            Intent i = new Intent(Home.this,MainActivity.class);
+            i.putExtra("name","login");
+            startActivity(i);
+            finish();
+        }
 
     }
-    public void loadScreen(int number)
-    {
+    public void loadScreen(int number){
         category.removeAllViews();
         LayoutInflater inflater = LayoutInflater.from(this);
         View cat1 = inflater.inflate(R.layout.category1, null, false);
@@ -127,15 +169,15 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
             fitness     = (LinearLayout)findViewById(R.id.fitness);
             salon       = (LinearLayout)findViewById(R.id.salon);
             spa         = (LinearLayout)findViewById(R.id.spa);
-            fitness.setOnClickListener(new View.OnClickListener() {
+            fitness.setOnClickListener(new View.OnClickListener(){
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view){
                     Logthis("Home","Fitness");
                 }
             });
-            salon.setOnClickListener(new View.OnClickListener() {
+            salon.setOnClickListener(new View.OnClickListener(){
                 @Override
-                public void onClick(View view) {
+                public void onClick(View view){
                     Logthis("Home","Salon");
                 }
             });

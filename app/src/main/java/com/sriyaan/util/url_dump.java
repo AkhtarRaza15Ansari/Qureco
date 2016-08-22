@@ -54,7 +54,7 @@ public class url_dump {
 
     public static String main_header = "http://sriyaan.com/hcp/hcp_customer_webservices/";
     // To fetch deviceregistration
-    public static String deviceregistration = "hcp_device_registration.php";
+    public static String cust_categories = "hcp_get_all_cust_categories.php";
     // To fetch userregistration
     public static String userregistration = "hcp_customer_registration.php";
     // To fetch userlogin
@@ -84,6 +84,7 @@ public class url_dump {
                 {
                     Intent i = null;
                     i = new Intent(con,class1);
+                    i.putExtra("name","Register");
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     con.startActivity(i);
                 }
@@ -120,6 +121,9 @@ public class url_dump {
         // Show progressdialog
         mProgressDialog.show();
     }
+    public static String removeLastChar(String str) {
+        return str.substring(0,str.length()-1);
+    }
     public static void dismissprogress()
     {
         mProgressDialog.dismiss();
@@ -149,13 +153,11 @@ public class url_dump {
             // you can add an if statement here and do other actions based on the response
         }
     }
-    public static String DeviceRegistration(String email,Context context) throws Exception {
-        String url = main_header + deviceregistration;
+    public static String GetCategories() throws Exception {
+        String url = main_header + cust_categories;
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-        nameValuePairs.add(new BasicNameValuePair("imei", getImei(context)));
-        nameValuePairs.add(new BasicNameValuePair("email", email));
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

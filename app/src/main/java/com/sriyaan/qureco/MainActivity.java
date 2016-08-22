@@ -61,7 +61,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.sriyaan.util.url_dump.DeviceRegistration;
 import static com.sriyaan.util.url_dump.SplashTimer;
 import static com.sriyaan.util.url_dump.Toastthis;
 
@@ -72,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
     LayoutInflater inflater;
     LinearLayout my_root;
     String bitmap = null;
+
+    ArrayList<String> array_cat_name,array_cat_image,array_cat_image_selected,
+            array_cat_id ;
+    String response="";
+    String hcp_cust_cat_id,hcp_cust_cat_name,hcp_cust_cat_image,hcp_cust_cat_image_selected,
+            hcp_cust_cat_order,hcp_cust_cat_status,hcp_cust_cat_deleted,hcp_cust_cat_add_date;
 
     private LinearLayout dotsLayout;
     private int dotsCount;
@@ -122,8 +127,14 @@ public class MainActivity extends AppCompatActivity {
         my_root = (LinearLayout) findViewById(R.id.body);
         inflater = LayoutInflater.from(this);
         setUiPageViewController(3);
+        if(getIntent().getStringExtra("name").equals("Register"))
+        {
+            loadLayout("register");
+        }
+        else {
+            loadLayout("login");
+        }
 
-        loadLayout("register");
     }
 
     public void initLogin(){
@@ -225,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
             View inflatedLayout = inflater.inflate(R.layout.activity_complete_register, null, false);
             my_root.addView(inflatedLayout);
             initCompleteRegister();
+            new GetCategories().execute();
             opengallery.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -270,7 +282,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic_));
+                                //clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic_));
+                                Picasso.with(MainActivity.this).load(array_cat_image_selected.get(0)).into(clinics);
                             }
 
                             @Override
@@ -290,7 +303,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic));
+                                //clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic));
+                                Picasso.with(MainActivity.this).load(array_cat_image.get(0)).into(clinics);
                             }
 
                             @Override
@@ -318,7 +332,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital_));
+                                //hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital_));
+                                Picasso.with(MainActivity.this).load(array_cat_image_selected.get(1)).into(hospital);
                             }
 
                             @Override
@@ -338,7 +353,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
+                                //hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
+                                Picasso.with(MainActivity.this).load(array_cat_image.get(1)).into(hospital);
                             }
 
                             @Override
@@ -366,7 +382,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab_));
+                                //pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab_));
+                                Picasso.with(MainActivity.this).load(array_cat_image_selected.get(2)).into(pathlab);
                             }
 
                             @Override
@@ -386,7 +403,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab));
+                                //pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab));
+                                Picasso.with(MainActivity.this).load(array_cat_image.get(2)).into(pathlab);
                             }
 
                             @Override
@@ -414,7 +432,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness_));
+                                //fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness_));
+                                Picasso.with(MainActivity.this).load(array_cat_image_selected.get(3)).into(fitness);
                             }
 
                             @Override
@@ -434,7 +453,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness));
+                                //fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness));
+                                Picasso.with(MainActivity.this).load(array_cat_image.get(3)).into(fitness);
                             }
 
                             @Override
@@ -462,7 +482,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank_));
+                                //bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank_));
+                                Picasso.with(MainActivity.this).load(array_cat_image_selected.get(4)).into(bloodbanks);
                             }
 
                             @Override
@@ -482,7 +503,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank));
+                                //bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank));
+                                Picasso.with(MainActivity.this).load(array_cat_image.get(4)).into(bloodbanks);
                             }
 
                             @Override
@@ -510,7 +532,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                salon.setImageDrawable(getResources().getDrawable(R.drawable.salon_));
+                                //salon.setImageDrawable(getResources().getDrawable(R.drawable.salon_));
+                                Picasso.with(MainActivity.this).load(array_cat_image_selected.get(5)).into(salon);
                             }
 
                             @Override
@@ -530,7 +553,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                salon.setImageDrawable(getResources().getDrawable(R.drawable.salon));
+                                //salon.setImageDrawable(getResources().getDrawable(R.drawable.salon));
+                                Picasso.with(MainActivity.this).load(array_cat_image.get(5)).into(salon);
                             }
 
                             @Override
@@ -558,7 +582,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy_));
+                                //pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy_));
+                                Picasso.with(MainActivity.this).load(array_cat_image_selected.get(6)).into(pharmacy);
                             }
 
                             @Override
@@ -578,7 +603,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy));
+                                //pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy));
+                                Picasso.with(MainActivity.this).load(array_cat_image.get(6)).into(pharmacy);
                             }
 
                             @Override
@@ -606,7 +632,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor_));
+                                //doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor_));
+                                Picasso.with(MainActivity.this).load(array_cat_image_selected.get(7)).into(doctor);
                             }
 
                             @Override
@@ -626,7 +653,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor));
+                                //doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor));
+                                Picasso.with(MainActivity.this).load(array_cat_image.get(7)).into(doctor);
                             }
 
                             @Override
@@ -654,7 +682,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                spa.setImageDrawable(getResources().getDrawable(R.drawable.spa_));
+                                //spa.setImageDrawable(getResources().getDrawable(R.drawable.spa_));
+                                Picasso.with(MainActivity.this).load(array_cat_image_selected.get(8)).into(spa);
                             }
 
                             @Override
@@ -674,7 +703,8 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onAnimationEnd(Animation arg0) {
-                                spa.setImageDrawable(getResources().getDrawable(R.drawable.spa));
+                                //spa.setImageDrawable(getResources().getDrawable(R.drawable.spa));
+                                Picasso.with(MainActivity.this).load(array_cat_image.get(8)).into(spa);
                             }
 
                             @Override
@@ -752,7 +782,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void updateLabel() {
 
-        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        String myFormat = "yyyy/MM/dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         dob.setText(sdf.format(myCalendar.getTime()));
@@ -1031,31 +1061,40 @@ public class MainActivity extends AppCompatActivity {
 
         int anyone=0;
         if(cclinics==1) {
-            tmp.append("Clinics, ");
+            //tmp.append("Clinics, ");
+            tmp.append(array_cat_id.get(0)+", ");
         }
         if(chospital==1) {
-            tmp.append("Hospitals, ");
+            //tmp.append("Hospitals, ");
+            tmp.append(array_cat_id.get(1)+", ");
         }
         if(cpathlab==1) {
-            tmp.append("Pathlabs, ");
+            //tmp.append("Pathlabs, ");
+            tmp.append(array_cat_id.get(2)+", ");
         }
         if(cfitness==1){
-            tmp.append("Fitness, ");
+            //tmp.append("Fitness, ");
+            tmp.append(array_cat_id.get(3)+", ");
         }
         if(cbloodbanks==1){
-            tmp.append("Blood Banks, ");
+            //tmp.append("Blood Banks, ");
+            tmp.append(array_cat_id.get(4)+", ");
         }
         if(csalon==1){
-            tmp.append("Salon, ");
+            //tmp.append("Salon, ");
+            tmp.append(array_cat_id.get(5)+", ");
         }
         if(cpharmacy==1){
-            tmp.append("Pharmacy, ");
+            //tmp.append("Pharmacy, ");
+            tmp.append(array_cat_id.get(6)+", ");
         }
         if(cdoctor==1){
-            tmp.append("Doctors, ");
+            //tmp.append("Doctors, ");
+            tmp.append(array_cat_id.get(7)+", ");
         }
         if(cspa==1) {
-            tmp.append("Spa");
+            //tmp.append("Spa");
+            tmp.append(array_cat_id.get(8)+", ");
         }
         if((cclinics==0)&&(chospital==0)&&(cpathlab==0)&&(cfitness==0)&&(cbloodbanks==0)&&(csalon==0)&&(cpharmacy==0)&&(cdoctor==0)&&(cspa==0))
         {
@@ -1115,7 +1154,6 @@ public class MainActivity extends AppCompatActivity {
                     {
                         //Successfull
                         prefs.edit().putString("type","register").apply();
-                        prefs.edit().putString("login","yes").apply();
                         Intent i = new Intent(con,SmsReciever.class);
                         startActivity(i);
                         finish();
@@ -1179,7 +1217,6 @@ public class MainActivity extends AppCompatActivity {
                     {
                         //Successfull
                         prefs.edit().putString("type","login").apply();
-                        prefs.edit().putString("login","yes").apply();
                         Intent i = new Intent(con,SmsReciever.class);
                         startActivity(i);
                         finish();
@@ -1195,6 +1232,63 @@ public class MainActivity extends AppCompatActivity {
                         Toastthis(str_Message,con);
                         loadLayout("login");
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    public class GetCategories extends AsyncTask<Void,Void,Void>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                response = url_dump.GetCategories();
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Log.d("response","Data:  "+response);
+            try{
+                JSONArray array = new JSONArray(response);
+
+                array_cat_name = new ArrayList<>();
+                array_cat_image = new ArrayList<>();
+                array_cat_image_selected = new ArrayList<>();
+                array_cat_id = new ArrayList<>();
+
+                String code = array.getString(0);
+                String message = array.getString(1);
+                JSONArray internal = array.getJSONArray(2);
+                for(int i=0;i<internal.length();i++)
+                {
+                    JSONObject object = internal.getJSONObject(i);
+                    hcp_cust_cat_id =object.getString("hcp_cust_cat_id");
+                    hcp_cust_cat_name =object.getString("hcp_cust_cat_name");
+                    hcp_cust_cat_image =object.getString("hcp_cust_cat_image");
+                    hcp_cust_cat_image_selected =object.getString("hcp_cust_cat_image_selected");
+                    hcp_cust_cat_order =object.getString("hcp_cust_cat_order");
+                    hcp_cust_cat_status =object.getString("hcp_cust_cat_status");
+                    hcp_cust_cat_deleted =object.getString("hcp_cust_cat_deleted");
+                    hcp_cust_cat_add_date =object.getString("hcp_cust_cat_add_date");
+
+                    array_cat_name.add(hcp_cust_cat_name);
+                    array_cat_image.add(hcp_cust_cat_image);
+                    array_cat_image_selected.add(hcp_cust_cat_image_selected);
+                    array_cat_id.add(hcp_cust_cat_id);
                 }
             }
             catch (Exception e)

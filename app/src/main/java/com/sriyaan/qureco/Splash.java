@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import static com.sriyaan.util.url_dump.DeviceRegistration;
 import static com.sriyaan.util.url_dump.SplashTimer;
 
 public class Splash extends AppCompatActivity {
