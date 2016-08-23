@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.akhtar.fan.MainActivity">
+    <item
+        android:id="@+id/editProfile"
+        android:orderInCategory="100"
+        android:title="Edit Profile"
+        android:icon="@drawable/ic_edit_white_24dp"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/editPreference"
+        android:orderInCategory="100"
+        android:title="Edit Preferences"
+        android:icon="@drawable/ic_dvr_white_24dp"
+        app:showAsAction="always" />
+</menu>

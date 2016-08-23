@@ -92,7 +92,7 @@ public class EditProfile extends AppCompatActivity {
         str_lat = prefs.getString("cust_map_lat","");
         str_lon = prefs.getString("cust_map_long","");
 
-
+        user_name
         opengallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -189,6 +189,7 @@ public class EditProfile extends AppCompatActivity {
         etName          = (EditText)    findViewById(R.id.name);
         etMobile        = (EditText)    findViewById(R.id.Mobile);
         etReferral      = (EditText)    findViewById(R.id.promocode);
+        location        = (LinearLayout)findViewById(R.id.location);
 
         myCalendar      = Calendar.getInstance();
     }

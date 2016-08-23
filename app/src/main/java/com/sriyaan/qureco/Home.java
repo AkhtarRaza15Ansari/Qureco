@@ -102,6 +102,8 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         if(position==0)
         {
             //My Accounts
+            Intent i = new Intent(Home.this,MyAccount.class);
+            startActivity(i);
         }
         else if(position==1)
         {
