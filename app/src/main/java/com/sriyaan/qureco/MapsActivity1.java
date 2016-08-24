@@ -61,6 +61,7 @@ public class MapsActivity1 extends FragmentActivity implements OnMapReadyCallbac
             double in_lon_ = Double.valueOf(in_lon);
 
             LatLng you = new LatLng(in_lat_, in_lon_);
+            mMap.clear();
             mMap.addMarker(new MarkerOptions().position(you).title("You"));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(you, 15));
         }catch (Exception e)
@@ -77,6 +78,7 @@ public class MapsActivity1 extends FragmentActivity implements OnMapReadyCallbac
                 lat     = String.valueOf(arg0.latitude);
                 longt   = String.valueOf(arg0.longitude);
                 LatLng sydney = new LatLng(arg0.latitude, arg0.longitude);
+                mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(sydney).title("You"));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15));
             }
@@ -92,6 +94,7 @@ public class MapsActivity1 extends FragmentActivity implements OnMapReadyCallbac
 
                     if (location != null && !location.equals("")) {
                         try {
+                            mMap.clear();
                             LatLng newpoint = getLocationFromAddress(MapsActivity1.this, location);
                             mMap.addMarker(new MarkerOptions().position(newpoint).title(location));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(newpoint, 15));

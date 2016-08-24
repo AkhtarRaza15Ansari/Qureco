@@ -64,9 +64,11 @@ public class EditPreference extends AppCompatActivity {
 
         categories = prefs.getString("cust_interests","");
         user_id = prefs.getString("cust_id","");
-
+        Log.d("categories",categories);
         categories = removeLastChar(categories);
+        Log.d("new categories",categories);
         cat = Arrays.asList(categories.split(","));
+
         new GetCategories().execute();
 
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -593,7 +595,7 @@ public class EditPreference extends AppCompatActivity {
                     array_cat_image_selected.add(hcp_cust_cat_image_selected);
                     array_cat_id.add(hcp_cust_cat_id);
                 }
-
+                LoadCategories();
             }
             catch (Exception e)
             {
@@ -604,48 +606,67 @@ public class EditPreference extends AppCompatActivity {
 
     public void LoadCategories()
     {
+
+        Log.d("cat_if",array_cat_id.get(0));
         if(cat.contains(array_cat_id.get(0)))
         {
+            Log.d("cat_if",array_cat_image_selected.get(0));
             cclinics=1;
             Picasso.with(con).load(array_cat_image_selected.get(0)).into(clinics);
         }
+        Log.d("cat_if",array_cat_id.get(1));
         if(cat.contains(array_cat_id.get(1)))
         {
+            Log.d("cat_if",array_cat_image_selected.get(1));
             chospital=1;
             Picasso.with(con).load(array_cat_image_selected.get(1)).into(hospital);
         }
+        Log.d("cat_if",array_cat_id.get(2));
         if(cat.contains(array_cat_id.get(2)))
         {
+            Log.d("cat_if",array_cat_image_selected.get(2));
             cpathlab=1;
             Picasso.with(con).load(array_cat_image_selected.get(2)).into(pathlab);
         }
+        Log.d("cat_if",array_cat_id.get(3));
         if(cat.contains(array_cat_id.get(3)))
         {
+            Log.d("cat_if",array_cat_image_selected.get(3));
             cfitness=1;
             Picasso.with(con).load(array_cat_image_selected.get(3)).into(fitness);
         }
+        Log.d("cat_if",array_cat_id.get(4));
         if(cat.contains(array_cat_id.get(4)))
         {
+            Log.d("cat_if",array_cat_image_selected.get(4));
             cbloodbanks=1;
             Picasso.with(con).load(array_cat_image_selected.get(4)).into(bloodbanks);
         }
+        Log.d("cat_if",array_cat_id.get(5));
         if(cat.contains(array_cat_id.get(5)))
         {
+            Log.d("cat_if",array_cat_image_selected.get(5));
             csalon=1;
             Picasso.with(con).load(array_cat_image_selected.get(5)).into(salon);
         }
+        Log.d("cat_if",array_cat_id.get(6));
         if(cat.contains(array_cat_id.get(6)))
         {
+            Log.d("cat_if",array_cat_image_selected.get(6));
             cpharmacy=1;
             Picasso.with(con).load(array_cat_image_selected.get(6)).into(pharmacy);
         }
+        Log.d("cat_if",array_cat_id.get(7));
         if(cat.contains(array_cat_id.get(7)))
         {
+            Log.d("cat_if",array_cat_image_selected.get(7));
             cdoctor=1;
             Picasso.with(con).load(array_cat_image_selected.get(7)).into(doctor);
         }
+        Log.d("cat_if",array_cat_id.get(8));
         if(cat.contains(array_cat_id.get(8)))
         {
+            Log.d("cat_if",array_cat_image_selected.get(8));
             cspa=1;
             Picasso.with(con).load(array_cat_image_selected.get(8)).into(spa);
         }
@@ -654,7 +675,7 @@ public class EditPreference extends AppCompatActivity {
     public void validateRegister(){
         strInterest = "";
         strInterest = getInterest();
-        //Toast.makeText(con, ""+getInterest(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(con, ""+getInterest(), Toast.LENGTH_SHORT).show();
         if(strInterest.equals("Please select one interest to proceed"))
         {
             url_dump.Toastthis(strInterest,con);

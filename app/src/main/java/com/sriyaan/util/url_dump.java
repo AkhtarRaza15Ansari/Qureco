@@ -287,7 +287,8 @@ public class url_dump {
             HttpPost post = new HttpPost(urlString);
 
             MultipartEntity reqEntity = new MultipartEntity();
-            if(profile_pic!=null)
+            Log.d("prf",profile_pic+" Akhtar");
+            if(!profile_pic.trim().equals(""))
             {
                 File fmain = new File(profile_pic);
                 FileBody binmain = new FileBody(fmain);

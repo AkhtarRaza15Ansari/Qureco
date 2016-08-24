@@ -50,10 +50,9 @@ public class EditProfile extends AppCompatActivity {
     LinearLayout location;
     SharedPreferences prefs;
     Button btnSave;
-    EditText dob;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
-    EditText etName,etMobile,etDob,etReferral;
+    EditText etName,etMobile,etDob;
     RadioGroup gender;
     RadioButton male,female;
 
@@ -92,7 +91,19 @@ public class EditProfile extends AppCompatActivity {
         str_lat = prefs.getString("cust_map_lat","");
         str_lon = prefs.getString("cust_map_long","");
 
-        user_name
+        etName.setText(user_name);
+        etMobile.setText(mobile_no);
+        etDob.setText(sdob);
+        if(sgender.equalsIgnoreCase("male"))
+        {
+            gender.check(R.id.male);
+        }
+        else {
+            gender.check(R.id.male);
+        }
+
+        Picasso.with(con).load(profile_pic).into(person);
+        //user_name
         opengallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,13 +138,13 @@ public class EditProfile extends AppCompatActivity {
             }
 
         };
-        dob.setOnClickListener(new View.OnClickListener() {
+        etDob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPicker();
             }
         });
-        dob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        etDob.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if(b)
@@ -147,7 +158,7 @@ public class EditProfile extends AppCompatActivity {
     {
         strName = etName.getText().toString();
         strMobile = etMobile.getText().toString();
-        strDob = dob.getText().toString();
+        strDob = etDob.getText().toString();
         int selectedId = gender.getCheckedRadioButtonId();
         if(selectedId == male.getId())
         {
@@ -182,13 +193,12 @@ public class EditProfile extends AppCompatActivity {
         person              = (ImageView)   findViewById(R.id.person);
 
         btnSave         = (Button)      findViewById(R.id.btnSave);
-        dob             = (EditText)    findViewById(R.id.dob);
+        etDob           = (EditText)    findViewById(R.id.dob);
         gender          = (RadioGroup)  findViewById(R.id.group);
         male            = (RadioButton) findViewById(R.id.male);
         female          = (RadioButton) findViewById(R.id.female);
         etName          = (EditText)    findViewById(R.id.name);
         etMobile        = (EditText)    findViewById(R.id.Mobile);
-        etReferral      = (EditText)    findViewById(R.id.promocode);
         location        = (LinearLayout)findViewById(R.id.location);
 
         myCalendar      = Calendar.getInstance();
@@ -205,7 +215,7 @@ public class EditProfile extends AppCompatActivity {
         String myFormat = "yyyy/MM/dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        dob.setText(sdf.format(myCalendar.getTime()));
+        etDob.setText(sdf.format(myCalendar.getTime()));
     }
     private void selectImage() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
