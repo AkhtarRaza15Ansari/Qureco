@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.sriyaan.qr.IntentIntegrator;
 import com.sriyaan.qr.IntentResult;
 import com.sriyaan.qr.QrCode;
+import com.sriyaan.util.url_dump;
 
 import org.w3c.dom.Text;
 
@@ -87,5 +88,10 @@ public class Loyalty extends AppCompatActivity {
                 }
             }
         }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        url_dump.deleteCache(getApplicationContext());
     }
 }

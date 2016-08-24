@@ -158,4 +158,9 @@ public class Register extends AppCompatActivity {
         female          = (RadioButton) findViewById(R.id.female);
         myCalendar      = Calendar.getInstance();
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        url_dump.deleteCache(getApplicationContext());
+    }
 }

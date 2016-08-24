@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.sriyaan.util.url_dump;
+
 import static com.sriyaan.util.url_dump.SplashTimer;
 
 public class Splash extends AppCompatActivity {
@@ -32,4 +34,9 @@ public class Splash extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        url_dump.deleteCache(getApplicationContext());
+    }
 }

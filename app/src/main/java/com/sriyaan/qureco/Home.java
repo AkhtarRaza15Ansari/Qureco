@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 import com.sriyaan.util.FragmentDrawer;
+import com.sriyaan.util.url_dump;
 
 import static com.sriyaan.util.url_dump.Logthis;
 
@@ -381,5 +382,10 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         public String key() {
             return "circle";
         }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        url_dump.deleteCache(getApplicationContext());
     }
 }

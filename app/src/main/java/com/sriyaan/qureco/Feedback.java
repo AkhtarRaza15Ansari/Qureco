@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sriyaan.util.url_dump;
+
 public class Feedback extends AppCompatActivity {
     Button btnSave;
     @Override
@@ -37,5 +39,10 @@ public class Feedback extends AppCompatActivity {
     }
     public void init(){
         btnSave = (Button) findViewById(R.id.btnSave);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        url_dump.deleteCache(getApplicationContext());
     }
 }

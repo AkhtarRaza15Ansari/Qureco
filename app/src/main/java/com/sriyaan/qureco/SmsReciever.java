@@ -249,4 +249,9 @@ public class SmsReciever extends AppCompatActivity {
             }
         }
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        url_dump.deleteCache(getApplicationContext());
+    }
 }

@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.sriyaan.util.url_dump;
+
 public class Emergency extends AppCompatActivity {
 
     @Override
@@ -26,5 +28,10 @@ public class Emergency extends AppCompatActivity {
         setTitle("");
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setText("Emergency");
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        url_dump.deleteCache(getApplicationContext());
     }
 }

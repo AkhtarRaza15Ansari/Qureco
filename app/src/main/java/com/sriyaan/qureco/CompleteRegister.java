@@ -649,4 +649,10 @@ public class CompleteRegister extends AppCompatActivity {
 
         person.setImageBitmap(bm);
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        url_dump.deleteCache(getApplicationContext());
+    }
+
 }

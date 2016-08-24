@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.sriyaan.util.url_dump;
+
 public class Login extends AppCompatActivity {
     Button btnLogin;
     Toolbar toolbar;
@@ -48,5 +50,10 @@ public class Login extends AppCompatActivity {
         tvSignUp    = (TextView)findViewById(R.id.tvSignUp);
         toolbar     = (Toolbar) findViewById(R.id.toolbar);
         btnLogin    = (Button)  findViewById(R.id.btnLogin);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        url_dump.deleteCache(getApplicationContext());
     }
 }
