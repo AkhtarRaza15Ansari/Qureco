@@ -95,6 +95,7 @@
                         android:layout_weight="0.5"
                         >
                         <LinearLayout
+                            android:id="@+id/loyaltyll"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -116,6 +117,7 @@
                                 android:text="@string/option1"/>
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/dealsll"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -144,6 +146,7 @@
                         android:layout_weight="0.5"
                         >
                         <LinearLayout
+                            android:id="@+id/reviewll"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -165,6 +168,7 @@
                                 android:text="@string/option3"/>
                         </LinearLayout>
                         <LinearLayout
+                            android:id="@+id/lifesaversll"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
@@ -268,6 +272,7 @@
                 android:background="#F5F5F5"
                 android:orientation="horizontal">
                 <LinearLayout
+                    android:id="@+id/homell"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -293,6 +298,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/notificationll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -319,6 +325,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/chatll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -343,6 +350,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/favouritesll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -367,6 +375,7 @@
                         />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/accountsll"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"

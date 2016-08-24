@@ -82,7 +82,21 @@
             android:label="@string/title_activity_maps1" />
         <activity android:name=".EditProfile" />
         <activity android:name=".EditPreference" />
-        <activity android:name=".MyAccount"></activity>
+        <activity android:name=".MyAccount" />
+        <activity android:name=".SettingsPage" />
+        <activity android:name=".AboutUsPage" />
+        <activity android:name=".TermsConditionPage" />
+        <activity android:name=".ContactUs" />
+        <activity android:name=".SearchListPage" />
+        <activity android:name=".LifeSavers" />
+        <activity android:name=".ReviewPage" />
+        <activity android:name=".DealsOffers" />
+        <activity android:name=".AlertFamily" />
+        <activity android:name=".ShoutOutHelp" />
+        <activity android:name=".Emergency" />
+        <activity android:name=".Notification" />
+        <activity android:name=".Chat" />
+        <activity android:name=".Favourite"></activity>
     </application>
 
 </manifest>

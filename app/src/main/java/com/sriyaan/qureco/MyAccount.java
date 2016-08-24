@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.sriyaan.util.url_dump;
 
 public class MyAccount extends AppCompatActivity {
     ImageView person;
@@ -29,7 +30,7 @@ public class MyAccount extends AppCompatActivity {
         init();
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         setTitle("");
@@ -68,8 +69,9 @@ public class MyAccount extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.editPreference) {
-            Intent i = new Intent(con,EditPreference.class);
-            startActivity(i);
+            //Intent i = new Intent(con,EditPreference.class);
+            //startActivity(i);
+            url_dump.Toastthis("Coming soon",con);
             return true;
         }
         if (id == R.id.editProfile) {

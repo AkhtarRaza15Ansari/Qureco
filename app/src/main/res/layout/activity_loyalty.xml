@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.sriyaan.qureco.Loyalty">
     <include android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbarwhite"/>
 
     <ImageView
         android:id="@+id/qrcodescanner"

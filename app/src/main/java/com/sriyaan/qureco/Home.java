@@ -39,6 +39,10 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
     ImageView img_profile;
     SharedPreferences prefs;
     String cust_id,cust_name,cust_mobile_no,cust_profile_pic;
+
+    LinearLayout llloyalty,lldeals,llreview,lllife;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
+    LinearLayout alertfamily, shoutouthelp,emergency;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,91 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         if(!cust_profile_pic.isEmpty())
         Picasso.with(con).load(cust_profile_pic)
                 .transform(new CircleTransform()).into(img_profile);
+
+
+
+        llloyalty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,Loyalty.class);
+                startActivity(i);
+            }
+        });
+        lldeals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,DealsOffers.class);
+                startActivity(i);
+            }
+        });
+        llreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,ReviewPage.class);
+                startActivity(i);
+            }
+        });
+        lllife.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,LifeSavers.class);
+                startActivity(i);
+            }
+        });
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,MyAccount.class);
+                startActivity(i);
+            }
+        });
+        alertfamily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,AlertFamily.class);
+                startActivity(i);
+            }
+        });
+        shoutouthelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,ShoutOutHelp.class);
+                startActivity(i);
+            }
+        });
+        emergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Home.this,Emergency.class);
+                startActivity(i);
+            }
+        });
     }
     public void init(){
         con         = Home.this;
@@ -95,6 +184,22 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         category    = (LinearLayout)    findViewById(R.id.category);
         right_ll    = (LinearLayout)    findViewById(R.id.right_ll);
         left_ll     = (LinearLayout)    findViewById(R.id.left_ll);
+
+
+
+        llloyalty       = (LinearLayout)    findViewById(R.id.loyaltyll);
+        lldeals         = (LinearLayout)    findViewById(R.id.dealsll);
+        llreview        = (LinearLayout)    findViewById(R.id.reviewll);
+        lllife          = (LinearLayout)    findViewById(R.id.lifesaversll);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
+        alertfamily     = (LinearLayout)    findViewById(R.id.alertfamily);
+        shoutouthelp    = (LinearLayout)    findViewById(R.id.shoutouthelp);
+        emergency       = (LinearLayout)    findViewById(R.id.emergency);
+
     }
 
     @Override
@@ -108,21 +213,31 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         else if(position==1)
         {
             //Settings
+            Intent i = new Intent(Home.this,SettingsPage.class);
+            startActivity(i);
         }else if(position==2)
         {
             //About Us
+            Intent i = new Intent(Home.this,AboutUsPage.class);
+            startActivity(i);
         }else if(position==3)
         {
             //Rate Us
         }else if(position==4)
         {
             //Feedback
+            Intent i = new Intent(Home.this,Feedback.class);
+            startActivity(i);
         }else if(position==5)
         {
             //Terms & Conditions
+            Intent i = new Intent(Home.this,TermsConditionPage.class);
+            startActivity(i);
         }else if(position==6)
         {
             //Contact Us
+            Intent i = new Intent(Home.this,ContactUs.class);
+            startActivity(i);
         }else if(position==7)
         {
             //Logout
@@ -150,18 +265,24 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Doctor");
+                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    startActivity(i);
                 }
             });
             clinics.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Clinics");
+                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    startActivity(i);
                 }
             });
             pathlab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Pathlab");
+                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    startActivity(i);
                 }
             });
         }
@@ -175,18 +296,24 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 @Override
                 public void onClick(View view){
                     Logthis("Home","Fitness");
+                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    startActivity(i);
                 }
             });
             salon.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
                     Logthis("Home","Salon");
+                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    startActivity(i);
                 }
             });
             spa.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Spa");
+                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    startActivity(i);
                 }
             });
         }
@@ -200,18 +327,24 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Pharmacy");
+                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    startActivity(i);
                 }
             });
             hospital.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Hospital");
+                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    startActivity(i);
                 }
             });
             bloodbanks.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Blood Banks");
+                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    startActivity(i);
                 }
             });
         }
