@@ -67,36 +67,9 @@ public class url_dump {
     public static String update_preference= "hcp_customer_edit_preferences.php";
     // For Update in Profile
     public static String update_profile= "hcp_customer_edit_profile.php";
+    // For Getting Search List
+    public static String search_by_category = "hcp_search_by_category.php";
 
-    public static void SplashTimer(final Context con, final Class class1)
-    {
-        Thread timer= new Thread()
-        {
-            public void run()
-            {
-                try
-                {
-                    //Display for 3 seconds
-                    sleep(3000);
-                }
-                catch (InterruptedException e)
-                {
-                    // TODO: handle exception
-                    e.printStackTrace();
-                }
-                finally
-                {
-                    Intent i = null;
-                    i = new Intent(con,class1);
-                    i.putExtra("name","Register");
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                    con.startActivity(i);
-                }
-            }
-        };
-        timer.start();
-
-    }
 
     public static String jsonvalues;
     public static HttpClient httpClient;
@@ -373,5 +346,15 @@ public class url_dump {
             return false;
         }
     }
-
+    public static String getSearchCategory(String user_id,String cat_id) throws Exception {
+        String url = main_header + search_by_category;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("cat_id", cat_id));
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
 }

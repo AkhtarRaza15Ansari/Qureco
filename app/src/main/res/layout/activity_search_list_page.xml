@@ -4,14 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.sriyaan.qureco.SearchListPage">
+    tools:context="com.sriyaan.qureco.Chat">
     <include android:id="@+id/toolbar"
         layout="@layout/toolbarwhite"/>
-    <TextView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="35dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Search Page"/>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_recycler_view1"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

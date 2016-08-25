@@ -48,6 +48,7 @@ import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -61,7 +62,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.sriyaan.util.url_dump.SplashTimer;
 import static com.sriyaan.util.url_dump.Toastthis;
 
 public class MainActivity extends AppCompatActivity {
@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
     Animation flipin,flipout;
     LinearLayout location;
     ImageView opengallery,person;
+    TextView tvName;
     String strName="",strMobile="",strDob="",strReferral="",strGender="",strInterest="";
     public static String str_lat,str_lon;
     int REQUEST_CAMERA = 0, FILE_SELECT_CODE = 1;
@@ -172,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
         location            = (LinearLayout)findViewById(R.id.location);
         opengallery         = (ImageView)   findViewById(R.id.opengallery);
         person              = (ImageView)   findViewById(R.id.person);
+        tvName              = (TextView)    findViewById(R.id.name);
     }
     public void loadLayout(String body)
     {
@@ -236,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
             View inflatedLayout = inflater.inflate(R.layout.activity_complete_register, null, false);
             my_root.addView(inflatedLayout);
             initCompleteRegister();
+            tvName.setText(strName);
             new GetCategories().execute();
             opengallery.setOnClickListener(new View.OnClickListener() {
                 @Override

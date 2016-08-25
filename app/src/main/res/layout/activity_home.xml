@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_weight="0.22"
+                    android:layout_weight="0.24"
                     >
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:layout_weight="0.39"
+                    android:layout_weight="0.37"
                     >
                     <LinearLayout
                         android:id="@+id/alertfamily"
@@ -216,7 +216,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12dp"
+                            android:textSize="10dp"
                             android:text="ALERT FAMILY"/>
                     </LinearLayout>
                     <LinearLayout
@@ -238,7 +238,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SHOUT OUT HELP"
-                            android:textSize="12dp"/>
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textSize="10dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/emergency"
@@ -258,7 +260,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12dp"
+                            android:textSize="10dp"
                             android:text="EMERGENCY"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -288,13 +290,14 @@
                         android:src="@drawable/home_icon"
                         />
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:typeface="serif"
                         android:text="Home"
+                        android:singleLine="true"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -315,13 +318,14 @@
                         />
 
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:typeface="serif"
                         android:text="Notification"
+                        android:singleLine="true"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -340,13 +344,14 @@
                         android:src="@drawable/chat"
                         />
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:typeface="serif"
                         android:text="Chat"
+                        android:singleLine="true"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -365,13 +370,14 @@
                         android:src="@drawable/favourites"
                         />
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:typeface="serif"
                         android:text="Favourites"
+                        android:singleLine="true"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -390,12 +396,13 @@
                         android:src="@drawable/myaccounts"
                         />
                     <TextView
-                        android:textSize="12dp"
+                        android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:typeface="serif"
+                        android:singleLine="true"
                         android:text="Accounts"
                         />
                 </LinearLayout>

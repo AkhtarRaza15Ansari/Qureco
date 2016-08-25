@@ -24,7 +24,6 @@ import org.json.JSONObject;
 import static com.sriyaan.util.url_dump.Logthis;
 import static com.sriyaan.util.url_dump.OTPSender;
 import static com.sriyaan.util.url_dump.OTPSenderLogin;
-import static com.sriyaan.util.url_dump.SplashTimer;
 import static com.sriyaan.util.url_dump.Toastthis;
 
 public class SmsReciever extends AppCompatActivity {

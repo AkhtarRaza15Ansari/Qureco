@@ -59,7 +59,9 @@
                             android:hint="Name"
                             android:textSize="15dp"
                             android:typeface="serif"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:singleLine="true"
+                            android:imeOptions="actionNext" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
@@ -80,7 +82,11 @@
                             android:hint="Mobile Number"
                             android:textSize="15dp"
                             android:typeface="serif"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:singleLine="true"
+                            android:inputType="phone"
+                            android:digits="0123456789"
+                            android:imeOptions="actionNext" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
@@ -132,7 +138,9 @@
                             android:textSize="15dp"
                             android:hint="Date of Birth"
                             android:typeface="serif"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:singleLine="true"
+                            android:imeOptions="actionNext" />
 
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
@@ -154,7 +162,9 @@
                             android:hint="Referral code"
                             android:textSize="15dp"
                             android:typeface="serif"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:singleLine="true"
+                            android:imeOptions="actionDone" />
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
