@@ -25,9 +25,7 @@ public class LifeSavers extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Life Savers");
+        setTitle("Life Savers");
     }
     @Override
     protected void onPause() {

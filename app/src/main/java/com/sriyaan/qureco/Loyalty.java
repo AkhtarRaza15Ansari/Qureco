@@ -37,9 +37,8 @@ public class Loyalty extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Loyalty");
+        setTitle("Loyalty");
+
         init();
         qrcodescanner.setOnClickListener(new View.OnClickListener() {
             @Override

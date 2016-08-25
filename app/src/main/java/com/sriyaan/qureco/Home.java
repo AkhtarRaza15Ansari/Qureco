@@ -66,9 +66,9 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
         drawerFragment.setDrawerListener(this);
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Home");
+
+        setTitle("Home");
+
         loadScreen(num);
         right_ll.setOnClickListener(new View.OnClickListener(){
             @Override

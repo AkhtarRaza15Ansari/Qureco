@@ -76,10 +76,14 @@ public class EditProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Edit Profile");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //What to do on back clicked
+                onBackPressed();
+            }
+        });
+        setTitle("Edit Profile");
 
         user_id = prefs.getString("cust_id","");
         user_name = prefs.getString("cust_name","");

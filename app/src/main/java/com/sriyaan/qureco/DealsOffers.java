@@ -25,9 +25,7 @@ public class DealsOffers extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Deals and Offers");
+        setTitle("Deals and Offers");
     }
     @Override
     protected void onPause() {

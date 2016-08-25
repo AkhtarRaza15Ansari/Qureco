@@ -55,12 +55,17 @@ public class EditPreference extends AppCompatActivity {
         init();
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //What to do on back clicked
+                onBackPressed();
+            }
+        });
 
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Edit Preference");
+        setTitle("Edit Preference");
 
         categories = prefs.getString("cust_interests","");
         user_id = prefs.getString("cust_id","");
@@ -69,7 +74,8 @@ public class EditPreference extends AppCompatActivity {
         Log.d("new categories",categories);
         cat = Arrays.asList(categories.split(","));
 
-        new GetCategories().execute();
+        //new GetCategories().execute();
+        LoadCategories();
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +101,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic_));
-                            Picasso.with(con).load(array_cat_image_selected.get(0)).into(clinics);
+                            clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic_));
+                            //Picasso.with(con).load(array_cat_image_selected.get(0)).into(clinics);
                         }
 
                         @Override
@@ -116,8 +122,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic));
-                            Picasso.with(con).load(array_cat_image.get(0)).into(clinics);
+                            clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic));
+                            //Picasso.with(con).load(array_cat_image.get(0)).into(clinics);
                         }
 
                         @Override
@@ -145,8 +151,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital_));
-                            Picasso.with(con).load(array_cat_image_selected.get(1)).into(hospital);
+                            hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital_));
+                            //Picasso.with(con).load(array_cat_image_selected.get(1)).into(hospital);
                         }
 
                         @Override
@@ -166,8 +172,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
-                            Picasso.with(con).load(array_cat_image.get(1)).into(hospital);
+                            hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital));
+                            //Picasso.with(con).load(array_cat_image.get(1)).into(hospital);
                         }
 
                         @Override
@@ -195,8 +201,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab_));
-                            Picasso.with(con).load(array_cat_image_selected.get(2)).into(pathlab);
+                            pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab_));
+                            //Picasso.with(con).load(array_cat_image_selected.get(2)).into(pathlab);
                         }
 
                         @Override
@@ -216,8 +222,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab));
-                            Picasso.with(con).load(array_cat_image.get(2)).into(pathlab);
+                            pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab));
+                            //Picasso.with(con).load(array_cat_image.get(2)).into(pathlab);
                         }
 
                         @Override
@@ -245,8 +251,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness_));
-                            Picasso.with(con).load(array_cat_image_selected.get(3)).into(fitness);
+                            fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness_));
+                            //Picasso.with(con).load(array_cat_image_selected.get(3)).into(fitness);
                         }
 
                         @Override
@@ -266,8 +272,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness));
-                            Picasso.with(con).load(array_cat_image.get(3)).into(fitness);
+                            fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness));
+                            //Picasso.with(con).load(array_cat_image.get(3)).into(fitness);
                         }
 
                         @Override
@@ -295,8 +301,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank_));
-                            Picasso.with(con).load(array_cat_image_selected.get(4)).into(bloodbanks);
+                            bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank_));
+                            //Picasso.with(con).load(array_cat_image_selected.get(4)).into(bloodbanks);
                         }
 
                         @Override
@@ -316,8 +322,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank));
-                            Picasso.with(con).load(array_cat_image.get(4)).into(bloodbanks);
+                            bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank));
+                            //Picasso.with(con).load(array_cat_image.get(4)).into(bloodbanks);
                         }
 
                         @Override
@@ -345,8 +351,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //salon.setImageDrawable(getResources().getDrawable(R.drawable.salon_));
-                            Picasso.with(con).load(array_cat_image_selected.get(5)).into(salon);
+                            salon.setImageDrawable(getResources().getDrawable(R.drawable.salon_));
+                            //Picasso.with(con).load(array_cat_image_selected.get(5)).into(salon);
                         }
 
                         @Override
@@ -366,8 +372,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //salon.setImageDrawable(getResources().getDrawable(R.drawable.salon));
-                            Picasso.with(con).load(array_cat_image.get(5)).into(salon);
+                            salon.setImageDrawable(getResources().getDrawable(R.drawable.salon));
+                            //Picasso.with(con).load(array_cat_image.get(5)).into(salon);
                         }
 
                         @Override
@@ -395,8 +401,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy_));
-                            Picasso.with(con).load(array_cat_image_selected.get(6)).into(pharmacy);
+                            pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy_));
+                            //Picasso.with(con).load(array_cat_image_selected.get(6)).into(pharmacy);
                         }
 
                         @Override
@@ -416,8 +422,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy));
-                            Picasso.with(con).load(array_cat_image.get(6)).into(pharmacy);
+                            pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy));
+                            //Picasso.with(con).load(array_cat_image.get(6)).into(pharmacy);
                         }
 
                         @Override
@@ -445,8 +451,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor_));
-                            Picasso.with(con).load(array_cat_image_selected.get(7)).into(doctor);
+                            doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor_));
+                            //Picasso.with(con).load(array_cat_image_selected.get(7)).into(doctor);
                         }
 
                         @Override
@@ -466,8 +472,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor));
-                            Picasso.with(con).load(array_cat_image.get(7)).into(doctor);
+                            doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor));
+                            //Picasso.with(con).load(array_cat_image.get(7)).into(doctor);
                         }
 
                         @Override
@@ -495,8 +501,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //spa.setImageDrawable(getResources().getDrawable(R.drawable.spa_));
-                            Picasso.with(con).load(array_cat_image_selected.get(8)).into(spa);
+                            spa.setImageDrawable(getResources().getDrawable(R.drawable.spa_));
+                            //Picasso.with(con).load(array_cat_image_selected.get(8)).into(spa);
                         }
 
                         @Override
@@ -516,8 +522,8 @@ public class EditPreference extends AppCompatActivity {
 
                         @Override
                         public void onAnimationEnd(Animation arg0) {
-                            //spa.setImageDrawable(getResources().getDrawable(R.drawable.spa));
-                            Picasso.with(con).load(array_cat_image.get(8)).into(spa);
+                            spa.setImageDrawable(getResources().getDrawable(R.drawable.spa));
+                            //Picasso.with(con).load(array_cat_image.get(8)).into(spa);
                         }
 
                         @Override
@@ -595,7 +601,6 @@ public class EditPreference extends AppCompatActivity {
                     array_cat_image_selected.add(hcp_cust_cat_image_selected);
                     array_cat_id.add(hcp_cust_cat_id);
                 }
-                LoadCategories();
             }
             catch (Exception e)
             {
@@ -607,68 +612,77 @@ public class EditPreference extends AppCompatActivity {
     public void LoadCategories()
     {
 
-        Log.d("cat_if",array_cat_id.get(0));
-        if(cat.contains(array_cat_id.get(0)))
+        //Log.d("cat_if",array_cat_id.get(0));
+        if(cat.contains("1"))
         {
-            Log.d("cat_if",array_cat_image_selected.get(0));
+            //Log.d("cat_if",array_cat_image_selected.get(0));
             cclinics=1;
-            Picasso.with(con).load(array_cat_image_selected.get(0)).into(clinics);
+            clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic_));
+            //Picasso.with(con).load(array_cat_image_selected.get(0)).into(clinics);
         }
-        Log.d("cat_if",array_cat_id.get(1));
-        if(cat.contains(array_cat_id.get(1)))
+        //Log.d("cat_if",array_cat_id.get(1));
+        if(cat.contains("2"))
         {
-            Log.d("cat_if",array_cat_image_selected.get(1));
+            //Log.d("cat_if",array_cat_image_selected.get(1));
             chospital=1;
-            Picasso.with(con).load(array_cat_image_selected.get(1)).into(hospital);
+            hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital_));
+            //Picasso.with(con).load(array_cat_image_selected.get(1)).into(hospital);
         }
-        Log.d("cat_if",array_cat_id.get(2));
-        if(cat.contains(array_cat_id.get(2)))
+        //Log.d("cat_if",array_cat_id.get(2));
+        if(cat.contains("3"))
         {
-            Log.d("cat_if",array_cat_image_selected.get(2));
+            //Log.d("cat_if",array_cat_image_selected.get(2));
             cpathlab=1;
-            Picasso.with(con).load(array_cat_image_selected.get(2)).into(pathlab);
+            pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab_));
+            //Picasso.with(con).load(array_cat_image_selected.get(2)).into(pathlab);
         }
-        Log.d("cat_if",array_cat_id.get(3));
-        if(cat.contains(array_cat_id.get(3)))
+        //Log.d("cat_if",array_cat_id.get(3));
+        if(cat.contains("4"))
         {
-            Log.d("cat_if",array_cat_image_selected.get(3));
+            //Log.d("cat_if",array_cat_image_selected.get(3));
             cfitness=1;
-            Picasso.with(con).load(array_cat_image_selected.get(3)).into(fitness);
+            fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness_));
+            //Picasso.with(con).load(array_cat_image_selected.get(3)).into(fitness);
         }
-        Log.d("cat_if",array_cat_id.get(4));
-        if(cat.contains(array_cat_id.get(4)))
+        //Log.d("cat_if",array_cat_id.get(4));
+        if(cat.contains("5"))
         {
-            Log.d("cat_if",array_cat_image_selected.get(4));
+            //Log.d("cat_if",array_cat_image_selected.get(4));
             cbloodbanks=1;
-            Picasso.with(con).load(array_cat_image_selected.get(4)).into(bloodbanks);
+            bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank_));
+            //Picasso.with(con).load(array_cat_image_selected.get(4)).into(bloodbanks);
         }
-        Log.d("cat_if",array_cat_id.get(5));
-        if(cat.contains(array_cat_id.get(5)))
+        //Log.d("cat_if",array_cat_id.get(5));
+        if(cat.contains("6"))
         {
-            Log.d("cat_if",array_cat_image_selected.get(5));
+            //Log.d("cat_if",array_cat_image_selected.get(5));
             csalon=1;
-            Picasso.with(con).load(array_cat_image_selected.get(5)).into(salon);
+            salon.setImageDrawable(getResources().getDrawable(R.drawable.salon_));
+            //Picasso.with(con).load(array_cat_image_selected.get(5)).into(salon);
         }
-        Log.d("cat_if",array_cat_id.get(6));
-        if(cat.contains(array_cat_id.get(6)))
+        //Log.d("cat_if",array_cat_id.get(6));
+        if(cat.contains("7"))
         {
-            Log.d("cat_if",array_cat_image_selected.get(6));
+            //Log.d("cat_if",array_cat_image_selected.get(6));
             cpharmacy=1;
-            Picasso.with(con).load(array_cat_image_selected.get(6)).into(pharmacy);
+            pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy_));
+            //Picasso.with(con).load(array_cat_image_selected.get(6)).into(pharmacy);
         }
-        Log.d("cat_if",array_cat_id.get(7));
-        if(cat.contains(array_cat_id.get(7)))
+        //Log.d("cat_if",array_cat_id.get(7));
+        if(cat.contains("8"))
         {
-            Log.d("cat_if",array_cat_image_selected.get(7));
+            //Log.d("cat_if",array_cat_image_selected.get(7));
             cdoctor=1;
-            Picasso.with(con).load(array_cat_image_selected.get(7)).into(doctor);
+            doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor_));
+            //Picasso.with(con).load(array_cat_image_selected.get(7)).into(doctor);
         }
-        Log.d("cat_if",array_cat_id.get(8));
-        if(cat.contains(array_cat_id.get(8)))
+        //Log.d("cat_if",array_cat_id.get(8));
+        if(cat.contains("9"))
         {
-            Log.d("cat_if",array_cat_image_selected.get(8));
+            //Log.d("cat_if",array_cat_image_selected.get(8));
             cspa=1;
-            Picasso.with(con).load(array_cat_image_selected.get(8)).into(spa);
+            spa.setImageDrawable(getResources().getDrawable(R.drawable.spa_));
+            //Picasso.with(con).load(array_cat_image_selected.get(8)).into(spa);
         }
     }
 
@@ -750,39 +764,48 @@ public class EditPreference extends AppCompatActivity {
         int anyone=0;
         if(cclinics==1) {
             //tmp.append("Clinics, ");
-            tmp.append(array_cat_id.get(0)+", ");
+            //tmp.append(array_cat_id.get(0)+", ");
+            tmp.append("1, ");
         }
         if(chospital==1) {
             //tmp.append("Hospitals, ");
-            tmp.append(array_cat_id.get(1)+", ");
+            //tmp.append(array_cat_id.get(1)+", ");
+            tmp.append("2, ");
         }
         if(cpathlab==1) {
             //tmp.append("Pathlabs, ");
-            tmp.append(array_cat_id.get(2)+", ");
+            //tmp.append(array_cat_id.get(2)+", ");
+            tmp.append("3, ");
         }
         if(cfitness==1){
             //tmp.append("Fitness, ");
-            tmp.append(array_cat_id.get(3)+", ");
+            //tmp.append(array_cat_id.get(3)+", ");
+            tmp.append("4, ");
         }
         if(cbloodbanks==1){
             //tmp.append("Blood Banks, ");
-            tmp.append(array_cat_id.get(4)+", ");
+            //tmp.append(array_cat_id.get(4)+", ");
+            tmp.append("5, ");
         }
         if(csalon==1){
             //tmp.append("Salon, ");
-            tmp.append(array_cat_id.get(5)+", ");
+            //tmp.append(array_cat_id.get(5)+", ");
+            tmp.append("6, ");
         }
         if(cpharmacy==1){
             //tmp.append("Pharmacy, ");
-            tmp.append(array_cat_id.get(6)+", ");
+            //tmp.append(array_cat_id.get(6)+", ");
+            tmp.append("7, ");
         }
         if(cdoctor==1){
             //tmp.append("Doctors, ");
-            tmp.append(array_cat_id.get(7)+", ");
+            //tmp.append(array_cat_id.get(7)+", ");
+            tmp.append("8, ");
         }
         if(cspa==1) {
             //tmp.append("Spa");
-            tmp.append(array_cat_id.get(8)+", ");
+            //tmp.append(array_cat_id.get(8)+", ");
+            tmp.append("9, ");
         }
         if((cclinics==0)&&(chospital==0)&&(cpathlab==0)&&(cfitness==0)&&(cbloodbanks==0)&&(csalon==0)&&(cpharmacy==0)&&(cdoctor==0)&&(cspa==0))
         {
@@ -791,7 +814,6 @@ public class EditPreference extends AppCompatActivity {
         else{
             anyone=1;
         }
-
         if(anyone==0)
         {
             return "Please select one interest to proceed";

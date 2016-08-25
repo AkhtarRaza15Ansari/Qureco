@@ -25,9 +25,7 @@ public class ContactUs extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Contact Us");
+        setTitle("Contact Us");
     }
     @Override
     protected void onPause() {

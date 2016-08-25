@@ -25,9 +25,7 @@ public class Emergency extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Emergency");
+        setTitle("Emergency");
     }
     @Override
     protected void onPause() {

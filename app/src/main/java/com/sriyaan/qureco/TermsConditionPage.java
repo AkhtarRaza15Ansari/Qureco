@@ -25,9 +25,7 @@ public class TermsConditionPage extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Terms and Conditions");
+        setTitle("Terms and Conditions");
     }
     @Override
     protected void onPause() {

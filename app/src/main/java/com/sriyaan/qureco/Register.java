@@ -49,11 +49,7 @@ public class Register extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Register");
-        getSupportActionBar().setIcon(R.drawable.logo);
+        setTitle("Register");
 
         date = new DatePickerDialog.OnDateSetListener() {
 

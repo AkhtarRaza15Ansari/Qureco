@@ -26,9 +26,7 @@ public class Feedback extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Feedback");
+        setTitle("Feedback");
         init();
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override

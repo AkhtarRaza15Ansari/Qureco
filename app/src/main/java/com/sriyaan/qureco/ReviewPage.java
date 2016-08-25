@@ -25,9 +25,7 @@ public class ReviewPage extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Review Page");
+        setTitle("Review Page");
     }
     @Override
     protected void onPause() {

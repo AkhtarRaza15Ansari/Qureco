@@ -25,9 +25,7 @@ public class Search extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Search Page");
+        setTitle("Search Page");
     }
     @Override
     protected void onPause() {

@@ -25,9 +25,7 @@ public class Favourite extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Favorite");
+        setTitle("Favorite");
     }
     @Override
     protected void onPause() {

@@ -40,9 +40,7 @@ public class MyAccount extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("My Profile");
+        setTitle("My Profile");
 
         user_name = prefs.getString("cust_name","");
         mobile_no = prefs.getString("cust_mobile_no","");
@@ -76,9 +74,9 @@ public class MyAccount extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.editPreference) {
-            //Intent i = new Intent(con,EditPreference.class);
-            //startActivity(i);
-            url_dump.Toastthis("Coming soon",con);
+            Intent i = new Intent(con,EditPreference.class);
+            startActivity(i);
+            //url_dump.Toastthis("Coming soon",con);
             return true;
         }
         if (id == R.id.editProfile) {

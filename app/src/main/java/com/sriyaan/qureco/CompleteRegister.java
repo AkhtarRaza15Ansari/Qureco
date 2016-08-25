@@ -64,11 +64,7 @@ public class CompleteRegister extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Register");
-        getSupportActionBar().setIcon(R.drawable.logo);
+        setTitle("Register");
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

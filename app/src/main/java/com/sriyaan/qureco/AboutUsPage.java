@@ -25,9 +25,7 @@ public class AboutUsPage extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("About Us");
+        setTitle("About Us");
     }
     @Override
     protected void onPause() {

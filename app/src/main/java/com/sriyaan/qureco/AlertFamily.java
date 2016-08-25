@@ -25,9 +25,7 @@ public class AlertFamily extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Alert Family");
+        setTitle("Alert Family");
     }
     @Override
     protected void onPause() {

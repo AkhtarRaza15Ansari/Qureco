@@ -62,7 +62,9 @@ public class SmsReciever extends AppCompatActivity {
         btnEnter    = (Button)      findViewById(R.id.btn_verify_otp);
 
         code        = codeotp.getText().toString();
-        setTitle("SMS Verification");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle("OTP Reciever Page");
 
         btnEnter.setOnClickListener(new View.OnClickListener(){
             @Override

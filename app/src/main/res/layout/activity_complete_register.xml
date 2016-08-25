@@ -420,9 +420,11 @@
                                     android:layout_height="50dp"
                                     android:layout_gravity="center"
                                     android:layout_margin="05dp"
+                                    android:tint="@color/colorPrimary"
                                     android:src="@drawable/location" />
 
                                 <TextView
+                                    android:id="@+id/clickheretoselect"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"

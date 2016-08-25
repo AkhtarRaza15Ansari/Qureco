@@ -25,9 +25,7 @@ public class ShoutOutHelp extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Shout Out Help");
+        setTitle("Shout Out Help");
     }
     @Override
     protected void onPause() {

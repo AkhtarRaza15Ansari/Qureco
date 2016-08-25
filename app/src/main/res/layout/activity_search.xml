@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.sriyaan.qureco.Search">
     <include android:id="@+id/toolbar"
-        layout="@layout/toolbarwhite"/>
+        layout="@layout/toolbar"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

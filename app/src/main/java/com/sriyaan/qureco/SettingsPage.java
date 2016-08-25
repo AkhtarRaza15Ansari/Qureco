@@ -25,9 +25,7 @@ public class SettingsPage extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Settings Page");
+        setTitle("Settings Page");
     }
     @Override
     protected void onPause() {

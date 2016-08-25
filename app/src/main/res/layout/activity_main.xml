@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true">
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbarwhite" />
+            layout="@layout/toolbar" />
     </LinearLayout>
 
     <LinearLayout

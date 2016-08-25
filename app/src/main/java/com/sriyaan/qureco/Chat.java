@@ -25,9 +25,7 @@ public class Chat extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Chat");
+        setTitle("Chat");
 
     }
     @Override

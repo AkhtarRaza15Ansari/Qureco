@@ -25,9 +25,7 @@ public class Notification extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Notification");
+        setTitle("Notification");
     }
     @Override
     protected void onPause() {

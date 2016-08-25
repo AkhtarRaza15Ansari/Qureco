@@ -49,9 +49,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                 onBackPressed();
             }
         });
-        setTitle("");
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setText("Search Page");
+        setTitle("Search Page");
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view1);
         mRecyclerView.setHasFixedSize(true);
