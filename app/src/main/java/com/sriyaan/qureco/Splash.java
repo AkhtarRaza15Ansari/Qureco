@@ -10,7 +10,9 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.sriyaan.util.url_dump;
 
 import java.util.ArrayList;
@@ -33,8 +35,19 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        ImageView img = (ImageView) findViewById(R.id.image);
+
+
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
         context = Splash.this;
+
+        Glide
+                .with( context )
+                .load( R.raw.qureco)
+                .asGif()
+                .error( R.drawable.qureco_logo )
+                .into( img );
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             // only for gingerbread and newer versions
             requestPermission();
@@ -145,7 +158,7 @@ public class Splash extends AppCompatActivity {
                 try
                 {
                     //Display for 3 seconds
-                    sleep(3000);
+                    sleep(10000);
                 }
                 catch (InterruptedException e)
                 {
