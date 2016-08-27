@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.sriyaan.util.url_dump;
 
 import java.util.ArrayList;
@@ -41,12 +40,7 @@ public class Splash extends AppCompatActivity {
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
         context = Splash.this;
 
-        Glide
-                .with( context )
-                .load( R.raw.qureco)
-                .asGif()
-                .error( R.drawable.qureco_logo )
-                .into( img );
+
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             // only for gingerbread and newer versions
@@ -158,7 +152,7 @@ public class Splash extends AppCompatActivity {
                 try
                 {
                     //Display for 3 seconds
-                    sleep(10000);
+                    sleep(5000);
                 }
                 catch (InterruptedException e)
                 {
