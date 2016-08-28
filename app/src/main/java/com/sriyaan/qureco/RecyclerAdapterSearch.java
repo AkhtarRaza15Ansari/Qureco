@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.sriyaan.modal.ListData;
 
 import java.util.ArrayList;
@@ -29,21 +30,26 @@ public class RecyclerAdapterSearch extends RecyclerView
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        LinearLayout lldistance;
         ImageView imageView;
-        ImageView imageCall;
-        ImageView imageShare;
+        LinearLayout llcall,lldirection;
         TextView name;
+        TextView followers;
         TextView address;
-        TextView specialisation;
-        TextView completeAddress;
-        TextView workinghours;
+        TextView cash;
+        TextView likes;
         TextView distance;
-        TextView offers;
-        TextView text_ratings;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
+            name = (TextView) itemView.findViewById(R.id.name);
+            followers = (TextView) itemView.findViewById(R.id.followers);
+            address = (TextView) itemView.findViewById(R.id.address);
+            cash = (TextView) itemView.findViewById(R.id.cash);
+            likes = (TextView) itemView.findViewById(R.id.likes);
+            distance = (TextView) itemView.findViewById(R.id.distance);
+            imageView = (ImageView) itemView.findViewById(R.id.list_image);
+            llcall  = (LinearLayout) itemView.findViewById(R.id.llcall);
+            lldirection = (LinearLayout) itemView.findViewById(R.id.lldirection);
 
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
@@ -76,6 +82,17 @@ public class RecyclerAdapterSearch extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, final int position) {
+        holder.name.setText(""+ mDataset.get(position).getServiceName());
+        holder.followers.setText(""+ mDataset.get(position).getNoFollowers());
+        holder.address.setText(""+ mDataset.get(position).getLocationName());
+        holder.cash.setText(""+ mDataset.get(position).getCharges());
+        holder.likes.setText(""+ mDataset.get(position).getLikes());
+        holder.distance.setText(""+ mDataset.get(position).getDistance());
+
+        if(!mDataset.get(position).getPhotoPath().equals(""))
+        {
+            Picasso.with(context).load(mDataset.get(position).getPhotoPath()).placeholder(R.drawable.hosp).into(holder.imageView);
+        }
 
     }
     private void callShareIntent(String text){
@@ -99,7 +116,7 @@ public class RecyclerAdapterSearch extends RecyclerView
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mDataset.size();
     }
 
     public interface MyClickListener {

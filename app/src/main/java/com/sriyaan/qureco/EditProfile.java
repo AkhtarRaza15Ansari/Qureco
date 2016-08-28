@@ -33,6 +33,7 @@ import com.squareup.picasso.Picasso;
 import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -425,6 +426,7 @@ public class EditProfile extends AppCompatActivity {
         String str_Code;
         String str_Message;
         String str_UserID;
+        String hcp_cust_id,hcp_cust_name,hcp_cust_mobile_no,hcp_cust_gender,hcp_cust_dob,hcp_cust_referral_code,hcp_cust_profile_pic,hcp_cust_interests,hcp_cust_map_lat,hcp_cust_map_long;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -457,10 +459,31 @@ public class EditProfile extends AppCompatActivity {
                     Log.d("Code",str_Code);
                     Log.d("Mesg",str_Message);
                     Log.d("UsID",str_UserID);
-
+                    JSONObject object1 = object.getJSONObject(3);
                     if(str_Code.equals("HCPC900"))
                     {
                         //Successfull
+                        hcp_cust_id = object1.getString("hcp_cust_id");
+                        hcp_cust_name = object1.getString("hcp_cust_name");
+                        hcp_cust_mobile_no = object1.getString("hcp_cust_mobile_no");
+                        hcp_cust_profile_pic = object1.getString("hcp_cust_profile_pic");
+                        hcp_cust_gender = object1.getString("hcp_cust_gender");
+                        hcp_cust_dob = object1.getString("hcp_cust_dob");
+                        hcp_cust_referral_code = object1.getString("hcp_cust_referral_code");
+                        hcp_cust_interests = object1.getString("hcp_cust_interests");
+                        hcp_cust_map_lat = object1.getString("hcp_cust_map_lat");
+                        hcp_cust_map_long = object1.getString("hcp_cust_map_long");
+
+                        prefs.edit().putString("cust_name",hcp_cust_name).apply();
+                        prefs.edit().putString("cust_mobile_no",hcp_cust_mobile_no).apply();
+                        prefs.edit().putString("cust_profile_pic",hcp_cust_profile_pic).apply();
+                        prefs.edit().putString("cust_gender",hcp_cust_gender).apply();
+                        prefs.edit().putString("cust_dob",hcp_cust_dob).apply();
+                        prefs.edit().putString("cust_referral_code",hcp_cust_referral_code).apply();
+                        prefs.edit().putString("cust_interests",hcp_cust_interests).apply();
+                        prefs.edit().putString("cust_map_lat",hcp_cust_map_lat).apply();
+                        prefs.edit().putString("cust_map_long",hcp_cust_map_long).apply();
+
                         onBackPressed();
                     }
                     else if(str_Code.equals("HCPC901"))

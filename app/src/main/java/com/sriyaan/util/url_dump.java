@@ -353,6 +353,8 @@ public class url_dump {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
         nameValuePairs.add(new BasicNameValuePair("cat_id", cat_id));
+        nameValuePairs.add(new BasicNameValuePair("lat", "19.186418"));
+        nameValuePairs.add(new BasicNameValuePair("long", "73.021341"));
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

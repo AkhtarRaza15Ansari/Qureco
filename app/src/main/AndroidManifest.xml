@@ -97,7 +97,8 @@
         <activity android:name=".Emergency" />
         <activity android:name=".Notification" />
         <activity android:name=".Chat" />
-        <activity android:name=".Favourite"></activity>
+        <activity android:name=".Favourite" />
+        <activity android:name=".Filters"></activity>
     </application>
 
 </manifest>

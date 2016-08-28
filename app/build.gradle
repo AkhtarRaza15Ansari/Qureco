@@ -9,7 +9,7 @@ android {
         // Enabling multidex support.
         multiDexEnabled true
         applicationId "com.sriyaan.qureco"
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
