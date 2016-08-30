@@ -46,7 +46,7 @@ public class SmsReciever extends AppCompatActivity {
     String json;
     String str_Code,str_Message,str_UserID;
     String hcp_cust_id,hcp_cust_name,hcp_cust_mobile_no,hcp_cust_gender,hcp_cust_dob,hcp_cust_referral_code,hcp_cust_profile_pic,hcp_cust_interests,hcp_cust_map_lat,hcp_cust_map_long;
-
+    String str_mobile_login;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -91,6 +91,13 @@ public class SmsReciever extends AppCompatActivity {
                         @Override
                         public void onClick(View view){
                             resend.setVisibility(View.GONE);
+                            if(type.equals("login"))
+                            {
+                                str_mobile_login = getIntent().getStringExtra("str_mobile_login");
+                            }
+                            else {
+
+                            }
                         }
                     });
                 } catch (Exception e) {
@@ -254,5 +261,64 @@ public class SmsReciever extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         url_dump.deleteCache(getApplicationContext());
+    }
+    public class UserLoginResend extends AsyncTask<Void,Void,Void> {
+        String json;
+        String str_Code,str_Message,str_UserID;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            url_dump.startprogress("Fetching Data","Please wait",SmsReciever.this,false);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                prefs.edit().putString("mobile",str_mobile_login).apply();
+                json = url_dump.LoginUser(str_mobile_login);
+            } catch (Exception e) {
+                e.printStackTrace();
+                url_dump.dismissprogress();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            url_dump.dismissprogress();
+            try{
+                if(!json.equals(""))
+                {
+                    JSONArray object = new JSONArray(json);
+                    str_Code = object.get(0).toString();
+                    str_Message = object.get(1).toString();
+                    str_UserID = object.get(2).toString();
+                    Log.d("Code",str_Code);
+                    Log.d("Mesg",str_Message);
+                    Log.d("UsID",str_UserID);
+
+                    if(str_Code.equals("HCPC400"))
+                    {
+                        //Successfull
+                        prefs.edit().putString("type","login").apply();
+                    }
+                    else if(str_Code.equals("HCPC401"))
+                    {
+                        //Some Parameters are Missing
+                        Toastthis(str_Message,SmsReciever.this);
+                    }
+                    else if(str_Code.equals("HCP402"))
+                    {
+                        //User Already Registered
+                        Toastthis(str_Message,SmsReciever.this);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }

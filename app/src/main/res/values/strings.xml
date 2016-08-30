@@ -21,7 +21,7 @@
 
     <!-- Register Page -->
     <string name="input_name">Name</string>
-    <string name="btn_register">Next</string>
+    <string name="btn_register">Submit</string>
     <string name="btn_register_complete">Register</string>
     <string name="male">Male</string>
     <string name="female">Female</string>

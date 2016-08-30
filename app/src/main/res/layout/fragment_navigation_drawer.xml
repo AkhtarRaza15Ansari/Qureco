@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:clickable="true"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +17,7 @@
             android:id="@+id/back_drawer"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:tint="@color/white"
             android:src="@drawable/back_drawer"/>
         <ImageView
             android:id="@+id/img_profile"

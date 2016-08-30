@@ -86,6 +86,24 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_toLeftOf="@+id/llmap"
+            android:padding="05dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="05dp"
+            android:gravity="center"
+            android:background="@color/deals"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="COMPARE"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llmap"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:padding="05dp"
             android:layout_gravity="center"

@@ -1228,6 +1228,7 @@ public class MainActivity extends AppCompatActivity {
                         //Successfull
                         prefs.edit().putString("type","login").apply();
                         Intent i = new Intent(con,SmsReciever.class);
+                        i.putExtra("str_mobile_login",str_mobile_login);
                         startActivity(i);
                         finish();
                     }
