@@ -63,6 +63,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static com.sriyaan.util.url_dump.Toastthis;
+import static com.sriyaan.util.url_dump.removeLastChar;
 
 public class MainActivity extends AppCompatActivity {
     Fragment fragment = null;
@@ -92,9 +93,9 @@ public class MainActivity extends AppCompatActivity {
     EditText dob;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
-    EditText etName,etMobile,etDob,etReferral;
-    RadioGroup gender;
-    RadioButton male,female;
+    EditText etName,etMobile,etBloodGroup,etReferral;
+    RadioGroup gender,donategroup;
+    RadioButton male,female,yes,no;
 
 
     ImageView clinics,hospital,pathlab,fitness,bloodbanks,salon,pharmacy,doctor,spa;
@@ -103,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
     Animation flipin,flipout;
     LinearLayout location;
     ImageView opengallery,person;
-    TextView tvName;
-    String strName="",strMobile="",strDob="",strReferral="",strGender="",strInterest="";
-    public static String str_lat,str_lon;
+    TextView tvName,clickheretoselect;
+    String strName="",strMobile="",strDob="",strReferral="",strGender="",strInterest="",lifesaver="",bloodgroup="";
+    public static String str_lat="",str_lon="";
     int REQUEST_CAMERA = 0, FILE_SELECT_CODE = 1;
     private String userChoosenTask;
     int page = 0;
@@ -154,7 +155,10 @@ public class MainActivity extends AppCompatActivity {
         etName          = (EditText)    findViewById(R.id.name);
         etMobile        = (EditText)    findViewById(R.id.Mobile);
         etReferral      = (EditText)    findViewById(R.id.promocode);
-
+        etBloodGroup    = (EditText)    findViewById(R.id.bloodGroup);
+        donategroup     = (RadioGroup)  findViewById(R.id.donategroup);
+        yes             = (RadioButton) findViewById(R.id.yes);
+        no              = (RadioButton) findViewById(R.id.no);
         myCalendar      = Calendar.getInstance();
     }
     public void initCompleteRegister()
@@ -174,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         opengallery         = (ImageView)   findViewById(R.id.opengallery);
         person              = (ImageView)   findViewById(R.id.person);
         tvName              = (TextView)    findViewById(R.id.name);
+        clickheretoselect   = (TextView)    findViewById(R.id.clickheretoselect);
     }
     public void loadLayout(String body)
     {
@@ -1010,6 +1015,18 @@ public class MainActivity extends AppCompatActivity {
         strName = etName.getText().toString();
         strMobile = etMobile.getText().toString();
         strDob = dob.getText().toString();
+        bloodgroup = etBloodGroup.getText().toString();
+
+        int lifesaverId = gender.getCheckedRadioButtonId();
+        if(lifesaverId == yes.getId())
+        {
+            lifesaver = "Yes";
+        }
+        else if(lifesaverId == no.getId())
+        {
+            lifesaver = "No";
+        }
+
         int selectedId = gender.getCheckedRadioButtonId();
         if(selectedId == male.getId())
         {
@@ -1137,7 +1154,8 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             try {
                 prefs.edit().putString("mobile",strMobile).apply();
-                json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,str_lat,str_lon,path);
+                strInterest = removeLastChar(strInterest);
+                json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,str_lat,str_lon,path,lifesaver,bloodgroup);
             } catch (Exception e) {
                 url_dump.dismissprogress();
                 e.printStackTrace();
@@ -1193,7 +1211,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            url_dump.startprogress("Fetching Data","Please wait",MainActivity.this,false);
+            url_dump.startprogress("Contac","Please wait",MainActivity.this,false);
         }
 
         @Override
@@ -1312,6 +1330,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         url_dump.deleteCache(getApplicationContext());
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        try {
+            if (!str_lat.equals("")) {
+                clickheretoselect.setText("Your location is:(" + str_lat + "," + str_lon + ")");
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }

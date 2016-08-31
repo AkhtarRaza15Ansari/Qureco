@@ -35,61 +35,114 @@
                         android:padding="10dp"
                         android:orientation="vertical">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                            <ImageView
-                                android:id="@+id/person"
-                                android:layout_width="100dp"
-                                android:layout_height="100dp"
-                                android:padding="15dp"
-                                android:layout_centerInParent="true"
-                                android:src="@drawable/user"
-                                />
-                        </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/person"
+                            android:layout_width="250dp"
+                            android:layout_height="200dp"
+                            android:scaleType="centerCrop"
+                            android:padding="15dp"
+                            android:layout_gravity="center"
+                            />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/name"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Name"
-                                android:textSize="18dp"
-                                android:layout_marginTop="10dp"
-                                android:typeface="serif"
-                                android:textColor="@color/text_color" />
-                            <TextView
-                                android:id="@+id/Mobile"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6"
+                                    android:textSize="18dp"
+                                    android:layout_marginTop="10dp"
+                                    android:typeface="serif"
+                                    android:text="Name:"
+                                    android:textColor="@color/text_color" />
+                                <TextView
+                                    android:id="@+id/name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.4"
+                                    android:textSize="18dp"
+                                    android:layout_marginTop="10dp"
+                                    android:typeface="serif"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Mobile Number"
-                                android:textSize="18dp"
-                                android:layout_marginTop="10dp"
-                                android:enabled="false"
-                                android:typeface="serif"
-                                android:textColor="@color/text_color" />
-                            <TextView
-                                android:id="@+id/gender"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6"
+                                    android:textSize="18dp"
+                                    android:layout_marginTop="10dp"
+                                    android:typeface="serif"
+                                    android:text="Mobile:"
+                                    android:textColor="@color/text_color" />
+                                <TextView
+                                    android:id="@+id/Mobile"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.4"
+                                    android:textSize="18dp"
+                                    android:layout_marginTop="10dp"
+                                    android:enabled="false"
+                                    android:typeface="serif"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="18dp"
-                                android:layout_marginTop="10dp"
-                                android:hint="Male"
-                                android:typeface="serif"
-                                android:textColor="@color/text_color" />
-                            <TextView
-                                android:id="@+id/dob"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6"
+                                    android:textSize="18dp"
+                                    android:layout_marginTop="10dp"
+                                    android:typeface="serif"
+                                    android:text="Gender:"
+                                    android:textColor="@color/text_color" />
+                                <TextView
+                                    android:id="@+id/gender"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="18dp"
+                                    android:layout_weight="0.4"
+                                    android:layout_marginTop="10dp"
+                                    android:typeface="serif"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="18dp"
-                                android:layout_marginTop="10dp"
-                                android:hint="Date of Birth"
-                                android:typeface="serif"
-                                android:textColor="@color/text_color" />
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6"
+                                    android:textSize="18dp"
+                                    android:layout_marginTop="10dp"
+                                    android:typeface="serif"
+                                    android:text="DOB:"
+                                    android:textColor="@color/text_color" />
+                                <TextView
+                                    android:id="@+id/dob"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="18dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="0.4"
+                                    android:typeface="serif"
+                                    android:textColor="@color/text_color" />
+                            </LinearLayout>
+
 
                         </LinearLayout>
 

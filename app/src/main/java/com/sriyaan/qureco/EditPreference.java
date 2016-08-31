@@ -73,9 +73,13 @@ public class EditPreference extends AppCompatActivity {
         categories = removeLastChar(categories);
         Log.d("new categories",categories);
         cat = Arrays.asList(categories.split(","));
+        for(int i=0;i<cat.size();i++)
+        {
+            Log.d("new categories",cat.get(i));
+            LoadCategories(cat.get(i).trim()+"");
+        }
 
         //new GetCategories().execute();
-        LoadCategories();
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -609,76 +613,85 @@ public class EditPreference extends AppCompatActivity {
         }
     }
 
-    public void LoadCategories()
+    public void LoadCategories(String values)
     {
-
+        //int val = Integer.parseInt(values);
         //Log.d("cat_if",array_cat_id.get(0));
-        if(cat.contains("1"))
+        if(values.equals("1"))
         {
+            Log.d("Coming","1");
             //Log.d("cat_if",array_cat_image_selected.get(0));
             cclinics=1;
             clinics.setImageDrawable(getResources().getDrawable(R.drawable.clinic_));
             //Picasso.with(con).load(array_cat_image_selected.get(0)).into(clinics);
         }
         //Log.d("cat_if",array_cat_id.get(1));
-        if(cat.contains("2"))
+        if(values.equals("2"))
         {
+            Log.d("Coming","2");
             //Log.d("cat_if",array_cat_image_selected.get(1));
             chospital=1;
             hospital.setImageDrawable(getResources().getDrawable(R.drawable.hospital_));
             //Picasso.with(con).load(array_cat_image_selected.get(1)).into(hospital);
         }
         //Log.d("cat_if",array_cat_id.get(2));
-        if(cat.contains("3"))
+        if(values.equals("3"))
         {
+            Log.d("Coming","3");
             //Log.d("cat_if",array_cat_image_selected.get(2));
             cpathlab=1;
             pathlab.setImageDrawable(getResources().getDrawable(R.drawable.pathlab_));
             //Picasso.with(con).load(array_cat_image_selected.get(2)).into(pathlab);
         }
         //Log.d("cat_if",array_cat_id.get(3));
-        if(cat.contains("4"))
+        if(values.equals("4"))
         {
+            Log.d("Coming","4");
             //Log.d("cat_if",array_cat_image_selected.get(3));
             cfitness=1;
             fitness.setImageDrawable(getResources().getDrawable(R.drawable.fitness_));
             //Picasso.with(con).load(array_cat_image_selected.get(3)).into(fitness);
         }
         //Log.d("cat_if",array_cat_id.get(4));
-        if(cat.contains("5"))
+        if(values.equals("5"))
         {
             //Log.d("cat_if",array_cat_image_selected.get(4));
+            Log.d("Coming","5");
             cbloodbanks=1;
             bloodbanks.setImageDrawable(getResources().getDrawable(R.drawable.bloodbank_));
             //Picasso.with(con).load(array_cat_image_selected.get(4)).into(bloodbanks);
         }
         //Log.d("cat_if",array_cat_id.get(5));
-        if(cat.contains("6"))
+        if(values.equals("6"))
         {
+            Log.d("Coming","6");
             //Log.d("cat_if",array_cat_image_selected.get(5));
             csalon=1;
             salon.setImageDrawable(getResources().getDrawable(R.drawable.salon_));
             //Picasso.with(con).load(array_cat_image_selected.get(5)).into(salon);
         }
         //Log.d("cat_if",array_cat_id.get(6));
-        if(cat.contains("7"))
+        if(values.equals("7"))
         {
+            Log.d("Coming","7");
             //Log.d("cat_if",array_cat_image_selected.get(6));
             cpharmacy=1;
             pharmacy.setImageDrawable(getResources().getDrawable(R.drawable.pharmacy_));
             //Picasso.with(con).load(array_cat_image_selected.get(6)).into(pharmacy);
         }
         //Log.d("cat_if",array_cat_id.get(7));
-        if(cat.contains("8"))
+        if(values.equals("8"))
         {
+            Log.d("Coming","8");
             //Log.d("cat_if",array_cat_image_selected.get(7));
             cdoctor=1;
             doctor.setImageDrawable(getResources().getDrawable(R.drawable.doctor_));
             //Picasso.with(con).load(array_cat_image_selected.get(7)).into(doctor);
         }
         //Log.d("cat_if",array_cat_id.get(8));
-        if(cat.contains("9"))
+        if(values.equals("9"))
         {
+            Log.d("Coming","9");
             //Log.d("cat_if",array_cat_image_selected.get(8));
             cspa=1;
             spa.setImageDrawable(getResources().getDrawable(R.drawable.spa_));

@@ -48,4 +48,8 @@
     <string name="option2">DEALS &amp; OFFERS</string>
     <string name="option3">REVIEW</string>
     <string name="option4">LIFE SAVERS</string>
+
+
+
+    <declare-styleable name="customfont"> <attr name="android:fontFamily"/> <attr name="android:textStyle"/> </declare-styleable>
 </resources>

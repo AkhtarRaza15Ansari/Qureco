@@ -52,7 +52,7 @@ public class MyAccount extends AppCompatActivity {
         Mobile.setText(mobile_no);
         gender.setText(sgender);
         dob.setText(sdob);
-        Picasso.with(con).load(profile_pic).into(person);
+        Picasso.with(con).load(profile_pic).placeholder(R.drawable.person).into(person);
 
     }
     public void init()

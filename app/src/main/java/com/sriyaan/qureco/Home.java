@@ -92,7 +92,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         img_profile = (ImageView)   findViewById(R.id.img_profile);
         if(!cust_profile_pic.isEmpty())
         Picasso.with(con).load(cust_profile_pic)
-                .transform(new CircleTransform()).into(img_profile);
+                .transform(new CircleTransform()).placeholder(R.drawable.person).into(img_profile);
 
 
 

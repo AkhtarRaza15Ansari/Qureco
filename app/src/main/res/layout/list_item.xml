@@ -20,16 +20,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.75"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/deals"
+                        android:background="@color/offers"
                         android:text="OFFERS"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:textSize="15dp"
+                        android:padding="03dp"
                         android:layout_gravity="center"
                         android:gravity="center"
                         />
@@ -45,7 +46,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.25"
+                    android:layout_gravity="center"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -59,10 +61,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.3"
-                            android:textSize="20dp"
+                            android:textSize="15dp"
                             android:text="Name Here"
                             android:textStyle="bold"
-                            android:layout_gravity="left"
+                            android:layout_gravity="center"
                             android:gravity="left"
                             android:layout_marginLeft="5dp"
                             />
@@ -92,8 +94,8 @@
                             android:id="@+id/address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.35"
-                            android:textSize="15dp"
+                            android:layout_weight="0.4"
+                            android:textSize="13dp"
                             android:text="Majiwada Thane"
                             android:layout_gravity="left"
                             android:gravity="left"
@@ -103,35 +105,40 @@
                             android:id="@+id/ratings"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.65"
+                            android:layout_weight="0.6"
                             android:orientation="horizontal"
                             android:layout_gravity="center"
                             android:gravity="center"
                             >
                             <ImageView
                                 android:id="@+id/one"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_margin="01dp"
                                 android:src="@drawable/star"/>
                             <ImageView
                                 android:id="@+id/two"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_margin="01dp"
                                 android:src="@drawable/star"/>
                             <ImageView
                                 android:id="@+id/three"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_margin="01dp"
                                 android:src="@drawable/star"/>
                             <ImageView
                                 android:id="@+id/four"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_margin="01dp"
                                 android:src="@drawable/star"/>
                             <ImageView
                                 android:id="@+id/five"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_margin="01dp"
                                 android:src="@drawable/star"/>
                         </LinearLayout>
                     </LinearLayout>
@@ -155,7 +162,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.4"
-                            android:textSize="15dp"
+                            android:textSize="13dp"
                             android:text="5000"
                             android:layout_gravity="left"
                             android:gravity="left"
@@ -177,7 +184,7 @@
                                 android:id="@+id/likes"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
+                                android:textSize="13dp"
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:text="1240 likes"
@@ -200,7 +207,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.33"
-                            android:textSize="15dp"
+                            android:textSize="13dp"
                             android:text="3.5 KM"
                             android:paddingTop="05dp"
                             android:paddingBottom="05dp"
@@ -226,9 +233,10 @@
                                 android:src="@drawable/navigate"/>
                             <TextView
                                 android:id="@+id/direction"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="12dp"
+                                android:paddingLeft="02dp"
                                 android:paddingTop="05dp"
                                 android:paddingBottom="05dp"
                                 android:textColor="@color/white"
@@ -247,6 +255,8 @@
                             android:orientation="horizontal"
                             android:background="@color/call"
                             android:paddingTop="05dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:paddingBottom="05dp"
                             android:layout_marginLeft="2dp"
                             >
@@ -257,7 +267,8 @@
                                 android:src="@drawable/calll"/>
                             <TextView
                                 android:id="@+id/call"
-                                android:layout_width="match_parent"
+                                android:paddingLeft="02dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="12dp"
                                 android:textColor="@color/white"

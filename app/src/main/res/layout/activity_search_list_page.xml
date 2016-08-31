@@ -22,25 +22,30 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:text="Loyalty"/>
+            android:paddingLeft="05dp"
+            android:paddingRight="05dp"
+            android:text="LOYALTY"/>
 
         <TextView
+            android:id="@+id/sort"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:background="@color/light_black"
             android:textColor="@color/white"
-            android:padding="05dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:layout_marginRight="05dp"
             android:gravity="center"
-            android:layout_toLeftOf="@+id/filter"
+            android:layout_toLeftOf="@+id/llfilter"
             android:text="SORT"/>
 
         <LinearLayout
-            android:id="@+id/filter"
+            android:id="@+id/llfilter"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:padding="05dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:background="@color/light_black"
@@ -48,6 +53,7 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:layout_marginRight="05dp"
                 android:src="@drawable/filters"
                 />
             <TextView
@@ -67,16 +73,19 @@
         android:gravity="center"
         android:orientation="horizontal">
         <RadioGroup
+            android:id="@+id/gendergroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
             <RadioButton
+                android:id="@+id/male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/male"
                 />
             <RadioButton
+                android:id="@+id/female"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/female"
@@ -84,10 +93,12 @@
         </RadioGroup>
 
         <LinearLayout
+            android:id="@+id/llcompare"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_toLeftOf="@+id/llmap"
-            android:padding="05dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:layout_gravity="center"
             android:layout_marginRight="05dp"
             android:gravity="center"
@@ -103,9 +114,10 @@
         <LinearLayout
             android:id="@+id/llmap"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:padding="05dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:background="@color/review"

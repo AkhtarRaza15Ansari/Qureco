@@ -83,11 +83,12 @@ public class RecyclerAdapterSearch extends RecyclerView
     @Override
     public void onBindViewHolder(DataObjectHolder holder, final int position) {
         holder.name.setText(""+ mDataset.get(position).getServiceName());
-        holder.followers.setText(""+ mDataset.get(position).getNoFollowers());
+        holder.followers.setText(""+ mDataset.get(position).getNoFollowers() + " Followers");
         holder.address.setText(""+ mDataset.get(position).getLocationName());
         holder.cash.setText(""+ mDataset.get(position).getCharges());
-        holder.likes.setText(""+ mDataset.get(position).getLikes());
-        holder.distance.setText(""+ mDataset.get(position).getDistance());
+        holder.likes.setText(""+ mDataset.get(position).getLikes() +" Likes");
+        String dist = String.format("%.2f", Double.valueOf(mDataset.get(position).getDistance()));
+        holder.distance.setText(""+ dist + " Km");
 
         if(!mDataset.get(position).getPhotoPath().equals(""))
         {

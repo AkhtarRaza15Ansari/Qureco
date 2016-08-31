@@ -210,7 +210,7 @@ public class url_dump {
     }
 
 
-    public static String doFileUpload(String name,String mobile_no,String gender,String dob,String referral_code,String interests,String map_lat,String map_long,String profile_pic) throws Exception {
+    public static String doFileUpload(String name,String mobile_no,String gender,String dob,String referral_code,String interests,String map_lat,String map_long,String profile_pic,String life_saver,String blood_group) throws Exception {
         String urlString = main_header + userregistration;
         String sResponse;
         StringBuilder s = new StringBuilder();
@@ -235,6 +235,8 @@ public class url_dump {
             reqEntity.addPart("interests", new StringBody(interests));
             reqEntity.addPart("map_lat", new StringBody(map_lat));
             reqEntity.addPart("map_long", new StringBody(map_long));
+            reqEntity.addPart("life_saver",new StringBody(life_saver));
+            reqEntity.addPart("blood_group",new StringBody(blood_group));
 
             post.setEntity(reqEntity);
             HttpResponse response = client.execute(post);
@@ -250,7 +252,7 @@ public class url_dump {
         return getDecode(jsonvalues);
     }
 
-    public static String updateProfile(String user_id,String name,String dob,String old_profile_pic,String map_lat,String map_long,String profile_pic) throws Exception {
+    public static String updateProfile(String user_id,String name,String dob,String old_profile_pic,String map_lat,String map_long,String profile_pic,String life_saver,String blood_group) throws Exception {
         String urlString = main_header + update_profile;
         String sResponse;
         StringBuilder s = new StringBuilder();
@@ -274,6 +276,8 @@ public class url_dump {
             reqEntity.addPart("dob", new StringBody(dob));
             reqEntity.addPart("map_lat", new StringBody(map_lat));
             reqEntity.addPart("map_long", new StringBody(map_long));
+            reqEntity.addPart("life_saver",new StringBody(life_saver));
+            reqEntity.addPart("blood_group",new StringBody(blood_group));
 
             post.setEntity(reqEntity);
             HttpResponse response = client.execute(post);
@@ -346,13 +350,23 @@ public class url_dump {
             return false;
         }
     }
-    public static String getSearchCategory(String user_id,String cat_id) throws Exception {
+    public static String getSearchCategory(String user_id,String cat_id,String sort_by,
+                    String open_hours,String fees,String open_now,String loyalty, String service_type,
+                    String open_days,String gender) throws Exception {
         String url = main_header + search_by_category;
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
         nameValuePairs.add(new BasicNameValuePair("cat_id", cat_id));
+        nameValuePairs.add(new BasicNameValuePair("sort_by", sort_by));
+        nameValuePairs.add(new BasicNameValuePair("open_hours", open_hours));
+        nameValuePairs.add(new BasicNameValuePair("fees", fees));
+        nameValuePairs.add(new BasicNameValuePair("open_now", open_now));
+        nameValuePairs.add(new BasicNameValuePair("loyalty", loyalty));
+        nameValuePairs.add(new BasicNameValuePair("service_type", service_type));
+        nameValuePairs.add(new BasicNameValuePair("open_days", open_days));
+        nameValuePairs.add(new BasicNameValuePair("gender", gender));
         nameValuePairs.add(new BasicNameValuePair("lat", "19.186418"));
         nameValuePairs.add(new BasicNameValuePair("long", "73.021341"));
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

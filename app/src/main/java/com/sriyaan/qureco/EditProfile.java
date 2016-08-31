@@ -46,18 +46,17 @@ import static com.sriyaan.util.url_dump.Toastthis;
 public class EditProfile extends AppCompatActivity {
     Toolbar toolbar;
     Context con;
-
+    TextView clickheretoselect;
     ImageView opengallery,person;
     LinearLayout location;
     SharedPreferences prefs;
     Button btnSave;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
-    EditText etName,etMobile,etDob;
-    RadioGroup gender;
-    RadioButton male,female;
-
-    String strName="",strMobile="",strDob="",strReferral="",strGender="",strInterest="";
+    EditText etName,etMobile,etDob,etBloodGroup;
+    RadioGroup gender,donategroup;
+    RadioButton male,female,yes,no;
+    String strName="",strMobile="",strDob="",strReferral="",strGender="",strInterest="",lifesaver="",bloodgroup="";
     public static String str_lat,str_lon;
     int REQUEST_CAMERA = 0, FILE_SELECT_CODE = 1;
     private String userChoosenTask;
@@ -75,7 +74,7 @@ public class EditProfile extends AppCompatActivity {
 
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +106,7 @@ public class EditProfile extends AppCompatActivity {
             gender.check(R.id.male);
         }
 
-        Picasso.with(con).load(profile_pic).into(person);
+        Picasso.with(con).load(profile_pic).placeholder(R.drawable.person).into(person);
         //user_name
         opengallery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +163,18 @@ public class EditProfile extends AppCompatActivity {
         strName = etName.getText().toString();
         strMobile = etMobile.getText().toString();
         strDob = etDob.getText().toString();
+        bloodgroup = etBloodGroup.getText().toString();
+
+        int lifesaverId = gender.getCheckedRadioButtonId();
+        if(lifesaverId == yes.getId())
+        {
+            lifesaver = "Yes";
+        }
+        else if(lifesaverId == no.getId())
+        {
+            lifesaver = "No";
+        }
+
         int selectedId = gender.getCheckedRadioButtonId();
         if(selectedId == male.getId())
         {
@@ -206,6 +217,11 @@ public class EditProfile extends AppCompatActivity {
         etMobile        = (EditText)    findViewById(R.id.Mobile);
         location        = (LinearLayout)findViewById(R.id.location);
 
+        etBloodGroup    = (EditText)    findViewById(R.id.bloodGroup);
+        donategroup     = (RadioGroup)  findViewById(R.id.donategroup);
+        yes             = (RadioButton) findViewById(R.id.yes);
+        no              = (RadioButton) findViewById(R.id.no);
+        clickheretoselect = (TextView)  findViewById(R.id.clickheretoselect);
         myCalendar      = Calendar.getInstance();
     }
 
@@ -437,7 +453,7 @@ public class EditProfile extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             try {
                 prefs.edit().putString("mobile",strMobile).apply();
-                json = url_dump.updateProfile(user_id,strName,strDob,profile_pic,str_lat,str_lon,path);
+                json = url_dump.updateProfile(user_id,strName,strDob,profile_pic,str_lat,str_lon,path,lifesaver,bloodgroup);
             } catch (Exception e) {
                 url_dump.dismissprogress();
                 e.printStackTrace();
@@ -508,5 +524,18 @@ public class EditProfile extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         url_dump.deleteCache(getApplicationContext());
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        try {
+            if (!str_lat.equals("")) {
+                clickheretoselect.setText("Your location is:(" + str_lat + "," + str_lon + ")");
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

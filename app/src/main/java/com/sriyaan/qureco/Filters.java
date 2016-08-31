@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class Filters extends AppCompatActivity {
@@ -13,6 +15,7 @@ public class Filters extends AppCompatActivity {
     TextView mon,tue,wed,thurs,fri,sat,sun;
     TextView beforenoon,afternoon,evening,night;
     Button apply;
+    Switch open;
     int llone = 0,lltwo = 0,llthree = 0,llfour = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +34,33 @@ public class Filters extends AppCompatActivity {
         });
         setTitle("Filters");
         init();
+        //set the switch to ON
+        open.setChecked(true);
+        //attach a listener to check for changes in state
+        open.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+
+                if(isChecked){
+                    SearchListPage.open = "1";
+                }else{
+                    SearchListPage.open = "0";
+                }
+            }
+        });
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.onRefresh = true;
                 onBackPressed();
             }
         });
         free.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.fees = "0";
                 free.setTextColor(getResources().getColor(R.color.colorPrimary));
                 //free.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
@@ -57,6 +77,7 @@ public class Filters extends AppCompatActivity {
         one.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.fees = "1";
                 free.setTextColor(getResources().getColor(R.color.black));
                 //free.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -73,6 +94,7 @@ public class Filters extends AppCompatActivity {
         two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.fees = "2";
                 free.setTextColor(getResources().getColor(R.color.black));
                 //free.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -89,6 +111,7 @@ public class Filters extends AppCompatActivity {
         three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.fees = "3";
                 free.setTextColor(getResources().getColor(R.color.black));
                 //free.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -106,6 +129,7 @@ public class Filters extends AppCompatActivity {
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.service_type = "1";
                 book.setTextColor(getResources().getColor(R.color.colorPrimary));
                 //book.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
@@ -116,6 +140,7 @@ public class Filters extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.service_type = "2";
                 book.setTextColor(getResources().getColor(R.color.black));
                 //book.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -127,6 +152,7 @@ public class Filters extends AppCompatActivity {
         mon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_days = "1";
                 mon.setTextColor(getResources().getColor(R.color.colorPrimary));
                 //mon.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
@@ -152,6 +178,7 @@ public class Filters extends AppCompatActivity {
         tue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_days = "2";
                 mon.setTextColor(getResources().getColor(R.color.black));
                 //mon.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -177,6 +204,7 @@ public class Filters extends AppCompatActivity {
         wed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_days = "3";
                 mon.setTextColor(getResources().getColor(R.color.black));
                 //mon.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -202,6 +230,7 @@ public class Filters extends AppCompatActivity {
         thurs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_days = "4";
                 mon.setTextColor(getResources().getColor(R.color.black));
                 //mon.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -227,6 +256,7 @@ public class Filters extends AppCompatActivity {
         fri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_days = "5";
                 mon.setTextColor(getResources().getColor(R.color.black));
                 //mon.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -252,6 +282,7 @@ public class Filters extends AppCompatActivity {
         sat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_days = "6";
                 mon.setTextColor(getResources().getColor(R.color.black));
                 //mon.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -277,6 +308,7 @@ public class Filters extends AppCompatActivity {
         sun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_days = "7";
                 mon.setTextColor(getResources().getColor(R.color.black));
                 //mon.setBackgroundColor(getResources().getColor(R.color.white));
 
@@ -304,6 +336,7 @@ public class Filters extends AppCompatActivity {
         beforenoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_hours = "1";
                 beforenoon.setTextColor(getResources().getColor(R.color.colorPrimary));
                 //beforenoon.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
@@ -320,6 +353,7 @@ public class Filters extends AppCompatActivity {
         afternoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_hours = "2";
                 afternoon.setTextColor(getResources().getColor(R.color.colorPrimary));
                 //afternoon.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
@@ -336,6 +370,7 @@ public class Filters extends AppCompatActivity {
         evening.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_hours = "3";
 
                 evening.setTextColor(getResources().getColor(R.color.colorPrimary));
                 //evening.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -353,6 +388,7 @@ public class Filters extends AppCompatActivity {
         night.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SearchListPage.open_hours = "4";
                 night.setTextColor(getResources().getColor(R.color.colorPrimary));
                 //night.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
@@ -370,6 +406,7 @@ public class Filters extends AppCompatActivity {
 
     public void init()
     {
+        open            = (Switch)      findViewById(R.id.open);
         free            = (TextView)    findViewById(R.id.free);
         one             = (TextView)    findViewById(R.id.one);
         two             = (TextView)    findViewById(R.id.two);

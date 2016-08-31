@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/sortprice1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:text="Price - Low to High"/>
+    <TextView
+        android:id="@+id/sortprice2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:text="Price - High to Low"/>
+    <TextView
+        android:id="@+id/sortdistance1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:text="Distance - Nearest to Far"/>
+    <TextView
+        android:id="@+id/sortdistance2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:text="Distance - Far to Nearest"/>
+    <TextView
+        android:id="@+id/sortratings1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:text="Rating - Higher to Lower"/>
+    <TextView
+        android:id="@+id/sortratings2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:text="Rating - Lower to Higher"/>
+</LinearLayout>

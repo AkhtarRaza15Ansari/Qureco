@@ -1,5 +1,6 @@
 package com.sriyaan.qureco;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,8 +10,15 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.sriyaan.modal.ListData;
@@ -18,6 +26,7 @@ import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +43,20 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     LinearLayout filter;
     SwipeRefreshLayout swipeRefreshLayout;
     Context con;
+    String sort_by="",str_loyalty="",strGender="";
+    LinearLayout llcompare,llmap;
+    Switch loyalty;
+    TextView sort;
+    RadioGroup gendergroup;
+    RadioButton male,female;
+    Toolbar toolbar;
+    public static boolean onRefresh = false;
+    public static String open_hours="",fees="",open="",service_type="",open_days="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list_page);
-
         init();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -53,17 +69,14 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         });
         setTitle("Search Page");
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view1);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager1 = new GridLayoutManager(con, 1);
         mRecyclerView.setLayoutManager(mLayoutManager1);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable(){
              @Override
              public void run(){
-                 swipeRefreshLayout.setRefreshing(true);
-                 new Type().execute();
+                 runThis();
                  }
              }
         );
@@ -75,6 +88,47 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                 startActivity(i);
             }
         });
+        sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initSorting();
+            }
+        });
+        //attach a listener to check for changes in state
+        loyalty.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+
+                if(isChecked){
+                    str_loyalty = "1";
+                    runThis();
+                }else{
+                    str_loyalty = "0";
+                    runThis();
+                }
+            }
+        });
+
+        gendergroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                if(checkedId == male.getId())
+                {
+                    strGender = "1";
+                    runThis();
+                }
+                else if(checkedId == female.getId())
+                {
+                    strGender = "2";
+                    runThis();
+                }
+            }
+        });
+
     }
     @Override
     protected void onPause(){
@@ -85,13 +139,34 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     public void init()
     {
         con = SearchListPage.this;
-        filter = (LinearLayout) findViewById(R.id.filter);
-
+        toolbar             = (Toolbar)             findViewById(R.id.toolbar);
+        filter              = (LinearLayout)        findViewById(R.id.llfilter);
+        loyalty             = (Switch)              findViewById(R.id.loyalty);
+        llmap               = (LinearLayout)        findViewById(R.id.llmap);
+        llcompare           = (LinearLayout)        findViewById(R.id.llcompare);
+        sort                = (TextView)            findViewById(R.id.sort);
+        gendergroup         = (RadioGroup)          findViewById(R.id.gendergroup);
+        male                = (RadioButton)         findViewById(R.id.male);
+        female              = (RadioButton)         findViewById(R.id.female);
+        mRecyclerView       = (RecyclerView)        findViewById(R.id.my_recycler_view1);
+        swipeRefreshLayout  = (SwipeRefreshLayout)  findViewById(R.id.swiperefreshlayout);
     }
 
     @Override
     public void onRefresh() {
+        runThis();
+    }
+
+    public void runThis()
+    {
+        Log.d("Coming","Here");
         swipeRefreshLayout.setRefreshing(true);
+        if(loyalty.isChecked()){
+            str_loyalty = "1";
+        }
+        else {
+            str_loyalty = "0";
+        }
         new Type().execute();
     }
 
@@ -106,7 +181,8 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
 
             try {
                 results = new ArrayList<ListData>();
-                json_response = url_dump.getSearchCategory("1","1");
+                json_response = url_dump.getSearchCategory("1","1",sort_by,open_hours,fees,open,str_loyalty,
+                service_type,open_days,strGender);
                 JSONArray array = new JSONArray(json_response);
 
                 object = array.getJSONArray(2);
@@ -152,6 +228,82 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
             mAdapter = new RecyclerAdapterSearch(results,con);
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
+        }
+    }
+    public void initSorting()
+    {
+        // Create custom dialog object
+        final Dialog dialog = new Dialog(SearchListPage.this);
+        // Include dialog.xml file
+        dialog.setContentView(R.layout.sorting_dialog);
+        // Set dialog title
+        dialog.setTitle("Sort By");
+
+        TextView sortprice1 = (TextView) dialog.findViewById(R.id.sortprice1);
+        TextView sortprice2 = (TextView) dialog.findViewById(R.id.sortprice2);
+        TextView sortdistance1 = (TextView) dialog.findViewById(R.id.sortdistance1);
+        TextView sortdistance2 = (TextView) dialog.findViewById(R.id.sortdistance2);
+        TextView sortratings1 = (TextView) dialog.findViewById(R.id.sortratings1);
+        TextView sortratings2 = (TextView) dialog.findViewById(R.id.sortratings2);
+
+        sortprice1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sort_by = "1";
+                runThis();
+                dialog.dismiss();
+            }
+        });
+        sortprice2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sort_by = "2";
+                runThis();
+                dialog.dismiss();
+            }
+        });
+        sortdistance1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sort_by = "3";
+                runThis();
+                dialog.dismiss();
+            }
+        });
+        sortdistance2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sort_by = "4";
+                runThis();
+                dialog.dismiss();
+            }
+        });
+        sortratings1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sort_by = "5";
+                runThis();
+                dialog.dismiss();
+            }
+        });
+        sortratings2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sort_by = "6";
+                runThis();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if(onRefresh)
+        {
+            runThis();
+            onRefresh = false;
         }
     }
 }
