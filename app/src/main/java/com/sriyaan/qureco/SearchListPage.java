@@ -57,6 +57,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     LinearLayout llclearfilter;
     TextView clearfilter;
     // Loading Font Face
+    //
     Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
