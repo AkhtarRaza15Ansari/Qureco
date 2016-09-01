@@ -41,7 +41,15 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
     ImageView img_profile;
     SharedPreferences prefs;
     String cust_id,cust_name,cust_mobile_no,cust_profile_pic;
-
+    String scat1="1";
+    String scat2="1";
+    String scat3="1";
+    String scat4="1";
+    String scat5="1";
+    String scat6="1";
+    String scat7="1";
+    String scat8="1";
+    String scat9="1";
     LinearLayout llloyalty,lldeals,llreview,lllife;
     LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     LinearLayout alertfamily, shoutouthelp,emergency;
@@ -275,6 +283,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Doctor");
                     Intent i = new Intent(Home.this,SearchListPage.class);
+                    i.putExtra("value",""+scat1);
                     startActivity(i);
                 }
             });
@@ -283,6 +292,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Clinics");
                     Intent i = new Intent(Home.this,SearchListPage.class);
+                    i.putExtra("value",""+scat2);
                     startActivity(i);
                 }
             });
@@ -291,6 +301,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Pathlab");
                     Intent i = new Intent(Home.this,SearchListPage.class);
+                    i.putExtra("value",""+scat3);
                     startActivity(i);
                 }
             });
@@ -306,6 +317,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view){
                     Logthis("Home","Fitness");
                     Intent i = new Intent(Home.this,SearchListPage.class);
+                    i.putExtra("value",""+scat4);
                     startActivity(i);
                 }
             });
@@ -314,6 +326,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view){
                     Logthis("Home","Salon");
                     Intent i = new Intent(Home.this,SearchListPage.class);
+                    i.putExtra("value",""+scat5);
                     startActivity(i);
                 }
             });
@@ -322,6 +335,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Spa");
                     Intent i = new Intent(Home.this,SearchListPage.class);
+                    i.putExtra("value",""+scat6);
                     startActivity(i);
                 }
             });
@@ -337,6 +351,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Pharmacy");
                     Intent i = new Intent(Home.this,SearchListPage.class);
+                    i.putExtra("value",""+scat7);
                     startActivity(i);
                 }
             });
@@ -345,6 +360,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Hospital");
                     Intent i = new Intent(Home.this,SearchListPage.class);
+                    i.putExtra("value",""+scat8);
                     startActivity(i);
                 }
             });
@@ -353,6 +369,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Blood Banks");
                     Intent i = new Intent(Home.this,SearchListPage.class);
+                    i.putExtra("value",""+scat9);
                     startActivity(i);
                 }
             });

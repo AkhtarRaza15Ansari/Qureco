@@ -130,7 +130,25 @@
         </LinearLayout>
 
     </RelativeLayout>
-
+    <LinearLayout
+        android:id="@+id/llclearfilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="05dp"
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:id="@+id/clearfilter"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@color/light_black"
+            android:textColor="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_marginRight="05dp"
+            android:gravity="center"
+            android:layout_toLeftOf="@+id/llfilter"
+            android:text="CLEAR FILTER"/>
+    </LinearLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"

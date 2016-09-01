@@ -47,13 +47,15 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     String sort_by="",str_loyalty="",strGender="";
     LinearLayout llcompare,llmap;
     Switch loyalty;
-    TextView sort;
+    TextView sort,tvfilter;
     RadioGroup gendergroup;
     RadioButton male,female;
     Toolbar toolbar;
     public static boolean onRefresh = false;
     public static String open_hours="",fees="",open="",service_type="",open_days="";
     String fontPath = "fonts/Montserrat-Regular.ttf";
+    LinearLayout llclearfilter;
+    TextView clearfilter;
     // Loading Font Face
     Typeface tf;
     @Override
@@ -136,7 +138,13 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                 }
             }
         });
-
+        llclearfilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearFilter();
+                runThis();
+            }
+        });
     }
     @Override
     protected void onPause(){
@@ -158,6 +166,8 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         female              = (RadioButton)         findViewById(R.id.female);
         mRecyclerView       = (RecyclerView)        findViewById(R.id.my_recycler_view1);
         swipeRefreshLayout  = (SwipeRefreshLayout)  findViewById(R.id.swiperefreshlayout);
+        llclearfilter       = (LinearLayout)        findViewById(R.id.llclearfilter);
+        clearfilter         = (TextView)            findViewById(R.id.clearfilter);
     }
 
     @Override
@@ -310,8 +320,18 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         super.onResume();
         if(onRefresh)
         {
+            llclearfilter.setVisibility(View.VISIBLE);
             runThis();
             onRefresh = false;
         }
+    }
+
+    public void clearFilter()
+    {
+        open_hours="";
+        fees="";
+        open="";
+        service_type="";
+        open_days="";
     }
 }
