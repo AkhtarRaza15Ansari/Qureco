@@ -2,6 +2,7 @@ package com.sriyaan.util;
 
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     List<NavDrawerItem> data = Collections.emptyList();
     private LayoutInflater inflater;
     private Context context;
+    Typeface tf;
+    String fontPath = "fonts/Montserrat-Regular.ttf";
     public static int selected_item = 0;
 
 
@@ -44,7 +47,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     public void onBindViewHolder(MyViewHolder holder, int position) {
         NavDrawerItem current = data.get(position);
         holder.title.setText(current.getTitle());
-
+        holder.title.setTypeface(tf);
     }
 
     @Override
@@ -57,6 +60,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         ImageView background;
         public MyViewHolder(View itemView) {
             super(itemView);
+            tf = Typeface.createFromAsset(context.getAssets(), fontPath);
             title = (TextView) itemView.findViewById(R.id.title);
         }
     }

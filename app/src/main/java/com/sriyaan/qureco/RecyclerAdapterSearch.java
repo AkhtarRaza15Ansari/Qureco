@@ -2,6 +2,7 @@ package com.sriyaan.qureco;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.sriyaan.modal.ListData;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -26,8 +29,10 @@ public class RecyclerAdapterSearch extends RecyclerView
     static public ArrayList<ListData> mDataset;
     static Context context;
     public static MyClickListener myClickListener;
+    Typeface tf;
+    String fontPath = "fonts/Montserrat-Regular.ttf";
 
-    public static class DataObjectHolder extends RecyclerView.ViewHolder
+    public class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
         ImageView imageView;
@@ -38,18 +43,27 @@ public class RecyclerAdapterSearch extends RecyclerView
         TextView cash;
         TextView likes;
         TextView distance;
+        TextView call;
+        TextView direction;
+        TextView offers;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.name);
-            followers = (TextView) itemView.findViewById(R.id.followers);
-            address = (TextView) itemView.findViewById(R.id.address);
-            cash = (TextView) itemView.findViewById(R.id.cash);
-            likes = (TextView) itemView.findViewById(R.id.likes);
-            distance = (TextView) itemView.findViewById(R.id.distance);
-            imageView = (ImageView) itemView.findViewById(R.id.list_image);
-            llcall  = (LinearLayout) itemView.findViewById(R.id.llcall);
+            tf = Typeface.createFromAsset(context.getAssets(), fontPath);
+
+            imageView   = (ImageView) itemView.findViewById(R.id.list_image);
+            llcall      = (LinearLayout) itemView.findViewById(R.id.llcall);
             lldirection = (LinearLayout) itemView.findViewById(R.id.lldirection);
+
+            name        = (TextView)    itemView.findViewById(R.id.name);
+            followers   = (TextView)    itemView.findViewById(R.id.followers);
+            address     = (TextView)    itemView.findViewById(R.id.address);
+            cash        = (TextView)    itemView.findViewById(R.id.cash);
+            likes       = (TextView)    itemView.findViewById(R.id.likes);
+            distance    = (TextView)    itemView.findViewById(R.id.distance);
+            call        = (TextView)    itemView.findViewById(R.id.call);
+            direction   = (TextView)    itemView.findViewById(R.id.direction);
+            offers      = (TextView)    itemView.findViewById(R.id.offers);
 
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
@@ -94,7 +108,15 @@ public class RecyclerAdapterSearch extends RecyclerView
         {
             Picasso.with(context).load(mDataset.get(position).getPhotoPath()).placeholder(R.drawable.hosp).into(holder.imageView);
         }
-
+        holder.name        .setTypeface(tf);
+        holder.followers   .setTypeface(tf);
+        holder.address     .setTypeface(tf);
+        holder.cash        .setTypeface(tf);
+        holder.likes       .setTypeface(tf);
+        holder.distance    .setTypeface(tf);
+        holder.call        .setTypeface(tf);
+        holder.direction   .setTypeface(tf);
+        holder.offers      .setTypeface(tf);
     }
     private void callShareIntent(String text){
         Intent shareIntent = new Intent();

@@ -15,6 +15,7 @@
             layout="@layout/toolbar"/>
 
         <TextView
+            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="05dp"
@@ -111,6 +112,7 @@
                                 android:layout_marginBottom="05dp"
                                 />
                             <TextView
+                                android:id="@+id/tvLoyalty"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
@@ -133,6 +135,7 @@
                                 android:src="@drawable/deals"
                                 />
                             <TextView
+                                android:id="@+id/tvDeals"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
@@ -162,6 +165,7 @@
                                 android:src="@drawable/review"
                                 />
                             <TextView
+                                android:id="@+id/tvReview"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
@@ -184,6 +188,7 @@
                                 android:src="@drawable/lifesaver"
                                 />
                             <TextView
+                                android:id="@+id/tvlifesavers"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/white"
@@ -214,6 +219,7 @@
                             android:layout_marginBottom="05dp"
                             android:src="@drawable/alert_family"/>
                         <TextView
+                            android:id="@+id/tvAlert"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="10dp"
@@ -235,6 +241,7 @@
                             android:layout_marginBottom="05dp"
                             android:src="@drawable/shouthelp"/>
                         <TextView
+                            android:id="@+id/tvShout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="SHOUT OUT HELP"
@@ -258,6 +265,7 @@
                             android:layout_marginBottom="05dp"
                             android:src="@drawable/emergency"/>
                         <TextView
+                            android:id="@+id/tvEmergency"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="10dp"
@@ -290,6 +298,7 @@
                         android:src="@drawable/home_icon"
                         />
                     <TextView
+                        android:id="@+id/tvHome"
                         android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"
@@ -318,6 +327,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tvNotification"
                         android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"
@@ -344,6 +354,7 @@
                         android:src="@drawable/chat"
                         />
                     <TextView
+                        android:id="@+id/tvChat"
                         android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"
@@ -370,6 +381,7 @@
                         android:src="@drawable/favourites"
                         />
                     <TextView
+                        android:id="@+id/tvFavourites"
                         android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"
@@ -396,6 +408,7 @@
                         android:src="@drawable/myaccounts"
                         />
                     <TextView
+                        android:id="@+id/tvAccounts"
                         android:textSize="10dp"
                         android:textColor="@color/unselected"
                         android:layout_width="match_parent"

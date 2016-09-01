@@ -37,25 +37,28 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
     private FragmentDrawer drawerFragment;
     LinearLayout category,right_ll,left_ll;
     LinearLayout doctor,clinics,pathlab,fitness,salon,spa,pharmacy,hospital,bloodbanks;
+    TextView tvdoctor,tvclinics,tvpathlab,tvfitness,tvsalon,tvspa,tvpharmacy,tvhospital,tvbloodbanks;
     int num=0;
     ImageView img_profile;
     SharedPreferences prefs;
     String cust_id,cust_name,cust_mobile_no,cust_profile_pic;
     String scat1="1";
-    String scat2="1";
-    String scat3="1";
-    String scat4="1";
-    String scat5="1";
-    String scat6="1";
-    String scat7="1";
-    String scat8="1";
-    String scat9="1";
+    String scat2="2";
+    String scat3="3";
+    String scat4="4";
+    String scat5="5";
+    String scat6="6";
+    String scat7="7";
+    String scat8="8";
+    String scat9="9";
     LinearLayout llloyalty,lldeals,llreview,lllife;
     LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     LinearLayout alertfamily, shoutouthelp,emergency;
     String fontPath = "fonts/Montserrat-Regular.ttf";
     // Loading Font Face
     Typeface tf;
+    TextView search,tvLoyalty,tvDeals,tvReview,tvlifesavers,tvAlert,tvShout,tvEmergency,
+            tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +87,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setTypeface(tf);
         mTitle.setText("Home");
-
+        setFont();
         loadScreen(num);
         right_ll.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -203,7 +206,6 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         left_ll     = (LinearLayout)    findViewById(R.id.left_ll);
 
 
-
         llloyalty       = (LinearLayout)    findViewById(R.id.loyaltyll);
         lldeals         = (LinearLayout)    findViewById(R.id.dealsll);
         llreview        = (LinearLayout)    findViewById(R.id.reviewll);
@@ -217,8 +219,37 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         shoutouthelp    = (LinearLayout)    findViewById(R.id.shoutouthelp);
         emergency       = (LinearLayout)    findViewById(R.id.emergency);
 
-    }
+        search          = (TextView)        findViewById(R.id.search);
+        tvLoyalty       = (TextView)        findViewById(R.id.tvLoyalty);
+        tvDeals         = (TextView)        findViewById(R.id.tvDeals);
+        tvReview        = (TextView)        findViewById(R.id.tvReview);
+        tvlifesavers    = (TextView)        findViewById(R.id.tvlifesavers);
+        tvAlert         = (TextView)        findViewById(R.id.tvAlert);
+        tvShout         = (TextView)        findViewById(R.id.tvShout);
+        tvEmergency     = (TextView)        findViewById(R.id.tvEmergency);
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
 
+    }
+    public void setFont()
+    {
+        search          .setTypeface(tf);
+        tvLoyalty       .setTypeface(tf);
+        tvDeals         .setTypeface(tf);
+        tvReview        .setTypeface(tf);
+        tvlifesavers    .setTypeface(tf);
+        tvAlert         .setTypeface(tf);
+        tvShout         .setTypeface(tf);
+        tvEmergency     .setTypeface(tf);
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);;
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
+    }
     @Override
     public void onDrawerItemSelected(View view, int position){
         if(position==0)
@@ -275,15 +306,24 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         if(number==0)
         {
             category.addView(cat1);
+
             doctor      = (LinearLayout)findViewById(R.id.doctor);
             clinics     = (LinearLayout)findViewById(R.id.clinics);
             pathlab     = (LinearLayout)findViewById(R.id.pathlab);
+
+            tvdoctor    = (TextView)    findViewById(R.id.tvdoctors);
+            tvclinics   = (TextView)    findViewById(R.id.tvclinics);
+            tvpathlab   = (TextView)    findViewById(R.id.tvpathlab);
+
+            tvdoctor    .setTypeface(tf);
+            tvclinics   .setTypeface(tf);
+            tvpathlab   .setTypeface(tf);
             doctor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Doctor");
                     Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat1);
+                    i.putExtra("value",""+scat8);
                     startActivity(i);
                 }
             });
@@ -292,7 +332,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Clinics");
                     Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat2);
+                    i.putExtra("value",""+scat1);
                     startActivity(i);
                 }
             });
@@ -312,6 +352,15 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
             fitness     = (LinearLayout)findViewById(R.id.fitness);
             salon       = (LinearLayout)findViewById(R.id.salon);
             spa         = (LinearLayout)findViewById(R.id.spa);
+
+            tvfitness   = (TextView)    findViewById(R.id.tvfitness);
+            tvsalon     = (TextView)    findViewById(R.id.tvsalon);
+            tvspa       = (TextView)    findViewById(R.id.tvspa);
+
+            tvfitness   .setTypeface(tf);
+            tvsalon     .setTypeface(tf);
+            tvspa       .setTypeface(tf);
+
             fitness.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
@@ -326,7 +375,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view){
                     Logthis("Home","Salon");
                     Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat5);
+                    i.putExtra("value",""+scat6);
                     startActivity(i);
                 }
             });
@@ -335,7 +384,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Spa");
                     Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat6);
+                    i.putExtra("value",""+scat9);
                     startActivity(i);
                 }
             });
@@ -346,6 +395,15 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
             pharmacy    = (LinearLayout)findViewById(R.id.pharmacy);
             hospital    = (LinearLayout)findViewById(R.id.hospital);
             bloodbanks  = (LinearLayout)findViewById(R.id.bloodbanks);
+
+            tvpharmacy  = (TextView)    findViewById(R.id.tvpharmacy);
+            tvhospital  = (TextView)    findViewById(R.id.tvhospital);
+            tvbloodbanks= (TextView)    findViewById(R.id.tvbloodbank);
+
+            tvpharmacy  .setTypeface(tf);
+            tvhospital  .setTypeface(tf);
+            tvbloodbanks.setTypeface(tf);
+
             pharmacy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -360,7 +418,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Hospital");
                     Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat8);
+                    i.putExtra("value",""+scat2);
                     startActivity(i);
                 }
             });
@@ -369,7 +427,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 public void onClick(View view) {
                     Logthis("Home","Blood Banks");
                     Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat9);
+                    i.putExtra("value",""+scat5);
                     startActivity(i);
                 }
             });

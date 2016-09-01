@@ -19,6 +19,7 @@ import com.sriyaan.util.url_dump;
 public class MyAccount extends AppCompatActivity {
     ImageView person;
     TextView name,Mobile,gender,dob;
+    TextView tvName,tvMobile,tvGender,tvDob;
     SharedPreferences prefs;
     String user_name,mobile_no,profile_pic,sgender,sdob;
     Context con;
@@ -49,7 +50,7 @@ public class MyAccount extends AppCompatActivity {
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setTypeface(tf);
         mTitle.setText("My Profile");
-
+        setFonts();
         user_name = prefs.getString("cust_name","");
         mobile_no = prefs.getString("cust_mobile_no","");
         profile_pic = prefs.getString("cust_profile_pic","");
@@ -67,11 +68,32 @@ public class MyAccount extends AppCompatActivity {
     {
         toolbar = (Toolbar)     findViewById(R.id.toolbar);
         person  = (ImageView)   findViewById(R.id.person);
+
         name    = (TextView)    findViewById(R.id.name);
         Mobile  = (TextView)    findViewById(R.id.Mobile);
         gender  = (TextView)    findViewById(R.id.gender);
         dob     = (TextView)    findViewById(R.id.dob);
+
+        tvName  = (TextView)    findViewById(R.id.tvName);
+        tvMobile= (TextView)    findViewById(R.id.tvMobile);
+        tvGender= (TextView)    findViewById(R.id.tvGender);
+        tvDob   = (TextView)    findViewById(R.id.tvDob);
+
     }
+
+    public void setFonts()
+    {
+        name    .setTypeface(tf);
+        Mobile  .setTypeface(tf);
+        gender  .setTypeface(tf);
+        dob     .setTypeface(tf);
+
+        tvName  .setTypeface(tf);
+        tvMobile.setTypeface(tf);
+        tvGender.setTypeface(tf);
+        tvDob   .setTypeface(tf);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);

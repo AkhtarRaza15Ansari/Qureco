@@ -47,7 +47,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     String sort_by="",str_loyalty="",strGender="";
     LinearLayout llcompare,llmap;
     Switch loyalty;
-    TextView sort,tvfilter;
+    TextView sort,filters,tvCompare,tvMapView,clearfilter;
     RadioGroup gendergroup;
     RadioButton male,female;
     Toolbar toolbar;
@@ -55,7 +55,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     public static String open_hours="",fees="",open="",service_type="",open_days="";
     String fontPath = "fonts/Montserrat-Regular.ttf";
     LinearLayout llclearfilter;
-    TextView clearfilter;
+    String value;
     // Loading Font Face
     //
     Typeface tf;
@@ -64,6 +64,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list_page);
         init();
+        value = getIntent().getStringExtra("value");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -79,7 +80,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setTypeface(tf);
         mTitle.setText("Search Page");
-
+        setFont();
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager1 = new GridLayoutManager(con, 1);
         mRecyclerView.setLayoutManager(mLayoutManager1);
@@ -139,6 +140,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                 }
             }
         });
+        llclearfilter.setVisibility(View.GONE);
         llclearfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,14 +163,27 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         loyalty             = (Switch)              findViewById(R.id.loyalty);
         llmap               = (LinearLayout)        findViewById(R.id.llmap);
         llcompare           = (LinearLayout)        findViewById(R.id.llcompare);
-        sort                = (TextView)            findViewById(R.id.sort);
         gendergroup         = (RadioGroup)          findViewById(R.id.gendergroup);
         male                = (RadioButton)         findViewById(R.id.male);
         female              = (RadioButton)         findViewById(R.id.female);
         mRecyclerView       = (RecyclerView)        findViewById(R.id.my_recycler_view1);
         swipeRefreshLayout  = (SwipeRefreshLayout)  findViewById(R.id.swiperefreshlayout);
         llclearfilter       = (LinearLayout)        findViewById(R.id.llclearfilter);
+
         clearfilter         = (TextView)            findViewById(R.id.clearfilter);
+        sort                = (TextView)            findViewById(R.id.sort);
+        filters             = (TextView)            findViewById(R.id.filters);
+        tvCompare           = (TextView)            findViewById(R.id.tvCompare);
+        tvMapView           = (TextView)            findViewById(R.id.tvMapView);
+    }
+
+    public void setFont()
+    {
+        clearfilter         .setTypeface(tf);
+        sort                .setTypeface(tf);
+        filters             .setTypeface(tf);
+        tvCompare           .setTypeface(tf);
+        tvMapView           .setTypeface(tf);
     }
 
     @Override
@@ -200,7 +215,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
 
             try {
                 results = new ArrayList<ListData>();
-                json_response = url_dump.getSearchCategory("1","1",sort_by,open_hours,fees,open,str_loyalty,
+                json_response = url_dump.getSearchCategory("1",value,sort_by,open_hours,fees,open,str_loyalty,
                 service_type,open_days,strGender);
                 JSONArray array = new JSONArray(json_response);
 
@@ -334,5 +349,6 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         open="";
         service_type="";
         open_days="";
+        llclearfilter.setVisibility(View.GONE);
     }
 }

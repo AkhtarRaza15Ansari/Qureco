@@ -22,6 +22,7 @@
                 android:src="@drawable/pharmacy" />
 
             <TextView
+                android:id="@+id/tvpharmacy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -45,6 +46,7 @@
                 android:src="@drawable/hospital" />
 
             <TextView
+                android:id="@+id/tvhospital"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -68,6 +70,7 @@
                 android:src="@drawable/bloodbank" />
 
             <TextView
+                android:id="@+id/tvbloodbank"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

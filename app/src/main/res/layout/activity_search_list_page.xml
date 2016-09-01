@@ -105,6 +105,7 @@
             android:background="@color/deals"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/tvCompare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -123,6 +124,7 @@
             android:background="@color/review"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/tvMapView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -135,6 +137,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="05dp"
+        android:layout_gravity="end"
+        android:gravity="end"
         android:layout_marginBottom="10dp">
         <TextView
             android:id="@+id/clearfilter"

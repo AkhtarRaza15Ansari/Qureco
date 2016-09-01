@@ -181,6 +181,8 @@ public class url_dump {
         String url = main_header + update_preference;
         function1(url);
         // add your data
+
+        interests = removeLastChar(interests);
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
         nameValuePairs.add(new BasicNameValuePair("interests", interests));
@@ -216,6 +218,7 @@ public class url_dump {
         StringBuilder s = new StringBuilder();
         try
         {
+            interests = removeLastChar(interests);
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost(urlString);
 
