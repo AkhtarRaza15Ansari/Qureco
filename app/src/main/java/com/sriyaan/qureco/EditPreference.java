@@ -3,6 +3,7 @@ package com.sriyaan.qureco;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,10 +49,16 @@ public class EditPreference extends AppCompatActivity {
     List<String> cat;
     String strInterest="";
     String categories,user_id;
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
+
+    TextView tvselectPreference,tvdoctor,tvclinics,tvpathlab,tvfitness,tvsalon,tvspa,tvpharmacy,tvhospital,tvbloodbank;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_preference);
+
         init();
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
         setSupportActionBar(toolbar);
@@ -65,8 +72,12 @@ public class EditPreference extends AppCompatActivity {
             }
         });
 
-        setTitle("Edit Preference");
-
+        setTitle("");
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("Edit Preference");
+        setFont();
         categories = prefs.getString("cust_interests","");
         user_id = prefs.getString("cust_id","");
         Log.d("categories",categories);
@@ -554,6 +565,32 @@ public class EditPreference extends AppCompatActivity {
         doctor              = (ImageView)   findViewById(R.id.doctor);
         spa                 = (ImageView)   findViewById(R.id.spa);
         btnSave             = (Button)      findViewById(R.id.btnSave);
+
+        tvselectPreference  = (TextView)    findViewById(R.id.tvselectPreference);
+        tvdoctor            = (TextView)    findViewById(R.id.tvdoctor);
+        tvclinics           = (TextView)    findViewById(R.id.tvclinics);
+        tvpathlab           = (TextView)    findViewById(R.id.tvpathlab);
+        tvfitness           = (TextView)    findViewById(R.id.tvfitness);
+        tvsalon             = (TextView)    findViewById(R.id.tvsalon);
+        tvspa               = (TextView)    findViewById(R.id.tvspa);
+        tvpharmacy          = (TextView)    findViewById(R.id.tvpharmacy);
+        tvhospital          = (TextView)    findViewById(R.id.tvhospital);
+        tvbloodbank         = (TextView)    findViewById(R.id.tvbloodbank);
+    }
+
+    public void setFont()
+    {
+        tvselectPreference  .setTypeface(tf);
+        tvdoctor            .setTypeface(tf);
+        tvclinics           .setTypeface(tf);
+        tvpathlab           .setTypeface(tf);
+        tvfitness           .setTypeface(tf);
+        tvsalon             .setTypeface(tf);
+        tvspa               .setTypeface(tf);
+        tvpharmacy          .setTypeface(tf);
+        tvhospital          .setTypeface(tf);
+        tvbloodbank         .setTypeface(tf);
+        btnSave             .setTypeface(tf);
     }
     public class GetCategories extends AsyncTask<Void,Void,Void>
     {

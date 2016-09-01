@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -65,6 +66,11 @@ public class EditProfile extends AppCompatActivity {
     String path = "",selectedImagePath;
     String user_id,user_name,mobile_no,profile_pic,sgender,sdob,referral_code;
 
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
+
+    TextView editprofile,donatebloodsave,doyouwant,tvbloodgroup,caution,edityourlocation,clickherto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +89,13 @@ public class EditProfile extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("Edit Profile");
+        setTitle("");
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("Edit Profile");
+
+        setFont();
 
         user_id = prefs.getString("cust_id","");
         user_name = prefs.getString("cust_name","");
@@ -221,8 +233,29 @@ public class EditProfile extends AppCompatActivity {
         donategroup     = (RadioGroup)  findViewById(R.id.donategroup);
         yes             = (RadioButton) findViewById(R.id.yes);
         no              = (RadioButton) findViewById(R.id.no);
-        clickheretoselect = (TextView)  findViewById(R.id.clickheretoselect);
         myCalendar      = Calendar.getInstance();
+
+        editprofile     = (TextView)    findViewById(R.id.editprofile);
+        donatebloodsave = (TextView)    findViewById(R.id.donatebloodsave);
+        doyouwant       = (TextView)    findViewById(R.id.doyouwant);
+        tvbloodgroup    = (TextView)    findViewById(R.id.bloodgroup);
+        caution         = (TextView)    findViewById(R.id.caution);
+        edityourlocation= (TextView)    findViewById(R.id.edityourlocation);
+        clickherto      = (TextView)    findViewById(R.id.clickherto);
+    }
+
+    public void setFont()
+    {
+        editprofile     .setTypeface(tf);
+        donatebloodsave .setTypeface(tf);
+        doyouwant       .setTypeface(tf);
+        tvbloodgroup    .setTypeface(tf);
+        caution         .setTypeface(tf);
+        edityourlocation.setTypeface(tf);
+        clickherto      .setTypeface(tf);
+        yes             .setTypeface(tf);
+        no             .setTypeface(tf);
+        btnSave         .setTypeface(tf);
     }
 
     public void showPicker()
@@ -531,7 +564,7 @@ public class EditProfile extends AppCompatActivity {
         super.onResume();
         try {
             if (!str_lat.equals("")) {
-                clickheretoselect.setText("Your location is:(" + str_lat + "," + str_lon + ")");
+                //clickheretoselect.setText("Your location is:(" + str_lat + "," + str_lon + ")");
             }
         }catch (Exception e)
         {

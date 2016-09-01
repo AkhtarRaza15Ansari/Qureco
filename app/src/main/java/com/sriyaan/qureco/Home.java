@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +45,9 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
     LinearLayout llloyalty,lldeals,llreview,lllife;
     LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     LinearLayout alertfamily, shoutouthelp,emergency;
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +71,11 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
         drawerFragment.setDrawerListener(this);
 
-        setTitle("Home");
+        setTitle("");
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("Home");
 
         loadScreen(num);
         right_ll.setOnClickListener(new View.OnClickListener(){

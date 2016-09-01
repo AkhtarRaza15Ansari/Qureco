@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -48,6 +49,9 @@ public class CompleteRegister extends AppCompatActivity {
 
     private String selectedImagePath;
 
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +68,11 @@ public class CompleteRegister extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("Register");
+        setTitle("");
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("Register");
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

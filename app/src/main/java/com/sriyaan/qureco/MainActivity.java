@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -110,9 +111,12 @@ public class MainActivity extends AppCompatActivity {
     int REQUEST_CAMERA = 0, FILE_SELECT_CODE = 1;
     private String userChoosenTask;
     int page = 0;
-
+    TextView mTitle;
     String path = "",selectedImagePath;
     SharedPreferences prefs;
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +128,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("");
-
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("");
 
         my_root = (LinearLayout) findViewById(R.id.body);
         inflater = LayoutInflater.from(this);
@@ -185,7 +192,8 @@ public class MainActivity extends AppCompatActivity {
         if(body.equals("register"))
         {
             page = 1;
-            setTitle("REGISTRATION");
+            setTitle("");
+            mTitle.setText("REGISTRATION");
             my_root.removeAllViews();
             View inflatedLayout = inflater.inflate(R.layout.activity_register, null, false);
             my_root.addView(inflatedLayout);
@@ -236,7 +244,8 @@ public class MainActivity extends AppCompatActivity {
         else if(body.equals("completeregister")){
 
             page = 2;
-            setTitle("COMPLETE REGISTRATION");
+            setTitle("");
+            mTitle.setText("COMPLETE REGISTRATION");
             my_root.removeAllViews();
             View inflatedLayout = inflater.inflate(R.layout.activity_complete_register, null, false);
             my_root.addView(inflatedLayout);
@@ -729,7 +738,8 @@ public class MainActivity extends AppCompatActivity {
         {
             page = 3;
 
-            setTitle("LOGIN");
+            setTitle("");
+            mTitle.setText("LOGIN");
 
             my_root.removeAllViews();
             View inflatedLayout = inflater.inflate(R.layout.activity_login, null, false);

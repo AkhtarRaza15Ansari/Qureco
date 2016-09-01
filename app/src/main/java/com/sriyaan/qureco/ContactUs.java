@@ -1,5 +1,6 @@
 package com.sriyaan.qureco;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,9 @@ import com.sriyaan.util.url_dump;
 
 public class ContactUs extends AppCompatActivity {
 
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +29,11 @@ public class ContactUs extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("Contact Us");
+        setTitle("");
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("Contact Us");
     }
     @Override
     protected void onPause() {

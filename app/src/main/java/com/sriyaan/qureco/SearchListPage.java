@@ -3,6 +3,7 @@ package com.sriyaan.qureco;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,9 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     Toolbar toolbar;
     public static boolean onRefresh = false;
     public static String open_hours="",fees="",open="",service_type="",open_days="";
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +71,11 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                 onBackPressed();
             }
         });
-        setTitle("Search Page");
+        setTitle("");
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("Search Page");
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager1 = new GridLayoutManager(con, 1);

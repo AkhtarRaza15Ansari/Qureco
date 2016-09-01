@@ -3,6 +3,7 @@ package com.sriyaan.qureco;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,9 @@ public class MyAccount extends AppCompatActivity {
     String user_name,mobile_no,profile_pic,sgender,sdob;
     Context con;
     Toolbar toolbar;
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +44,11 @@ public class MyAccount extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("My Profile");
+        setTitle("");
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("My Profile");
 
         user_name = prefs.getString("cust_name","");
         mobile_no = prefs.getString("cust_mobile_no","");

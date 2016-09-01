@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,9 @@ public class SmsReciever extends AppCompatActivity {
     String str_Code,str_Message,str_UserID;
     String hcp_cust_id,hcp_cust_name,hcp_cust_mobile_no,hcp_cust_gender,hcp_cust_dob,hcp_cust_referral_code,hcp_cust_profile_pic,hcp_cust_interests,hcp_cust_map_lat,hcp_cust_map_long;
     String str_mobile_login;
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -64,7 +68,11 @@ public class SmsReciever extends AppCompatActivity {
         code        = codeotp.getText().toString();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("OTP Reciever Page");
+        setTitle("");
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("OTP Reciever Page");
 
         btnEnter.setOnClickListener(new View.OnClickListener(){
             @Override

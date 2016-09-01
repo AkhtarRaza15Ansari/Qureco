@@ -15,14 +15,11 @@ public class MyApplication extends MultiDexApplication{
         MultiDex.install(newBase);
         super.attachBaseContext(newBase);
 
-        //FontsOverride.setDefaultFont(this, "DEFAULT", "Monteserrat-Regular.ttf");
-        //
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        //FontsOverride.setDefaultFont(this, "DEFAULT", "Montserrat-Regular.ttf");
-        TypefaceUtil.overrideFont(getApplicationContext(), "serif", "Montserrat-Regular.ttf");
+
     }
 }

@@ -1,5 +1,6 @@
 package com.sriyaan.qureco;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,7 +10,9 @@ import android.widget.TextView;
 import com.sriyaan.util.url_dump;
 
 public class LifeSavers extends AppCompatActivity {
-
+    String fontPath = "fonts/Montserrat-Regular.ttf";
+    // Loading Font Face
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +28,11 @@ public class LifeSavers extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        setTitle("Life Savers");
+        setTitle("");
+        tf = Typeface.createFromAsset(getAssets(), fontPath);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setTypeface(tf);
+        mTitle.setText("Life Savers");
     }
     @Override
     protected void onPause() {

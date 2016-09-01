@@ -31,6 +31,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/editprofile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -162,6 +163,7 @@
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/donatebloodsave"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -179,6 +181,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/doyouwant"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -215,6 +218,7 @@
                         android:layout_marginTop="10dp"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/bloodgroup"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -233,6 +237,7 @@
                             android:hint="Enter Here"/>
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/caution"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="12dp"
@@ -257,6 +262,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/edityourlocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -296,6 +302,7 @@
                                     android:src="@drawable/location" />
 
                                 <TextView
+                                    android:id="@+id/clickherto"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
