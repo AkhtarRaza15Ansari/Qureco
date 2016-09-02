@@ -96,6 +96,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvselectPreference"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -133,6 +134,7 @@
                                     android:src="@drawable/doctor" />
 
                                 <TextView
+                                    android:id="@+id/tvdoctor"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -158,6 +160,7 @@
                                     android:src="@drawable/clinic" />
 
                                 <TextView
+                                    android:id="@+id/tvclinics"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -184,6 +187,7 @@
                                     android:src="@drawable/pathlab" />
 
                                 <TextView
+                                    android:id="@+id/tvpathlab"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -215,6 +219,7 @@
                                     android:src="@drawable/fitness" />
 
                                 <TextView
+                                    android:id="@+id/tvfitness"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -239,6 +244,7 @@
                                     android:src="@drawable/salon" />
 
                                 <TextView
+                                    android:id="@+id/tvsalon"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -263,6 +269,7 @@
                                     android:src="@drawable/spa" />
 
                                 <TextView
+                                    android:id="@+id/tvspa"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -297,6 +304,7 @@
                                     android:src="@drawable/pharmacy" />
 
                                 <TextView
+                                    android:id="@+id/tvpharmacy"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -321,6 +329,7 @@
                                     android:src="@drawable/hospital" />
 
                                 <TextView
+                                    android:id="@+id/tvhospital"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -345,6 +354,7 @@
                                     android:src="@drawable/bloodbank" />
 
                                 <TextView
+                                    android:id="@+id/tvbloodbank"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -375,6 +385,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/selectlocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

@@ -99,6 +99,8 @@ public class url_dump {
         mProgressDialog.show();
     }
     public static String removeLastChar(String str) {
+        Log.d("previous",str);
+        Log.d("final",str.substring(0,str.length()-1));
         return str.substring(0,str.length()-1);
     }
     public static void dismissprogress()
@@ -181,9 +183,11 @@ public class url_dump {
         String url = main_header + update_preference;
         function1(url);
         // add your data
-
+        interests = interests.trim();
         interests = removeLastChar(interests);
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        Log.d("user_id", user_id+" ::UserID");
+        Log.d("interests", interests+" ::Interest");
         nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
         nameValuePairs.add(new BasicNameValuePair("interests", interests));
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

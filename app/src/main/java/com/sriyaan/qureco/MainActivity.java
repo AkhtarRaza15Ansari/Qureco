@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnRegister;
     TextView skip,skip1;
+    TextView donatebloodsave,doyouwant,tvbloodgroup,caution;
     EditText dob;
     Calendar myCalendar;
     DatePickerDialog.OnDateSetListener date;
@@ -98,8 +99,9 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup gender,donategroup;
     RadioButton male,female,yes,no;
 
-
     ImageView clinics,hospital,pathlab,fitness,bloodbanks,salon,pharmacy,doctor,spa;
+    TextView tvselectPreference,tvdoctor,tvclinics,tvpathlab,tvfitness,tvsalon,tvspa,tvpharmacy,tvhospital
+            ,tvbloodbank,selectlocation;
     Button btnCompleteRegister;
     int cclinics,chospital,cpathlab,cfitness,cbloodbanks,csalon,cpharmacy,cdoctor,cspa;
     Animation flipin,flipout;
@@ -123,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         con = MainActivity.this;
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
-
         toolbar     = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -166,6 +167,10 @@ public class MainActivity extends AppCompatActivity {
         donategroup     = (RadioGroup)  findViewById(R.id.donategroup);
         yes             = (RadioButton) findViewById(R.id.yes);
         no              = (RadioButton) findViewById(R.id.no);
+        donatebloodsave = (TextView)    findViewById(R.id.donatebloodsave);
+        doyouwant       = (TextView)    findViewById(R.id.doyouwant);
+        tvbloodgroup    = (TextView)    findViewById(R.id.tvbloodgroup);
+        caution         = (TextView)    findViewById(R.id.caution);
         myCalendar      = Calendar.getInstance();
     }
     public void initCompleteRegister()
@@ -186,6 +191,18 @@ public class MainActivity extends AppCompatActivity {
         person              = (ImageView)   findViewById(R.id.person);
         tvName              = (TextView)    findViewById(R.id.name);
         clickheretoselect   = (TextView)    findViewById(R.id.clickheretoselect);
+
+        tvselectPreference  = (TextView)    findViewById(R.id.tvselectPreference);
+        tvdoctor            = (TextView)    findViewById(R.id.tvdoctor);
+        tvclinics           = (TextView)    findViewById(R.id.tvclinics);
+        tvpathlab           = (TextView)    findViewById(R.id.tvpathlab);
+        tvfitness           = (TextView)    findViewById(R.id.tvfitness);
+        tvsalon             = (TextView)    findViewById(R.id.tvsalon);
+        tvspa               = (TextView)    findViewById(R.id.tvspa);
+        tvpharmacy          = (TextView)    findViewById(R.id.tvpharmacy);
+        tvhospital          = (TextView)    findViewById(R.id.tvhospital);
+        tvbloodbank         = (TextView)    findViewById(R.id.tvbloodbank);
+        selectlocation      = (TextView)    findViewById(R.id.selectlocation);
     }
     public void loadLayout(String body)
     {
@@ -198,6 +215,8 @@ public class MainActivity extends AppCompatActivity {
             View inflatedLayout = inflater.inflate(R.layout.activity_register, null, false);
             my_root.addView(inflatedLayout);
             initRegister();
+
+            setFontRegister();
             btnRegister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -250,6 +269,8 @@ public class MainActivity extends AppCompatActivity {
             View inflatedLayout = inflater.inflate(R.layout.activity_complete_register, null, false);
             my_root.addView(inflatedLayout);
             initCompleteRegister();
+
+            setFontComplete();
             tvName.setText(strName);
             //new GetCategories().execute();
             opengallery.setOnClickListener(new View.OnClickListener() {
@@ -745,6 +766,9 @@ public class MainActivity extends AppCompatActivity {
             View inflatedLayout = inflater.inflate(R.layout.activity_login, null, false);
             my_root.addView(inflatedLayout);
             initLogin();
+
+            setFontLogin();
+
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -1069,7 +1093,10 @@ public class MainActivity extends AppCompatActivity {
         strInterest = "";
         strInterest = getInterest();
         //Toast.makeText(MainActivity.this, ""+getInterest(), Toast.LENGTH_SHORT).show();
-        if(strInterest.equals("Please select one interest to proceed"))
+        if(path.equals("")){
+            url_dump.Toastthis("Please select your profile pic",con);
+        }
+        else if(strInterest.equals("Please select one interest to proceed"))
         {
             url_dump.Toastthis(strInterest,con);
         }
@@ -1354,5 +1381,44 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    public void setFontLogin() {
 
+        tvSignUp.setTypeface(tf);
+        input_phone.setTypeface(tf);
+    }
+    public void setFontRegister() {
+
+        skip            .setTypeface(tf);
+        donatebloodsave .setTypeface(tf);
+        doyouwant       .setTypeface(tf);
+        tvbloodgroup    .setTypeface(tf);
+        caution         .setTypeface(tf);
+        btnRegister     .setTypeface(tf);
+        dob             .setTypeface(tf);
+        male            .setTypeface(tf);
+        female          .setTypeface(tf);
+        etName          .setTypeface(tf);
+        etMobile        .setTypeface(tf);
+        etReferral      .setTypeface(tf);
+        etBloodGroup    .setTypeface(tf);
+        yes             .setTypeface(tf);
+        no              .setTypeface(tf);
+
+    }
+    public void setFontComplete() {
+        tvselectPreference.setTypeface(tf);
+        tvdoctor.setTypeface(tf);
+        tvclinics.setTypeface(tf);
+        tvpathlab.setTypeface(tf);
+        tvfitness.setTypeface(tf);
+        tvsalon.setTypeface(tf);
+        tvspa.setTypeface(tf);
+        tvpharmacy.setTypeface(tf);
+        tvhospital.setTypeface(tf);
+        tvbloodbank.setTypeface(tf);
+        selectlocation.setTypeface(tf);
+        tvName.setTypeface(tf);
+        clickheretoselect.setTypeface(tf);
+        btnCompleteRegister.setTypeface(tf);
+    }
 }

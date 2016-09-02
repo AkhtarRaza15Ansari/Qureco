@@ -739,7 +739,7 @@ public class EditPreference extends AppCompatActivity {
     public void validateRegister(){
         strInterest = "";
         strInterest = getInterest();
-        Toast.makeText(con, ""+getInterest(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(con, ""+getInterest(), Toast.LENGTH_SHORT).show();
         if(strInterest.equals("Please select one interest to proceed"))
         {
             url_dump.Toastthis(strInterest,con);

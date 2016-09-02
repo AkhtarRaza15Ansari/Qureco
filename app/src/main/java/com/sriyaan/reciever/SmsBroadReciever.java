@@ -37,7 +37,7 @@ public class SmsBroadReciever extends BroadcastReceiver {
     public String code;
     SharedPreferences prefs;
     String type;
-    String hcp_cust_id,hcp_cust_name,hcp_cust_mobile_no,hcp_cust_gender,hcp_cust_dob,hcp_cust_referral_code,hcp_cust_profile_pic,hcp_cust_interests,hcp_cust_map_lat,hcp_cust_map_long;
+    String hcp_cust_id,hcp_cust_name,hcp_cust_mobile_no,hcp_cust_gender,hcp_cust_dob,hcp_cust_referral_code,hcp_cust_profile_pic,hcp_cust_interests,hcp_cust_map_lat,hcp_cust_map_long,hcp_cust_blood_group,hcp_cust_life_saver,hcp_cust_points;
     @Override
     public void onReceive(Context context, Intent intent) {
 // Retrieves a map of extended data from the intent.
@@ -126,6 +126,9 @@ public class SmsBroadReciever extends BroadcastReceiver {
                             hcp_cust_interests = object1.getString("hcp_cust_interests");
                             hcp_cust_map_lat = object1.getString("hcp_cust_map_lat");
                             hcp_cust_map_long = object1.getString("hcp_cust_map_long");
+                            hcp_cust_blood_group = object1.getString("hcp_cust_blood_group");
+                            hcp_cust_life_saver = object1.getString("hcp_cust_life_saver");
+                            hcp_cust_points = object1.getString("hcp_cust_points");
 
                             Logthis("hcp_cust_profile_pic",hcp_cust_profile_pic);
 
@@ -140,6 +143,9 @@ public class SmsBroadReciever extends BroadcastReceiver {
                             prefs.edit().putString("cust_map_lat",hcp_cust_map_lat).apply();
                             prefs.edit().putString("cust_map_long",hcp_cust_map_long).apply();
                             prefs.edit().putString("login","yes").apply();
+                            prefs.edit().putString("hcp_cust_blood_group",hcp_cust_blood_group).apply();
+                            prefs.edit().putString("hcp_cust_life_saver",hcp_cust_life_saver).apply();
+                            prefs.edit().putString("hcp_cust_points",hcp_cust_points).apply();
 
                             Intent i = new Intent(con,RoutingActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -176,6 +182,9 @@ public class SmsBroadReciever extends BroadcastReceiver {
                             hcp_cust_interests = object1.getString("hcp_cust_interests");
                             hcp_cust_map_lat = object1.getString("hcp_cust_map_lat");
                             hcp_cust_map_long = object1.getString("hcp_cust_map_long");
+                            hcp_cust_blood_group = object1.getString("hcp_cust_blood_group");
+                            hcp_cust_life_saver = object1.getString("hcp_cust_life_saver");
+                            hcp_cust_points = object1.getString("hcp_cust_points");
 
                             Logthis("hcp_cust_profile_pic",hcp_cust_profile_pic);
 
@@ -190,7 +199,9 @@ public class SmsBroadReciever extends BroadcastReceiver {
                             prefs.edit().putString("cust_map_lat",hcp_cust_map_lat).apply();
                             prefs.edit().putString("cust_map_long",hcp_cust_map_long).apply();
                             prefs.edit().putString("login","yes").apply();
-
+                            prefs.edit().putString("hcp_cust_blood_group",hcp_cust_blood_group).apply();
+                            prefs.edit().putString("hcp_cust_life_saver",hcp_cust_life_saver).apply();
+                            prefs.edit().putString("hcp_cust_points",hcp_cust_points).apply();
                             Intent i = new Intent(con,RoutingActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             con.startActivity(i);

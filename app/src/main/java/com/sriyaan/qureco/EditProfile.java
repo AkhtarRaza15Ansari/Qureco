@@ -64,7 +64,7 @@ public class EditProfile extends AppCompatActivity {
     int page = 0;
 
     String path = "",selectedImagePath;
-    String user_id,user_name,mobile_no,profile_pic,sgender,sdob,referral_code;
+    String user_id,user_name,mobile_no,profile_pic,sgender,sdob,referral_code,hcp_cust_blood_group,hcp_cust_life_saver;
 
     String fontPath = "fonts/Montserrat-Regular.ttf";
     // Loading Font Face
@@ -106,6 +106,8 @@ public class EditProfile extends AppCompatActivity {
         referral_code = prefs.getString("cust_referral_code","");
         str_lat = prefs.getString("cust_map_lat","");
         str_lon = prefs.getString("cust_map_long","");
+        hcp_cust_blood_group = prefs.getString("hcp_cust_blood_group","");
+        hcp_cust_life_saver = prefs.getString("hcp_cust_life_saver","");
 
         etName.setText(user_name);
         etMobile.setText(mobile_no);
@@ -169,6 +171,14 @@ public class EditProfile extends AppCompatActivity {
                 }
             }
         });
+        etBloodGroup.setText(hcp_cust_blood_group);
+        if(hcp_cust_life_saver.equals("0"))
+        {
+            donategroup.check(R.id.yes);
+        }
+        else{
+            donategroup.check(R.id.no);
+        }
     }
     public void validateNext()
     {
