@@ -69,7 +69,8 @@ public class url_dump {
     public static String update_profile= "hcp_customer_edit_profile.php";
     // For Getting Search List
     public static String search_by_category = "hcp_search_by_category.php";
-
+    // For Loyalty QR
+    public static String loyaltyQr = "hcp_get_hcp_id_qrcode.php";
 
     public static String jsonvalues;
     public static HttpClient httpClient;
@@ -100,8 +101,17 @@ public class url_dump {
     }
     public static String removeLastChar(String str) {
         Log.d("previous",str);
+        String str_return= "";
         Log.d("final",str.substring(0,str.length()-1));
-        return str.substring(0,str.length()-1);
+        String lastWord = str.substring(str.lastIndexOf(" ")+1);
+        if(lastWord.equals(","))
+        {
+            str_return = str.substring(0,str.length()-1);
+        }
+        else{
+            str_return = str;
+        }
+        return str_return;
     }
     public static void dismissprogress()
     {
@@ -376,6 +386,19 @@ public class url_dump {
         nameValuePairs.add(new BasicNameValuePair("gender", gender));
         nameValuePairs.add(new BasicNameValuePair("lat", "19.186418"));
         nameValuePairs.add(new BasicNameValuePair("long", "73.021341"));
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+    public static String LoyaltyQR(String user_id,String qr_code) throws Exception {
+        String url = main_header + loyaltyQr;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("qr_code", qr_code));
+        Log.d("user_id", user_id);
+        Log.d("qr_code", qr_code);
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

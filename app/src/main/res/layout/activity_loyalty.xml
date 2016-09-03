@@ -47,6 +47,7 @@
             android:textSize="18dp"
             android:textColor="@color/black"
             />
+
         <Button
             android:id="@+id/confirm"
             android:layout_width="wrap_content"

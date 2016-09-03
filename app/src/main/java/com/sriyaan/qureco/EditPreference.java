@@ -81,8 +81,8 @@ public class EditPreference extends AppCompatActivity {
         categories = prefs.getString("cust_interests","");
         user_id = prefs.getString("cust_id","");
         Log.d("categories",categories);
-        categories = removeLastChar(categories);
-        Log.d("new categories",categories);
+        //categories = removeLastChar(categories);
+        //Log.d("new categories",categories);
         cat = Arrays.asList(categories.split(","));
         for(int i=0;i<cat.size();i++)
         {
@@ -784,10 +784,11 @@ public class EditPreference extends AppCompatActivity {
                     Log.d("Code",str_Code);
                     Log.d("Mesg",str_Message);
                     Log.d("UsID",str_UserID);
-
+                    JSONObject object1 = object.getJSONObject(3);
                     if(str_Code.equals("HCPC1000"))
                     {
                         //Successfull
+                        prefs.edit().putString("cust_interests",object1.getString("hcp_cust_interests")).apply();
                         onBackPressed();
                     }
                     else if(str_Code.equals("HCPC1001"))

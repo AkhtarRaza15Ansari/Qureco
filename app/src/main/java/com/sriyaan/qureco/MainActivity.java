@@ -1385,9 +1385,9 @@ public class MainActivity extends AppCompatActivity {
 
         tvSignUp.setTypeface(tf);
         input_phone.setTypeface(tf);
+        input_phone.setHint("Mobile Number");
     }
     public void setFontRegister() {
-
         skip            .setTypeface(tf);
         donatebloodsave .setTypeface(tf);
         doyouwant       .setTypeface(tf);
@@ -1401,9 +1401,15 @@ public class MainActivity extends AppCompatActivity {
         etMobile        .setTypeface(tf);
         etReferral      .setTypeface(tf);
         etBloodGroup    .setTypeface(tf);
+
+        etName          .setHint("User name");
+        etMobile        .setHint("Mobile Number");
+        etReferral      .setHint("Referral Code");
+        etBloodGroup    .setHint("Enter Here");
+        dob             .setHint("Date of birth");
+
         yes             .setTypeface(tf);
         no              .setTypeface(tf);
-
     }
     public void setFontComplete() {
         tvselectPreference.setTypeface(tf);

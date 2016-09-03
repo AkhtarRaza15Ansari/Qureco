@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,6 +60,8 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
     Typeface tf;
     TextView search,tvLoyalty,tvDeals,tvReview,tvlifesavers,tvAlert,tvShout,tvEmergency,
             tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    DrawerLayout drawerLayout;
+    LinearLayout back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,10 +80,21 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         drawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
         drawerFragment.setDrawerListener(this);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        back = (LinearLayout) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.closeDrawer(Gravity.LEFT);
+            }
+        });
+
 
         setTitle("");
         tf = Typeface.createFromAsset(getAssets(), fontPath);

@@ -44,7 +44,7 @@
                             android:id="@+id/input_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/input_phone"
+                            android:hint=""
                             android:textColor="@color/text_color"
                             android:textSize="15dp"
                             android:inputType="phone"

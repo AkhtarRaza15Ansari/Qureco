@@ -5,13 +5,77 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.sriyaan.qureco.ReviewPage">
+
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="35dp"
+
+    <ImageView
+        android:id="@+id/qrcodescanner"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Review Page"/>
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/qrcode"
+        />
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Click on image to scan QRCode)"
+        android:textColor="@color/black"/>
+
+
+    <TextView
+        android:id="@+id/textQr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Do you want to review"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        />
+    <LinearLayout
+        android:id="@+id/showNow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/nameandaddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:layout_gravity="center"
+            android:id="@+id/promocode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Promocode"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:layout_gravity="center"
+                style="@style/ButtonTextFille"/>
+            <Button
+                android:id="@+id/no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:layout_gravity="center"
+                style="@style/ButtonTextFille"/>
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>
