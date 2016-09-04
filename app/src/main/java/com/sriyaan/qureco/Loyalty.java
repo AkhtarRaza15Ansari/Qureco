@@ -76,7 +76,8 @@ public class Loyalty extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(Loyalty.this,LoyaltyFinalPage.class);
+                startActivity(i);
             }
         });
     }

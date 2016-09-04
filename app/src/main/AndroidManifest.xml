@@ -98,7 +98,8 @@
         <activity android:name=".Notification" />
         <activity android:name=".Chat" />
         <activity android:name=".Favourite" />
-        <activity android:name=".Filters"></activity>
+        <activity android:name=".Filters" />
+        <activity android:name=".LoyaltyFinalPage"></activity>
     </application>
 
 </manifest>
