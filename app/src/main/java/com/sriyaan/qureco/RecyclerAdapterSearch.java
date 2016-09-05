@@ -11,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.sriyaan.modal.ListData;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -36,7 +38,7 @@ public class RecyclerAdapterSearch extends RecyclerView
             implements View
             .OnClickListener {
         ImageView imageView;
-        LinearLayout llcall,lldirection;
+        LinearLayout llcall,lldirection,body;
         TextView name;
         TextView followers;
         TextView address;
@@ -54,6 +56,7 @@ public class RecyclerAdapterSearch extends RecyclerView
             imageView   = (ImageView) itemView.findViewById(R.id.list_image);
             llcall      = (LinearLayout) itemView.findViewById(R.id.llcall);
             lldirection = (LinearLayout) itemView.findViewById(R.id.lldirection);
+            body        = (LinearLayout) itemView.findViewById(R.id.body);
 
             name        = (TextView)    itemView.findViewById(R.id.name);
             followers   = (TextView)    itemView.findViewById(R.id.followers);
@@ -64,7 +67,6 @@ public class RecyclerAdapterSearch extends RecyclerView
             call        = (TextView)    itemView.findViewById(R.id.call);
             direction   = (TextView)    itemView.findViewById(R.id.direction);
             offers      = (TextView)    itemView.findViewById(R.id.offers);
-
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -95,7 +97,7 @@ public class RecyclerAdapterSearch extends RecyclerView
     }
 
     @Override
-    public void onBindViewHolder(DataObjectHolder holder, final int position) {
+    public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         holder.name.setText(""+ mDataset.get(position).getServiceName());
         holder.followers.setText(""+ mDataset.get(position).getNoFollowers() + " Followers");
         holder.address.setText(""+ mDataset.get(position).getLocationName());
@@ -117,6 +119,43 @@ public class RecyclerAdapterSearch extends RecyclerView
         holder.call        .setTypeface(tf);
         holder.direction   .setTypeface(tf);
         holder.offers      .setTypeface(tf);
+
+        holder.body.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                //Toast.makeText(context, "Long item clicked"+position, Toast.LENGTH_SHORT).show();
+                if(SearchListPage.array.size()<=1)
+                {
+                    SearchListPage.array.add(""+position);
+                    SearchListPage.arrayID.add(""+mDataset.get(position).getHcpUserOid());
+                    holder.body.setBackgroundColor(context.getResources().getColor(R.color.backgroundColor));
+                }
+                else{
+                    Toast.makeText(context, "Cannot compare more than 2 items", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+        holder.body.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(SearchListPage.array.size()<0)
+                {
+                    Log.d("Coming","here");
+                }
+                else{
+                    Log.d("Coming","here 1");
+                    if(SearchListPage.array.contains(""+position))
+                    {
+                        int pos = SearchListPage.array.indexOf(""+position);
+                        SearchListPage.array.remove(pos);
+                        SearchListPage.arrayID.remove(pos);
+                        holder.body.setBackgroundColor(context.getResources().getColor(R.color.white));
+                    }
+                }
+            }
+        });
+
     }
     private void callShareIntent(String text){
         Intent shareIntent = new Intent();

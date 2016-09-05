@@ -59,6 +59,8 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     // Loading Font Face
     //
     Typeface tf;
+    static ArrayList<String> array,arrayID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +83,8 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         mTitle.setTypeface(tf);
         mTitle.setText("Search Page");
         setFont();
+        array       = new ArrayList<>();
+        arrayID     = new ArrayList<>();
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager1 = new GridLayoutManager(con, 1);
         mRecyclerView.setLayoutManager(mLayoutManager1);
@@ -146,6 +150,21 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
             public void onClick(View view) {
                 clearFilter();
                 runThis();
+            }
+        });
+        llcompare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(array.size()<0)
+                {
+
+                }
+                else{
+                    for(int i=0;i<array.size();i++)
+                    {
+                        Log.d("Messages","Item "+ arrayID.get(i));
+                    }
+                }
             }
         });
     }
