@@ -73,6 +73,8 @@ public class url_dump {
     public static String search_by_category = "hcp_search_by_category.php";
     // For Loyalty QR
     public static String loyaltyQr = "hcp_get_hcp_id_qrcode.php";
+    // For Fetching Review KPIs
+    public static String fetchReviewKPI = "hcp_get_hcp_rating_kpis.php";
 
     public static String jsonvalues;
     public static HttpClient httpClient;
@@ -412,6 +414,20 @@ public class url_dump {
         nameValuePairs.add(new BasicNameValuePair("qr_code", qr_code));
         Log.d("user_id", user_id);
         Log.d("qr_code", qr_code);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+
+    public static String getKPIs(String user_id,String hcp_id) throws Exception {
+        String url = main_header + fetchReviewKPI;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("hcp_id", hcp_id));
+        Log.d("user_id", user_id);
+        Log.d("qr_code", hcp_id);
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

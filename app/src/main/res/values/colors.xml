@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#b8141d</color>
     <color name="colorAccent">#D61821</color>
     <color name="transparent">#88ED0D0A</color>
+    <color name="completetransparent">#00000000</color>
     <color name="text_color">#536172</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
@@ -28,4 +29,6 @@
     <color name="deals">#51b8d7</color>
     <color name="review">#fec93b</color>
     <color name="lifesavers">#37bcab</color>
+    <color name="chat">#FEC601</color>
+    <color name="follow">#0B9EB2</color>
 </resources>

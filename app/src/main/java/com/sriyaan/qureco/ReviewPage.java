@@ -76,7 +76,8 @@ public class ReviewPage extends AppCompatActivity {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(ReviewPage.this,ReviewFinal.class);
+                startActivity(i);
             }
         });
     }

@@ -139,9 +139,11 @@ public class RecyclerAdapterSearch extends RecyclerView
         holder.body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(SearchListPage.array.size()<0)
+                if(SearchListPage.array.size()<=0)
                 {
                     Log.d("Coming","here");
+                    Intent i =  new Intent(context,DetailsPage.class);
+                    context.startActivity(i);
                 }
                 else{
                     Log.d("Coming","here 1");
