@@ -59,6 +59,8 @@ public class url_dump {
     public static String userregistration = "hcp_customer_registration.php";
     // To fetch userlogin
     public static String userlogin = "hcp_customer_login.php";
+    // To resend sms otp
+    public static String sms_resend = "hcp_customer_resend_otp.php";
     // For SMS Verification Registration
     public static String sms_verification = "hcp_customer_registration_confirm.php";
     // For SMS Verification Login
@@ -158,6 +160,17 @@ public class url_dump {
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("mobile", mobile));
         Log.d("mobile",mobile);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+
+    public static String OTPResend(String mobile_no) throws Exception {
+        String url = main_header + sms_resend;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("mobile_no", mobile_no));
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

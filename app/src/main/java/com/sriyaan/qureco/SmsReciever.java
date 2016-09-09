@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import static com.sriyaan.util.url_dump.Logthis;
+import static com.sriyaan.util.url_dump.OTPResend;
 import static com.sriyaan.util.url_dump.OTPSender;
 import static com.sriyaan.util.url_dump.OTPSenderLogin;
 import static com.sriyaan.util.url_dump.Toastthis;
@@ -102,6 +103,7 @@ public class SmsReciever extends AppCompatActivity {
                             if(type.equals("login"))
                             {
                                 str_mobile_login = getIntent().getStringExtra("str_mobile_login");
+                                new Resend().execute();
                             }
                             else {
 
@@ -277,6 +279,33 @@ public class SmsReciever extends AppCompatActivity {
             }
         }
     }
+
+    public class Resend extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            url_dump.startprogress("Requesting again","Please wait",SmsReciever.this,false);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                json = OTPResend(mobile);
+                Log.d("json","This is it: "+json);
+            } catch (Exception e) {
+                e.printStackTrace();
+                url_dump.dismissprogress();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            url_dump.dismissprogress();
+        }
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
