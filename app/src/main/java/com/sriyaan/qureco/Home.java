@@ -43,15 +43,15 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
     ImageView img_profile;
     SharedPreferences prefs;
     String cust_id,cust_name,cust_mobile_no,cust_profile_pic;
-    String scat1="1";
-    String scat2="2";
-    String scat3="3";
-    String scat4="4";
-    String scat5="5";
-    String scat6="6";
-    String scat7="7";
-    String scat8="8";
-    String scat9="9";
+    String scat1="1";//clinics
+    String scat2="2";//hospitals
+    String scat3="3";//pathlab
+    String scat4="4";//fitness
+    String scat5="5";//bloodbanks
+    String scat6="6";//salon
+    String scat7="7";//pharmacy
+    String scat8="8";//doctors
+    String scat9="9";//spa
     LinearLayout llloyalty,lldeals,llreview,lllife;
     LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     LinearLayout alertfamily, shoutouthelp,emergency;

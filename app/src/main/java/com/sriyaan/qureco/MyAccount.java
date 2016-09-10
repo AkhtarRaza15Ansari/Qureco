@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +19,8 @@ import com.sriyaan.util.url_dump;
 
 public class MyAccount extends AppCompatActivity {
     ImageView person;
-    TextView name,Mobile,gender,dob;
+    ImageView editPreferences,editProfile;
+    TextView name,hcp_followers,followers,hcp_review,review,hcp_points,points;
     TextView tvName,tvMobile,tvGender,tvDob;
     SharedPreferences prefs;
     String user_name,mobile_no,profile_pic,sgender,sdob;
@@ -58,64 +60,55 @@ public class MyAccount extends AppCompatActivity {
         sdob = prefs.getString("cust_dob","");
 
         name.setText(user_name);
-        Mobile.setText(mobile_no);
-        gender.setText(sgender);
-        dob.setText(sdob);
-        Picasso.with(con).load(profile_pic).placeholder(R.drawable.person).into(person);
 
+        Picasso.with(con).load(profile_pic).placeholder(R.drawable.my_profile).into(person);
+
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(con,EditProfile.class);
+                startActivity(i);
+            }
+        });
+        editPreferences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(con,EditPreference.class);
+                startActivity(i);
+            }
+        });
     }
     public void init()
     {
         toolbar = (Toolbar)     findViewById(R.id.toolbar);
         person  = (ImageView)   findViewById(R.id.person);
 
-        name    = (TextView)    findViewById(R.id.name);
-        Mobile  = (TextView)    findViewById(R.id.Mobile);
-        gender  = (TextView)    findViewById(R.id.gender);
-        dob     = (TextView)    findViewById(R.id.dob);
+        name            = (TextView)    findViewById(R.id.name);
+        hcp_followers   = (TextView) findViewById(R.id.hcp_followers);
+        followers       = (TextView) findViewById(R.id.followers);
+        hcp_review      = (TextView) findViewById(R.id.hcp_review);
+        review          = (TextView) findViewById(R.id.review);
+        hcp_points      = (TextView) findViewById(R.id.hcp_points);
+        points          = (TextView) findViewById(R.id.points);
 
-        tvName  = (TextView)    findViewById(R.id.tvName);
-        tvMobile= (TextView)    findViewById(R.id.tvMobile);
-        tvGender= (TextView)    findViewById(R.id.tvGender);
-        tvDob   = (TextView)    findViewById(R.id.tvDob);
+        editPreferences = (ImageView) findViewById(R.id.editPreference);
+        editProfile     = (ImageView) findViewById(R.id.editProfile);
 
     }
 
     public void setFonts()
     {
-        name    .setTypeface(tf);
-        Mobile  .setTypeface(tf);
-        gender  .setTypeface(tf);
-        dob     .setTypeface(tf);
-
-        tvName  .setTypeface(tf);
-        tvMobile.setTypeface(tf);
-        tvGender.setTypeface(tf);
-        tvDob   .setTypeface(tf);
+        name            .setTypeface(tf);
+        hcp_followers   .setTypeface(tf);
+        followers       .setTypeface(tf);
+        hcp_review      .setTypeface(tf);
+        review          .setTypeface(tf);
+        hcp_points      .setTypeface(tf);
+        points          .setTypeface(tf);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.editPreference) {
-            Intent i = new Intent(con,EditPreference.class);
-            startActivity(i);
-            //url_dump.Toastthis("Coming soon",con);
-            return true;
-        }
-        if (id == R.id.editProfile) {
-            Intent i = new Intent(con,EditProfile.class);
-            startActivity(i);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
     @Override
     protected void onPause() {
         super.onPause();

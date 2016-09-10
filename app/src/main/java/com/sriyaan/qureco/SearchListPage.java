@@ -3,6 +3,7 @@ package com.sriyaan.qureco;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -55,17 +56,23 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     public static String open_hours="",fees="",open="",service_type="",open_days="";
     String fontPath = "fonts/Montserrat-Regular.ttf";
     LinearLayout llclearfilter;
-    String value;
+    public static String value;
     // Loading Font Face
     //
     Typeface tf;
     static ArrayList<String> array,arrayID;
-
+    SharedPreferences prefs;
+    String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list_page);
         init();
+
+        prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
+
+
+        user_id = prefs.getString("cust_id","");
         value = getIntent().getStringExtra("value");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -234,7 +241,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
 
             try {
                 results = new ArrayList<ListData>();
-                json_response = url_dump.getSearchCategory("1",value,sort_by,open_hours,fees,open,str_loyalty,
+                json_response = url_dump.getSearchCategory(user_id,value,sort_by,open_hours,fees,open,str_loyalty,
                 service_type,open_days,strGender);
                 JSONArray array = new JSONArray(json_response);
 

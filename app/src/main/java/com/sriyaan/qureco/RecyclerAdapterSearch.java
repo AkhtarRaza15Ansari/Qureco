@@ -3,6 +3,7 @@ package com.sriyaan.qureco;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -143,6 +144,9 @@ public class RecyclerAdapterSearch extends RecyclerView
                 {
                     Log.d("Coming","here");
                     Intent i =  new Intent(context,DetailsPage.class);
+                    i.putExtra("value",SearchListPage.value);
+                    i.putExtra("hcp_id",mDataset.get(position).getHsOid());
+                    Log.d("hcp_id",mDataset.get(position).getHsOid());
                     context.startActivity(i);
                 }
                 else{
@@ -155,6 +159,27 @@ public class RecyclerAdapterSearch extends RecyclerView
                         holder.body.setBackgroundColor(context.getResources().getColor(R.color.white));
                     }
                 }
+            }
+        });
+        holder.lldirection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String geo_lat = mDataset.get(position).getGeoLat();
+                String geo_longi = mDataset.get(position).getGeoLong();
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?daddr=" + geo_lat + "," + geo_longi));
+                context.startActivity(intent);
+            }
+        });
+        holder.llcall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String contacts = mDataset.get(position).getGeoLong();
+
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+contacts));
+                context.startActivity(intent);
             }
         });
 
