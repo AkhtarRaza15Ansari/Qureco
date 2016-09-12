@@ -41,6 +41,8 @@ public class DetailsPage extends AppCompatActivity {
     Typeface tf;
     ImageView back;
     String cat_id;
+
+    LinearLayout deals,amenities,specialities,services,availability,location,about,equipments,social,writereview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,17 @@ public class DetailsPage extends AppCompatActivity {
     }
 
     public void init() {
+        deals = (LinearLayout) findViewById(R.id.deals);
+        amenities = (LinearLayout) findViewById(R.id.amenities);
+        specialities = (LinearLayout) findViewById(R.id.specialities);
+        services = (LinearLayout) findViewById(R.id.services);
+        availability = (LinearLayout) findViewById(R.id.availability);
+        location = (LinearLayout) findViewById(R.id.location);
+        about = (LinearLayout) findViewById(R.id.about);
+        equipments = (LinearLayout) findViewById(R.id.equipments);
+        social = (LinearLayout) findViewById(R.id.social);
+        writereview = (LinearLayout) findViewById(R.id.writereview);
+
         topimage = (ImageView) findViewById(R.id.topimage);
         back    = (ImageView) findViewById(R.id.back);
         tvname = (TextView) findViewById(R.id.tvname);
@@ -412,7 +425,15 @@ public class DetailsPage extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
-                tvamenities.setOnClickListener(new View.OnClickListener() {
+                tvcall.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:"+location_contacts));
+                        startActivity(intent);
+                    }
+                });
+                amenities.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
@@ -427,7 +448,7 @@ public class DetailsPage extends AppCompatActivity {
                         alertDialog.show();
                     }
                 });
-                tvspecialities.setOnClickListener(new View.OnClickListener() {
+                specialities.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
@@ -442,7 +463,7 @@ public class DetailsPage extends AppCompatActivity {
                         alertDialog.show();
                     }
                 });
-                tvservices.setOnClickListener(new View.OnClickListener() {
+                services.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
@@ -456,7 +477,7 @@ public class DetailsPage extends AppCompatActivity {
                         alertDialog.show();
                     }
                 });
-                tvlocation.setOnClickListener(new View.OnClickListener() {
+                location.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
@@ -482,7 +503,7 @@ public class DetailsPage extends AppCompatActivity {
 
                     }
                 });
-                tvabout.setOnClickListener(new View.OnClickListener() {
+                about.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
@@ -501,7 +522,7 @@ public class DetailsPage extends AppCompatActivity {
                         alertDialog.show();
                     }
                 });
-                tvequipments.setOnClickListener(new View.OnClickListener() {
+                equipments.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
@@ -516,7 +537,7 @@ public class DetailsPage extends AppCompatActivity {
                         alertDialog.show();
                     }
                 });
-                tvsocial.setOnClickListener(new View.OnClickListener() {
+                social.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
@@ -532,7 +553,7 @@ public class DetailsPage extends AppCompatActivity {
                     }
                 });
 
-                tvavailability.setOnClickListener(new View.OnClickListener() {
+                availability.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
@@ -621,18 +642,10 @@ public class DetailsPage extends AppCompatActivity {
                     }
                 });
 
-                tvdeals.setOnClickListener(new View.OnClickListener() {
+                deals.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                    }
-                });
-                tvcall.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:"+location_contacts));
-                        startActivity(intent);
                     }
                 });
 
