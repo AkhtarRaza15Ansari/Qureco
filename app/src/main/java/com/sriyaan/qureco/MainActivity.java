@@ -1248,7 +1248,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            url_dump.startprogress("Contac","Please wait",MainActivity.this,false);
+            url_dump.startprogress("Fetching Data","Please wait",MainActivity.this,false);
         }
 
         @Override
