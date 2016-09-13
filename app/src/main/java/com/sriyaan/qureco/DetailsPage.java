@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.sriyaan.util.url_dump;
@@ -42,7 +43,7 @@ public class DetailsPage extends AppCompatActivity {
     ImageView back;
     String cat_id;
 
-    LinearLayout deals,amenities,specialities,services,availability,location,about,equipments,social,writereview;
+    LinearLayout deals,amenities,specialities,services,availability,location,about,equipments,social,writereview,follow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,13 @@ public class DetailsPage extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new FollowAsync().execute();
+            }
+        });
     }
 
     public void init() {
@@ -78,6 +86,7 @@ public class DetailsPage extends AppCompatActivity {
         equipments = (LinearLayout) findViewById(R.id.equipments);
         social = (LinearLayout) findViewById(R.id.social);
         writereview = (LinearLayout) findViewById(R.id.writereview);
+        follow = (LinearLayout)     findViewById(R.id.follow);
 
         topimage = (ImageView) findViewById(R.id.topimage);
         back    = (ImageView) findViewById(R.id.back);
@@ -222,7 +231,6 @@ public class DetailsPage extends AppCompatActivity {
                                 if(cat_id.equals("1"))
                                 {
                                     //Clinics
-
                                     adoctor_name = avob.getString("doctor_name");
                                     adoctor_description = avob.getString("doctor_description");
                                     acharges = avob.getString("charges");
@@ -660,5 +668,47 @@ public class DetailsPage extends AppCompatActivity {
         valueTV.setText(message);
         valueTV.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         ((LinearLayout) layout).addView(valueTV);
+    }
+    public class FollowAsync extends AsyncTask<Void,Void,Void>
+    {
+        public String json_values;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                json_values = url_dump.sendFollow(user_id, hcp_id);
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //["HCPC1800","Success",1]
+            try{
+                JSONArray array= new JSONArray(json_values);
+                String code = array.getString(0);
+                String message = array.getString(1);
+                 if(code.equals("HCP1800"))
+                 {
+                     Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                 }
+                 else{
+                     Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                 }
+            }
+            catch(Exception e)
+            {
+
+            }
+
+        }
     }
 }

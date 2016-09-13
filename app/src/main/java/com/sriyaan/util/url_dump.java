@@ -77,6 +77,8 @@ public class url_dump {
     public static String fetchReviewKPI = "hcp_get_hcp_rating_kpis.php";
     // For Details Page
     public static String detailsPage = "hcp_get_hcp_details.php";
+    // For Send Follow Request
+    public static String sendFollow = "hcp_do_follow.php";
 
     public static String jsonvalues;
     public static HttpClient httpClient;
@@ -436,6 +438,19 @@ public class url_dump {
     }
     public static String getDetails(String user_id,String hcp_id) throws Exception {
         String url = main_header + detailsPage;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("hcp_id", hcp_id));
+        Log.d("user_id", user_id);
+        Log.d("qr_code", hcp_id);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+    public static String sendFollow(String user_id,String hcp_id) throws Exception {
+        String url = main_header + sendFollow;
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
