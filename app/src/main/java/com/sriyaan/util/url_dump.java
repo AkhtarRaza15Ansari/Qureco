@@ -79,6 +79,12 @@ public class url_dump {
     public static String detailsPage = "hcp_get_hcp_details.php";
     // For Send Follow Request
     public static String sendFollow = "hcp_do_follow.php";
+    // For Compare Two HCP
+    public static String comparingHCP = "hcp_get_compare_results.php";
+    // For HCP Review
+    public static String hcp_review = "hcp_save_hcp_rating.php";
+    // For Getting Deals
+    public static String fetch_deals = "hcp_get_deals_by_category.php";
 
     public static String jsonvalues;
     public static HttpClient httpClient;
@@ -462,4 +468,43 @@ public class url_dump {
         function2();
         return getDecode(jsonvalues);
     }
+    public static String compareTwoHCP(String user_id,String hcp_id1,String hcp_id2) throws Exception
+    {
+        String url = main_header + comparingHCP;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("hcp_id1", hcp_id1));
+        nameValuePairs.add(new BasicNameValuePair("hcp_id2", hcp_id2));
+        Log.d("user_id", user_id);
+        Log.d("hcp_id1", hcp_id1);
+        Log.d("hcp_id2", hcp_id2);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+    public static String saveRatings(String user_id,String hcp_id,String review_text,String review_id,String review_star,String promo_code) throws Exception
+    {
+        String url = main_header + hcp_review;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("hcp_id", hcp_id));
+        nameValuePairs.add(new BasicNameValuePair("review_text", review_text));
+        nameValuePairs.add(new BasicNameValuePair("review_id", review_id));
+        nameValuePairs.add(new BasicNameValuePair("review_star", review_star));
+        nameValuePairs.add(new BasicNameValuePair("promo_code", promo_code));
+        Log.d("user_id", user_id);
+        Log.d("hcp_id1", hcp_id);
+        Log.d("review_text", review_text);
+        Log.d("review_id", review_id);
+        Log.d("review_star", review_star);
+        Log.d("promo_code", promo_code);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+
 }

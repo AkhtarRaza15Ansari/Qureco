@@ -161,6 +161,7 @@ public class Loyalty extends AppCompatActivity {
                     {
                         //Successfull
                         //prefs.edit().putString("cust_interests",object1.getString("hcp_cust_interests")).apply();
+
                         hcp_id = object1.getString("hcp_id");
                         name = object1.getString("name");
                         address = object1.getString("address");
