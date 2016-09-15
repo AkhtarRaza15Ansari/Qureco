@@ -34,10 +34,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="05dp"
-                        android:layout_marginRight="05dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -45,7 +45,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:background="#5D5B5C"
+                            android:background="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="03dp"
                             android:text="Current Qureco Points"
@@ -68,10 +68,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="05dp"
-                        android:layout_marginRight="05dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -79,7 +79,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:background="#5D5B5C"
+                            android:background="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="03dp"
                             android:text="Current Bill Amount"
@@ -96,6 +96,8 @@
                             android:hint="Enter here"
                             android:layout_marginTop="05dp"
                             android:padding="03dp"
+                            android:inputType="phone"
+                            android:digits="0123456789"
                             android:textColor="@color/text_color"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -109,7 +111,7 @@
                         android:layout_marginLeft="05dp"
                         android:layout_marginRight="05dp"
                         android:layout_marginTop="10dp"
-                        android:background="@color/colorPrimary"
+                        android:background="#5D5B5C"
                         android:gravity="center"
                         android:padding="05dp"
                         android:text="Show me the next step"
@@ -127,8 +129,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="05dp"
-                            android:layout_marginRight="05dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
                             android:layout_marginTop="10dp"
                             android:orientation="vertical">
 
@@ -138,12 +140,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginBottom="05dp"
-                                android:background="#5D5B5C"
-                                android:gravity="center"
                                 android:padding="03dp"
                                 android:layout_marginTop="05dp"
                                 android:text="Make your selection"
-                                android:textColor="@color/white"
+                                android:textColor="@color/text_color"
                                 android:textSize="20dp" />
 
                             <RadioGroup
@@ -178,7 +178,7 @@
                             android:layout_marginTop="10dp"
                             android:background="@color/colorPrimary"
                             android:gravity="center"
-                            android:padding="05dp"
+                            android:padding="10dp"
                             android:text="RequestApproval"
                             android:textColor="@color/white"
                             android:textSize="20dp" />
