@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import com.sriyaan.modal.KPIData;
 import com.sriyaan.modal.ListData;
 import com.sriyaan.qureco.R;
+import com.sriyaan.qureco.ReviewFinal;
 import com.sriyaan.qureco.SearchListPage;
 
 import java.util.ArrayList;
@@ -89,6 +90,7 @@ public class RecyclerAdapterRatings extends RecyclerView
         holder.star1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ReviewFinal.review_ratings.set(position,"1");
                 holder.star1.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 holder.star2.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
                 holder.star3.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
@@ -99,6 +101,7 @@ public class RecyclerAdapterRatings extends RecyclerView
         holder.star2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ReviewFinal.review_ratings.set(position,"2");
                 holder.star1.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 holder.star2.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 holder.star3.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
@@ -109,6 +112,7 @@ public class RecyclerAdapterRatings extends RecyclerView
         holder.star3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ReviewFinal.review_ratings.set(position,"3");
                 holder.star1.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 holder.star2.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 holder.star3.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
@@ -119,6 +123,7 @@ public class RecyclerAdapterRatings extends RecyclerView
         holder.star4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ReviewFinal.review_ratings.set(position,"4");
                 holder.star1.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 holder.star2.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 holder.star3.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
@@ -129,6 +134,7 @@ public class RecyclerAdapterRatings extends RecyclerView
         holder.star5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ReviewFinal.review_ratings.set(position,"5");
                 holder.star1.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 holder.star2.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 holder.star3.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));

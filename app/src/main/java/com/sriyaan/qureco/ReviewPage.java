@@ -10,9 +10,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sriyaan.qr.QrCode;
@@ -20,6 +24,8 @@ import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import static com.sriyaan.util.url_dump.Toastthis;
 
@@ -36,7 +42,11 @@ public class ReviewPage extends AppCompatActivity {
     String cust_id,cust_name;
     Context con;
     LinearLayout showNow;
-    String hcp_id,name,address;
+    String hcp_id,name,address,location;
+    Spinner spinner;
+    ArrayList<String> array,array_hcp,array_spinner;
+    EditText etpromocode;
+    String promo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +54,7 @@ public class ReviewPage extends AppCompatActivity {
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
         con = ReviewPage.this;
 
-        cust_id = prefs.getString("cust_id","");
+        cust_id = prefs.getString("cust_id","1");
         cust_name = prefs.getString("cust_name","");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -73,13 +83,7 @@ public class ReviewPage extends AppCompatActivity {
                 startActivityForResult(i, 2);
             }
         });
-        btnYes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(ReviewPage.this,ReviewFinal.class);
-                startActivity(i);
-            }
-        });
+
     }
     @Override
     protected void onPause() {
@@ -92,7 +96,8 @@ public class ReviewPage extends AppCompatActivity {
         nameandaddress  = (TextView)    findViewById(R.id.nameandaddress);
         btnYes      = (Button)      findViewById(R.id.yes);
         showNow         = (LinearLayout)findViewById(R.id.showNow);
-
+        spinner         = (Spinner)     findViewById(R.id.spinner);
+        etpromocode     = (EditText)    findViewById(R.id.promocode);
         btnYes.setVisibility(View.GONE);
     }
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -114,6 +119,7 @@ public class ReviewPage extends AppCompatActivity {
                         new Loyalty1().execute();
                         btnYes.setVisibility(View.VISIBLE);
                         showNow.setVisibility(View.VISIBLE);
+                        spinner.setVisibility(View.VISIBLE);
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -130,6 +136,9 @@ public class ReviewPage extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            array = new ArrayList<>();
+            array_hcp = new ArrayList<>();
+            array_spinner = new ArrayList<>();
             url_dump.startprogress("Fetching Data","Please wait",con,false);
         }
 
@@ -156,18 +165,54 @@ public class ReviewPage extends AppCompatActivity {
                     str_Message = object.get(1).toString();
                     Log.d("Code",str_Code);
                     Log.d("Mesg",str_Message);
-                    JSONObject object1 = object.getJSONObject(2);
+                    JSONArray object1 = object.getJSONArray(2);
                     if(str_Code.equals("HCPC1200"))
                     {
                         //Successfull
                         //prefs.edit().putString("cust_interests",object1.getString("hcp_cust_interests")).apply();
-                        hcp_id = object1.getString("hcp_id");
-                        name = object1.getString("name");
-                        address = object1.getString("address");
-                        nameandaddress.setText("Name: "+name+" \nAddress: "+address);
+
+                        for(int i=0;i<object1.length();i++)
+                        {
+                            JSONObject intern = object1.getJSONObject(i);
+                            hcp_id = intern.getString("hcp_id");
+                            name = intern.getString("service_name");
+                            location = intern.getString("location_name");
+                            address = intern.getString("location_address");
+                            array.add("Name: "+name+" \nLocation: "+location+" \nAddress: "+address);
+                            array_hcp.add(hcp_id);
+                            array_spinner.add(name+": "+location);
+                            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                                    ReviewPage.this, android.R.layout.simple_spinner_item, array_spinner);
+                            spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+                            spinner.setAdapter(spinnerArrayAdapter);
+                            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                                    nameandaddress.setText(array.get(position));
+                                    hcp_id = array_hcp.get(position);
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                }
+                            });
+                            btnYes.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    promo = etpromocode.getText().toString();
+                                    Intent i = new Intent(ReviewPage.this,ReviewFinal.class);
+                                    i.putExtra("promo",promo);
+                                    i.putExtra("user_id",cust_id);
+                                    i.putExtra("hcp_id",hcp_id);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            });
+                        }
                         //onBackPressed();
                     }
-                    else if(str_Code.equals("HCPC1001"))
+                    else if(str_Code.equals("HCPC1201"))
                     {
                         //Some Parameters are Missing
                         Toastthis(str_Message,con);

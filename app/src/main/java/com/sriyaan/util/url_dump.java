@@ -85,6 +85,12 @@ public class url_dump {
     public static String hcp_review = "hcp_save_hcp_rating.php";
     // For Getting Deals
     public static String fetch_deals = "hcp_get_deals_by_category.php";
+    // For Total Points
+    public static String total_points = "hcp_get_customer_current_balance.php";
+    // For Get Redeem Points
+    public static String redeem_points = "hcp_get_redeem_accumulate_details.php";
+    // For Redeem Request
+    public static String redeem_request = "hcp_redeem_accumulate_request.php";
 
     public static String jsonvalues;
     public static HttpClient httpClient;
@@ -506,5 +512,54 @@ public class url_dump {
         function2();
         return getDecode(jsonvalues);
     }
-
+    public static String getTotalPoints(String user_id) throws Exception
+    {
+        String url = main_header + total_points;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        Log.d("user_id", user_id);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+    public static String RequestRedeemPoints(String user_id,String hcp_id,String price_total) throws Exception
+    {
+        String url = main_header + redeem_points;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("hcp_id", hcp_id));
+        nameValuePairs.add(new BasicNameValuePair("price_total", price_total));
+        Log.d("user_id", user_id);
+        Log.d("hcp_id", hcp_id);
+        Log.d("price_total", price_total);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+    public static String RequestRedeem(String user_id,String hcp_id,String price_total,String redeem_point,String accumulate_point,String request_option) throws Exception
+    {
+        String url = main_header + redeem_points;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("hcp_id", hcp_id));
+        nameValuePairs.add(new BasicNameValuePair("price_total", price_total));
+        nameValuePairs.add(new BasicNameValuePair("redeem_point", redeem_point));
+        nameValuePairs.add(new BasicNameValuePair("accumulate_point", accumulate_point));
+        nameValuePairs.add(new BasicNameValuePair("request_option", request_option));
+        Log.d("user_id", user_id);
+        Log.d("hcp_id", hcp_id);
+        Log.d("price_total", price_total);
+        Log.d("redeem_point", redeem_point);
+        Log.d("accumulate_point", accumulate_point);
+        Log.d("request_option", request_option);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
 }

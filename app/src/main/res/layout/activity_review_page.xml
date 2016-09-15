@@ -44,6 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical">
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/nameandaddress"
             android:layout_width="match_parent"

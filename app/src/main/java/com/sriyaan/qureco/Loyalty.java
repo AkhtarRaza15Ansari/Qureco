@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ import com.sriyaan.util.url_dump;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 import static com.sriyaan.util.url_dump.Toastthis;
 
@@ -37,7 +42,9 @@ public class Loyalty extends AppCompatActivity {
     SharedPreferences prefs;
     String cust_id,cust_name;
     Context con;
-    String hcp_id,name,address;
+    String hcp_id,name,address,location;
+    Spinner spinner;
+    ArrayList<String> array,array_hcp,array_spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +52,7 @@ public class Loyalty extends AppCompatActivity {
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
         con = Loyalty.this;
 
-        cust_id = prefs.getString("cust_id","");
+        cust_id = prefs.getString("cust_id","1");
         cust_name = prefs.getString("cust_name","");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -73,19 +80,13 @@ public class Loyalty extends AppCompatActivity {
                 startActivityForResult(i, 2);
             }
         });
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Loyalty.this,LoyaltyFinalPage.class);
-                startActivity(i);
-            }
-        });
     }
     public void init(){
         qrcodescanner   = (ImageView)   findViewById(R.id.qrcodescanner);
         textQr          = (TextView)    findViewById(R.id.textQr);
         nameandaddress  = (TextView)    findViewById(R.id.nameandaddress);
         btnConfirm      = (Button)      findViewById(R.id.confirm);
+        spinner         = (Spinner)     findViewById(R.id.spinner);
 
 
         btnConfirm.setVisibility(View.GONE);
@@ -107,8 +108,10 @@ public class Loyalty extends AppCompatActivity {
                     else {
                         textQr.setText("Hi "+cust_name+": We see you are in California");//+ message
                         //nameandaddress.setText("Name: Ansari Akhtar's GYM \nAddress: A - 103, Oasis Park, Beverly Hills California.");
-                        new Loyalty1().execute();
+
                         btnConfirm.setVisibility(View.VISIBLE);
+                        spinner.setVisibility(View.VISIBLE);
+                        new Loyalty1().execute();
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -130,6 +133,9 @@ public class Loyalty extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            array = new ArrayList<>();
+            array_hcp = new ArrayList<>();
+            array_spinner = new ArrayList<>();
             url_dump.startprogress("Fetching Data","Please wait",con,false);
         }
 
@@ -156,19 +162,53 @@ public class Loyalty extends AppCompatActivity {
                     str_Message = object.get(1).toString();
                     Log.d("Code",str_Code);
                     Log.d("Mesg",str_Message);
-                    JSONObject object1 = object.getJSONObject(2);
+                    JSONArray object1 = object.getJSONArray(2);
                     if(str_Code.equals("HCPC1200"))
                     {
                         //Successfull
                         //prefs.edit().putString("cust_interests",object1.getString("hcp_cust_interests")).apply();
 
-                        hcp_id = object1.getString("hcp_id");
-                        name = object1.getString("name");
-                        address = object1.getString("address");
-                        nameandaddress.setText("Name: "+name+" \nAddress: "+address);
+                        for(int i=0;i<object1.length();i++)
+                        {
+                            JSONObject intern = object1.getJSONObject(i);
+                            hcp_id = intern.getString("hcp_id");
+                            name = intern.getString("service_name");
+                            location = intern.getString("location_name");
+                            address = intern.getString("location_address");
+                            array.add("Name: "+name+" \nLocation: "+location+" \nAddress: "+address);
+                            array_hcp.add(hcp_id);
+                            array_spinner.add(name+": "+location);
+                            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                                    Loyalty.this, android.R.layout.simple_spinner_item, array_spinner);
+                            spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
+                            spinner.setAdapter(spinnerArrayAdapter);
+                            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                                    nameandaddress.setText(array.get(position));
+                                    hcp_id = array_hcp.get(position);
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                }
+                            });
+
+                            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent i = new Intent(Loyalty.this,LoyaltyFinalPage.class);
+                                    i.putExtra("user_id",cust_id);
+                                    i.putExtra("hcp_id",hcp_id);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            });
+                        }
                         //onBackPressed();
                     }
-                    else if(str_Code.equals("HCPC1001"))
+                    else if(str_Code.equals("HCPC1201"))
                     {
                         //Some Parameters are Missing
                         Toastthis(str_Message,con);
