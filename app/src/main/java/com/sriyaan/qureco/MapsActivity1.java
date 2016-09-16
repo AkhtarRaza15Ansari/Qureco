@@ -192,7 +192,7 @@ public class MapsActivity1 extends FragmentActivity implements OnMapReadyCallbac
     }
 
     protected synchronized void buildGoogleApiClient() {
-        Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)

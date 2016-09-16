@@ -33,6 +33,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -47,6 +48,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     FloatingActionButton fab;
     String lat = "", longt = "";
     EditText etSearch;
+    String in_lat,in_lon;
 
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
@@ -75,10 +77,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMyLocationEnabled(true);
 
         buildGoogleApiClient();
 
         mGoogleApiClient.connect();
+
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
@@ -90,6 +94,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 lat     = String.valueOf(arg0.latitude);
                 longt   = String.valueOf(arg0.longitude);
                 LatLng sydney = new LatLng(arg0.latitude, arg0.longitude);
+                mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(sydney).title("You"));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15));
             }
@@ -105,6 +110,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     if (location != null && !location.equals("")) {
                         try {
+                            mMap.clear();
                             LatLng newpoint = getLocationFromAddress(MapsActivity.this, location);
                             mMap.addMarker(new MarkerOptions().position(newpoint).title(location));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(newpoint, 15));
@@ -195,13 +201,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mGoogleApiClient);
         if (mLastLocation != null) {
             //place marker at current position
-            //mGoogleMap.clear();
+            mMap.clear();
             latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            //MarkerOptions markerOptions = new MarkerOptions();
-            //markerOptions.position(latLng);
-            //markerOptions.title("Current Position");
-            //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-            //currLocationMarker = mMap.addMarker(markerOptions);
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("Current Position");
+            mMap.addMarker(markerOptions);
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(latLng).zoom(14).build();
+
+            mMap.animateCamera(CameraUpdateFactory
+                    .newCameraPosition(cameraPosition));
+
+            Log.d("arg0", latLng.latitude + "-" + latLng.longitude);
+            lat     = String.valueOf(latLng.latitude);
+            longt   = String.valueOf(latLng.longitude);
         }
 
         mLocationRequest = new LocationRequest();
