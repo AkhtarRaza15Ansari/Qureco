@@ -31,6 +31,7 @@ public class LoyaltyFinalPage extends AppCompatActivity {
     RadioButton oneaccumulate,bothaccred;
     String json_response;
     String user_id,hcp_id;
+    String price_total,redeem_point,accumulate_point,request_option;
     String total_points,finalbill;
     TextView qurecopoints,tvqurecopoints,currentbillamount,shownext,makeyourselection,request;
     @Override
@@ -77,10 +78,9 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                 if(bill.equals(""))
                 {
                     Toast.makeText(LoyaltyFinalPage.this, "Please enter something", Toast.LENGTH_SHORT).show();
-
                 }
                 else{
-                    finalbill = bill;
+                    price_total = bill;
                     makeyourselection.setVisibility(View.VISIBLE);
                     one.setVisibility(View.VISIBLE);
                     request.setVisibility(View.VISIBLE);
@@ -89,6 +89,21 @@ public class LoyaltyFinalPage extends AppCompatActivity {
             }
         });
         new getTotalPoints().execute();
+
+        request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int redeem_option = one.getCheckedRadioButtonId();
+                if(redeem_option == oneaccumulate.getId())
+                {
+                    request_option = "0";
+                }
+                else if(redeem_option == bothaccred.getId())
+                {
+                    request_option = "1";
+                }
+            }
+        });
     }
 
     public void init(){
@@ -164,7 +179,6 @@ public class LoyaltyFinalPage extends AppCompatActivity {
     }
     public class RedeemPoints extends AsyncTask<Void,Void,Void> {
         String str_Code,str_Message;
-        String redeem_point,accumulate_point;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -174,7 +188,7 @@ public class LoyaltyFinalPage extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
 
             try {
-                json_response = url_dump.RequestRedeemPoints(user_id,hcp_id,finalbill);
+                json_response = url_dump.RequestRedeemPoints(user_id,hcp_id,price_total);
                 Log.d("response",json_response);
                 JSONArray array = new JSONArray(json_response);
                 str_Code = array.get(0).toString();
@@ -205,6 +219,30 @@ public class LoyaltyFinalPage extends AppCompatActivity {
             else{
                 Toast.makeText(LoyaltyFinalPage.this, ""+str_Message, Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+    public class SubmitAsync extends AsyncTask<Void,Void,Void>
+    {
+        String json_values;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+                json_values = url_dump.RequestRedeem(user_id,hcp_id,price_total,redeem_point,accumulate_point,request_option);
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
         }
     }
 }

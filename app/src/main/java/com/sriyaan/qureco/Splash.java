@@ -135,7 +135,7 @@ public class Splash extends AppCompatActivity {
             SplashTimer(Splash.this,Home.class);
         }
         else {
-            SplashTimer(Splash.this,Loyalty.class);
+            SplashTimer(Splash.this,MainActivity.class);
         }
     }
     @Override
