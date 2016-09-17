@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.sriyaan.modal.DetailsData;
 import com.sriyaan.modal.ListData;
+import com.sriyaan.qureco.DealsOffers;
 import com.sriyaan.qureco.DetailsPage;
 import com.sriyaan.qureco.R;
 import com.sriyaan.qureco.SearchListPage;
@@ -128,7 +130,6 @@ public class RecyclerAdapterDeals extends RecyclerView
         holder.body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
 
