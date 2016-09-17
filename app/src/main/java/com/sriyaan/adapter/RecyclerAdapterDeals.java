@@ -130,6 +130,7 @@ public class RecyclerAdapterDeals extends RecyclerView
         holder.body.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
 

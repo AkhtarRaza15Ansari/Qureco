@@ -380,12 +380,20 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
                 public void onClick(View view) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
                     LayoutInflater inflater = getLayoutInflater();
-                    View convertView = (View) inflater.inflate(R.layout.service_layout, null);
+                    View convertView = (View) inflater.inflate(R.layout.deals_layout, null);
                     alertDialog.setView(convertView);
                     TextView tv = (TextView) convertView.findViewById(R.id.text);
-                    TextView tv1 = (TextView) convertView.findViewById(R.id.textname);
-                    tv.setText("Services");
-                    //tv1.setText("\u2022 "+service_name+" - " + service_description);
+                    TextView tvName = (TextView) convertView.findViewById(R.id.Name);
+                    TextView tvLimit = (TextView) convertView.findViewById(R.id.Limit);
+                    TextView tvOfferPc = (TextView) convertView.findViewById(R.id.OfferPc);
+                    TextView tvTnC = (TextView) convertView.findViewById(R.id.TnC);
+                    TextView tvDetails = (TextView) convertView.findViewById(R.id.Details);
+                    tv.setText("Deals");
+                    tvName.setText(mDataset.get(position).getOfferCaption());
+                    tvLimit.setText("");
+                    tvOfferPc.setText(mDataset.get(position).getOfferDiscount()+" %");
+                    tvTnC.setText(mDataset.get(position).getTermsCondition());
+                    tvDetails.setText(mDataset.get(position).getDescription());
                     alertDialog.show();
                 }
             });

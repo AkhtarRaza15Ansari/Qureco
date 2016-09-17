@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -41,6 +43,7 @@ public class RecyclerAdapterSearch extends RecyclerView
         ImageView imageView;
         LinearLayout llcall,lldirection,body;
         TextView name;
+        CheckBox chkcompare;
         TextView followers;
         TextView address;
         TextView cash;
@@ -52,6 +55,8 @@ public class RecyclerAdapterSearch extends RecyclerView
 
         public DataObjectHolder(View itemView) {
             super(itemView);
+
+
             tf = Typeface.createFromAsset(context.getAssets(), fontPath);
 
             imageView   = (ImageView) itemView.findViewById(R.id.list_image);
@@ -68,6 +73,9 @@ public class RecyclerAdapterSearch extends RecyclerView
             call        = (TextView)    itemView.findViewById(R.id.call);
             direction   = (TextView)    itemView.findViewById(R.id.direction);
             offers      = (TextView)    itemView.findViewById(R.id.offers);
+
+            chkcompare  = (CheckBox)    itemView.findViewById(R.id.chkcompare);
+            chkcompare.setOnCheckedChangeListener(null);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -121,33 +129,58 @@ public class RecyclerAdapterSearch extends RecyclerView
         holder.direction   .setTypeface(tf);
         holder.offers      .setTypeface(tf);
 
-        holder.body.setOnLongClickListener(new View.OnLongClickListener() {
+
+
+        holder.chkcompare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public boolean onLongClick(View view) {
-                //Toast.makeText(context, "Long item clicked"+position, Toast.LENGTH_SHORT).show();
-                if(SearchListPage.array.size()<=1)
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
                 {
-                    SearchListPage.array.add(""+position);
-                    SearchListPage.arrayID.add(""+mDataset.get(position).getHcpUserOid());
-                    holder.body.setBackgroundColor(context.getResources().getColor(R.color.backgroundColor));
+                    if(SearchListPage.array.size()<=1)
+                    {
+                        SearchListPage.array.add(""+position);
+                        SearchListPage.arrayID.add(""+mDataset.get(position).getHcpUserOid());
+                        //holder.body.setBackgroundColor(context.getResources().getColor(R.color.backgroundColor));
+                    }
+                    else{
+                        Toast.makeText(context, "Cannot compare more than 2 items", Toast.LENGTH_SHORT).show();
+                        holder.chkcompare.setChecked(false);
+                    }
                 }
                 else{
-                    Toast.makeText(context, "Cannot compare more than 2 items", Toast.LENGTH_SHORT).show();
+                    if(SearchListPage.array.size()<=0)
+                    {
+
+                    }
+                    else{
+                        Log.d("Coming","here 1");
+                        if(SearchListPage.array.contains(""+position))
+                        {
+                            int pos = SearchListPage.array.indexOf(""+position);
+                            SearchListPage.array.remove(pos);
+                            SearchListPage.arrayID.remove(pos);
+                            //holder.body.setBackgroundColor(context.getResources().getColor(R.color.white));
+                        }
+                    }
                 }
-                return true;
+
             }
         });
-        holder.body.setOnClickListener(new View.OnClickListener() {
+
+        holder.chkcompare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(SearchListPage.array.size()<=0)
-                {
-                    Log.d("Coming","here");
-                    Intent i =  new Intent(context,DetailsPage.class);
-                    i.putExtra("value",SearchListPage.value);
-                    i.putExtra("hcp_id",mDataset.get(position).getHsOid());
-                    Log.d("hcp_id",mDataset.get(position).getHsOid());
-                    context.startActivity(i);
+                if(holder.chkcompare.isChecked()){
+                    if(SearchListPage.array.size()<=1)
+                    {
+                        SearchListPage.array.add(""+position);
+                        SearchListPage.arrayID.add(""+mDataset.get(position).getHcpUserOid());
+                        //holder.body.setBackgroundColor(context.getResources().getColor(R.color.backgroundColor));
+                    }
+                    else{
+                        Toast.makeText(context, "Cannot compare more than 2 items", Toast.LENGTH_SHORT).show();
+                        holder.chkcompare.setChecked(false);
+                    }
                 }
                 else{
                     Log.d("Coming","here 1");
@@ -156,9 +189,20 @@ public class RecyclerAdapterSearch extends RecyclerView
                         int pos = SearchListPage.array.indexOf(""+position);
                         SearchListPage.array.remove(pos);
                         SearchListPage.arrayID.remove(pos);
-                        holder.body.setBackgroundColor(context.getResources().getColor(R.color.white));
+                        //holder.body.setBackgroundColor(context.getResources().getColor(R.color.white));
                     }
                 }
+            }
+        });
+        holder.body.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Coming","here");
+                Intent i =  new Intent(context,DetailsPage.class);
+                i.putExtra("value",SearchListPage.value);
+                i.putExtra("hcp_id",mDataset.get(position).getHsOid());
+                Log.d("hcp_id",mDataset.get(position).getHsOid());
+                context.startActivity(i);
             }
         });
         holder.lldirection.setOnClickListener(new View.OnClickListener() {
