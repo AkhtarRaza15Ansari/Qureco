@@ -337,7 +337,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Doctor");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
+                    Intent i = new Intent(Home.this,SearchListPage1.class);
                     i.putExtra("value",""+scat8);
                     startActivity(i);
                 }

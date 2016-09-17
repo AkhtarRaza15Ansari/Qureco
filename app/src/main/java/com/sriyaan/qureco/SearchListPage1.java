@@ -6,21 +6,29 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.sriyaan.adapter.RecyclerAdapterSearch;
 import com.sriyaan.modal.ListData;
 import com.sriyaan.util.url_dump;
@@ -31,15 +39,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchListPage extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+public class SearchListPage1 extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+    ListView listView;
     String json_response;
     JSONArray object;
     ArrayList results;
+    MyCustomAdapter dataAdapter = null;
     private RecyclerView.LayoutManager mLayoutManager1;
     //List of type books this list will store type Book which is our data model
-    private List<ListData> data;
     LinearLayout filter;
     SwipeRefreshLayout swipeRefreshLayout;
     Context con;
@@ -70,7 +77,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
 
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
 
-
+        Toast.makeText(SearchListPage1.this, "Coming ", Toast.LENGTH_SHORT).show();
         user_id = prefs.getString("cust_id","");
         value = getIntent().getStringExtra("value");
         setSupportActionBar(toolbar);
@@ -91,9 +98,8 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         setFont();
         array       = new ArrayList<>();
         arrayID     = new ArrayList<>();
-        mRecyclerView.setHasFixedSize(true);
+
         mLayoutManager1 = new GridLayoutManager(con, 1);
-        mRecyclerView.setLayoutManager(mLayoutManager1);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable(){
              @Override
@@ -106,7 +112,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SearchListPage.this,Filters.class);
+                Intent i = new Intent(SearchListPage1.this,Filters.class);
                 startActivity(i);
             }
         });
@@ -182,7 +188,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
 
     public void init()
     {
-        con = SearchListPage.this;
+        con = SearchListPage1.this;
         toolbar             = (Toolbar)             findViewById(R.id.toolbar);
         filter              = (LinearLayout)        findViewById(R.id.llfilter);
         loyalty             = (Switch)              findViewById(R.id.loyalty);
@@ -191,7 +197,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         gendergroup         = (RadioGroup)          findViewById(R.id.gendergroup);
         male                = (RadioButton)         findViewById(R.id.male);
         female              = (RadioButton)         findViewById(R.id.female);
-        mRecyclerView       = (RecyclerView)        findViewById(R.id.my_recycler_view1);
+        listView            = (ListView)            findViewById(R.id.listview);
         swipeRefreshLayout  = (SwipeRefreshLayout)  findViewById(R.id.swiperefreshlayout);
         llclearfilter       = (LinearLayout)        findViewById(R.id.llclearfilter);
 
@@ -284,15 +290,15 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             swipeRefreshLayout.setRefreshing(false);
-            mAdapter = new RecyclerAdapterSearch(results,con);
-            mRecyclerView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
+            dataAdapter = new MyCustomAdapter(SearchListPage1.this,
+                    R.layout.list_item, results);
+            listView.setAdapter(dataAdapter);
         }
     }
     public void initSorting()
     {
         // Create custom dialog object
-        final Dialog dialog = new Dialog(SearchListPage.this);
+        final Dialog dialog = new Dialog(SearchListPage1.this);
         // Include dialog.xml file
         dialog.setContentView(R.layout.sorting_dialog);
         // Set dialog title
@@ -375,5 +381,111 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         service_type="";
         open_days="";
         llclearfilter.setVisibility(View.GONE);
+    }
+    private class MyCustomAdapter extends ArrayAdapter<ListData> {
+
+        private ArrayList<ListData> countryList;
+
+        public MyCustomAdapter(Context context, int textViewResourceId,
+                               ArrayList<ListData> countryList) {
+            super(context, textViewResourceId, countryList);
+            this.countryList = new ArrayList<ListData>();
+            this.countryList.addAll(countryList);
+        }
+
+        private class ViewHolder {
+            ImageView imageView;
+            LinearLayout llcall,lldirection,body;
+            TextView name;
+            CheckBox chkcompare;
+            TextView followers;
+            TextView address;
+            TextView cash;
+            TextView likes;
+            TextView distance;
+            TextView call;
+            TextView direction;
+            TextView offers;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            ViewHolder holder = null;
+            Log.v("ConvertView", String.valueOf(position));
+
+            if (convertView == null) {
+                LayoutInflater vi = (LayoutInflater)getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = vi.inflate(R.layout.list_item, null);
+
+                holder = new ViewHolder();
+                tf = Typeface.createFromAsset(getAssets(), fontPath);
+
+                holder.imageView   = (ImageView)    convertView.findViewById(R.id.list_image);
+                holder.llcall      = (LinearLayout) convertView.findViewById(R.id.llcall);
+                holder.lldirection = (LinearLayout) convertView.findViewById(R.id.lldirection);
+                holder.body        = (LinearLayout) convertView.findViewById(R.id.body);
+
+                holder.name        = (TextView)    convertView.findViewById(R.id.name);
+                holder.followers   = (TextView)    convertView.findViewById(R.id.followers);
+                holder.address     = (TextView)    convertView.findViewById(R.id.address);
+                holder.cash        = (TextView)    convertView.findViewById(R.id.cash);
+                holder.likes       = (TextView)    convertView.findViewById(R.id.likes);
+                holder.distance    = (TextView)    convertView.findViewById(R.id.distance);
+                holder.call        = (TextView)    convertView.findViewById(R.id.call);
+                holder.direction   = (TextView)    convertView.findViewById(R.id.direction);
+                holder.offers      = (TextView)    convertView.findViewById(R.id.offers);
+
+                holder.chkcompare  = (CheckBox)    convertView.findViewById(R.id.chkcompare);
+                convertView.setTag(holder);
+
+                holder.chkcompare.setOnClickListener( new View.OnClickListener() {
+                    public void onClick(View v) {
+                        CheckBox cb = (CheckBox) v ;
+                        ListData country = (ListData) cb.getTag();
+                        /*Toast.makeText(getApplicationContext(),
+                                "Clicked on Checkbox: " + cb.getText() +
+                                        " is " + cb.isChecked(),
+                                Toast.LENGTH_LONG).show();*/
+                        country.setIsChecked(cb.isChecked());
+                    }
+                });
+            }
+            else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            ListData data = countryList.get(position);
+
+            holder.name.setText(""+ data.getServiceName());
+            holder.followers.setText(""+ data.getNoFollowers() + " Followers");
+            holder.address.setText(""+ data.getLocationName());
+            holder.cash.setText(""+ data.getCharges());
+            holder.likes.setText(""+ data.getLikes() +" Likes");
+            String dist = String.format("%.2f", Double.valueOf(data.getDistance()));
+            holder.distance.setText(""+ dist + " Km");
+
+            if(!data.getPhotoPath().equals(""))
+            {
+                Picasso.with(SearchListPage1.this).load(data.getPhotoPath()).placeholder(R.drawable.hosp).into(holder.imageView);
+            }
+            holder.name        .setTypeface(tf);
+            holder.followers   .setTypeface(tf);
+            holder.address     .setTypeface(tf);
+            holder.cash        .setTypeface(tf);
+            holder.likes       .setTypeface(tf);
+            holder.distance    .setTypeface(tf);
+            holder.call        .setTypeface(tf);
+            holder.direction   .setTypeface(tf);
+            holder.offers      .setTypeface(tf);
+
+            holder.chkcompare.setChecked(data.getIsChecked());
+            holder.name.setTag(data);
+
+            return convertView;
+
+        }
+
     }
 }

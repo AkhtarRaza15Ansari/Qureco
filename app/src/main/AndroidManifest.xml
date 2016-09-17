@@ -85,6 +85,7 @@
         <activity android:name=".TermsConditionPage" />
         <activity android:name=".ContactUs" />
         <activity android:name=".SearchListPage" />
+        <activity android:name=".SearchListPage1" />
         <activity android:name=".LifeSavers" />
         <activity android:name=".ReviewPage" />
         <activity android:name=".DealsOffers" />
