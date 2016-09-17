@@ -1,4 +1,4 @@
-package com.sriyaan.qureco;
+package com.sriyaan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,10 +16,10 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.sriyaan.modal.ListData;
+import com.sriyaan.qureco.DetailsPage;
+import com.sriyaan.qureco.R;
+import com.sriyaan.qureco.SearchListPage;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

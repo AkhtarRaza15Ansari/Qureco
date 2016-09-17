@@ -140,6 +140,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Home.this,DealsOffers.class);
+                i.putExtra("value","1");
                 startActivity(i);
             }
         });

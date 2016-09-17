@@ -102,6 +102,7 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                 {
                     request_option = "1";
                 }
+                new SubmitAsync().execute();
             }
         });
     }
@@ -219,6 +220,8 @@ public class LoyaltyFinalPage extends AppCompatActivity {
             else{
                 Toast.makeText(LoyaltyFinalPage.this, ""+str_Message, Toast.LENGTH_SHORT).show();
             }
+            oneaccumulate.setChecked(true);
+            etbillamount.setEnabled(false);
         }
     }
     public class SubmitAsync extends AsyncTask<Void,Void,Void>
@@ -243,6 +246,15 @@ public class LoyaltyFinalPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            try {
+                JSONArray array = new JSONArray(json_values);
+                String code  =  array.getString(0);
+                String message = array.getString(1);
+
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 }

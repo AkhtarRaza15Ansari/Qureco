@@ -14,21 +14,19 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.sriyaan.adapter.RecyclerAdapterSearch;
 import com.sriyaan.modal.ListData;
 import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +58,8 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     // Loading Font Face
     //
     Typeface tf;
-    static ArrayList<String> array,arrayID;
+    public static ArrayList<String> array;
+    public static ArrayList<String> arrayID;
     SharedPreferences prefs;
     String user_id;
     @Override

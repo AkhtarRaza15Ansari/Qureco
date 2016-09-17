@@ -654,6 +654,9 @@ public class DetailsPage extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
+                        Intent i = new Intent(DetailsPage.this,DealsOffers.class);
+                        i.putExtra("value",cat_id);
+                        startActivity(i);
                     }
                 });
 
