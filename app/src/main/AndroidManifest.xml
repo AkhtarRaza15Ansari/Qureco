@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -98,7 +97,8 @@
         <activity android:name=".Filters" />
         <activity android:name=".LoyaltyFinalPage" />
         <activity android:name=".DetailsPage" />
-        <activity android:name=".ReviewFinal"></activity>
+        <activity android:name=".ReviewFinal" />
+        <activity android:name=".CompareScreen"></activity>
     </application>
 
 </manifest>

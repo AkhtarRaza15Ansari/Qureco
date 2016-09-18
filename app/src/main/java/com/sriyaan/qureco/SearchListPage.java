@@ -20,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sriyaan.adapter.RecyclerAdapterSearch;
 import com.sriyaan.modal.ListData;
@@ -161,15 +162,23 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         llcompare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(array.size()<0)
+                if(array.size()<1)
                 {
-
+                    Toast.makeText(SearchListPage.this, "Please select two HCP to compaare", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     for(int i=0;i<array.size();i++)
                     {
                         Log.d("Messages","Item "+ arrayID.get(i));
                     }
+                    String hcp_id1 = arrayID.get(0);
+                    String hcp_id2 = arrayID.get(1);
+                    Intent i = new Intent(SearchListPage.this,CompareScreen.class);
+                    i.putExtra("hcp_id1",hcp_id1);
+                    i.putExtra("hcp_id2",hcp_id2);
+                    i.putExtra("value",value);
+                    startActivity(i);
+
                 }
             }
         });

@@ -41,6 +41,7 @@ public class RecyclerAdapterSearch extends RecyclerView
             implements View
             .OnClickListener {
         ImageView imageView;
+        ImageView one,two,three,four,five;
         LinearLayout llcall,lldirection,body;
         TextView name;
         CheckBox chkcompare;
@@ -59,7 +60,14 @@ public class RecyclerAdapterSearch extends RecyclerView
 
             tf = Typeface.createFromAsset(context.getAssets(), fontPath);
 
+            one         = (ImageView) itemView.findViewById(R.id.one);
+            two         = (ImageView) itemView.findViewById(R.id.two);
+            three       = (ImageView) itemView.findViewById(R.id.three);
+            four        = (ImageView) itemView.findViewById(R.id.four);
+            five        = (ImageView) itemView.findViewById(R.id.five);
+
             imageView   = (ImageView) itemView.findViewById(R.id.list_image);
+
             llcall      = (LinearLayout) itemView.findViewById(R.id.llcall);
             lldirection = (LinearLayout) itemView.findViewById(R.id.lldirection);
             body        = (LinearLayout) itemView.findViewById(R.id.body);
@@ -75,7 +83,6 @@ public class RecyclerAdapterSearch extends RecyclerView
             offers      = (TextView)    itemView.findViewById(R.id.offers);
 
             chkcompare  = (CheckBox)    itemView.findViewById(R.id.chkcompare);
-            chkcompare.setOnCheckedChangeListener(null);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -129,9 +136,58 @@ public class RecyclerAdapterSearch extends RecyclerView
         holder.direction   .setTypeface(tf);
         holder.offers      .setTypeface(tf);
 
+        if(mDataset.get(position).getIsChecked())
+        {
+            holder.chkcompare.setChecked(true);
+        }
+        else{
+            holder.chkcompare.setChecked(false);
+        }
 
+        String str_rating = mDataset.get(position).getFinalRating();
 
-        holder.chkcompare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        if(str_rating.equals("1"))
+        {
+            holder.one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.two.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+            holder.three.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+            holder.four.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+            holder.five.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+        }
+        else if(str_rating.equals("2"))
+        {
+            holder.one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.two.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.three.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+            holder.four.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+            holder.five.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+        }
+        else if(str_rating.equals("3"))
+        {
+            holder.one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.two.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.three.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.four.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+            holder.five.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+        }
+        else if(str_rating.equals("4"))
+        {
+            holder.one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.two.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.three.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.four.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.five.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+        }
+        else if(str_rating.equals("5"))
+        {
+            holder.one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.two.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.three.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.four.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+            holder.five.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+        }
+
+        /*holder.chkcompare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b)
@@ -166,11 +222,11 @@ public class RecyclerAdapterSearch extends RecyclerView
 
             }
         });
-
+*/
         holder.chkcompare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(holder.chkcompare.isChecked()){
+                /*if(holder.chkcompare.isChecked()){
                     if(SearchListPage.array.size()<=1)
                     {
                         SearchListPage.array.add(""+position);
@@ -184,6 +240,29 @@ public class RecyclerAdapterSearch extends RecyclerView
                 }
                 else{
                     Log.d("Coming","here 1");
+                    if(SearchListPage.array.contains(""+position))
+                    {
+                        int pos = SearchListPage.array.indexOf(""+position);
+                        SearchListPage.array.remove(pos);
+                        SearchListPage.arrayID.remove(pos);
+                        //holder.body.setBackgroundColor(context.getResources().getColor(R.color.white));
+                    }
+                }*/
+                if(holder.chkcompare.isChecked()) {
+                    if(SearchListPage.array.size()<=1)
+                    {
+                        mDataset.get(position).setIsChecked(true);
+                        SearchListPage.array.add(""+position);
+                        SearchListPage.arrayID.add(""+mDataset.get(position).getHsOid());
+                        //holder.body.setBackgroundColor(context.getResources().getColor(R.color.backgroundColor));
+                    }
+                    else{
+                        Toast.makeText(context, "Cannot compare more than 2 items", Toast.LENGTH_SHORT).show();
+                        holder.chkcompare.setChecked(false);
+                    }
+                }
+                else{
+                    mDataset.get(position).setIsChecked(false);
                     if(SearchListPage.array.contains(""+position))
                     {
                         int pos = SearchListPage.array.indexOf(""+position);

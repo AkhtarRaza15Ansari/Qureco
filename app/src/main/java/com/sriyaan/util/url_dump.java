@@ -497,6 +497,8 @@ public class url_dump {
         nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
         nameValuePairs.add(new BasicNameValuePair("hcp_id1", hcp_id1));
         nameValuePairs.add(new BasicNameValuePair("hcp_id2", hcp_id2));
+        nameValuePairs.add(new BasicNameValuePair("lat", "19.186418"));
+        nameValuePairs.add(new BasicNameValuePair("long", "73.021341"));
         Log.d("user_id", user_id);
         Log.d("hcp_id1", hcp_id1);
         Log.d("hcp_id2", hcp_id2);
