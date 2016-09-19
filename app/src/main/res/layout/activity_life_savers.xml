@@ -7,11 +7,16 @@
     tools:context="com.sriyaan.qureco.LifeSavers">
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="35dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Life Savers Here"/>
+        android:id="@+id/linear"
+        android:orientation="vertical"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>
