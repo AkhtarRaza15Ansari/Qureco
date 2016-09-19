@@ -104,6 +104,8 @@
                                 android:textSize="15dp"
                                 android:enabled="false"
                                 android:typeface="serif"
+                                android:digits="0123456789"
+                                android:maxLength="10"
                                 android:textColor="@color/text_color" />
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>

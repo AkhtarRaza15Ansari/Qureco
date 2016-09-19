@@ -1075,7 +1075,7 @@ public class MainActivity extends AppCompatActivity {
         {
             url_dump.Toastthis("Please enter name to proceed",con);
         }
-        else if(strMobile.equals(""))
+        else if(strMobile.equals("") || (strMobile.length()<10))
         {
             url_dump.Toastthis("Please enter mobile number to proceed",con);
         }
@@ -1093,10 +1093,7 @@ public class MainActivity extends AppCompatActivity {
         strInterest = "";
         strInterest = getInterest();
         //Toast.makeText(MainActivity.this, ""+getInterest(), Toast.LENGTH_SHORT).show();
-        if(path.equals("")){
-            url_dump.Toastthis("Please select your profile pic",con);
-        }
-        else if(strInterest.equals("Please select one interest to proceed"))
+        if(strInterest.equals("Please select one interest to proceed"))
         {
             url_dump.Toastthis(strInterest,con);
         }

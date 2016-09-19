@@ -345,7 +345,7 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
         @Override
         public void onBindViewHolder(final DataObjectHolder holder, final int position) {
             holder.name.setText("" + mDataset.get(position).getOfferCaption());
-            holder.validity.setText("Validity \n" + mDataset.get(position).getFromDate() + " to " + mDataset.get(position).getToDate());
+            holder.validity.setText("Expires on: " + mDataset.get(position).getToDate());
             holder.description.setText("" + mDataset.get(position).getLocationName());
             holder.cash.setText("" + mDataset.get(position).getOfferFlat());
             holder.likes.setText("" + mDataset.get(position).getLikes() + " Likes");

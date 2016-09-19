@@ -80,7 +80,7 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                     Toast.makeText(LoyaltyFinalPage.this, "Please enter something", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    price_total = bill;
+                    finalbill = bill;
                     makeyourselection.setVisibility(View.VISIBLE);
                     one.setVisibility(View.VISIBLE);
                     request.setVisibility(View.VISIBLE);
