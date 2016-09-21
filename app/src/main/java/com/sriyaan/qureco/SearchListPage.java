@@ -2,11 +2,14 @@ package com.sriyaan.qureco;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -22,6 +25,14 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.sriyaan.adapter.RecyclerAdapterSearch;
 import com.sriyaan.modal.ListData;
 import com.sriyaan.util.url_dump;
@@ -32,12 +43,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchListPage extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+public class SearchListPage extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     String json_response;
     JSONArray object;
+    String lat = "", longt = "";
     ArrayList results;
+    LatLng latLng;
     private RecyclerView.LayoutManager mLayoutManager1;
     //List of type books this list will store type Book which is our data model
     private List<ListData> data;
@@ -63,12 +76,15 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     public static ArrayList<String> arrayID;
     SharedPreferences prefs;
     String user_id;
+    GoogleApiClient mGoogleApiClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list_page);
         init();
+        buildGoogleApiClient();
 
+        mGoogleApiClient.connect();
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
 
 
@@ -96,13 +112,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         mLayoutManager1 = new GridLayoutManager(con, 1);
         mRecyclerView.setLayoutManager(mLayoutManager1);
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.post(new Runnable(){
-             @Override
-             public void run(){
-                 runThis();
-                 }
-             }
-        );
+
 
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,6 +248,11 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         new Type().execute();
     }
 
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
     public class Type extends AsyncTask<Void,Void,Void> {
         @Override
         protected void onPreExecute() {
@@ -250,7 +265,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
             try {
                 results = new ArrayList<ListData>();
                 json_response = url_dump.getSearchCategory(user_id,value,sort_by,open_hours,fees,open,str_loyalty,
-                service_type,open_days,strGender);
+                service_type,open_days,strGender,lat,longt);
                 JSONArray array = new JSONArray(json_response);
 
                 object = array.getJSONArray(2);
@@ -265,6 +280,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                     String hcp_cat_oid = object1.getString("hcp_cat_oid");
                     String service_name = object1.getString("service_name");
                     String location_name = object1.getString("location_name");
+                    String location_contacts = object1.getString("location_contacts");
                     String city = object1.getString("city");
                     String state = object1.getString("state");
                     String geo_lat = object1.getString("geo_lat");
@@ -278,7 +294,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                     ListData data = new ListData(distance,hs_oid,hl_oid,hcp_user_oid,hcp_cat_oid,
                             service_name,location_name,city,state,geo_lat,
                             geo_long,photo_path,charges,final_rating,
-                            no_of_followers,no_of_likes,false);
+                            no_of_followers,no_of_likes,location_contacts,false);
                     results.add(i, data);
                 }
             } catch (Exception ex) {
@@ -384,5 +400,75 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         service_type="";
         open_days="";
         llclearfilter.setVisibility(View.GONE);
+    }
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        clearFilter();
+    }
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        clearFilter();
+    }
+    protected synchronized void buildGoogleApiClient() {
+        //Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+    @Override
+    public void onConnected(Bundle bundle) {
+        //Toast.makeText(this,"onConnected",Toast.LENGTH_SHORT).show();
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            //place marker at current position
+            latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("Current Position");
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(latLng).zoom(14).build();
+
+            Log.d("arg0", latLng.latitude + "-" + latLng.longitude);
+            lat     = String.valueOf(latLng.latitude);
+            longt   = String.valueOf(latLng.longitude);
+            swipeRefreshLayout.post(new Runnable(){
+                                        @Override
+                                        public void run(){
+                                            runThis();
+                                        }
+                                    }
+            );
+        }
+        else{
+            new AlertDialog.Builder(con)
+                    .setTitle("Location Disabled")
+                    .setMessage("Please switch on your location to proceed")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                            onBackPressed();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }

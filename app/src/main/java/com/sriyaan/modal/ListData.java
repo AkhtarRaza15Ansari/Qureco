@@ -22,12 +22,13 @@ public class ListData {
     public String final_rating;
     public String no_of_followers;
     public String no_of_likes;
+    public String mobile_no;
     public boolean ischecked;
 
     public ListData(String distance,String hs_oid,String hl_oid,String hcp_user_oid,String hcp_cat_oid,
                     String service_name,String location_name,String city,String state,String geo_lat,
                     String geo_long,String photo_path,String charges,String final_rating,
-                    String no_of_followers,String no_of_likes,boolean ischecked)
+                    String no_of_followers,String no_of_likes,String mobile_no,boolean ischecked)
     {
         this.distance = distance;
         this.hs_oid = hs_oid;
@@ -45,6 +46,7 @@ public class ListData {
         this.final_rating = final_rating;
         this.no_of_followers = no_of_followers;
         this.no_of_likes = no_of_likes;
+        this.mobile_no = mobile_no;
         this.ischecked = ischecked;
     }
     public String getDistance(){
@@ -157,6 +159,13 @@ public class ListData {
     }
     public void setNoLikes(String no_of_likes){
         this.no_of_likes = no_of_likes;
+    }
+
+    public String getMobileNo(){
+        return mobile_no;
+    }
+    public void setMobileNo(String mobile_no){
+        this.mobile_no= mobile_no;
     }
 
     public boolean getIsChecked(){

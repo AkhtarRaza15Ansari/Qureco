@@ -1,16 +1,27 @@
 package com.sriyaan.qureco;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.location.Location;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 import com.sriyaan.modal.DetailsData;
 import com.sriyaan.util.url_dump;
@@ -20,7 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class CompareScreen extends AppCompatActivity {
+public class CompareScreen extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     TextView text1,text2,headPrice,price1,price2,headAmenities,list1,list2,headDistance,distance1,distance2
             ,headReview,headPoints,points1,points2;
@@ -30,6 +41,12 @@ public class CompareScreen extends AppCompatActivity {
     String user_id,hcp_id1,hcp_id2;
     Toolbar toolbar;
     JSONArray array;
+
+
+    GoogleApiClient mGoogleApiClient;
+    String lat = "", longt = "";
+    LatLng latLng;
+
     String name1,dis1,ratings1,refer_friend_points1,ams1,charges1;
     String name2,dis2,ratings2,refer_friend_points2,ams2,charges2;
 
@@ -50,6 +67,11 @@ public class CompareScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compare_screen);
         init();
+
+        buildGoogleApiClient();
+
+        mGoogleApiClient.connect();
+
         con = CompareScreen.this;
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
 
@@ -123,7 +145,6 @@ public class CompareScreen extends AppCompatActivity {
 
         setFonts();
 
-        new Compare().execute();
     }
 
 
@@ -193,7 +214,7 @@ public class CompareScreen extends AppCompatActivity {
 
             try {
 
-                json_response = url_dump.compareTwoHCP(user_id,hcp_id1,hcp_id2);
+                json_response = url_dump.compareTwoHCP(user_id,hcp_id1,hcp_id2,lat,longt);
                 JSONArray jsonArray = new JSONArray(json_response);
 
                 array = jsonArray.getJSONArray(2);
@@ -303,6 +324,63 @@ public class CompareScreen extends AppCompatActivity {
         distance2.setText(dist2+" Kms");
         points1.setText(refer_friend_points1);
         points2.setText(refer_friend_points2);
+    }
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+    protected synchronized void buildGoogleApiClient() {
+        //Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+    @Override
+    public void onConnected(Bundle bundle) {
+        //Toast.makeText(this,"onConnected",Toast.LENGTH_SHORT).show();
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            //place marker at current position
+            latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("Current Position");
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(latLng).zoom(14).build();
+
+            Log.d("arg0", latLng.latitude + "-" + latLng.longitude);
+            lat     = String.valueOf(latLng.latitude);
+            longt   = String.valueOf(latLng.longitude);
+
+            new Compare().execute();
+        }
+        else{
+            new AlertDialog.Builder(con)
+                    .setTitle("Location Disabled")
+                    .setMessage("Please switch on your location to proceed")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                            onBackPressed();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }
 

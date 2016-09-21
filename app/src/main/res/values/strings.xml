@@ -2,7 +2,7 @@
     <string name="app_name">Qureco</string>
     <string-array name="nav_drawer_labels">
         <item>My Accounts</item>
-        <item>Settings</item>
+        <item>Share the app</item>
         <item>About Us</item>
         <item>Rate Us</item>
         <item>Feedback</item>

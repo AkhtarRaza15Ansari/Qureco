@@ -60,9 +60,13 @@ public class MyAccount extends AppCompatActivity {
         sdob = prefs.getString("cust_dob","");
 
         name.setText(user_name);
-
-        Picasso.with(con).load(profile_pic).placeholder(R.drawable.my_profile).into(person);
-
+        try {
+            Picasso.with(con).load(profile_pic).placeholder(R.drawable.my_profile).into(person);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override

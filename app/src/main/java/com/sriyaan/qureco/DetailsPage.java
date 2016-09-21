@@ -42,7 +42,8 @@ public class DetailsPage extends AppCompatActivity {
     Typeface tf;
     ImageView back;
     String cat_id;
-
+    TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     LinearLayout deals,amenities,specialities,services,availability,location,about,equipments,social,writereview,follow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,44 @@ public class DetailsPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new FollowAsync().execute();
+            }
+        });
+
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DetailsPage.this,Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DetailsPage.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DetailsPage.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DetailsPage.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DetailsPage.this,MyAccount.class);
+                startActivity(i);
             }
         });
     }
@@ -110,6 +149,17 @@ public class DetailsPage extends AppCompatActivity {
         tvequipments = (TextView) findViewById(R.id.tvequipments);
         tvnavigate = (TextView) findViewById(R.id.navigate);
         tvsocial    = (TextView) findViewById(R.id.tvsocial);
+
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
     }
 
     public void setFonts() {
@@ -131,6 +181,11 @@ public class DetailsPage extends AppCompatActivity {
         tvabout.setTypeface(tf);
         tvequipments.setTypeface(tf);
         tvsocial.setTypeface(tf);
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);;
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
     }
 
     public class AsyncClass extends AsyncTask<Void, Void, Void> {

@@ -91,6 +91,8 @@ public class url_dump {
     public static String redeem_points = "hcp_get_redeem_accumulate_details.php";
     // For Redeem Request
     public static String redeem_request = "hcp_redeem_accumulate_request.php";
+    // For LifeSavers List
+    public static String lifesaver_list = "hcp_get_lifesaver_list.php";
 
     public static String jsonvalues;
     public static HttpClient httpClient;
@@ -268,7 +270,7 @@ public class url_dump {
             HttpPost post = new HttpPost(urlString);
 
             MultipartEntity reqEntity = new MultipartEntity();
-            if(profile_pic!=null)
+            if(!profile_pic.equals(""))
             {
                 File fmain = new File(profile_pic);
                 FileBody binmain = new FileBody(fmain);
@@ -400,7 +402,7 @@ public class url_dump {
     }
     public static String getSearchCategory(String user_id,String cat_id,String sort_by,
                     String open_hours,String fees,String open_now,String loyalty, String service_type,
-                    String open_days,String gender) throws Exception {
+                    String open_days,String gender,String lat,String longt) throws Exception {
         String url = main_header + search_by_category;
         function1(url);
         // add your data
@@ -415,8 +417,8 @@ public class url_dump {
         nameValuePairs.add(new BasicNameValuePair("service_type", service_type));
         nameValuePairs.add(new BasicNameValuePair("open_days", open_days));
         nameValuePairs.add(new BasicNameValuePair("gender", gender));
-        nameValuePairs.add(new BasicNameValuePair("lat", "19.186418"));
-        nameValuePairs.add(new BasicNameValuePair("long", "73.021341"));
+        nameValuePairs.add(new BasicNameValuePair("lat", lat));
+        nameValuePairs.add(new BasicNameValuePair("long", longt));
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);
@@ -488,7 +490,7 @@ public class url_dump {
         function2();
         return getDecode(jsonvalues);
     }
-    public static String compareTwoHCP(String user_id,String hcp_id1,String hcp_id2) throws Exception
+    public static String compareTwoHCP(String user_id,String hcp_id1,String hcp_id2,String lat,String longt) throws Exception
     {
         String url = main_header + comparingHCP;
         function1(url);
@@ -497,8 +499,8 @@ public class url_dump {
         nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
         nameValuePairs.add(new BasicNameValuePair("hcp_id1", hcp_id1));
         nameValuePairs.add(new BasicNameValuePair("hcp_id2", hcp_id2));
-        nameValuePairs.add(new BasicNameValuePair("lat", "19.186418"));
-        nameValuePairs.add(new BasicNameValuePair("long", "73.021341"));
+        nameValuePairs.add(new BasicNameValuePair("lat", lat));
+        nameValuePairs.add(new BasicNameValuePair("long", longt));
         Log.d("user_id", user_id);
         Log.d("hcp_id1", hcp_id1);
         Log.d("hcp_id2", hcp_id2);
@@ -558,7 +560,7 @@ public class url_dump {
     }
     public static String RequestRedeem(String user_id,String hcp_id,String price_total,String redeem_point,String accumulate_point,String request_option) throws Exception
     {
-        String url = main_header + redeem_points;
+        String url = main_header + redeem_request;
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
@@ -574,6 +576,23 @@ public class url_dump {
         Log.d("redeem_point", redeem_point);
         Log.d("accumulate_point", accumulate_point);
         Log.d("request_option", request_option);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+
+    public static String getLifeSaverList(String user_id,String lat,String longt) throws Exception
+    {
+        String url = main_header + lifesaver_list  ;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("lat", lat));
+        nameValuePairs.add(new BasicNameValuePair("long", longt));
+        Log.d("user_id", user_id);
+        Log.d("lat", lat);
+        Log.d("long", longt);
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

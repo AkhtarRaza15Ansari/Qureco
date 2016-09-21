@@ -1,7 +1,12 @@
 package com.sriyaan.qureco;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.location.Location;
+import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,34 +14,50 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.sriyaan.adapter.DividerItemDecoration;
 import com.sriyaan.adapter.ListAdapter;
+import com.sriyaan.adapter.RecyclerAdapterSearch;
 import com.sriyaan.adapter.RecyclerTouchListener;
 import com.sriyaan.modal.DataObject;
+import com.sriyaan.modal.ListData;
 import com.sriyaan.util.url_dump;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LifeSavers extends AppCompatActivity {
+public class LifeSavers extends AppCompatActivity implements  GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     String fontPath = "fonts/Montserrat-Regular.ttf";
     // Loading Font Face
     Typeface tf;
-
-
+    LatLng latLng;
+    String lat = "", longt = "";
     Context con;
     private List<DataObject> movieList = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private ListAdapter mAdapter;
+    SharedPreferences prefs;
+    String user_id;
+    GoogleApiClient mGoogleApiClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_life_savers);
+        con = LifeSavers.this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -54,6 +75,13 @@ public class LifeSavers extends AppCompatActivity {
         mTitle.setTypeface(tf);
         mTitle.setText("Life Savers");
 
+        prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
+        user_id = prefs.getString("cust_id","");
+
+        buildGoogleApiClient();
+
+        mGoogleApiClient.connect();
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         mAdapter = new ListAdapter(movieList,con);
@@ -64,21 +92,6 @@ public class LifeSavers extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                DataObject movie = movieList.get(position);
-                Toast.makeText(getApplicationContext(), movie.getName() + " is selected!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
-
-        prepareMovieData();
         
     }
     @Override
@@ -86,45 +99,117 @@ public class LifeSavers extends AppCompatActivity {
         super.onPause();
         url_dump.deleteCache(getApplicationContext());
     }
-    private void prepareMovieData() {
 
-        DataObject movie = new DataObject("A +ve","Jupiter Hospital");
-            movieList.add(movie);
 
-            movie = new DataObject("AB +ve", "Criticare Hospital");
-            movieList.add(movie);
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
 
-            movie = new DataObject("O-ve", "HealthCare Hospital");
-            movieList.add(movie);
+    }
+    protected synchronized void buildGoogleApiClient() {
+        //Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+    @Override
+    public void onConnected(Bundle bundle) {
+        //Toast.makeText(this,"onConnected",Toast.LENGTH_SHORT).show();
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            //place marker at current position
+            latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("Current Position");
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(latLng).zoom(14).build();
 
-            movie = new DataObject("AB +ve", "Vedant Hospital");
-            movieList.add(movie);
+            Log.d("arg0", latLng.latitude + "-" + latLng.longitude);
+            lat     = String.valueOf(latLng.latitude);
+            longt   = String.valueOf(latLng.longitude);
 
-            movie = new DataObject("A +ve","Jupiter Hospital");
-            movieList.add(movie);
+            new Type().execute();
+        }
+        else{
+            new AlertDialog.Builder(con)
+                    .setTitle("Location Disabled")
+                    .setMessage("Please switch on your location to proceed")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //
 
-            movie = new DataObject("AB +ve", "Criticare Hospital");
-            movieList.add(movie);
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                            onBackPressed();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+    }
 
-            movie = new DataObject("O-ve", "HealthCare Hospital");
-            movieList.add(movie);
+    @Override
+    public void onConnectionSuspended(int i) {
 
-            movie = new DataObject("AB +ve", "Vedant Hospital");
-            movieList.add(movie);
+    }
 
-            movie = new DataObject("O-ve", "HealthCare Hospital");
-            movieList.add(movie);
+    public class Type extends AsyncTask<Void,Void,Void> {
+        String json_response;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
-            movie = new DataObject("AB +ve", "Vedant Hospital");
-            movieList.add(movie);
+        @Override
+        protected Void doInBackground(Void... params) {
 
-            movie = new DataObject("A +ve","Jupiter Hospital");
-            movieList.add(movie);
+            try {
 
-            movie = new DataObject("AB +ve", "Criticare Hospital");
-            movieList.add(movie);
-        
+                json_response = url_dump.getLifeSaverList(user_id,lat,longt);
+                Log.d("Read",json_response);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
-        mAdapter.notifyDataSetChanged();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            try {
+                JSONArray array = new JSONArray(json_response);
+                String code = array.getString(0);
+                String message = array.getString(1);
+                if (code.equals("HCPC2600")) {
+                    JSONArray inner = array.getJSONArray(2);
+                    for (int i = 0; i < inner.length(); i++) {
+                        JSONObject object = inner.getJSONObject(i);
+                        String distance = object.getString("distance");
+                        String hcp_cust_id = object.getString("hcp_cust_id");
+                        String hcp_cust_name = object.getString("hcp_cust_name");
+                        String hcp_cust_mobile_no = object.getString("hcp_cust_mobile_no");
+                        String hcp_cust_map_lat = object.getString("hcp_cust_map_lat");
+                        String hcp_cust_map_long = object.getString("hcp_cust_map_long");
+                        String hcp_cust_blood_group = object.getString("hcp_cust_blood_group");
+
+                        DataObject movie = new DataObject(distance, hcp_cust_id, hcp_cust_name, hcp_cust_mobile_no, hcp_cust_map_lat, hcp_cust_map_long, hcp_cust_blood_group);
+                        movieList.add(movie);
+                    }
+
+                    mAdapter.notifyDataSetChanged();
+                }
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }

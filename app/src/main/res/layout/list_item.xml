@@ -165,7 +165,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.4"
                             android:textSize="13dp"
-                            android:text="5000"
+                            android:text=""
                             android:layout_gravity="left"
                             android:gravity="left"
                             android:layout_marginLeft="5dp"

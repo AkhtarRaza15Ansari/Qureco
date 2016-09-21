@@ -246,8 +246,8 @@ public class SearchListPage1 extends AppCompatActivity implements SwipeRefreshLa
 
             try {
                 results = new ArrayList<ListData>();
-                json_response = url_dump.getSearchCategory(user_id,value,sort_by,open_hours,fees,open,str_loyalty,
-                service_type,open_days,strGender);
+                /*json_response = url_dump.getSearchCategory(user_id,value,sort_by,open_hours,fees,open,str_loyalty,
+                service_type,open_days,strGender);*/
                 JSONArray array = new JSONArray(json_response);
 
                 object = array.getJSONArray(2);
@@ -271,11 +271,11 @@ public class SearchListPage1 extends AppCompatActivity implements SwipeRefreshLa
                     String final_rating = object1.getString("final_rating");
                     String no_of_followers = object1.getString("no_of_followers");
                     String no_of_likes = object1.getString("no_of_likes");
-
+                    String location_contacts = "";
                     ListData data = new ListData(distance,hs_oid,hl_oid,hcp_user_oid,hcp_cat_oid,
                             service_name,location_name,city,state,geo_lat,
                             geo_long,photo_path,charges,final_rating,
-                            no_of_followers,no_of_likes,false);
+                            no_of_followers,no_of_likes,location_contacts,false);
                     results.add(i, data);
                 }
             } catch (Exception ex) {

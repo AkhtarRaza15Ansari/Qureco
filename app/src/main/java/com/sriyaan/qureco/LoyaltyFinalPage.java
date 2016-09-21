@@ -1,5 +1,6 @@
 package com.sriyaan.qureco;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -34,6 +36,8 @@ public class LoyaltyFinalPage extends AppCompatActivity {
     String price_total,redeem_point,accumulate_point,request_option;
     String total_points,finalbill;
     TextView qurecopoints,tvqurecopoints,currentbillamount,shownext,makeyourselection,request;
+    TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +109,43 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                 new SubmitAsync().execute();
             }
         });
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoyaltyFinalPage.this,Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoyaltyFinalPage.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoyaltyFinalPage.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoyaltyFinalPage.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoyaltyFinalPage.this,MyAccount.class);
+                startActivity(i);
+            }
+        });
     }
 
     public void init(){
@@ -121,6 +162,16 @@ public class LoyaltyFinalPage extends AppCompatActivity {
         oneaccumulate       =   (RadioButton)   findViewById(R.id.oneaccumulate);
         bothaccred          =   (RadioButton)   findViewById(R.id.bothaccred);
 
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
     }
 
     public void setFont()
@@ -136,6 +187,12 @@ public class LoyaltyFinalPage extends AppCompatActivity {
         request             .setTypeface(tf);
         oneaccumulate       .setTypeface(tf);
         bothaccred          .setTypeface(tf);
+
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);;
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
 
     }
     public class getTotalPoints extends AsyncTask<Void,Void,Void> {

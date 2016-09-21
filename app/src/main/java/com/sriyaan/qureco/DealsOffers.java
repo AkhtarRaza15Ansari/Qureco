@@ -347,7 +347,14 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
             holder.name.setText("" + mDataset.get(position).getOfferCaption());
             holder.validity.setText("Expires on: " + mDataset.get(position).getToDate());
             holder.description.setText("" + mDataset.get(position).getLocationName());
-            holder.cash.setText("" + mDataset.get(position).getOfferFlat());
+            if(!mDataset.get(position).getOfferFlat().equals(""))
+            {
+                holder.cash.setText("Rs. " + mDataset.get(position).getOfferFlat()+ " Off" );
+            }
+            else{
+                holder.cash.setText("" + mDataset.get(position).getOfferDiscount()+ "%"+ " Off");
+            }
+
             holder.likes.setText("" + mDataset.get(position).getLikes() + " Likes");
 
             if (!mDataset.get(position).getDealImage().equals("")) {

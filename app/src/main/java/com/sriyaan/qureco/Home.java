@@ -1,5 +1,6 @@
 package com.sriyaan.qureco;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -276,8 +279,9 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         else if(position==1)
         {
             //Settings
-            Intent i = new Intent(Home.this,SettingsPage.class);
-            startActivity(i);
+            /*Intent i = new Intent(Home.this,SettingsPage.class);
+            startActivity(i);*/
+            shareTextUrl();
         }else if(position==2)
         {
             //About Us
@@ -286,6 +290,13 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         }else if(position==3)
         {
             //Rate Us
+            Uri uri = Uri.parse("market://details?id=com.akhtar.fan");// + getPackageName());
+            Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            try {
+                startActivity(myAppLinkToMarket);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show();
+            }
         }else if(position==4)
         {
             //Feedback
@@ -485,5 +496,13 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
     protected void onPause() {
         super.onPause();
         url_dump.deleteCache(getApplicationContext());
+    }
+
+    private void shareTextUrl() {
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_SUBJECT, "Share the app");
+        share.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.akhtar.fan&hl=en");
+        startActivity(Intent.createChooser(share, "Share text to..."));
     }
 }

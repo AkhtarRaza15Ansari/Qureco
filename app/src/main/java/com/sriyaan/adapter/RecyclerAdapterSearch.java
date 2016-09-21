@@ -117,7 +117,10 @@ public class RecyclerAdapterSearch extends RecyclerView
         holder.name.setText(""+ mDataset.get(position).getServiceName());
         holder.followers.setText(""+ mDataset.get(position).getNoFollowers() + " Followers");
         holder.address.setText(""+ mDataset.get(position).getLocationName());
-        holder.cash.setText(""+ mDataset.get(position).getCharges());
+        if (! mDataset.get(position).getCharges() .equals("null"))
+        {
+            holder.cash.setText(""+ mDataset.get(position).getCharges());
+        }
         holder.likes.setText(""+ mDataset.get(position).getLikes() +" Likes");
         String dist = String.format("%.2f", Double.valueOf(mDataset.get(position).getDistance()));
         holder.distance.setText(""+ dist + " Km");
@@ -298,7 +301,7 @@ public class RecyclerAdapterSearch extends RecyclerView
             @Override
             public void onClick(View v) {
 
-                String contacts = mDataset.get(position).getGeoLong();
+                String contacts = mDataset.get(position).getMobileNo();
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:"+contacts));

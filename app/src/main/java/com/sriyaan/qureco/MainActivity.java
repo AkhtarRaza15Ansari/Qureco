@@ -172,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
         tvbloodgroup    = (TextView)    findViewById(R.id.tvbloodgroup);
         caution         = (TextView)    findViewById(R.id.caution);
         myCalendar      = Calendar.getInstance();
+
+        male.setChecked(true);
     }
     public void initCompleteRegister()
     {
@@ -1075,7 +1077,7 @@ public class MainActivity extends AppCompatActivity {
         {
             url_dump.Toastthis("Please enter name to proceed",con);
         }
-        else if(strMobile.equals("") || (strMobile.length()<10))
+        else if(strMobile.equals("") && (strMobile.length()<10))
         {
             url_dump.Toastthis("Please enter mobile number to proceed",con);
         }

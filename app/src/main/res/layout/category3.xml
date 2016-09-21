@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="PHARMACY"
-                android:textSize="13dp"
+                android:textSize="11sp"
                 android:layout_margin="02dp"
                 android:textColor="@color/text_color" />
         </LinearLayout>
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="HOSPITAL"
-                android:textSize="13dp"
+                android:textSize="11sp"
                 android:layout_margin="02dp"
                 android:textColor="@color/text_color" />
         </LinearLayout>
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="BLOOD BANK"
-                android:textSize="13dp"
+                android:textSize="11sp"
                 android:layout_margin="02dp"
                 android:textColor="@color/text_color" />
         </LinearLayout>

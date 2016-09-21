@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="left|center"
-            android:text="HCP Open Today"/>
+            android:text="Open Today"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -137,6 +137,7 @@
             android:text="Type"
             android:textSize="18dp"
             android:layout_marginTop="15dp"
+            android:visibility="gone"
             android:textColor="@color/black"
             />
         <LinearLayout
@@ -144,6 +145,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="05dp"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:background="@drawable/border">
             <LinearLayout
                 android:layout_width="match_parent"

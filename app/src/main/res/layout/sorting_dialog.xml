@@ -2,53 +2,80 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
     <TextView
         android:id="@+id/sortprice1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:padding="10dp"
-        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="Price - Low to High"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_color"/>
     <TextView
         android:id="@+id/sortprice2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:padding="10dp"
-        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="Price - High to Low"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_color"/>
     <TextView
         android:id="@+id/sortdistance1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:padding="10dp"
-        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="Distance - Nearest to Far"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_color"/>
     <TextView
         android:id="@+id/sortdistance2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:padding="10dp"
-        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="Distance - Far to Nearest"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_color"/>
     <TextView
         android:id="@+id/sortratings1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:padding="10dp"
-        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="Rating - Higher to Lower"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_color"/>
     <TextView
         android:id="@+id/sortratings2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:padding="10dp"
-        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text="Rating - Lower to Higher"/>
 </LinearLayout>
