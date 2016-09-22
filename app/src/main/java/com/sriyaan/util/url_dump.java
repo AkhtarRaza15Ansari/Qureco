@@ -52,7 +52,7 @@ public class url_dump {
 
     public static TelephonyManager telephonyManager;
 
-    public static String main_header = "http://sriyaan.com/hcp/hcp_customer_webservices/";
+    public static String main_header = "http://54.153.69.73/~hcp/hcp_customer_webservices/";
     // To fetch deviceregistration
     public static String cust_categories = "hcp_get_all_cust_categories.php";
     // To fetch userregistration

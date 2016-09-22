@@ -1227,7 +1227,7 @@ public class MainActivity extends AppCompatActivity {
                         //Some Parameters are Missing
                         Toastthis(str_Message,con);
                     }
-                    else if(str_Code.equals("HCP202"))
+                    else if(str_Code.equals("HCPC202"))
                     {
                         //User Already Registered
                         Toastthis(str_Message,con);
