@@ -70,6 +70,9 @@ public class EditProfile extends AppCompatActivity {
     // Loading Font Face
     Typeface tf;
 
+    TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
+
     TextView editprofile,donatebloodsave,doyouwant,tvbloodgroup,caution,edityourlocation,clickherto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +182,44 @@ public class EditProfile extends AppCompatActivity {
         else{
             donategroup.check(R.id.no);
         }
+
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditProfile.this,Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditProfile.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditProfile.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditProfile.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditProfile.this,MyAccount.class);
+                startActivity(i);
+            }
+        });
     }
     public void validateNext()
     {
@@ -252,6 +293,17 @@ public class EditProfile extends AppCompatActivity {
         caution         = (TextView)    findViewById(R.id.caution);
         edityourlocation= (TextView)    findViewById(R.id.edityourlocation);
         clickherto      = (TextView)    findViewById(R.id.clickherto);
+
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
     }
 
     public void setFont()
@@ -266,6 +318,12 @@ public class EditProfile extends AppCompatActivity {
         yes             .setTypeface(tf);
         no             .setTypeface(tf);
         btnSave         .setTypeface(tf);
+
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
     }
 
     public void showPicker()

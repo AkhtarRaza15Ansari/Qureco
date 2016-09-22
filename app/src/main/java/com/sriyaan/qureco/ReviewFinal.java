@@ -1,6 +1,7 @@
 package com.sriyaan.qureco;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -46,6 +47,9 @@ public class ReviewFinal extends AppCompatActivity {
     Typeface tf;
     String user_id,hcp_id;
     String comments,ids,stars,promo;
+
+    TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +98,44 @@ public class ReviewFinal extends AppCompatActivity {
                 new Review().execute();
             }
         });
+
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ReviewFinal.this,Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ReviewFinal.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ReviewFinal.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ReviewFinal.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ReviewFinal.this,MyAccount.class);
+                startActivity(i);
+            }
+        });
     }
 
     public void init()
@@ -103,12 +145,29 @@ public class ReviewFinal extends AppCompatActivity {
         etComments      = (EditText)        findViewById(R.id.etComments);
         btnPost         = (Button)          findViewById(R.id.postreview);
         listratings     = (RecyclerView)    findViewById(R.id.list_ratings);
+
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
     }
 
     public void setFont()
     {
         etComments         .setTypeface(tf);
         btnPost            .setTypeface(tf);
+
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
     }
 
     public class Type extends AsyncTask<Void,Void,Void> {

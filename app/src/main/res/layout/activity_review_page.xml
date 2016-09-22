@@ -1,90 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.sriyaan.qureco.ReviewPage">
 
-    <include android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
-
-    <TextView
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan QR Code"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:textColor="@color/black"/>
-
-    <ImageView
-        android:id="@+id/qrcodescanner"
-        android:layout_gravity="center"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/qr_code"
-        />
-
-    <TextView
-        android:id="@+id/textQr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do you want to review"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:textStyle="bold"
-        android:visibility="gone"
-        android:textSize="18dp"
-        />
     <LinearLayout
-        android:id="@+id/showNow"
+        android:id="@+id/body"
+        android:layout_above="@+id/menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-        <Spinner
-            android:id="@+id/spinner"
+        <include android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+        <ScrollView
             android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/nameandaddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_gravity="center"
-            android:id="@+id/promocode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Promocode"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/yes"
-                android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Yes"
-                android:layout_gravity="center"
-                style="@style/ButtonTextFille"/>
-            <Button
-                android:id="@+id/no"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No"
-                android:layout_gravity="center"
-                style="@style/ButtonTextFille"/>
-        </LinearLayout>
+                android:orientation="vertical">
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scan QR Code"
+                    android:textSize="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:id="@+id/qrcodescanner"
+                    android:layout_gravity="center"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:src="@drawable/qr_code"
+                    />
+
+                <TextView
+                    android:id="@+id/textQr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Do you want to review"
+                    android:layout_margin="10dp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:textSize="18dp"
+                    />
+                <LinearLayout
+                    android:id="@+id/showNow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/nameandaddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        android:textColor="@color/black"
+                        />
+                    <EditText
+                        android:layout_gravity="center"
+                        android:id="@+id/promocode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Promocode"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:layout_gravity="center"
+                            style="@style/ButtonTextFille"/>
+                        <Button
+                            android:id="@+id/no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:layout_gravity="center"
+                            style="@style/ButtonTextFille"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#F5F5F5"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/homell"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/home"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/home_icon"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Home"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/notificationll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/notification"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/notification"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Notification"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chatll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/chat"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/chat"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvChat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Chat"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/favouritesll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/favourites"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/favourites"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvFavourites"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Favourites"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/accountsll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/accounts"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/myaccounts"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvAccounts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Accounts"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

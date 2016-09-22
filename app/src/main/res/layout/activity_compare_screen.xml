@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,10 +12,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_above="@+id/menu"
         android:orientation="vertical">
 
         <LinearLayout
@@ -495,4 +497,152 @@
         </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F5F5F5"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/homell"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:id="@+id/home"
+                android:tint="@color/unselected"
+                android:src="@drawable/home_icon"
+                />
+            <TextView
+                android:id="@+id/tvHome"
+                android:textSize="10dp"
+                android:textColor="@color/unselected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:typeface="serif"
+                android:text="Home"
+                android:singleLine="true"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/notificationll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:id="@+id/notification"
+                android:tint="@color/unselected"
+                android:src="@drawable/notification"
+                />
+
+            <TextView
+                android:id="@+id/tvNotification"
+                android:textSize="10dp"
+                android:textColor="@color/unselected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:typeface="serif"
+                android:text="Notification"
+                android:singleLine="true"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/chatll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:id="@+id/chat"
+                android:tint="@color/unselected"
+                android:src="@drawable/chat"
+                />
+            <TextView
+                android:id="@+id/tvChat"
+                android:textSize="10dp"
+                android:textColor="@color/unselected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:typeface="serif"
+                android:text="Chat"
+                android:singleLine="true"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/favouritesll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:id="@+id/favourites"
+                android:tint="@color/unselected"
+                android:src="@drawable/favourites"
+                />
+            <TextView
+                android:id="@+id/tvFavourites"
+                android:textSize="10dp"
+                android:textColor="@color/unselected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:typeface="serif"
+                android:text="Favourites"
+                android:singleLine="true"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/accountsll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:id="@+id/accounts"
+                android:tint="@color/unselected"
+                android:src="@drawable/myaccounts"
+                />
+            <TextView
+                android:id="@+id/tvAccounts"
+                android:textSize="10dp"
+                android:textColor="@color/unselected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:typeface="serif"
+                android:singleLine="true"
+                android:text="Accounts"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

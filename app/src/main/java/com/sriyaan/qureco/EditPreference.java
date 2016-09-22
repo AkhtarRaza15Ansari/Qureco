@@ -53,6 +53,9 @@ public class EditPreference extends AppCompatActivity {
     // Loading Font Face
     Typeface tf;
 
+    TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
+
     TextView tvselectPreference,tvdoctor,tvclinics,tvpathlab,tvfitness,tvsalon,tvspa,tvpharmacy,tvhospital,tvbloodbank;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,43 @@ public class EditPreference extends AppCompatActivity {
         }
 
         //new GetCategories().execute();
-
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditPreference.this,Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditPreference.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditPreference.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditPreference.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(EditPreference.this,MyAccount.class);
+                startActivity(i);
+            }
+        });
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -576,6 +615,17 @@ public class EditPreference extends AppCompatActivity {
         tvpharmacy          = (TextView)    findViewById(R.id.tvpharmacy);
         tvhospital          = (TextView)    findViewById(R.id.tvhospital);
         tvbloodbank         = (TextView)    findViewById(R.id.tvbloodbank);
+
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
     }
 
     public void setFont()
@@ -591,6 +641,12 @@ public class EditPreference extends AppCompatActivity {
         tvhospital          .setTypeface(tf);
         tvbloodbank         .setTypeface(tf);
         btnSave             .setTypeface(tf);
+
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);;
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
     }
     public class GetCategories extends AsyncTask<Void,Void,Void>
     {

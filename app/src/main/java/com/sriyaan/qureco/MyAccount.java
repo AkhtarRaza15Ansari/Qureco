@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -29,6 +30,9 @@ public class MyAccount extends AppCompatActivity {
     String fontPath = "fonts/Montserrat-Regular.ttf";
     // Loading Font Face
     Typeface tf;
+
+    TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +86,44 @@ public class MyAccount extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MyAccount.this,Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MyAccount.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MyAccount.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MyAccount.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MyAccount.this,MyAccount.class);
+                startActivity(i);
+            }
+        });
     }
     public void init()
     {
@@ -99,6 +141,17 @@ public class MyAccount extends AppCompatActivity {
         editPreferences = (ImageView) findViewById(R.id.editPreference);
         editProfile     = (ImageView) findViewById(R.id.editProfile);
 
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
+
     }
 
     public void setFonts()
@@ -110,6 +163,12 @@ public class MyAccount extends AppCompatActivity {
         review          .setTypeface(tf);
         hcp_points      .setTypeface(tf);
         points          .setTypeface(tf);
+
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
     }
 
 

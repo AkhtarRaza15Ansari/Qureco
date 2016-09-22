@@ -77,6 +77,9 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     SharedPreferences prefs;
     String user_id;
     GoogleApiClient mGoogleApiClient;
+
+    TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -192,6 +195,44 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                 }
             }
         });
+
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SearchListPage.this,Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SearchListPage.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SearchListPage.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SearchListPage.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SearchListPage.this,MyAccount.class);
+                startActivity(i);
+            }
+        });
     }
     @Override
     protected void onPause(){
@@ -219,6 +260,17 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         filters             = (TextView)            findViewById(R.id.filters);
         tvCompare           = (TextView)            findViewById(R.id.tvCompare);
         tvMapView           = (TextView)            findViewById(R.id.tvMapView);
+
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
     }
 
     public void setFont()
@@ -228,6 +280,12 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         filters             .setTypeface(tf);
         tvCompare           .setTypeface(tf);
         tvMapView           .setTypeface(tf);
+
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
     }
 
     @Override

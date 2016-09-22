@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,11 +8,13 @@
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
     <RelativeLayout
+        android:id="@+id/options"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="05dp"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_below="@+id/toolbar"
         android:orientation="horizontal">
         <Switch
             android:id="@+id/loyalty"
@@ -69,11 +71,13 @@
 
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/options1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="05dp"
         android:layout_gravity="center"
         android:gravity="center"
+        android:layout_below="@+id/options"
         android:orientation="horizontal">
         <RadioGroup
             android:id="@+id/gendergroup"
@@ -144,6 +148,7 @@
         android:layout_marginTop="05dp"
         android:layout_gravity="end"
         android:gravity="end"
+        android:layout_below="@+id/options1"
         android:layout_marginBottom="10dp">
         <TextView
             android:id="@+id/clearfilter"
@@ -161,6 +166,8 @@
     </LinearLayout>
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiperefreshlayout"
+        android:layout_below="@+id/llclearfilter"
+        android:layout_above="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView
@@ -170,4 +177,153 @@
             android:layout_height="wrap_content"
             android:scrollbars="vertical" />
     </android.support.v4.widget.SwipeRefreshLayout>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#F5F5F5"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/homell"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/home"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/home_icon"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Home"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/notificationll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/notification"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/notification"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Notification"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chatll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/chat"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/chat"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvChat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Chat"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/favouritesll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/favourites"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/favourites"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvFavourites"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Favourites"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/accountsll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/accounts"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="02dp"
+                android:src="@drawable/myaccounts"
+                android:tint="@color/unselected" />
+
+            <TextView
+                android:id="@+id/tvAccounts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Accounts"
+                android:textColor="@color/unselected"
+                android:textSize="10dp"
+                android:typeface="serif" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

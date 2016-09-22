@@ -2,6 +2,7 @@ package com.sriyaan.qureco;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.location.Location;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -42,6 +44,8 @@ public class CompareScreen extends AppCompatActivity implements GoogleApiClient.
     Toolbar toolbar;
     JSONArray array;
 
+    TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
 
     GoogleApiClient mGoogleApiClient;
     String lat = "", longt = "";
@@ -144,7 +148,43 @@ public class CompareScreen extends AppCompatActivity implements GoogleApiClient.
         mTitle.setText("Compare HCP");
 
         setFonts();
-
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CompareScreen.this,Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CompareScreen.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CompareScreen.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CompareScreen.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CompareScreen.this,MyAccount.class);
+                startActivity(i);
+            }
+        });
     }
 
 
@@ -182,6 +222,17 @@ public class CompareScreen extends AppCompatActivity implements GoogleApiClient.
         three2       = (ImageView)    findViewById(R.id.three2);
         four2       = (ImageView)    findViewById(R.id.four2);
         five2       = (ImageView)    findViewById(R.id.five2);
+
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
     }
 
     public void setFonts()
@@ -201,6 +252,12 @@ public class CompareScreen extends AppCompatActivity implements GoogleApiClient.
         headPoints       .setTypeface(tf);
         points1       .setTypeface(tf);
         points2       .setTypeface(tf);
+
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);;
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
     }
     public class Compare extends AsyncTask<Void,Void,Void> {
         String json_response;

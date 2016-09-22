@@ -209,7 +209,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.33"
-                            android:textSize="13dp"
+                            android:textSize="11dp"
                             android:text="3.5 KM"
                             android:paddingTop="05dp"
                             android:paddingBottom="05dp"
@@ -230,14 +230,14 @@
                             >
                             <ImageView
                                 android:paddingLeft="02dp"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
                                 android:src="@drawable/navigate"/>
                             <TextView
                                 android:id="@+id/direction"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
+                                android:textSize="11dp"
                                 android:paddingLeft="02dp"
                                 android:paddingTop="05dp"
                                 android:paddingBottom="05dp"
@@ -264,15 +264,15 @@
                             >
                             <ImageView
                                 android:paddingLeft="02dp"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
                                 android:src="@drawable/calll"/>
                             <TextView
                                 android:id="@+id/call"
                                 android:paddingLeft="02dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
+                                android:textSize="11dp"
                                 android:textColor="@color/white"
                                 android:layout_gravity="center"
                                 android:gravity="center"

@@ -1,5 +1,6 @@
 package com.sriyaan.qureco;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -21,6 +23,9 @@ public class Filters extends AppCompatActivity {
     String fontPath = "fonts/Montserrat-Regular.ttf";
     // Loading Font Face
     Typeface tf;
+
+    TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
+    LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,7 @@ public class Filters extends AppCompatActivity {
         mTitle.setTypeface(tf);
         mTitle.setText("Filters");
         init();
+        setFont();
         //set the switch to ON
         open.setChecked(true);
         //attach a listener to check for changes in state
@@ -410,6 +416,44 @@ public class Filters extends AppCompatActivity {
                 //evening.setBackgroundColor(getResources().getColor(R.color.white));
             }
         });
+
+        llhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Filters.this,Home.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                finish();
+            }
+        });
+        llnotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Filters.this,Notification.class);
+                startActivity(i);
+            }
+        });
+        llchat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Filters.this,Chat.class);
+                startActivity(i);
+            }
+        });
+        llfavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Filters.this,Favourite.class);
+                startActivity(i);
+            }
+        });
+        llacounts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Filters.this,MyAccount.class);
+                startActivity(i);
+            }
+        });
     }
 
     public void init()
@@ -437,6 +481,26 @@ public class Filters extends AppCompatActivity {
         night           = (TextView)    findViewById(R.id.night);
 
         apply           = (Button)      findViewById(R.id.apply);
+
+        tvHome          = (TextView)        findViewById(R.id.tvHome);
+        tvNotification  = (TextView)        findViewById(R.id.tvNotification);
+        tvChat          = (TextView)        findViewById(R.id.tvChat);
+        tvFavourites    = (TextView)        findViewById(R.id.tvFavourites);
+        tvAccounts      = (TextView)        findViewById(R.id.tvAccounts);
+        llhome          = (LinearLayout)    findViewById(R.id.homell);
+        llnotification  = (LinearLayout)    findViewById(R.id.notificationll);
+        llchat          = (LinearLayout)    findViewById(R.id.chatll);
+        llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
+        llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
+    }
+
+    public void setFont()
+    {
+        tvHome          .setTypeface(tf);
+        tvNotification  .setTypeface(tf);
+        tvChat          .setTypeface(tf);;
+        tvFavourites    .setTypeface(tf);
+        tvAccounts      .setTypeface(tf);
     }
 }
 

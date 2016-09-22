@@ -476,7 +476,7 @@ public class DetailsPage extends AppCompatActivity {
                 }
 
                 tvname.setText(service_name);
-                tvaddress.setText(location_address);
+                tvaddress.setText(location_name);
                 tvreviews_count.setText("0 Reviews");
                 tvlikes.setText(like_count + " Likes");
                 tvopentimings.setText("" + from_time + " to " + to_time);
