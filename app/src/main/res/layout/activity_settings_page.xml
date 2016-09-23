@@ -13,5 +13,5 @@
         android:textSize="35dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Settings Page"/>
+        android:text="Coming Soon"/>
 </LinearLayout>

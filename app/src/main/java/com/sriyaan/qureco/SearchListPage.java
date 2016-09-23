@@ -80,6 +80,11 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
 
     TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
     LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
+
+    public static ArrayList<String> arr_lat;
+    public static ArrayList<String> arr_long;
+    public static ArrayList<String> arr_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -243,6 +248,11 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     public void init()
     {
         con = SearchListPage.this;
+
+        arr_lat             = new ArrayList<>();
+        arr_long            = new ArrayList<>();
+        arr_name            = new ArrayList<>();
+
         toolbar             = (Toolbar)             findViewById(R.id.toolbar);
         filter              = (LinearLayout)        findViewById(R.id.llfilter);
         loyalty             = (Switch)              findViewById(R.id.loyalty);
@@ -315,6 +325,9 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            arr_long.clear();
+            arr_lat.clear();
+            arr_name.clear();
         }
 
         @Override
@@ -349,6 +362,10 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                     String no_of_followers = object1.getString("no_of_followers");
                     String no_of_likes = object1.getString("no_of_likes");
 
+                    arr_lat.add(geo_lat);
+                    arr_long.add(geo_long);
+                    arr_name.add(service_name);
+
                     ListData data = new ListData(distance,hs_oid,hl_oid,hcp_user_oid,hcp_cat_oid,
                             service_name,location_name,city,state,geo_lat,
                             geo_long,photo_path,charges,final_rating,
@@ -370,6 +387,13 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
             mAdapter = new RecyclerAdapterSearch(results,con);
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
+            llmap.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(SearchListPage.this,MapsViewPage.class);
+                    startActivity(i);
+                }
+            });
         }
     }
     public void initSorting()

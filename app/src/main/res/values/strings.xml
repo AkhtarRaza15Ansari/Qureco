@@ -54,4 +54,5 @@
         <attr name="android:fontFamily" />
         <attr name="android:textStyle" />
     </declare-styleable>
+    <string name="title_activity_maps_view_page">Map</string>
 </resources>

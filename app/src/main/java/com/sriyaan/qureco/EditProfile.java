@@ -122,8 +122,12 @@ public class EditProfile extends AppCompatActivity {
         else {
             gender.check(R.id.male);
         }
-
-        Picasso.with(con).load(profile_pic).placeholder(R.drawable.person).into(person);
+        try {
+            Picasso.with(con).load(profile_pic).placeholder(R.drawable.person).into(person);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         //user_name
         opengallery.setOnClickListener(new View.OnClickListener() {
             @Override

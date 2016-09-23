@@ -57,13 +57,15 @@ public class MyAccount extends AppCompatActivity {
         mTitle.setTypeface(tf);
         mTitle.setText("My Profile");
         setFonts();
+
         user_name = prefs.getString("cust_name","");
         mobile_no = prefs.getString("cust_mobile_no","");
         profile_pic = prefs.getString("cust_profile_pic","");
         sgender = prefs.getString("cust_gender","");
         sdob = prefs.getString("cust_dob","");
+        String cap = user_name.substring(0, 1).toUpperCase() + user_name.substring(1);
 
-        name.setText(user_name);
+        name.setText(cap);
         try {
             Picasso.with(con).load(profile_pic).placeholder(R.drawable.my_profile).into(person);
         }

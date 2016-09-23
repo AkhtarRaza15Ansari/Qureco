@@ -13,5 +13,5 @@
         android:textSize="35dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Emergency"/>
+        android:text="Coming Soon"/>
 </LinearLayout>

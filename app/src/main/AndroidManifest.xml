@@ -98,7 +98,10 @@
         <activity android:name=".LoyaltyFinalPage" />
         <activity android:name=".DetailsPage" />
         <activity android:name=".ReviewFinal" />
-        <activity android:name=".CompareScreen"></activity>
+        <activity android:name=".CompareScreen" />
+        <activity
+            android:name=".MapsViewPage"
+            android:label="@string/title_activity_maps_view_page"></activity>
     </application>
 
 </manifest>

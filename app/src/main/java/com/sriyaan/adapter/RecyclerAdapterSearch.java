@@ -116,7 +116,9 @@ public class RecyclerAdapterSearch extends RecyclerView
     public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         holder.name.setText(""+ mDataset.get(position).getServiceName());
         holder.followers.setText(""+ mDataset.get(position).getNoFollowers() + " Followers");
-        holder.address.setText(""+ mDataset.get(position).getLocationName());
+        String str = mDataset.get(position).getLocationName();
+        String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
+        holder.address.setText(""+ cap);
         if (! mDataset.get(position).getCharges() .equals("null"))
         {
             holder.cash.setText(""+ mDataset.get(position).getCharges());

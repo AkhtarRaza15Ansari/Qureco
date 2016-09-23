@@ -46,6 +46,7 @@ public class RecyclerAdapterDeals extends RecyclerView
         TextView name;
         TextView validity;
         TextView description;
+        TextView address;
         TextView cash;
         TextView likes;
         TextView active;
@@ -61,6 +62,7 @@ public class RecyclerAdapterDeals extends RecyclerView
             name = (TextView) itemView.findViewById(R.id.name);
             validity = (TextView) itemView.findViewById(R.id.validity);
             description = (TextView) itemView.findViewById(R.id.description);
+            address = (TextView) itemView.findViewById(R.id.address);
             cash = (TextView) itemView.findViewById(R.id.cash);
             likes = (TextView) itemView.findViewById(R.id.likes);
             active = (TextView) itemView.findViewById(R.id.active);
@@ -98,7 +100,8 @@ public class RecyclerAdapterDeals extends RecyclerView
     public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         holder.name.setText("" + mDataset.get(position).getOfferCaption());
         holder.validity.setText("Expires on: " + mDataset.get(position).getToDate());
-        holder.description.setText("" + mDataset.get(position).getLocationName());
+        holder.description.setText("" + mDataset.get(position).getDescription());
+        holder.address.setText("" + mDataset.get(position).getLocationName());
         holder.cash.setText("" + mDataset.get(position).getOfferFlat());
         holder.likes.setText("" + mDataset.get(position).getLikes() + " Likes");
 
@@ -108,6 +111,7 @@ public class RecyclerAdapterDeals extends RecyclerView
         holder.name.setTypeface(tf);
         holder.validity.setTypeface(tf);
         holder.description.setTypeface(tf);
+        holder.address.setTypeface(tf);
         holder.cash.setTypeface(tf);
         holder.likes.setTypeface(tf);
         holder.offers.setTypeface(tf);

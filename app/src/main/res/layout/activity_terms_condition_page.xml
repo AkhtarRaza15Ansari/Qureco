@@ -5,13 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.sriyaan.qureco.TermsConditionPage">
+
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="35dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="Terms and Condition Page"/>
+        android:text="Coming Soon"/>
+
 </LinearLayout>

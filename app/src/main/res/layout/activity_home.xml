@@ -296,7 +296,6 @@
                         android:layout_height="20dp"
                         android:layout_marginBottom="02dp"
                         android:id="@+id/home"
-                        android:tint="@color/unselected"
                         android:src="@drawable/home_icon"
                         />
                     <TextView

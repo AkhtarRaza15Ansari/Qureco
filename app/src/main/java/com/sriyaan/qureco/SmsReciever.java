@@ -106,7 +106,7 @@ public class SmsReciever extends AppCompatActivity {
                                 new Resend().execute();
                             }
                             else {
-
+                                new Resend().execute();
                             }
                         }
                     });

@@ -190,7 +190,8 @@ public class url_dump {
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-        nameValuePairs.add(new BasicNameValuePair("mobile_no", mobile_no));
+        nameValuePairs.add(new BasicNameValuePair("mobile", mobile_no));
+        Log.d("mobile_no",mobile_no+"");
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

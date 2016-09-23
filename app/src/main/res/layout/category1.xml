@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="DOCTOR"
-                android:textSize="13dp"
+                android:textSize="11sp"
                 android:layout_margin="02dp"
                 android:textColor="@color/text_color" />
         </LinearLayout>
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="CLINICS"
-                android:textSize="13dp"
+                android:textSize="11sp"
                 android:layout_margin="02dp"
                 android:textColor="@color/text_color" />
         </LinearLayout>
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="PATHLAB"
-                android:textSize="13dp"
+                android:textSize="11sp"
                 android:layout_margin="02dp"
                 android:textColor="@color/text_color" />
         </LinearLayout>
