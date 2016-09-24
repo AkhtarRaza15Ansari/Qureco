@@ -27,7 +27,7 @@
             android:paddingLeft="05dp"
             android:paddingRight="05dp"
             android:textSize="12dp"
-            android:text="Deals"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/sort"
@@ -38,6 +38,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:textSize="12dp"
+            android:visibility="gone"
             android:layout_marginRight="05dp"
             android:gravity="center"
             android:layout_toLeftOf="@+id/llfilter"
@@ -52,6 +53,7 @@
             android:paddingRight="15dp"
             android:layout_gravity="center"
             android:gravity="center"
+            android:visibility="gone"
             android:background="@color/light_black"
             android:orientation="horizontal">
             <ImageView

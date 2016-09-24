@@ -424,13 +424,14 @@ public class url_dump {
         function2();
         return getDecode(jsonvalues);
     }
-    public static String getSearchDeals(String user_id,String cat_id,String sort_by,
+    public static String getSearchDeals(String hcp_id,String user_id,String cat_id,String sort_by,
                                            String page_no) throws Exception {
         String url = main_header + fetch_deals;
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
         nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("hcp_id", hcp_id));
         nameValuePairs.add(new BasicNameValuePair("cat_id", cat_id));
         nameValuePairs.add(new BasicNameValuePair("sort_by", sort_by));
         nameValuePairs.add(new BasicNameValuePair("page_no", page_no));

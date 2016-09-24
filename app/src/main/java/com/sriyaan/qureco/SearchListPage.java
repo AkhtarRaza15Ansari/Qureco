@@ -361,6 +361,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                     String final_rating = object1.getString("final_rating");
                     String no_of_followers = object1.getString("no_of_followers");
                     String no_of_likes = object1.getString("no_of_likes");
+                    String offer_caption = object1.getString("offer_caption");
 
                     arr_lat.add(geo_lat);
                     arr_long.add(geo_long);
@@ -369,7 +370,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                     ListData data = new ListData(distance,hs_oid,hl_oid,hcp_user_oid,hcp_cat_oid,
                             service_name,location_name,city,state,geo_lat,
                             geo_long,photo_path,charges,final_rating,
-                            no_of_followers,no_of_likes,location_contacts,false);
+                            no_of_followers,no_of_likes,location_contacts,offer_caption,false);
                     results.add(i, data);
                 }
             } catch (Exception ex) {

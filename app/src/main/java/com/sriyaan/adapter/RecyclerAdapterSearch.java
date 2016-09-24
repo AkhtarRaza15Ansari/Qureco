@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.sriyaan.modal.ListData;
+import com.sriyaan.qureco.DealsOffers;
 import com.sriyaan.qureco.DetailsPage;
 import com.sriyaan.qureco.R;
 import com.sriyaan.qureco.SearchListPage;
@@ -131,6 +132,25 @@ public class RecyclerAdapterSearch extends RecyclerView
         {
             Picasso.with(context).load(mDataset.get(position).getPhotoPath()).placeholder(R.drawable.hosp).into(holder.imageView);
         }
+
+        if(mDataset.get(position).getOffersCaption().equals("null"))
+        {
+            holder.offers.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.offers.setVisibility(View.VISIBLE);
+        }
+        holder.offers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, DealsOffers.class);
+                i.putExtra("value",SearchListPage.value);
+                i.putExtra("hcp_id",mDataset.get(position).getHsOid());
+                Log.d("hcp_id",mDataset.get(position).getHsOid());
+                context.startActivity(i);
+            }
+        });
         holder.name        .setTypeface(tf);
         holder.followers   .setTypeface(tf);
         holder.address     .setTypeface(tf);

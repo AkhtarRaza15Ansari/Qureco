@@ -272,11 +272,11 @@ public class SearchListPage1 extends AppCompatActivity implements SwipeRefreshLa
                     String no_of_followers = object1.getString("no_of_followers");
                     String no_of_likes = object1.getString("no_of_likes");
                     String location_contacts = "";
-                    ListData data = new ListData(distance,hs_oid,hl_oid,hcp_user_oid,hcp_cat_oid,
+                    /*ListData data = new ListData(distance,hs_oid,hl_oid,hcp_user_oid,hcp_cat_oid,
                             service_name,location_name,city,state,geo_lat,
                             geo_long,photo_path,charges,final_rating,
                             no_of_followers,no_of_likes,location_contacts,false);
-                    results.add(i, data);
+                    results.add(i, data);*/
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

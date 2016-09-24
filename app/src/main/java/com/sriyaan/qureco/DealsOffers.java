@@ -58,7 +58,7 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
     Typeface tf;
     static ArrayList<String> array,arrayID;
     SharedPreferences prefs;
-    String user_id;
+    String user_id,hcp_id="";
 
     TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
     LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
@@ -69,6 +69,13 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
         setContentView(R.layout.activity_deals_offers);
         init();
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
+
+        try {
+            hcp_id = prefs.getString("hcp_id", "");
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         user_id = prefs.getString("cust_id","");
         value = getIntent().getStringExtra("value");
         setSupportActionBar(toolbar);
@@ -215,7 +222,7 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
 
             try {
                 results = new ArrayList<DetailsData>();
-                json_response = url_dump.getSearchDeals(user_id,value,sort_by,"1");
+                json_response = url_dump.getSearchDeals(hcp_id,user_id,value,sort_by,"1");
                 JSONArray array = new JSONArray(json_response);
 
                 object = array.getJSONArray(2);

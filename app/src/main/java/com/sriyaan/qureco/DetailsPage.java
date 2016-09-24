@@ -390,7 +390,7 @@ public class DetailsPage extends AppCompatActivity {
                                 JSONObject eqob = equipments.getJSONObject(eq);
                                 String equip_name = eqob.getString("equip_name");
                                 String equip_desc = eqob.getString("equip_desc");
-                                arr_eq.add("\u2022 "+equip_name+": "+equip_desc);
+                                arr_eq.add(equip_name+": "+equip_desc);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -402,7 +402,7 @@ public class DetailsPage extends AppCompatActivity {
                                 JSONObject spob = speciality.getJSONObject(sp);
                                 String speciality_name = spob.getString("speciality_name");
                                 String speciality_description = spob.getString("speciality_description");
-                                arr_sp.add("\u2022 "+speciality_name+": "+speciality_description);
+                                arr_sp.add(""+speciality_name+": "+speciality_description);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -476,7 +476,7 @@ public class DetailsPage extends AppCompatActivity {
                 }
 
                 tvname.setText(service_name);
-                tvaddress.setText(location_name);
+                tvaddress.setText(location_name+", "+city);
                 tvreviews_count.setText("0 Reviews");
                 tvlikes.setText(like_count + " Likes");
                 tvopentimings.setText("" + from_time + " to " + to_time);
@@ -529,59 +529,73 @@ public class DetailsPage extends AppCompatActivity {
                 services.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        ArrayList<String> arrr = new ArrayList<String>();
+                        arrr.add(service_name+" - " + service_description);
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
                         LayoutInflater inflater = getLayoutInflater();
-                        View convertView = (View) inflater.inflate(R.layout.service_layout, null);
+                        View convertView = (View) inflater.inflate(R.layout.amenities, null);
                         alertDialog.setView(convertView);
+                        ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
-                        TextView tv1 = (TextView) convertView.findViewById(R.id.textname);
                         tv.setText("Services");
-                        tv1.setText("\u2022 "+service_name+" - " + service_description);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arrr);
+                        lv.setAdapter(adapter);
                         alertDialog.show();
+
                     }
                 });
                 location.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        ArrayList<String> arrr = new ArrayList<String>();
+                        arrr.add(" Location Name: "+location_name);
+                        arrr.add(" Location Address: "+location_address);
+                        arrr.add(" Landmarks: "+landmark);
+                        arrr.add(" Locality: "+Locality);
+                        arrr.add(" City: "+city);
+                        arrr.add(" State: "+state);
+                        arrr.add(" Pincode: "+pincode);
+                        arrr.add(" Location Contacts: "+location_contacts);
+                        arrr.add(" Year of Estb: "+year_of_establishment);
+                        arrr.add(" From time : "+from_time);
+                        arrr.add(" To time: "+to_time);
+
+
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
                         LayoutInflater inflater = getLayoutInflater();
-                        View convertView = (View) inflater.inflate(R.layout.location, null);
+                        View convertView = (View) inflater.inflate(R.layout.amenities, null);
                         alertDialog.setView(convertView);
+                        ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
                         tv.setText("Location & Address");
-                        LinearLayout layout = (LinearLayout) convertView.findViewById(R.id.info);
-                        layout.removeAllViews();
-                        addValue("\u2022 "+" Location Name: "+location_name,layout);
-                        addValue("\u2022 "+" Location Address: "+location_address,layout);
-                        addValue("\u2022 "+" Landmarks: "+landmark,layout);
-                        addValue("\u2022 "+" Locality: "+Locality,layout);
-                        addValue("\u2022 "+" City: "+city,layout);
-                        addValue("\u2022 "+" State: "+state,layout);
-                        addValue("\u2022 "+" Pincode: "+pincode,layout);
-                        addValue("\u2022 "+" Location Contacts: "+location_contacts,layout);
-                        addValue("\u2022 "+" Year of Estb: "+year_of_establishment,layout);
-                        addValue("\u2022 "+" From time : "+from_time,layout);
-                        addValue("\u2022 "+" To time: "+to_time,layout);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arrr);
+                        lv.setAdapter(adapter);
                         alertDialog.show();
-
                     }
                 });
                 about.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        ArrayList<String> arrr = new ArrayList<String>();
+
+                        arrr.add(" HCP Name: "+ hcp_name);
+                        arrr.add(" HCP Description: "+hcp_description);
+                        arrr.add(" HCP Experience: "+hcp_experience);
+                        arrr.add(" Language Known: "+hcp_language_known);
+                        arrr.add(" HCP Education: "+hcp_education);
+
+
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
                         LayoutInflater inflater = getLayoutInflater();
-                        View convertView = (View) inflater.inflate(R.layout.location, null);
+                        View convertView = (View) inflater.inflate(R.layout.amenities, null);
                         alertDialog.setView(convertView);
+                        ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
-                        tv.setText("About ");
-                        LinearLayout layout = (LinearLayout) convertView.findViewById(R.id.info);
-                        layout.removeAllViews();
-                        addValue("\u2022 "+" HCP Name: "+ hcp_name,layout);
-                        addValue("\u2022 "+" HCP Description: "+hcp_description,layout);
-                        addValue("\u2022 "+" HCP Experience: "+hcp_experience,layout);
-                        addValue("\u2022 "+" Language Known: "+hcp_language_known,layout);
-                        addValue("\u2022 "+" HCP Education: "+hcp_education,layout);
+                        tv.setText("About");
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arrr);
+                        lv.setAdapter(adapter);
                         alertDialog.show();
                     }
                 });
@@ -616,91 +630,110 @@ public class DetailsPage extends AppCompatActivity {
                     }
                 });
 
+                writereview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(DetailsPage.this,ReviewPage.class);
+                        startActivity(i);
+                    }
+                });
                 availability.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
+                        /*AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
                         LayoutInflater inflater = getLayoutInflater();
                         View convertView = (View) inflater.inflate(R.layout.location, null);
                         alertDialog.setView(convertView);
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
                         tv.setText("Availability ");
                         LinearLayout layout = (LinearLayout) convertView.findViewById(R.id.info);
-                        layout.removeAllViews();
+                        layout.removeAllViews();*/
 
+
+                        ArrayList<String> arrr = new ArrayList<String>();
                         if(cat_id.equals("1"))
                         {
                             //Clinics
-                            addValue("\u2022 "+" Name: "+ adoctor_name,layout);
-                            addValue("\u2022 "+" Description: "+ adoctor_description,layout);
-                            addValue("\u2022 "+" Charges: "+ acharges,layout);
-                            addValue("\u2022 "+" From Time: "+ afrom_time,layout);
-                            addValue("\u2022 "+" To Time: "+ ato_time,layout);
-                            addValue("\u2022 "+" Note: "+ anote,layout);
+                            arrr.add(" Name: "+ adoctor_name);
+                            arrr.add(" Name: "+ adoctor_name);
+                            arrr.add(" Description: "+ adoctor_description);
+                            arrr.add(" Charges: "+ acharges);
+                            arrr.add(" From Time: "+ afrom_time);
+                            arrr.add(" To Time: "+ ato_time);
+                            arrr.add(" Note: "+ anote);
                         }
                         if(cat_id.equals("2"))
                         {
-                            addValue("\u2022 "+" Name: "+ adoctor_name,layout);
-                            addValue("\u2022 "+" Description: "+ adoctor_description,layout);
-                            addValue("\u2022 "+" Charges: "+ acharges,layout);
-                            addValue("\u2022 "+" From Time: "+ afrom_time,layout);
-                            addValue("\u2022 "+" To Time: "+ ato_time,layout);
-                            addValue("\u2022 "+" Note: "+ anote,layout);
+                            arrr.add(" Name: "+ adoctor_name);
+                            arrr.add(" Description: "+ adoctor_description);
+                            arrr.add(" Charges: "+ acharges);
+                            arrr.add(" From Time: "+ afrom_time);
+                            arrr.add(" To Time: "+ ato_time);
+                            arrr.add(" Note: "+ anote);
                         }
                         if(cat_id.equals("3"))
                         {
-                            addValue("\u2022 "+" Pathlab name: "+ apathlab__title,layout);
-                            addValue("\u2022 "+" Description: "+ adescription,layout);
-                            addValue("\u2022 "+" Charges: "+ acharges,layout);
+                            arrr.add(" Pathlab name: "+ apathlab__title);
+                            arrr.add(" Description: "+ adescription);
+                            arrr.add(" Charges: "+ acharges);
                         }
                         if(cat_id.equals("4"))
                         {
-                            addValue("\u2022 "+" Batch Name: "+ ahag_batch_name,layout);
-                            addValue("\u2022 "+" Batch Type: "+ ahag_batch_type,layout);
-                            addValue("\u2022 "+" Batch Trainer: "+ ahag_batch_trainer,layout);
-                            addValue("\u2022 "+" From Time: "+ afrom_time,layout);
-                            addValue("\u2022 "+" To Time: "+ ato_time,layout);
-                            addValue("\u2022 "+" Seats Open: "+ aseats_open,layout);
-                            addValue("\u2022 "+" Charges: "+ acharges,layout);
+                            arrr.add(" Batch Name: "+ ahag_batch_name);
+                            arrr.add(" Batch Type: "+ ahag_batch_type);
+                            arrr.add(" Batch Trainer: "+ ahag_batch_trainer);
+                            arrr.add(" From Time: "+ afrom_time);
+                            arrr.add(" To Time: "+ ato_time);
+                            arrr.add(" Seats Open: "+ aseats_open);
+                            arrr.add(" Charges: "+ acharges);
                         }
                         if(cat_id.equals("5"))
                         {
-                            addValue("\u2022 "+" Available Blood: "+ aavail_blood,layout);
-                            addValue("\u2022 "+" Quantity: "+ aqty,layout);
-                            addValue("\u2022 "+" Charges: "+ acharges,layout);
+                            arrr.add(" Available Blood: "+ aavail_blood);
+                            arrr.add(" Quantity: "+ aqty);
+                            arrr.add(" Charges: "+ acharges);
                         }
                         if(cat_id.equals("6"))
                         {
-                            addValue("\u2022 "+" Specialists: "+ aspecialist,layout);
-                            addValue("\u2022 "+" Description: "+ adescription,layout);
-                            addValue("\u2022 "+" About: "+ aabout,layout);
-                            addValue("\u2022 "+" From Time: "+ afrom_time,layout);
-                            addValue("\u2022 "+" To Time: "+ ato_time,layout);
-                            addValue("\u2022 "+" Charges: "+ acharges,layout);
+                            arrr.add(" Specialists: "+ aspecialist);
+                            arrr.add(" Description: "+ adescription);
+                            arrr.add(" About: "+ aabout);
+                            arrr.add(" From Time: "+ afrom_time);
+                            arrr.add(" To Time: "+ ato_time);
+                            arrr.add(" Charges: "+ acharges);
                         }
                         if(cat_id.equals("7"))
                         {
-                            addValue("\u2022 "+" From Time: "+ afrom_time,layout);
-                            addValue("\u2022 "+" To Time: "+ ato_time,layout);
-                            addValue("\u2022 "+" Note: "+ anote,layout);
+                            arrr.add(" From Time: "+ afrom_time);
+                            arrr.add(" To Time: "+ ato_time);
+                            arrr.add(" Note: "+ anote);
                         }
                         if(cat_id.equals("8"))
                         {
-                            addValue("\u2022 "+" Name: "+ adoctor_name,layout);
-                            addValue("\u2022 "+" Description: "+ adoctor_description,layout);
-                            addValue("\u2022 "+" Charges: "+ acharges,layout);
-                            addValue("\u2022 "+" From Time: "+ afrom_time,layout);
-                            addValue("\u2022 "+" To Time: "+ ato_time,layout);
-                            addValue("\u2022 "+" Note: "+ anote,layout);
+                            arrr.add(" Name: "+ adoctor_name);
+                            arrr.add(" Description: "+ adoctor_description);
+                            arrr.add(" Charges: "+ acharges);
+                            arrr.add(" From Time: "+ afrom_time);
+                            arrr.add(" To Time: "+ ato_time);
+                            arrr.add(" Note: "+ anote);
                         }
                         if(cat_id.equals("9"))
                         {
-                            addValue("\u2022 "+" Available Blood: "+ aavail_blood,layout);
-                            addValue("\u2022 "+" Quantity: "+ aqty,layout);
-                            addValue("\u2022 "+" Charges: "+ acharges,layout);
+                            arrr.add(" Available Blood: "+ aavail_blood);
+                            arrr.add(" Quantity: "+ aqty);
+                            arrr.add(" Charges: "+ acharges);
                         }
 
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
+                        LayoutInflater inflater = getLayoutInflater();
+                        View convertView = (View) inflater.inflate(R.layout.amenities, null);
+                        alertDialog.setView(convertView);
+                        ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
+                        TextView tv = (TextView) convertView.findViewById(R.id.text);
+                        tv.setText("Availability");
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arrr);
+                        lv.setAdapter(adapter);
                         alertDialog.show();
                     }
                 });
