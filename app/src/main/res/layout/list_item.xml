@@ -98,7 +98,7 @@
                             android:layout_weight="0.6"
                             android:orientation="horizontal"
                             android:layout_gravity="center"
-                            android:gravity="center"
+                            android:gravity="left"
                             >
                             <ImageView
                                 android:id="@+id/one"
@@ -164,7 +164,7 @@
                             android:layout_weight="0.6"
                             android:orientation="horizontal"
                             android:layout_gravity="center"
-                            android:gravity="center"
+                            android:gravity="left"
                             >
                             <ImageView
                                 android:layout_width="15dp"
@@ -323,13 +323,13 @@
                         android:id="@+id/offers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/offers"
+                        android:background="@color/white"
                         android:text="OFFERS"
                         android:paddingLeft="16dp"
                         android:paddingRight="16dp"
                         android:paddingTop="05dp"
                         android:paddingBottom="05dp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/offers"
                         android:textStyle="bold"
                         android:textSize="15dp"
                         />

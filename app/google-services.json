@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "676671260386",
+    "firebase_url": "https://qurecoandroid-208d0.firebaseio.com",
+    "project_id": "qurecoandroid-208d0",
+    "storage_bucket": "qurecoandroid-208d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676671260386:android:5ce7f0c23fbfaaef",
+        "android_client_info": {
+          "package_name": "com.sriyaan.qureco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676671260386-dt2qqgheeq2omlsiuedidse1c67m1h08.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sriyaan.qureco",
+            "certificate_hash": "60FC40DC6238FB7DDA703ADE986F99219E64A8A1"
+          }
+        },
+        {
+          "client_id": "676671260386-p00o8hivris0l9f5o91ka0k3bbi2udme.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKth8vadOKO7GETHl-VcixGrtmO_3ad5Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676671260386-p00o8hivris0l9f5o91ka0k3bbi2udme.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

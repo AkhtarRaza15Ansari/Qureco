@@ -48,7 +48,8 @@ dependencies {
     compile 'org.apache.httpcomponents:httpcore:4.2.4'
     compile 'org.apache.httpcomponents:httpmime:4.3'
     compile 'com.squareup.picasso:picasso:2.4.0'
-    compile 'com.google.android.gms:play-services:9.4.0'
+    compile 'com.google.android.gms:play-services:9.6.1'
     compile 'com.android.support:multidex:1.0.1'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
 }
+apply plugin: 'com.google.gms.google-services'
