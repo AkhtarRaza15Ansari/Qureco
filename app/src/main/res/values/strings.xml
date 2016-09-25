@@ -12,7 +12,6 @@
     </string-array>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-
     <!-- Login Page -->
     <string name="input_phone">Mobile Number</string>
     <string name="input_password">Password</string>

@@ -51,7 +51,10 @@ public class url_dump {
     public static String IMEI_Number_Holder;
 
     public static TelephonyManager telephonyManager;
-
+    // Url For Terms and Conditions Page
+    public static String tncHeader = "http://qureco.com/terms-conditions.php";
+    // Url For About Page
+    public static String aboutHeader = "http://qureco.com";
     public static String main_header = "http://54.153.69.73/~hcp/hcp_customer_webservices/";
     // To fetch deviceregistration
     public static String cust_categories = "hcp_get_all_cust_categories.php";
