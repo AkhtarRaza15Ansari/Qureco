@@ -51,5 +51,6 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.6.1'
     compile 'com.android.support:multidex:1.0.1'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
+    compile 'com.android.support:support-v4:24.2.1'
 }
 apply plugin: 'com.google.gms.google-services'

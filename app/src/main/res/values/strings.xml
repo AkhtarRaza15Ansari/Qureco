@@ -54,4 +54,7 @@
         <attr name="android:textStyle" />
     </declare-styleable>
     <string name="title_activity_maps_view_page">Map</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Coming Soon</string>
 </resources>

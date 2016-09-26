@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.sriyaan.qureco.AboutUsPage">
+
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
-    <TextView
+
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="35dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Coming Soon"/>
+        android:layout_height="match_parent"/>
+
 </LinearLayout>

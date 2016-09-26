@@ -68,13 +68,6 @@ public class DetailsPage extends AppCompatActivity {
             }
         });
 
-        follow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new FollowAsync().execute();
-            }
-        });
-
         llhome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,7 +184,7 @@ public class DetailsPage extends AppCompatActivity {
     public class AsyncClass extends AsyncTask<Void, Void, Void> {
         String json_values = "";
         ArrayList<String> arr_am,arr_sp,arr_eq,arr_soc;
-        String like_count, followers_count, rating, refer_friend_points,
+        String is_following,like_count, followers_count, rating, refer_friend_points,
                 location_contacts, licence_no, year_of_establishment, pincode,
                 geo_longi, geo_lat, state, city, Locality, landmark, location_address, location_name, from_time, to_time, service_name,service_description, photo_path = "",hcp_name
                 ,hcp_description,hcp_experience,hcp_language_known,hcp_education;
@@ -205,6 +198,7 @@ public class DetailsPage extends AppCompatActivity {
             arr_sp = new ArrayList<>();
             arr_eq = new ArrayList<>();
             arr_soc = new ArrayList<>();
+            url_dump.startprogress("Fetching from server", "Please wait",DetailsPage.this,true);
         }
 
         @Override
@@ -245,6 +239,7 @@ public class DetailsPage extends AppCompatActivity {
                             location_contacts = lobject.getString("location_contacts");
                         } catch (Exception e) {
                             e.printStackTrace();
+                            url_dump.dismissprogress();
                         }
 
                         JSONArray location_time = lobject.getJSONArray("location_time");
@@ -454,6 +449,7 @@ public class DetailsPage extends AppCompatActivity {
                             followers_count = lobject.getString("followers_count");
                             rating = lobject.getString("rating");
                             refer_friend_points = lobject.getString("refer_friend_points");
+                            is_following    = lobject.getString("is_following");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -463,6 +459,7 @@ public class DetailsPage extends AppCompatActivity {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                url_dump.dismissprogress();
             }
             return null;
         }
@@ -470,6 +467,9 @@ public class DetailsPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+
+            url_dump.dismissprogress();
+
             try {
                 if (!photo_path.equals("")) {
                     Picasso.with(context).load(photo_path).placeholder(R.drawable.hospc).into(topimage);
@@ -641,16 +641,6 @@ public class DetailsPage extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        /*AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
-                        LayoutInflater inflater = getLayoutInflater();
-                        View convertView = (View) inflater.inflate(R.layout.location, null);
-                        alertDialog.setView(convertView);
-                        TextView tv = (TextView) convertView.findViewById(R.id.text);
-                        tv.setText("Availability ");
-                        LinearLayout layout = (LinearLayout) convertView.findViewById(R.id.info);
-                        layout.removeAllViews();*/
-
-
                         ArrayList<String> arrr = new ArrayList<String>();
                         if(cat_id.equals("1"))
                         {
@@ -748,6 +738,28 @@ public class DetailsPage extends AppCompatActivity {
                     }
                 });
 
+                if(is_following.equals("1"))
+                {
+                    Log.d("console","following");
+                    tvfollow.setText("Following");
+                    follow.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(DetailsPage.this, "You are aleready following this HCP", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else{
+                    Log.d("console","Follow");
+                    tvfollow.setText("Follow");
+                    follow.setOnClickListener( new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            new FollowAsync().execute();
+                        }
+                    });
+                }
+
             } catch (Exception e) {
 
             }
@@ -787,9 +799,10 @@ public class DetailsPage extends AppCompatActivity {
                 JSONArray array= new JSONArray(json_values);
                 String code = array.getString(0);
                 String message = array.getString(1);
-                 if(code.equals("HCP1800"))
+                 if(code.equals("HCPC1800"))
                  {
                      Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                     new AsyncClass().execute();
                  }
                  else{
                      Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();

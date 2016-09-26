@@ -5,6 +5,7 @@ package com.sriyaan.gcm;
  */
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -76,6 +77,8 @@ public class RegistrationIntentService extends IntentService {
      */
     private void sendRegistrationToServer(String token) {
         // Add custom implementation, as needed.
+        SharedPreferences prefs =  getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
+        prefs.edit().putString("gcm_code",token).apply();
         Log.d("toke",token);
     }
 

@@ -1,17 +1,17 @@
-package com.sriyaan.qureco;
+package com.sriyaan.fragments;
+
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +19,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-import com.sriyaan.modal.DetailsData;
+import com.sriyaan.modal.FollowData;
 import com.sriyaan.modal.ListData;
-import com.sriyaan.modal.NotificationsData;
+import com.sriyaan.modal.FollowData;
+import com.sriyaan.qureco.DetailsPage;
+import com.sriyaan.qureco.R;
+import com.sriyaan.qureco.SearchListPage;
 import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
@@ -33,7 +34,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notification extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class FollowingTabs extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     String json_response;
@@ -45,39 +49,23 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
     LinearLayout filter;
     SwipeRefreshLayout swipeRefreshLayout;
     Context con;
-    String fontPath = "fonts/Montserrat-Regular.ttf";
-    // Loading Font Face
-    Typeface tf;
     static ArrayList<String> array,arrayID;
     SharedPreferences prefs;
     String user_id,hcp_id="";
-    TextView tvHome, tvNotification, tvChat, tvFavourites, tvAccounts;
-    LinearLayout llhome, llnotification, llchat, llfavorites, llacounts;
+
+    public FollowingTabs() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootview = inflater.inflate(R.layout.fragment_following_tabs, container, false);
+        init(rootview);
 
-        init();
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //What to do on back clicked
-                onBackPressed();
-            }
-        });
-        setTitle("");
-        tf = Typeface.createFromAsset(getAssets(), fontPath);
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-        mTitle.setTypeface(tf);
-        mTitle.setText("Notification");
-        setFonts();
-        prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
+        prefs = getActivity().getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
 
         try {
             hcp_id = prefs.getString("hcp_id", "");
@@ -101,82 +89,13 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
                                     }
                                 }
         );
-
-
-
-        llhome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Notification.this, Home.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
-                finish();
-            }
-        });
-        llnotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-        llchat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Notification.this, Chat.class);
-                startActivity(i);
-            }
-        });
-        llfavorites.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Notification.this, Favourite.class);
-                startActivity(i);
-            }
-        });
-        llacounts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Notification.this, MyAccount.class);
-                startActivity(i);
-            }
-        });
-
+        return rootview;
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        url_dump.deleteCache(getApplicationContext());
-    }
-    public void setFonts() {
-
-        tvHome.setTypeface(tf);
-        tvNotification.setTypeface(tf);
-        tvChat.setTypeface(tf);
-        tvFavourites.setTypeface(tf);
-        tvAccounts.setTypeface(tf);
-    }
-    public void init()
-    {
-        con = Notification.this;
-        mRecyclerView       = (RecyclerView)        findViewById(R.id.my_recycler_view1);
-        swipeRefreshLayout  = (SwipeRefreshLayout)  findViewById(R.id.swiperefreshlayout);
-
-        tvHome = (TextView) findViewById(R.id.tvHome);
-        tvNotification = (TextView) findViewById(R.id.tvNotification);
-        tvChat = (TextView) findViewById(R.id.tvChat);
-        tvFavourites = (TextView) findViewById(R.id.tvFavourites);
-        tvAccounts = (TextView) findViewById(R.id.tvAccounts);
-        llhome = (LinearLayout) findViewById(R.id.homell);
-        llnotification = (LinearLayout) findViewById(R.id.notificationll);
-        llchat = (LinearLayout) findViewById(R.id.chatll);
-        llfavorites = (LinearLayout) findViewById(R.id.favouritesll);
-        llacounts = (LinearLayout) findViewById(R.id.accountsll);
-    }
-
     public class RecyclerAdapterNotification extends RecyclerView
             .Adapter<RecyclerAdapterNotification
             .DataObjectHolder> {
         public String LOG_TAG = "MyRecyclerViewAdapter";
-        public ArrayList<NotificationsData> mDataset;
+        public ArrayList<FollowData> mDataset;
         Context context;
         Typeface tf;
         String fontPath = "fonts/Montserrat-Regular.ttf";
@@ -184,17 +103,24 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
         public class DataObjectHolder extends RecyclerView.ViewHolder
                 implements View
                 .OnClickListener {
-            ImageView imageView;
-            LinearLayout body;
-            TextView msg;
-            TextView msg_date;
+            LinearLayout body,lldirection,llcall;
+            TextView name;
+            TextView address;
+            TextView follow;
 
             public DataObjectHolder(View itemView) {
                 super(itemView);
                 tf = Typeface.createFromAsset(context.getAssets(), fontPath);
+                body = (LinearLayout) itemView.findViewById(R.id.body);
+                lldirection = (LinearLayout) itemView.findViewById(R.id.lldirection);
+                llcall = (LinearLayout) itemView.findViewById(R.id.llcall);
 
-                msg = (TextView) itemView.findViewById(R.id.msg);
-                msg_date = (TextView) itemView.findViewById(R.id.msg_date);
+                name = (TextView) itemView.findViewById(R.id.name);
+                address = (TextView) itemView.findViewById(R.id.address);
+                follow = (TextView) itemView.findViewById(R.id.follow);
+
+
+
                 Log.i(LOG_TAG, "Adding Listener");
                 itemView.setOnClickListener(this);
             }
@@ -207,7 +133,7 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
 
 
 
-        public RecyclerAdapterNotification(ArrayList<NotificationsData> myDataset, Context context) {
+        public RecyclerAdapterNotification(ArrayList<FollowData> myDataset, Context context) {
             mDataset = myDataset;
             this.context = context;
         }
@@ -216,7 +142,7 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
         public DataObjectHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.notification_item, parent, false);
+                    .inflate(R.layout.following_item, parent, false);
 
             DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
             return dataObjectHolder;
@@ -224,11 +150,41 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
 
         @Override
         public void onBindViewHolder(final DataObjectHolder holder, final int position) {
-            holder.msg.setText("" + mDataset.get(position).getMsg());
-            holder.msg_date.setText(mDataset.get(position).getMsgDate());
+            holder.name.setText("" + mDataset.get(position).getServiceName());
+            holder.address.setText(mDataset.get(position).getLocationName());
 
-            holder.msg.setTypeface(tf);
-            holder.msg_date.setTypeface(tf);
+            holder.body.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("Coming","here");
+                    Intent i =  new Intent(context,DetailsPage.class);
+                    i.putExtra("value", SearchListPage.value);
+                    i.putExtra("hcp_id",mDataset.get(position).getHsOid());
+                    Log.d("hcp_id",mDataset.get(position).getHsOid());
+                    context.startActivity(i);
+                }
+            });
+            holder.lldirection.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String geo_lat = mDataset.get(position).getGeoLat();
+                    String geo_longi = mDataset.get(position).getGeoLong();
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                            Uri.parse("http://maps.google.com/maps?daddr=" + geo_lat + "," + geo_longi));
+                    context.startActivity(intent);
+                }
+            });
+            holder.llcall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    String contacts = mDataset.get(position).getMobileNo();
+
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:"+contacts));
+                    context.startActivity(intent);
+                }
+            });
         }
 
         private void callShareIntent(String text) {
@@ -241,7 +197,7 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
             context.startActivity(Intent.createChooser(shareIntent, "Share Via"));
         }
 
-        public void addItem(NotificationsData dataObj, int index) {
+        public void addItem(FollowData dataObj, int index) {
             mDataset.add(dataObj);
             notifyItemInserted(index);
         }
@@ -258,6 +214,12 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
 
     }
 
+    public void init(View v)
+    {
+        con = getActivity();
+        mRecyclerView       = (RecyclerView)        v.findViewById(R.id.my_recycler_view1);
+        swipeRefreshLayout  = (SwipeRefreshLayout)  v.findViewById(R.id.swiperefreshlayout);
+    }
 
     @Override
     public void onRefresh() {
@@ -281,8 +243,8 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
         protected Void doInBackground(Void... params) {
 
             try {
-                results = new ArrayList<NotificationsData>();
-                json_response = url_dump.getNotification(user_id);
+                results = new ArrayList<FollowData>();
+                json_response = url_dump.getFollowingList(user_id);
                 Log.d("json_response",json_response);
                 JSONArray array = new JSONArray(json_response);
                 String code = array.getString(0);
@@ -291,11 +253,17 @@ public class Notification extends AppCompatActivity implements SwipeRefreshLayou
                 for (int i = 0; i < object.length(); i++) {
                     JSONObject jsonObject = object.getJSONObject(i);
 
-                    String msg = jsonObject.getString("msg");
-                    String msg_type = jsonObject.getString("msg_type");
-                    String msg_date = jsonObject.getString("msg_date");
+                    String hs_oid = jsonObject.getString("hs_oid");
+                    String hl_oid = jsonObject.getString("hl_oid");
+                    String service_name = jsonObject.getString("service_name");
+                    String location_name = jsonObject.getString("location_name");
+                    String city = jsonObject.getString("city");
+                    String state = jsonObject.getString("state");
+                    String geo_lat = jsonObject.getString("geo_lat");
+                    String geo_longi = jsonObject.getString("geo_longi");
+                    String location_contacts = jsonObject.getString("location_contacts");
 
-                    NotificationsData data = new NotificationsData(msg,msg_type,msg_date);
+                    FollowData data = new FollowData(hs_oid,hl_oid,service_name,location_name,city,state,geo_lat,geo_longi,location_contacts);
                     results.add(i, data);
                 }
             } catch (Exception ex) {

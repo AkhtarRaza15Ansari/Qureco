@@ -114,9 +114,10 @@ public class MainActivity extends AppCompatActivity {
     private String userChoosenTask;
     int page = 0;
     TextView mTitle;
-    String path = "",selectedImagePath;
+    String path = "",new_path="",selectedImagePath;
     SharedPreferences prefs;
     String fontPath = "fonts/Montserrat-Regular.ttf";
+    String gcm_code;
     // Loading Font Face
     Typeface tf;
     @Override
@@ -133,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
         mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setTypeface(tf);
         mTitle.setText("");
+
+        gcm_code = prefs.getString("gcm_code","");
 
         my_root = (LinearLayout) findViewById(R.id.body);
         inflater = LayoutInflater.from(this);
@@ -894,6 +897,7 @@ public class MainActivity extends AppCompatActivity {
                 path = getPath(this, uri);
                 Log.d("TAG", "File Path: " + path);
                 String filename = path.substring(path.lastIndexOf("/") + 1);
+                new_path  = url_dump.compressImage(String.valueOf(path),con);
                 PlaceImage();
                 //new PostNotification().execute();
             }
@@ -912,6 +916,7 @@ public class MainActivity extends AppCompatActivity {
         selectedImagePath = getImagePath();
         File destination = new File(selectedImagePath);
         path = destination.getAbsolutePath();
+        new_path  = url_dump.compressImage(String.valueOf(path),con);
         Log.d("path",path);
         PlaceImage();
         //new PostNotification().execute();
@@ -1191,7 +1196,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 prefs.edit().putString("mobile",strMobile).apply();
                 strInterest = removeLastChar(strInterest);
-                json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,str_lat,str_lon,path,lifesaver,bloodgroup);
+                json = url_dump.doFileUpload(strName,strMobile,strGender,strDob,strReferral,strInterest,str_lat,str_lon,new_path,lifesaver,bloodgroup,gcm_code);
             } catch (Exception e) {
                 url_dump.dismissprogress();
                 e.printStackTrace();
@@ -1254,7 +1259,7 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             try {
                 prefs.edit().putString("mobile",str_mobile_login).apply();
-                json = url_dump.LoginUser(str_mobile_login);
+                json = url_dump.LoginUser(str_mobile_login,gcm_code);
             } catch (Exception e) {
                 e.printStackTrace();
                 url_dump.dismissprogress();

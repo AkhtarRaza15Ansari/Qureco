@@ -301,7 +301,7 @@
                     <TextView
                         android:id="@+id/tvHome"
                         android:textSize="10dp"
-                        android:textColor="@color/unselected"
+                        android:textColor="@color/colorPrimary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"

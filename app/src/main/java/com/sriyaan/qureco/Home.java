@@ -65,6 +65,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
             tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
     DrawerLayout drawerLayout;
     LinearLayout back;
+    public static boolean resume = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +127,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         });
 
         img_profile = (ImageView)   findViewById(R.id.img_profile);
+
         if(!cust_profile_pic.isEmpty())
         Picasso.with(con).load(cust_profile_pic)
                 .transform(new CircleTransform()).placeholder(R.drawable.person).into(img_profile);
@@ -504,5 +506,18 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         share.putExtra(Intent.EXTRA_SUBJECT, "Share the app");
         share.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.akhtar.fan&hl=en");
         startActivity(Intent.createChooser(share, "Share text to..."));
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if(resume)
+        {
+            cust_profile_pic = prefs.getString("cust_profile_pic","");
+            Logthis("cust_profile_pic",cust_profile_pic+"A");
+            if(!cust_profile_pic.isEmpty())
+                Picasso.with(con).load(cust_profile_pic)
+                        .transform(new CircleTransform()).placeholder(R.drawable.person).into(img_profile);
+        }
     }
 }

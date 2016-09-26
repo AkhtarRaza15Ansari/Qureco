@@ -2,6 +2,7 @@ package com.sriyaan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -135,22 +136,31 @@ public class RecyclerAdapterSearch extends RecyclerView
 
         if(mDataset.get(position).getOffersCaption().equals("null"))
         {
-            holder.offers.setVisibility(View.GONE);
+            holder.offers.setTextColor(context.getResources().getColor(R.color.unselected));
+            holder.offers.setText("OFFERS");
+            holder.offers.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "No offers available", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         else
         {
-            holder.offers.setVisibility(View.VISIBLE);
+            holder.offers.setTextColor(context.getResources().getColor(R.color.offers));
+            holder.offers.setText("OFFERS");
+            holder.offers.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, DealsOffers.class);
+                    i.putExtra("value",SearchListPage.value);
+                    i.putExtra("hcp_id",mDataset.get(position).getHsOid());
+                    Log.d("hcp_id",mDataset.get(position).getHsOid());
+                    context.startActivity(i);
+                }
+            });
         }
-        holder.offers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, DealsOffers.class);
-                i.putExtra("value",SearchListPage.value);
-                i.putExtra("hcp_id",mDataset.get(position).getHsOid());
-                Log.d("hcp_id",mDataset.get(position).getHsOid());
-                context.startActivity(i);
-            }
-        });
+
         holder.name        .setTypeface(tf);
         holder.followers   .setTypeface(tf);
         holder.address     .setTypeface(tf);

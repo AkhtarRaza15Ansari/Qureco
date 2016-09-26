@@ -3,6 +3,9 @@
     <color name="colorPrimary">#D61821</color>
     <color name="colorPrimaryDark">#b8141d</color>
     <color name="colorAccent">#D61821</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
     <color name="transparent">#88ED0D0A</color>
     <color name="completetransparent">#00000000</color>
     <color name="text_color">#536172</color>

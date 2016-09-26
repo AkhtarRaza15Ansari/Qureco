@@ -8,7 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -37,6 +43,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -63,7 +72,7 @@ public class EditProfile extends AppCompatActivity {
     private String userChoosenTask;
     int page = 0;
 
-    String path = "",selectedImagePath;
+    String path = "",new_path="",selectedImagePath;
     String user_id,user_name,mobile_no,profile_pic,sgender,sdob,referral_code,hcp_cust_blood_group,hcp_cust_life_saver;
 
     String fontPath = "fonts/Montserrat-Regular.ttf";
@@ -390,6 +399,7 @@ public class EditProfile extends AppCompatActivity {
                 // Get the path
 
                 path = getPath(this, uri);
+                new_path  = url_dump.compressImage(String.valueOf(path),con);
                 Log.d("TAG", "File Path: " + path);
                 String filename = path.substring(path.lastIndexOf("/") + 1);
                 PlaceImage();
@@ -401,6 +411,7 @@ public class EditProfile extends AppCompatActivity {
     }
     public void PlaceImage(){
         Uri uri = Uri.fromFile(new File(path));
+
         Picasso.with(con).load(uri).resize(96, 96).centerCrop().into(person);
     }
     public String getImagePath() {
@@ -410,6 +421,7 @@ public class EditProfile extends AppCompatActivity {
         selectedImagePath = getImagePath();
         File destination = new File(selectedImagePath);
         path = destination.getAbsolutePath();
+        new_path  = url_dump.compressImage(String.valueOf(path),con);
         Log.d("path",path);
         PlaceImage();
         //new PostNotification().execute();
@@ -558,7 +570,7 @@ public class EditProfile extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             try {
                 prefs.edit().putString("mobile",strMobile).apply();
-                json = url_dump.updateProfile(user_id,strName,strDob,profile_pic,str_lat,str_lon,path,lifesaver,bloodgroup);
+                json = url_dump.updateProfile(user_id,strName,strDob,profile_pic,str_lat,str_lon,new_path,lifesaver,bloodgroup);
             } catch (Exception e) {
                 url_dump.dismissprogress();
                 e.printStackTrace();
@@ -604,7 +616,8 @@ public class EditProfile extends AppCompatActivity {
                         prefs.edit().putString("cust_interests",hcp_cust_interests).apply();
                         prefs.edit().putString("cust_map_lat",hcp_cust_map_lat).apply();
                         prefs.edit().putString("cust_map_long",hcp_cust_map_long).apply();
-
+                        MyAccount.resume = true;
+                        Home.resume = true;
                         onBackPressed();
                     }
                     else if(str_Code.equals("HCPC901"))
@@ -643,4 +656,5 @@ public class EditProfile extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }

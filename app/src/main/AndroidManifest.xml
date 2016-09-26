@@ -86,13 +86,17 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="sensorPortrait" />
-        <activity android:name=".Search" />
-        <activity android:name=".Feedback" />
-        <activity android:name=".Loyalty" />
+        <activity android:name=".Search"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".Feedback"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".Loyalty"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name="com.sriyaan.qr.QrCode"
             android:screenOrientation="portrait" />
-        <activity android:name=".SmsReciever" />
+        <activity android:name=".SmsReciever"
+            android:screenOrientation="sensorPortrait" />
 
         <receiver android:name="com.sriyaan.reciever.SmsBroadReciever">
             <intent-filter>
@@ -100,7 +104,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.sriyaan.util.RoutingActivity" />
+        <activity android:name="com.sriyaan.util.RoutingActivity"
+            android:screenOrientation="sensorPortrait" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -115,35 +120,61 @@
 
         <activity
             android:name=".MapsActivity"
+            android:screenOrientation="sensorPortrait"
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".MapsActivity1"
+            android:screenOrientation="sensorPortrait"
             android:label="@string/title_activity_maps1" />
-        <activity android:name=".EditProfile" />
-        <activity android:name=".EditPreference" />
-        <activity android:name=".MyAccount" />
-        <activity android:name=".SettingsPage" />
-        <activity android:name=".AboutUsPage" />
-        <activity android:name=".TermsConditionPage" />
-        <activity android:name=".ContactUs" />
-        <activity android:name=".SearchListPage" />
-        <activity android:name=".SearchListPage1" />
-        <activity android:name=".LifeSavers" />
-        <activity android:name=".ReviewPage" />
-        <activity android:name=".DealsOffers" />
-        <activity android:name=".AlertFamily" />
-        <activity android:name=".ShoutOutHelp" />
-        <activity android:name=".Emergency" />
-        <activity android:name=".Notification" />
-        <activity android:name=".Chat" />
-        <activity android:name=".Favourite" />
-        <activity android:name=".Filters" />
-        <activity android:name=".LoyaltyFinalPage" />
-        <activity android:name=".DetailsPage" />
-        <activity android:name=".ReviewFinal" />
-        <activity android:name=".CompareScreen" />
+        <activity android:name=".EditProfile"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".EditPreference"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".MyAccount"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".SettingsPage"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".AboutUsPage"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".TermsConditionPage"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".ContactUs"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".SearchListPage"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".SearchListPage1"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".LifeSavers"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".ReviewPage"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".DealsOffers"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".AlertFamily"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".ShoutOutHelp"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".Emergency"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".Notification"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".Chat"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".Favourite"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".Filters"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".LoyaltyFinalPage"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".DetailsPage"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".ReviewFinal"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".CompareScreen"
+            android:screenOrientation="sensorPortrait"/>
         <activity
             android:name=".MapsViewPage"
+            android:screenOrientation="sensorPortrait"
             android:label="@string/title_activity_maps_view_page"></activity>
     </application>
 

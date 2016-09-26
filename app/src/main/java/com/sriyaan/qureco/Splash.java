@@ -41,7 +41,6 @@ public class Splash extends AppCompatActivity {
     String permission8 = Manifest.permission.ACCESS_COARSE_LOCATION;
     String permission9 = Manifest.permission.ACCESS_FINE_LOCATION;
 
-
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
 

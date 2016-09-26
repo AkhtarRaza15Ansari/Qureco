@@ -19,7 +19,7 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     card_view:cardUseCompatPadding="true"
                     card_view:cardElevation="5dp"
                     card_view:cardCornerRadius="3dp">
@@ -27,7 +27,6 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -111,7 +110,7 @@
                                     android:id="@+id/hcp_followers"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="HCP Followers"/>
+                                    android:text="HCP Following"/>
                                 <TextView
                                     android:id="@+id/followers"
                                     android:layout_width="wrap_content"
@@ -161,7 +160,39 @@
 
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
+                        <android.support.design.widget.AppBarLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                            <android.support.design.widget.TabLayout
+                                android:id="@+id/tabs"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:tabBackground="@color/white"
+                                app:tabIndicatorColor="@color/colorPrimary"
+                                app:tabTextColor="@color/text_color"
+                                app:tabSelectedTextColor="@color/colorPrimary"
+                                app:tabMode="scrollable"
+                                app:tabGravity="fill"/>
+                        </android.support.design.widget.AppBarLayout>
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/viewpager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+                    </android.support.design.widget.CoordinatorLayout>
+                </LinearLayout>
             </LinearLayout>
     </RelativeLayout>
     <LinearLayout
@@ -307,7 +338,7 @@
                 android:gravity="center"
                 android:singleLine="true"
                 android:text="Accounts"
-                android:textColor="@color/unselected"
+                android:textColor="@color/colorPrimary"
                 android:textSize="10dp"
                 android:typeface="serif" />
         </LinearLayout>
