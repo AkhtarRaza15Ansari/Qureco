@@ -171,6 +171,7 @@
                                 android:paddingBottom="05dp"
                                 android:textColor="@color/offers"
                                 android:textStyle="bold"
+                                android:visibility="gone"
                                 android:textSize="15dp"
                                 />
 

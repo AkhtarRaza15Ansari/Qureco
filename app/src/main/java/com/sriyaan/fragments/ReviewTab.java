@@ -159,7 +159,8 @@ public class ReviewTab extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
         @Override
         public void onBindViewHolder(final DataObjectHolder holder, final int position) {
-            holder.name.setText("" + mDataset.get(position).getServiceName());
+
+            holder.name.setText(mDataset.get(position).getServiceName());
             holder.address.setText(mDataset.get(position).getLocationName());
 
             holder.body.setOnClickListener(new View.OnClickListener() {

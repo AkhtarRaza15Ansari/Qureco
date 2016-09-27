@@ -59,7 +59,7 @@ public class SmsBroadReciever extends BroadcastReceiver {
                     String message = currentMessage.getDisplayMessageBody();
                     Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
 
-                    if(senderNum.contains("TXTLCL")){
+                    if(senderNum.contains("QURECO")){
                         String substr = message.substring(startIndex,endIndex);
                         Log.d("cscc",substr);
                         code = substr;

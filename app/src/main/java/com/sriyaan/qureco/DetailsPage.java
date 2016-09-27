@@ -506,6 +506,10 @@ public class DetailsPage extends AppCompatActivity {
                         ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
                         tv.setText("Amenities");
+                        if(arr_am.size()==0)
+                        {
+                            arr_am.add("N.A.");
+                        }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arr_am);
                         lv.setAdapter(adapter);
                         alertDialog.show();
@@ -521,6 +525,10 @@ public class DetailsPage extends AppCompatActivity {
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
                         ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         tv.setText("Specialities");
+                        if(arr_sp.size()==0)
+                        {
+                            arr_sp.add("N.A.");
+                        }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arr_sp);
                         lv.setAdapter(adapter);
                         alertDialog.show();
@@ -539,6 +547,10 @@ public class DetailsPage extends AppCompatActivity {
                         ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
                         tv.setText("Services");
+                        if(arrr.size()==0)
+                        {
+                            arrr.add("N.A.");
+                        }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arrr);
                         lv.setAdapter(adapter);
                         alertDialog.show();
@@ -569,6 +581,12 @@ public class DetailsPage extends AppCompatActivity {
                         ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
                         tv.setText("Location & Address");
+
+                        if(arrr.size()==0)
+                        {
+                            arrr.add("N.A.");
+                        }
+
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arrr);
                         lv.setAdapter(adapter);
                         alertDialog.show();
@@ -594,6 +612,10 @@ public class DetailsPage extends AppCompatActivity {
                         ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
                         tv.setText("About");
+                        if(arrr.size()==0)
+                        {
+                            arrr.add("N.A.");
+                        }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arrr);
                         lv.setAdapter(adapter);
                         alertDialog.show();
@@ -609,6 +631,10 @@ public class DetailsPage extends AppCompatActivity {
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
                         ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         tv.setText("Equipments");
+                        if(arr_eq.size()==0)
+                        {
+                            arr_eq.add("N.A.");
+                        }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arr_eq);
                         lv.setAdapter(adapter);
                         alertDialog.show();
@@ -624,6 +650,10 @@ public class DetailsPage extends AppCompatActivity {
                         TextView tv = (TextView) convertView.findViewById(R.id.text);
                         ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
                         tv.setText("Social");
+                        if(arr_soc.size()==0)
+                        {
+                            arr_soc.add("N.A.");
+                        }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, arr_soc);
                         lv.setAdapter(adapter);
                         alertDialog.show();
@@ -714,7 +744,10 @@ public class DetailsPage extends AppCompatActivity {
                             arrr.add(" Quantity: "+ aqty);
                             arrr.add(" Charges: "+ acharges);
                         }
-
+                        if(arrr.size()==0)
+                        {
+                            arrr.add("N.A.");
+                        }
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
                         LayoutInflater inflater = getLayoutInflater();
                         View convertView = (View) inflater.inflate(R.layout.amenities, null);

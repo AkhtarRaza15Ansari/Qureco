@@ -63,7 +63,7 @@
                         android:text=""
                         />
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="02dp"
                         android:orientation="horizontal"
@@ -71,8 +71,11 @@
                         android:gravity="center"
                         >
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="0.4"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:orientation="horizontal">
                             <ImageView
                                 android:layout_width="20dp"
@@ -86,14 +89,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:singleLine="true"
-                                android:text=""
+                                android:text="Akhtar raza"
                                 />
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
+                            android:layout_gravity="start"
+                            android:gravity="start"
+                            android:layout_weight="0.6"
                             android:orientation="horizontal">
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -297,14 +301,14 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginRight="6dp"
                                 android:src="@drawable/calll"/>
                             <TextView
                                 android:id="@+id/tvcall"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:text="Call     "
+                                android:textSize="11dp"
+                                android:text="  Call   "
                                 android:textColor="@color/white"/>
                         </LinearLayout>
                         <LinearLayout
@@ -321,14 +325,16 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginRight="6dp"
                                 android:src="@drawable/chatabc"/>
                             <TextView
                                 android:id="@+id/tvchat"
+                                android:layout_gravity="center"
+                                android:gravity="center"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:text="Chat     "
+                                android:textSize="11dp"
+                                android:text="  Chat   "
                                 android:textColor="@color/white"/>
                         </LinearLayout>
                         <LinearLayout
@@ -346,13 +352,13 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginRight="6dp"
                                 android:src="@drawable/follow"/>
                             <TextView
                                 android:id="@+id/tvfollow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="12dp"
+                                android:textSize="11dp"
                                 android:text="Follow"
                                 android:textColor="@color/white"/>
                         </LinearLayout>

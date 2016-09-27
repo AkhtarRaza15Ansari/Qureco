@@ -26,13 +26,15 @@ import com.squareup.picasso.Picasso;
 import com.sriyaan.adapter.RecyclerAdapterDeals;
 import com.sriyaan.adapter.RecyclerAdapterSearch;
 import com.sriyaan.modal.DetailsData;
-import com.sriyaan.modal.ListData;
 import com.sriyaan.util.url_dump;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
@@ -44,7 +46,7 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
     ArrayList results;
     private RecyclerView.LayoutManager mLayoutManager1;
     //List of type books this list will store type Book which is our data model
-    private List<ListData> data;
+    private List<DetailsData> data;
     LinearLayout filter;
     SwipeRefreshLayout swipeRefreshLayout;
     Context con;
@@ -412,7 +414,7 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
         @Override
         public void onBindViewHolder(final DataObjectHolder holder, final int position) {
             holder.name.setText("" + mDataset.get(position).getOfferCaption());
-            holder.validity.setText("Expires on: " + mDataset.get(position).getToDate());
+            holder.validity.setText("Valid till: " + parseDateToddMMyyyy(mDataset.get(position).getToDate()));
             holder.description.setText("" + mDataset.get(position).getDescription());
             holder.address.setText("" + mDataset.get(position).getLocationName());
             if(!mDataset.get(position).getOfferFlat().equals(""))
@@ -437,20 +439,6 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
             holder.offers.setTypeface(tf);
             holder.active.setTypeface(tf);
 
-            holder.body.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    //Toast.makeText(context, "Long item clicked"+position, Toast.LENGTH_SHORT).show();
-                    if (SearchListPage.array.size() <= 1) {
-                        SearchListPage.array.add("" + position);
-                        SearchListPage.arrayID.add("" + mDataset.get(position).getHcpUserOid());
-                        holder.body.setBackgroundColor(context.getResources().getColor(R.color.backgroundColor));
-                    } else {
-                        Toast.makeText(context, "Cannot compare more than 2 items", Toast.LENGTH_SHORT).show();
-                    }
-                    return true;
-                }
-            });
             holder.body.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -502,5 +490,23 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
             return mDataset.size();
         }
 
+    }
+
+    public String parseDateToddMMyyyy(String time) {
+        String inputPattern = "yyyy-MM-dd";
+        String outputPattern = "dd-MM-yyyy";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = inputFormat.parse(time);
+            str = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return str;
     }
 }

@@ -117,9 +117,9 @@ public class url_dump {
     // For Review List
     public static String getRevList = "hcp_get_customer_write_review_list";
     // For Points Earned
-    public static String ptsEarnedList = "";
+    public static String ptsEarnedList = "hcp_get_customer_earned_points_list.php";
     // For Points Redeemed
-    public static String ptsRedeemedList = "";
+    public static String ptsRedeemedList = "hcp_get_customer_redeem_points_list.php";
 
 
     public static String jsonvalues;
@@ -669,6 +669,30 @@ public class url_dump {
     public static String getReviewList(String user_id) throws Exception
     {
         String url = main_header + getRevList;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        Log.d("user_id", user_id);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+    public static String getPointsEarned(String user_id) throws Exception
+    {
+        String url = main_header + ptsEarnedList;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        Log.d("user_id", user_id);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+    public static String getPointsRedeemed(String user_id) throws Exception
+    {
+        String url = main_header + ptsRedeemedList;
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
