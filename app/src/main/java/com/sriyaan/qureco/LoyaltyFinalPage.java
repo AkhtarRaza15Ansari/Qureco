@@ -1,5 +1,6 @@
 package com.sriyaan.qureco;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -33,11 +34,12 @@ public class LoyaltyFinalPage extends AppCompatActivity {
     RadioButton oneaccumulate,bothaccred;
     String json_response;
     String user_id,hcp_id;
-    String price_total,redeem_point,accumulate_point,request_option;
+    String price_total="",redeem_point,accumulate_point,request_option;
     String total_points,finalbill;
     TextView qurecopoints,tvqurecopoints,currentbillamount,shownext,makeyourselection,request;
     TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
     LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
+    String verify_pin = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,10 +86,11 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                     Toast.makeText(LoyaltyFinalPage.this, "Please enter something", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    finalbill = bill;
+                    price_total = bill;
                     makeyourselection.setVisibility(View.VISIBLE);
                     one.setVisibility(View.VISIBLE);
                     request.setVisibility(View.VISIBLE);
+                    Log.d("price",price_total);
                     new RedeemPoints().execute();
                 }
             }
@@ -106,7 +109,36 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                 {
                     request_option = "1";
                 }
-                new SubmitAsync().execute();
+
+                final Dialog dialog = new Dialog(LoyaltyFinalPage.this);
+                // Include dialog.xml file
+                dialog.setContentView(R.layout.enterpasscode);
+                // Set dialog title
+                dialog.setTitle("Custom Dialog");
+
+                // set values for custom dialog components - text, image and button
+                final EditText passcode = (EditText) dialog.findViewById(R.id.passcode);
+
+                dialog.show();
+
+                Button submit= (Button) dialog.findViewById(R.id.submit);
+                // if decline button is clicked, close the custom dialog
+                submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Close dialog
+                        verify_pin = passcode.getText().toString();
+                        if(verify_pin.length()<4)
+                        {
+                            Toast.makeText(LoyaltyFinalPage.this, "Please enter 4 digit code to proceed", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            new SubmitAsync().execute();
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
             }
         });
         llhome.setOnClickListener(new View.OnClickListener() {
@@ -271,7 +303,7 @@ public class LoyaltyFinalPage extends AppCompatActivity {
 
             if(str_Code.equals("HCPC2400"))
             {
-                bothaccred.setText("Redeem "+redeem_point+" points for a discount of Rs."+finalbill+" and accumulate "+accumulate_point+" points");
+                bothaccred.setText("Redeem "+redeem_point+" points for a discount of Rs."+price_total+" and accumulate "+accumulate_point+" points");
                 oneaccumulate.setText("Accumulate "+accumulate_point+" points");
             }
             else{
@@ -292,7 +324,7 @@ public class LoyaltyFinalPage extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try{
-                json_values = url_dump.RequestRedeem(user_id,hcp_id,price_total,redeem_point,accumulate_point,request_option);
+                json_values = url_dump.RequestRedeem(user_id,hcp_id,price_total,redeem_point,accumulate_point,request_option,verify_pin);
             }catch (Exception e)
             {
                 e.printStackTrace();
@@ -307,7 +339,13 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                 JSONArray array = new JSONArray(json_values);
                 String code  =  array.getString(0);
                 String message = array.getString(1);
-
+                if(code.equals("HCPC2500"))
+                {
+                    Toast.makeText(LoyaltyFinalPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(LoyaltyFinalPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                }
             }catch (Exception e)
             {
                 e.printStackTrace();

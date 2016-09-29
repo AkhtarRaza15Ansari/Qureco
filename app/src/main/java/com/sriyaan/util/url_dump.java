@@ -590,7 +590,7 @@ public class url_dump {
         function2();
         return getDecode(jsonvalues);
     }
-    public static String RequestRedeem(String user_id,String hcp_id,String price_total,String redeem_point,String accumulate_point,String request_option) throws Exception
+    public static String RequestRedeem(String user_id,String hcp_id,String price_total,String redeem_point,String accumulate_point,String request_option,String verify_pin) throws Exception
     {
         String url = main_header + redeem_request;
         function1(url);
@@ -602,12 +602,15 @@ public class url_dump {
         nameValuePairs.add(new BasicNameValuePair("redeem_point", redeem_point));
         nameValuePairs.add(new BasicNameValuePair("accumulate_point", accumulate_point));
         nameValuePairs.add(new BasicNameValuePair("request_option", request_option));
+        nameValuePairs.add(new BasicNameValuePair("verify_pin", verify_pin));
+
         Log.d("user_id", user_id);
         Log.d("hcp_id", hcp_id);
         Log.d("price_total", price_total);
         Log.d("redeem_point", redeem_point);
         Log.d("accumulate_point", accumulate_point);
         Log.d("request_option", request_option);
+        Log.d("verify_pin", verify_pin);
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);
