@@ -66,7 +66,7 @@ public class url_dump {
     // Url For Terms and Conditions Page
     public static String tncHeader = "http://qureco.com/terms-conditions.php";
     // Url For About Page
-    public static String aboutHeader = "http://qureco.com";
+    public static String aboutHeader = "http://qureco.com/aboutus.php";
     public static String main_header = "http://54.153.69.73/~hcp/hcp_customer_webservices/";
     // To fetch deviceregistration
     public static String cust_categories = "hcp_get_all_cust_categories.php";
@@ -465,6 +465,10 @@ public class url_dump {
         nameValuePairs.add(new BasicNameValuePair("cat_id", cat_id));
         nameValuePairs.add(new BasicNameValuePair("sort_by", sort_by));
         nameValuePairs.add(new BasicNameValuePair("page_no", page_no));
+        Log.d("user_id", user_id+" :: Append");
+        Log.d("hcp_id", hcp_id+" :: Append");
+        Log.d("cat_id", cat_id+" :: Append");
+        Log.d("sort_by", sort_by+" :: Append");
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);
@@ -504,7 +508,7 @@ public class url_dump {
         nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
         nameValuePairs.add(new BasicNameValuePair("hcp_id", hcp_id));
         Log.d("user_id", user_id);
-        Log.d("qr_code", hcp_id);
+        Log.d("hcp_id", hcp_id);
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);
@@ -517,7 +521,7 @@ public class url_dump {
         nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
         nameValuePairs.add(new BasicNameValuePair("hcp_id", hcp_id));
         Log.d("user_id", user_id);
-        Log.d("qr_code", hcp_id);
+        Log.d("hcp_id", hcp_id);
         httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
         function2();
         return getDecode(jsonvalues);

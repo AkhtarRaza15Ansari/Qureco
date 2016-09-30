@@ -154,8 +154,8 @@ public class PointsRedeemed extends Fragment implements SwipeRefreshLayout.OnRef
             String trans_str = "Points Redeemed: " + mDataset.get(position).getPoints();
             String amount_str = "Transaction amount: " + mDataset.get(position).getAmount();
 
-            holder.transaction.setText(getSpan(trans_str,18,trans_str.length()));
-            holder.amount.setText(getSpan(amount_str,20,amount_str.length()));
+            holder.transaction.setText(getSpan(trans_str,17,trans_str.length()));
+            holder.amount.setText(getSpan(amount_str,19,amount_str.length()));
 
             holder.date.setText("" + mDataset.get(position).getDate());
 

@@ -179,7 +179,7 @@
                             android:background="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="10dp"
-                            android:text="RequestApproval"
+                            android:text="Request Approval"
                             android:textColor="@color/white"
                             android:textSize="20dp" />
                     </LinearLayout>

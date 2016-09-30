@@ -16,6 +16,7 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 import com.sriyaan.qureco.Home;
+import com.sriyaan.qureco.Notification;
 import com.sriyaan.qureco.R;
 
 public class MyGcmListenerService extends GcmListenerService {
@@ -65,7 +66,7 @@ public class MyGcmListenerService extends GcmListenerService {
      * @param message GCM message received.
      */
     private void sendNotification(String message) {
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Notification.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

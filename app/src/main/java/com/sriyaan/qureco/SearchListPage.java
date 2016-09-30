@@ -68,7 +68,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     public static String open_hours="",fees="",open="",service_type="",open_days="";
     String fontPath = "fonts/Montserrat-Regular.ttf";
     LinearLayout llclearfilter;
-    public static String value;
+    public static String value = "";
     // Loading Font Face
     //
     Typeface tf;

@@ -292,7 +292,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         }else if(position==3)
         {
             //Rate Us
-            Uri uri = Uri.parse("market://details?id=com.akhtar.fan");// + getPackageName());
+            Uri uri = Uri.parse("market://details?id=" + getPackageName());
             Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
             try {
                 startActivity(myAppLinkToMarket);

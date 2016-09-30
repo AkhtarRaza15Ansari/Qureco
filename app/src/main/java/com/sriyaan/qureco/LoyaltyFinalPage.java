@@ -303,7 +303,7 @@ public class LoyaltyFinalPage extends AppCompatActivity {
 
             if(str_Code.equals("HCPC2400"))
             {
-                bothaccred.setText("Redeem "+redeem_point+" points for a discount of Rs."+price_total+" and accumulate "+accumulate_point+" points");
+                bothaccred.setText("Redeem "+redeem_point+" points from the amount of Rs."+price_total+" and pay Rs."+getBalance(price_total,redeem_point)+" only");
                 oneaccumulate.setText("Accumulate "+accumulate_point+" points");
             }
             else{
@@ -342,6 +342,7 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                 if(code.equals("HCPC2500"))
                 {
                     Toast.makeText(LoyaltyFinalPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                    onBackPressed();
                 }
                 else{
                     Toast.makeText(LoyaltyFinalPage.this, ""+message, Toast.LENGTH_SHORT).show();
@@ -351,5 +352,10 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+    public String getBalance(String major,String minor){
+        int a = Integer.parseInt(major);
+        int b = Integer.parseInt(minor);
+        return String.valueOf(a-b);
     }
 }

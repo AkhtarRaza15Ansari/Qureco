@@ -73,7 +73,7 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
 
         try {
-            hcp_id = prefs.getString("hcp_id", "");
+            hcp_id = getIntent().getStringExtra("hcp_id");
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -428,7 +428,7 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
             holder.likes.setText("" + mDataset.get(position).getLikes() + " Likes");
 
             if (!mDataset.get(position).getDealImage().equals("")) {
-                Picasso.with(context).load(mDataset.get(position).getDealImage()).placeholder(R.drawable.hosp).into(holder.imageView);
+                Picasso.with(context).load(mDataset.get(position).getDealImage()).placeholder(R.drawable.specialoffer).into(holder.imageView);
             }
             holder.name.setTypeface(tf);
             holder.validity.setTypeface(tf);
@@ -442,6 +442,17 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
             holder.body.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Intent i =  new Intent(context,DetailsPage.class);
+                    i.putExtra("value",SearchListPage.value);
+                    i.putExtra("hcp_id",mDataset.get(position).getHlOid());
+                    Log.d("hcp_id",mDataset.get(position).getHlOid());
+                    context.startActivity(i);
+                }
+            });
+
+            holder.offers.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
                     LayoutInflater inflater = getLayoutInflater();
                     View convertView = (View) inflater.inflate(R.layout.deals_layout, null);
@@ -461,7 +472,6 @@ public class DealsOffers extends AppCompatActivity implements SwipeRefreshLayout
                     alertDialog.show();
                 }
             });
-
 
         }
 

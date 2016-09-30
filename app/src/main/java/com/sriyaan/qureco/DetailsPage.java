@@ -45,6 +45,7 @@ public class DetailsPage extends AppCompatActivity {
     TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
     LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
     LinearLayout deals,amenities,specialities,services,availability,location,about,equipments,social,writereview,follow;
+    ImageView one,two,three,four,five;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,6 +154,13 @@ public class DetailsPage extends AppCompatActivity {
         llchat          = (LinearLayout)    findViewById(R.id.chatll);
         llfavorites     = (LinearLayout)    findViewById(R.id.favouritesll);
         llacounts       = (LinearLayout)    findViewById(R.id.accountsll);
+
+        one             = (ImageView)       findViewById(R.id.star1);
+        two             = (ImageView)       findViewById(R.id.star2);
+        three           = (ImageView)       findViewById(R.id.star3);
+        four            = (ImageView)       findViewById(R.id.star4);
+        five            = (ImageView)       findViewById(R.id.star5);
+
     }
 
     public void setFonts() {
@@ -447,9 +455,11 @@ public class DetailsPage extends AppCompatActivity {
                         try {
                             like_count = lobject.getString("like_count");
                             followers_count = lobject.getString("followers_count");
-                            rating = lobject.getString("rating");
+                            rating = lobject.getString("rating_value");
+                            reviews = lobject.getString("rating_count");
                             refer_friend_points = lobject.getString("refer_friend_points");
                             is_following    = lobject.getString("is_following");
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -470,6 +480,8 @@ public class DetailsPage extends AppCompatActivity {
 
             url_dump.dismissprogress();
 
+
+
             try {
                 if (!photo_path.equals("")) {
                     Picasso.with(context).load(photo_path).placeholder(R.drawable.hospc).into(topimage);
@@ -477,7 +489,7 @@ public class DetailsPage extends AppCompatActivity {
 
                 tvname.setText(service_name);
                 tvaddress.setText(location_name+", "+city);
-                tvreviews_count.setText("0 Reviews");
+                tvreviews_count.setText(reviews+" Reviews");
                 tvlikes.setText(like_count + " Likes");
                 tvopentimings.setText("" + from_time + " to " + to_time);
                 tvnavigate.setOnClickListener(new View.OnClickListener() {
@@ -767,6 +779,7 @@ public class DetailsPage extends AppCompatActivity {
 
                         Intent i = new Intent(DetailsPage.this,DealsOffers.class);
                         i.putExtra("value",cat_id);
+                        i.putExtra("hcp_id",hcp_id);
                         startActivity(i);
                     }
                 });
@@ -792,7 +805,56 @@ public class DetailsPage extends AppCompatActivity {
                         }
                     });
                 }
+                String str_rating = rating;
+                try {
+                    double value = Double.parseDouble(str_rating);
+                    int int_value = (int) Math.ceil(value);
+                    str_rating = String.valueOf(int_value);
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
 
+                if(str_rating.equals("1"))
+                {
+                    one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    two.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                    three.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                    four.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                    five.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                }
+                else if(str_rating.equals("2"))
+                {
+                    one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    two.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    three.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                    four.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                    five.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                }
+                else if(str_rating.equals("3"))
+                {
+                    one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    two.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    three.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    four.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                    five.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                }
+                else if(str_rating.equals("4"))
+                {
+                    one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    two.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    three.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    four.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    five.setImageDrawable(context.getResources().getDrawable(R.drawable.outlinestar));
+                }
+                else if(str_rating.equals("5"))
+                {
+                    one.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    two.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    three.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    four.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                    five.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
+                }
             } catch (Exception e) {
 
             }
