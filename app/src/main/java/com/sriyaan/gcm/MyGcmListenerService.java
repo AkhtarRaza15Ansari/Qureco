@@ -74,7 +74,7 @@ public class MyGcmListenerService extends GcmListenerService {
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.qureco_logo)
-                .setContentTitle("GCM Message")
+                .setContentTitle("Qureco App")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
