@@ -10,9 +10,11 @@ import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +29,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.sriyaan.util.url_dump.isTimeBetweenTwoTime;
 
 public class DetailsPage extends AppCompatActivity {
 
@@ -491,6 +497,13 @@ public class DetailsPage extends AppCompatActivity {
                 tvaddress.setText(location_name+", "+city);
                 tvreviews_count.setText(reviews+" Reviews");
                 tvlikes.setText(like_count + " Likes");
+                if(!from_time.equals("null") && !to_time.equals("null"))
+                {
+                    Time now = new Time();
+                    now.setToNow();
+                    Log.d("now",now.toString());
+                    isTimeBetweenTwoTime(from_time,to_time,now.toString());
+                }
                 tvopentimings.setText("" + from_time + " to " + to_time);
                 tvnavigate.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -503,9 +516,50 @@ public class DetailsPage extends AppCompatActivity {
                 tvcall.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:"+location_contacts));
-                        startActivity(intent);
+                        if(location_contacts.contains(","))
+                        {
+                            List<String> cont_list = Arrays.asList(location_contacts.split(","));
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
+                            LayoutInflater inflater = getLayoutInflater();
+                            View convertView = (View) inflater.inflate(R.layout.amenities, null);
+                            alertDialog.setView(convertView);
+                            ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
+                            TextView tv = (TextView) convertView.findViewById(R.id.text);
+                            tv.setText("Contact");
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, cont_list);
+                            lv.setAdapter(adapter);
+                            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                                    intent.setData(Uri.parse("tel:"+parent.getItemAtPosition(position)));
+                                    startActivity(intent);
+                                }
+                            });
+                            alertDialog.show();
+                        }
+                        else{
+                            ArrayList<String> val = new ArrayList<String>();
+                            val.add(location_contacts);
+                            AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
+                            LayoutInflater inflater = getLayoutInflater();
+                            View convertView = (View) inflater.inflate(R.layout.amenities, null);
+                            alertDialog.setView(convertView);
+                            ListView lv = (ListView) convertView.findViewById(R.id.list_amenities);
+                            TextView tv = (TextView) convertView.findViewById(R.id.text);
+                            tv.setText("Contact");
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(DetailsPage.this, android.R.layout.simple_list_item_1, val);
+                            lv.setAdapter(adapter);
+                            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                                    intent.setData(Uri.parse("tel:"+parent.getItemAtPosition(position)));
+                                    startActivity(intent);
+                                }
+                            });
+                            alertDialog.show();
+                        }
                     }
                 });
                 amenities.setOnClickListener(new View.OnClickListener() {
@@ -787,7 +841,7 @@ public class DetailsPage extends AppCompatActivity {
                 if(is_following.equals("1"))
                 {
                     Log.d("console","following");
-                    tvfollow.setText("Following");
+                    tvfollow.setText("Unfollow");
                     follow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

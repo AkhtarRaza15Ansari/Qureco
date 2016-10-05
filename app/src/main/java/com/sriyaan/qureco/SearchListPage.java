@@ -43,14 +43,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchListPage extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+import static com.sriyaan.qureco.Home.s_lat;
+import static com.sriyaan.qureco.Home.s_lon;
+
+public class SearchListPage extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     String json_response;
     JSONArray object;
     String lat = "", longt = "";
     ArrayList results;
-    LatLng latLng;
     private RecyclerView.LayoutManager mLayoutManager1;
     //List of type books this list will store type Book which is our data model
     private List<ListData> data;
@@ -76,7 +78,6 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
     public static ArrayList<String> arrayID;
     SharedPreferences prefs;
     String user_id;
-    GoogleApiClient mGoogleApiClient;
 
     TextView tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
     LinearLayout llhome,llnotification,llchat,llfavorites,llacounts;
@@ -90,9 +91,6 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_list_page);
         init();
-        buildGoogleApiClient();
-
-        mGoogleApiClient.connect();
         prefs = getSharedPreferences("QurecoOne", Context.MODE_PRIVATE);
 
 
@@ -121,6 +119,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         mRecyclerView.setLayoutManager(mLayoutManager1);
         swipeRefreshLayout.setOnRefreshListener(this);
 
+        runThis();
 
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -316,10 +315,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         new Type().execute();
     }
 
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
 
-    }
 
     public class Type extends AsyncTask<Void,Void,Void> {
         @Override
@@ -336,7 +332,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
             try {
                 results = new ArrayList<ListData>();
                 json_response = url_dump.getSearchCategory(user_id,value,sort_by,open_hours,fees,open,str_loyalty,
-                service_type,open_days,strGender,lat,longt);
+                service_type,open_days,strGender,s_lat,s_lon);
                 JSONArray array = new JSONArray(json_response);
 
                 object = array.getJSONArray(2);
@@ -496,62 +492,5 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
         super.onStop();
         clearFilter();
     }
-    protected synchronized void buildGoogleApiClient() {
-        //Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-    }
-    @Override
-    public void onConnected(Bundle bundle) {
-        //Toast.makeText(this,"onConnected",Toast.LENGTH_SHORT).show();
-        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            //place marker at current position
-            latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-            markerOptions.title("Current Position");
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(latLng).zoom(14).build();
 
-            Log.d("arg0", latLng.latitude + "-" + latLng.longitude);
-            lat     = String.valueOf(latLng.latitude);
-            longt   = String.valueOf(latLng.longitude);
-            swipeRefreshLayout.post(new Runnable(){
-                                        @Override
-                                        public void run(){
-                                            runThis();
-                                        }
-                                    }
-            );
-        }
-        else{
-            new AlertDialog.Builder(con)
-                    .setTitle("Location Disabled")
-                    .setMessage("Please switch on your location to proceed")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            //
-
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // do nothing
-                            onBackPressed();
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-        }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
 }

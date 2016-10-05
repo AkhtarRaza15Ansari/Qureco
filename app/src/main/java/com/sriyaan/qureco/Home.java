@@ -2,6 +2,7 @@ package com.sriyaan.qureco;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -9,8 +10,11 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -27,14 +31,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 import com.sriyaan.util.FragmentDrawer;
 import com.sriyaan.util.url_dump;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 import static com.sriyaan.util.url_dump.Logthis;
 
-public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener{
+public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     Toolbar toolbar;
     Context con;
@@ -65,7 +79,13 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
             tvHome,tvNotification,tvChat,tvFavourites,tvAccounts;
     DrawerLayout drawerLayout;
     LinearLayout back;
+    public static String city = "";
+    public static double lat=0,lon=0;
+    public static String s_lat,s_lon;
     public static boolean resume = false;
+    GoogleApiClient mGoogleApiClient;
+    LatLng latLng;
+    TextView mTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,9 +122,17 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
 
         setTitle("");
         tf = Typeface.createFromAsset(getAssets(), fontPath);
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
         mTitle.setTypeface(tf);
         mTitle.setText("Home");
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Home.this,Location.class);
+                startActivity(i);
+            }
+        });
+
         setFont();
         loadScreen(num);
         right_ll.setOnClickListener(new View.OnClickListener(){
@@ -217,6 +245,13 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 startActivity(i);
             }
         });
+
+
+
+        buildGoogleApiClient();
+
+        mGoogleApiClient.connect();
+
     }
     public void init(){
         con         = Home.this;
@@ -318,7 +353,7 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
         {
             //Logout
             prefs.edit().clear().apply();
-            Intent i = new Intent(Home.this,MainActivity.class);
+            Intent i = new Intent(Home.this,Splash.class);
             i.putExtra("name","login");
             startActivity(i);
             finish();
@@ -350,27 +385,36 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Doctor");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat8);
-                    startActivity(i);
+                    if(lat!=0)
+                    {
+                        Intent i = new Intent(Home.this,SearchListPage.class);
+                        i.putExtra("value",""+scat8);
+                        startActivity(i);
+                    }
                 }
             });
             clinics.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Clinics");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat1);
-                    startActivity(i);
+                    if(lat!=0)
+                    {
+                        Intent i = new Intent(Home.this,SearchListPage.class);
+                        i.putExtra("value",""+scat1);
+                        startActivity(i);
+                    }
                 }
             });
             pathlab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Pathlab");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat3);
-                    startActivity(i);
+                    if(lat!=0)
+                    {
+                        Intent i = new Intent(Home.this,SearchListPage.class);
+                        i.putExtra("value",""+scat3);
+                        startActivity(i);
+                    }
                 }
             });
         }
@@ -393,27 +437,37 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 @Override
                 public void onClick(View view){
                     Logthis("Home","Fitness");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat4);
-                    startActivity(i);
+                    if(lat!=0)
+                    {
+                        Intent i = new Intent(Home.this,SearchListPage.class);
+                        i.putExtra("value",""+scat4);
+                        startActivity(i);
+                    }
                 }
             });
             salon.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
                     Logthis("Home","Salon");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat6);
-                    startActivity(i);
+                    if(lat!=0)
+                    {
+                        Intent i = new Intent(Home.this,SearchListPage.class);
+                        i.putExtra("value",""+scat6);
+                        startActivity(i);
+                    }
                 }
             });
             spa.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Spa");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat9);
-                    startActivity(i);
+
+                    if(lat!=0)
+                    {
+                        Intent i = new Intent(Home.this,SearchListPage.class);
+                        i.putExtra("value",""+scat9);
+                        startActivity(i);
+                    }
                 }
             });
         }
@@ -436,27 +490,36 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Pharmacy");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat7);
-                    startActivity(i);
+                    if(lat!=0)
+                    {
+                        Intent i = new Intent(Home.this,SearchListPage.class);
+                        i.putExtra("value",""+scat7);
+                        startActivity(i);
+                    }
                 }
             });
             hospital.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Hospital");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat2);
-                    startActivity(i);
+                    if(lat!=0)
+                    {
+                        Intent i = new Intent(Home.this,SearchListPage.class);
+                        i.putExtra("value",""+scat2);
+                        startActivity(i);
+                    }
                 }
             });
             bloodbanks.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Logthis("Home","Blood Banks");
-                    Intent i = new Intent(Home.this,SearchListPage.class);
-                    i.putExtra("value",""+scat5);
-                    startActivity(i);
+                    if(lat!=0)
+                    {
+                        Intent i = new Intent(Home.this,SearchListPage.class);
+                        i.putExtra("value",""+scat5);
+                        startActivity(i);
+                    }
                 }
             });
         }
@@ -519,5 +582,98 @@ public class Home extends AppCompatActivity implements FragmentDrawer.FragmentDr
                 Picasso.with(con).load(cust_profile_pic)
                         .transform(new CircleTransform()).placeholder(R.drawable.person).into(img_profile);
         }
+        if(city!=null && !city.equals(""))
+        {
+            Log.d("Print here","resume");
+            mTitle.setText(""+ city);
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    protected synchronized void buildGoogleApiClient() {
+        //Toast.makeText(this,"buildGoogleApiClient",Toast.LENGTH_SHORT).show();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+    @Override
+    public void onConnected(Bundle bundle) {
+        //Toast.makeText(this,"onConnected",Toast.LENGTH_SHORT).show();
+        android.location.Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            //place marker at current position
+            latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+            Log.d("arg0", latLng.latitude + "-" + latLng.longitude);
+            s_lat       = String.valueOf(latLng.latitude);
+            s_lon       = String.valueOf(latLng.longitude);
+
+            lat         = latLng.latitude;
+            lon         = latLng.longitude;
+            city        = getLocationName(lat,lon);
+
+            Log.d("Print here","getting location"+ getLocationName(lat,lon));
+            mTitle.setText(""+ city);
+        }
+        else{
+            new AlertDialog.Builder(con)
+                    .setTitle("Location Disabled")
+                    .setMessage("Please switch on your location to proceed")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                            onBackPressed();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+    public String getLocationName(double lattitude, double longitude) {
+
+        String cityName = "Not Found";
+        Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
+        try {
+
+            List<Address> addresses = gcd.getFromLocation(lattitude, longitude,
+                    10);
+
+            for (Address adrs : addresses) {
+                if (adrs != null) {
+
+                    String city = adrs.getLocality();
+                    if (city != null && !city.equals("")) {
+                        cityName = city;
+                        System.out.println("city ::  " + cityName);
+                    } else {
+                    }
+                    // // you should also try with addresses.get(0).toSring();
+
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return cityName;
+
     }
 }
