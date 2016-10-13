@@ -97,6 +97,8 @@ public class url_dump {
     public static String detailsPage = "hcp_get_hcp_details.php";
     // For Send Follow Request
     public static String sendFollow = "hcp_do_follow.php";
+    // For Send UnFollow Request
+    public static String sendUnFollow = "hcp_do_unfollow.php";
     // For Compare Two HCP
     public static String comparingHCP = "hcp_get_compare_results.php";
     // For HCP Review
@@ -520,6 +522,19 @@ public class url_dump {
     }
     public static String sendFollow(String user_id,String hcp_id) throws Exception {
         String url = main_header + sendFollow;
+        function1(url);
+        // add your data
+        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+        nameValuePairs.add(new BasicNameValuePair("user_id", user_id));
+        nameValuePairs.add(new BasicNameValuePair("hcp_id", hcp_id));
+        Log.d("user_id", user_id);
+        Log.d("hcp_id", hcp_id);
+        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        function2();
+        return getDecode(jsonvalues);
+    }
+    public static String sendUnFollow(String user_id,String hcp_id) throws Exception {
+        String url = main_header + sendUnFollow;
         function1(url);
         // add your data
         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);

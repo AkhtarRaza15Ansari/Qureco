@@ -34,4 +34,7 @@
     <color name="lifesavers">#37bcab</color>
     <color name="chat">#FEC601</color>
     <color name="follow">#0B9EB2</color>
+
+    <color name="red">#e67040</color>
+    <color name="green">#2cd623</color>
 </resources>

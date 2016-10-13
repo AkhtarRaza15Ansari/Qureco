@@ -67,10 +67,10 @@ public class LoyaltyFinalPage extends AppCompatActivity {
         try {
             user_id = getIntent().getStringExtra("user_id");
             hcp_id = getIntent().getStringExtra("hcp_id");
-        }catch (Exception e)
-        {
+        }catch(Exception e){
             e.printStackTrace();
         }
+
         setFont();
 
         makeyourselection.setVisibility(View.GONE);
@@ -310,7 +310,7 @@ public class LoyaltyFinalPage extends AppCompatActivity {
                 Toast.makeText(LoyaltyFinalPage.this, ""+str_Message, Toast.LENGTH_SHORT).show();
             }
             oneaccumulate.setChecked(true);
-            etbillamount.setEnabled(false);
+            etbillamount.setEnabled(true);
         }
     }
     public class SubmitAsync extends AsyncTask<Void,Void,Void>

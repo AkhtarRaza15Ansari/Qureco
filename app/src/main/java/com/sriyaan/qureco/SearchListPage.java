@@ -237,6 +237,7 @@ public class SearchListPage extends AppCompatActivity implements SwipeRefreshLay
                 startActivity(i);
             }
         });
+
     }
     @Override
     protected void onPause(){

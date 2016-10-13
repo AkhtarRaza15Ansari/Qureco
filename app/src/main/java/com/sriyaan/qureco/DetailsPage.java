@@ -1,12 +1,18 @@
 package com.sriyaan.qureco;
 
+import android.*;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,8 +34,10 @@ import com.sriyaan.util.url_dump;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import static com.sriyaan.util.url_dump.isTimeBetweenTwoTime;
@@ -197,11 +205,12 @@ public class DetailsPage extends AppCompatActivity {
 
     public class AsyncClass extends AsyncTask<Void, Void, Void> {
         String json_values = "";
+        ArrayList<String> arr_frm,arr_to,arr_note;
         ArrayList<String> arr_am,arr_sp,arr_eq,arr_soc;
         String is_following,like_count, followers_count, rating, refer_friend_points,
                 location_contacts, licence_no, year_of_establishment, pincode,
                 geo_longi, geo_lat, state, city, Locality, landmark, location_address, location_name, from_time, to_time, service_name,service_description, photo_path = "",hcp_name
-                ,hcp_description,hcp_experience,hcp_language_known,hcp_education;
+                ,hcp_description,hcp_experience,hcp_language_known,hcp_education,note;
         String adoctor_name,adoctor_description,acharges,afrom_time,ato_time,anote,aavail_blood,aqty,
                 apathlab__title,ahag_batch_name,ahag_batch_type,ahag_batch_trainer
                 ,aseats_open,aspecialist,adescription,aabout;
@@ -212,6 +221,10 @@ public class DetailsPage extends AppCompatActivity {
             arr_sp = new ArrayList<>();
             arr_eq = new ArrayList<>();
             arr_soc = new ArrayList<>();
+            arr_frm = new ArrayList<>();
+            arr_to = new ArrayList<>();
+            arr_note = new ArrayList<>();
+
             url_dump.startprogress("Fetching from server", "Please wait",DetailsPage.this,true);
         }
 
@@ -262,7 +275,12 @@ public class DetailsPage extends AppCompatActivity {
                                 JSONObject ob = location_time.getJSONObject(lt);
                                 from_time = ob.getString("from_time");
                                 to_time = ob.getString("to_time");
-                                String note = ob.getString("note");
+                                note = ob.getString("note");
+
+                                arr_frm.add(from_time);
+                                arr_to.add(to_time);
+                                arr_note.add(note);
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -435,7 +453,6 @@ public class DetailsPage extends AppCompatActivity {
                         for (int de = 0; de < deals.length(); de++) {
                             try {
                                 JSONObject soob = deals.getJSONObject(de);
-                                String hdo_oid = soob.getString("hdo_oid");
                                 String offer_caption = soob.getString("offer_caption");
                                 String send_to = soob.getString("send_to");
                                 String deal_image = soob.getString("deal_image");
@@ -497,14 +514,6 @@ public class DetailsPage extends AppCompatActivity {
                 tvaddress.setText(location_name+", "+city);
                 tvreviews_count.setText(reviews+" Reviews");
                 tvlikes.setText(like_count + " Likes");
-                if(!from_time.equals("null") && !to_time.equals("null"))
-                {
-                    Time now = new Time();
-                    now.setToNow();
-                    Log.d("now",now.toString());
-                    isTimeBetweenTwoTime(from_time,to_time,now.toString());
-                }
-                tvopentimings.setText("" + from_time + " to " + to_time);
                 tvnavigate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -632,12 +641,6 @@ public class DetailsPage extends AppCompatActivity {
                         arrr.add(" Landmarks: "+landmark);
                         arrr.add(" Locality: "+Locality);
                         arrr.add(" City: "+city);
-                        arrr.add(" State: "+state);
-                        arrr.add(" Pincode: "+pincode);
-                        arrr.add(" Location Contacts: "+location_contacts);
-                        arrr.add(" Year of Estb: "+year_of_establishment);
-                        arrr.add(" From time : "+from_time);
-                        arrr.add(" To time: "+to_time);
 
 
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
@@ -664,11 +667,11 @@ public class DetailsPage extends AppCompatActivity {
 
                         ArrayList<String> arrr = new ArrayList<String>();
 
-                        arrr.add(" HCP Name: "+ hcp_name);
-                        arrr.add(" HCP Description: "+hcp_description);
-                        arrr.add(" HCP Experience: "+hcp_experience);
+                        arrr.add(" Name: "+ hcp_name);
+                        arrr.add(" Description: "+hcp_description);
+                        arrr.add(" Experience: "+hcp_experience);
                         arrr.add(" Language Known: "+hcp_language_known);
-                        arrr.add(" HCP Education: "+hcp_education);
+                        arrr.add(" Education: "+hcp_education);
 
 
                         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsPage.this);
@@ -845,7 +848,25 @@ public class DetailsPage extends AppCompatActivity {
                     follow.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(DetailsPage.this, "You are aleready following this HCP", Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+                            alertBuilder.setCancelable(true);
+                            alertBuilder.setTitle("Alert");
+                            alertBuilder.setMessage("Do you really want to unfollow this HCP");
+                            alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new UnFollowAsync().execute();
+                                }
+                            });
+                            alertBuilder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            AlertDialog alert = alertBuilder.create();
+                            alert.show();
+
                         }
                     });
                 }
@@ -909,8 +930,41 @@ public class DetailsPage extends AppCompatActivity {
                     four.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                     five.setImageDrawable(context.getResources().getDrawable(R.drawable.goldstar));
                 }
-            } catch (Exception e) {
 
+                for(int i = 0;i< arr_note.size();i++)
+                {
+                    from_time = arr_frm.get(i);
+                    to_time = arr_to.get(i);
+                    note = arr_note.get(i);
+                    Log.d("comimg here","values");
+                    if(!from_time.equals("null") && !to_time.equals("null"))
+                    {
+                        Log.d("comimg here","inside if");
+                        Calendar c = Calendar.getInstance();
+                        System.out.println("Current time => "+c.getTime());
+
+                        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+                        String formattedDate = df.format(c.getTime());
+                        Log.d("now",formattedDate);
+
+                            Log.d("comimg here",""+note);
+                            if(isTimeBetweenTwoTime(from_time,to_time,formattedDate))
+                            {
+                                tvopennow.setText("Open: ");
+                                tvopennow.setTextColor(getResources().getColor(R.color.green));
+                                break;
+                            }
+                            else {
+                                tvopennow.setText("Closed: ");
+                                tvopennow.setTextColor(getResources().getColor(R.color.red));
+                            }
+                    }
+                }
+                from_time = from_time.substring(0, from_time.length() - 3);
+                to_time = to_time.substring(0, to_time.length() - 3);
+                tvopentimings.setText("" + from_time + " to " + to_time);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -948,14 +1002,57 @@ public class DetailsPage extends AppCompatActivity {
                 JSONArray array= new JSONArray(json_values);
                 String code = array.getString(0);
                 String message = array.getString(1);
-                 if(code.equals("HCPC1800"))
-                 {
-                     Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();
-                     new AsyncClass().execute();
-                 }
-                 else{
-                     Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();
-                 }
+                if(code.equals("HCPC1800"))
+                {
+                    Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                    new AsyncClass().execute();
+                }
+                else{
+                    Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
+
+        }
+    }
+    public class UnFollowAsync extends AsyncTask<Void,Void,Void>
+    {
+        public String json_values;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                json_values = url_dump.sendUnFollow(user_id, hcp_id);
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //["HCPC1800","Success",1]
+            try{
+                JSONArray array= new JSONArray(json_values);
+                String code = array.getString(0);
+                String message = array.getString(1);
+                if(code.equals("HCPC3200"))
+                {
+                    Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                    new AsyncClass().execute();
+                }
+                else{
+                    Toast.makeText(DetailsPage.this, ""+message, Toast.LENGTH_SHORT).show();
+                }
             }
             catch(Exception e)
             {
